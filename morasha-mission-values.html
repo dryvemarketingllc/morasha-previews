@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Core Mission & Values — Morasha Camps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --grey: #ECECEC;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+    --hebrew: 'Frank Ruhl Libre', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+  }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ============ NAV (simplified for demo) ============ */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--darkest-green);
+  }
+  .nav-links { display: flex; align-items: center; gap: 36px; }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--darkest-green);
+    color: #fff !important;
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .25s;
+  }
+  .nav-cta:hover { background: var(--green); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 200px 0 140px;
+    background: var(--darkest-green);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    min-height: 720px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20,43,21,0.55) 0%, rgba(20,43,21,0.75) 60%, rgba(20,43,21,0.92) 100%),
+      radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.18) 0%, transparent 45%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .hero-play {
+    margin-top: 56px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    cursor: pointer;
+    transition: color .2s;
+  }
+  .hero-play:hover { color: var(--light-green); }
+  .hero-play .play-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.4);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    transition: all .25s;
+  }
+  .hero-play:hover .play-icon {
+    background: var(--light-green);
+    border-color: var(--light-green);
+  }
+  .hero-play .play-icon svg { margin-left: 2px; }
+  .hero .eyebrow {
+    color: var(--light-green);
+    margin-bottom: 32px;
+  }
+  .hero-quote {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(40px, 5.2vw, 78px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+    margin-bottom: 40px;
+  }
+  .hero-quote .mark {
+    color: var(--light-green);
+    font-style: italic;
+  }
+  .hero-attrib {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    padding-left: 20px;
+    border-left: 2px solid var(--light-green);
+  }
+
+  /* ============ CORE MISSION ============ */
+  .mission {
+    padding: 128px 0;
+    background: #fff;
+  }
+  .mission-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .mission-label .eyebrow { color: var(--green); margin-bottom: 16px; }
+  .mission-label h2 {
+    font-size: clamp(40px, 4vw, 56px);
+    color: var(--darkest-green);
+  }
+  .mission-body p {
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    margin-bottom: 24px;
+  }
+  .mission-body p:last-child { margin-bottom: 0; }
+  .mission-body p.lead {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--darkest-green);
+    letter-spacing: -0.01em;
+  }
+
+  /* ============ VALUES INTRO ============ */
+  .values-intro {
+    padding: 96px 0 64px;
+    background: var(--lightest-green);
+    text-align: center;
+  }
+  .values-intro .eyebrow { color: var(--green); margin-bottom: 18px; }
+  .values-intro h2 {
+    font-size: clamp(44px, 5vw, 72px);
+    color: var(--darkest-green);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .values-intro p {
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+  .morasha-word {
+    display: inline-flex;
+    gap: 8px;
+    margin-top: 48px;
+  }
+  .morasha-word span {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(48px, 8vw, 128px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--darkest-green);
+    position: relative;
+    padding: 0 4px;
+  }
+  .morasha-word span::after {
+    content: attr(data-word);
+    display: block;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-top: 12px;
+    line-height: 1;
+  }
+
+  /* ============ VALUE ROWS ============ */
+  .values {
+    background: #fff;
+  }
+  .value {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 640px;
+    --accent: var(--green);
+  }
+  .value[data-i="2"], .value[data-i="4"], .value[data-i="6"] {
+    direction: rtl;
+  }
+  .value[data-i="2"] > *, .value[data-i="4"] > *, .value[data-i="6"] > * {
+    direction: ltr;
+  }
+  .value-image {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    min-height: 480px;
+  }
+  .value-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    mix-blend-mode: multiply;
+    opacity: 0.35;
+    transition: opacity .5s ease;
+  }
+  .value:hover .value-image::after { opacity: 0.15; }
+  .value-content {
+    padding: 96px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .value-letter {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(120px, 14vw, 220px);
+    line-height: 0.85;
+    color: var(--accent);
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+  }
+  .value-title {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .value-title h3 {
+    font-size: clamp(32px, 3vw, 44px);
+    color: var(--darkest-green);
+    letter-spacing: -0.02em;
+  }
+  .value-hebrew {
+    font-family: var(--hebrew);
+    font-weight: 500;
+    font-size: clamp(22px, 2vw, 30px);
+    color: var(--accent);
+    direction: rtl;
+    letter-spacing: 0;
+  }
+  .value-content p {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    max-width: 48ch;
+  }
+
+  /* ============ CLOSING ============ */
+  .closing {
+    padding: 140px 0;
+    background: var(--darkest-green);
+    color: #fff;
+    text-align: center;
+  }
+  .closing-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .closing .eyebrow {
+    color: var(--light-green);
+    margin-bottom: 24px;
+  }
+  .closing h2 {
+    font-size: clamp(36px, 4vw, 56px);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .closing p {
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 40px;
+  }
+  .closing-actions {
+    display: inline-flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+  }
+  .btn-light { background: #fff; color: var(--darkest-green); }
+  .btn-light:hover { background: var(--light-green); color: var(--darkest-green); }
+  .btn-ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .hero { padding: 140px 0 96px; }
+    .mission { padding: 96px 0; }
+    .mission-inner { grid-template-columns: 1fr; gap: 40px; }
+    .value { grid-template-columns: 1fr; min-height: 0; }
+    .value[data-i="2"], .value[data-i="4"], .value[data-i="6"] { direction: ltr; }
+    .value-image { min-height: 360px; }
+    .value-content { padding: 64px 48px; }
+    .closing { padding: 96px 0; }
+  }
+  @media (max-width: 640px) {
+    .container, .nav, .hero-inner, .mission-inner, .closing-inner { padding-left: 24px; padding-right: 24px; }
+    .nav { padding: 16px 24px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero { padding: 120px 0 72px; }
+    .mission { padding: 72px 0; }
+    .values-intro { padding: 72px 0 48px; }
+    .morasha-word span { font-size: 56px; }
+    .morasha-word span::after { font-size: 9px; letter-spacing: 0.15em; }
+    .value-content { padding: 56px 24px; }
+    .value-letter { font-size: 120px; }
+    .closing { padding: 72px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo">Morasha</div>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Camps</a>
+      <a href="#">Giving</a>
+      <a href="#" class="nav-cta">Apply</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=2000&q=80">
+    <source src="assets/video/morasha-hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
+    <div class="eyebrow">Core Mission &amp; Values</div>
+    <h1 class="hero-quote">
+      Teaching kids to count isn't nearly as important as <span class="mark">teaching them what counts.</span>
+    </h1>
+    <div class="hero-attrib">The Morasha philosophy</div>
+    <a class="hero-play" href="#mission">
+      <span class="play-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></svg>
+      </span>
+      Watch our story
+    </a>
+  </div>
+</section>
+
+<!-- ============ CORE MISSION ============ -->
+<section class="mission" id="mission">
+  <div class="mission-inner">
+    <div class="mission-label">
+      <div class="eyebrow">The Mission</div>
+      <h2>Education is the cornerstone.</h2>
+    </div>
+    <div class="mission-body">
+      <p class="lead">Education is the cornerstone of the Morasha experience.</p>
+      <p>Camp Morasha integrates the best in informal and formal Jewish education in all of its programming and activities through a transformative and fun, co-ed, outdoor summer experience for Jewish youth. Through commitment to Torah principles and engagement with nature and the larger world, the camp inspires an enduring love of Judaism, Israel, and community.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUES INTRO ============ -->
+<section class="values-intro">
+  <div class="container">
+    <div class="eyebrow">The Seven Values</div>
+    <h2>The values that spell Morasha.</h2>
+    <p>Our programs are built around seven values — one for each letter of our name — that guide our campers toward a life of meaning, learning, and leadership.</p>
+    <div class="morasha-word" aria-hidden="true">
+      <span data-word="Respect">M</span>
+      <span data-word="Observe">O</span>
+      <span data-word="Responsibility">R</span>
+      <span data-word="Appreciation">A</span>
+      <span data-word="Skill">S</span>
+      <span data-word="Heart">H</span>
+      <span data-word="Achdut">A</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUE ROWS ============ -->
+<section class="values">
+
+  <!-- M -->
+  <div class="value" data-i="1" style="--accent:#46764B">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">M</div>
+      <div class="value-title">
+        <h3>Mutual Respect</h3>
+        <div class="value-hebrew">ואהבת לרעך כמוך</div>
+      </div>
+      <p>Our campers not only learn but practice respectful behavior and speech. Morasha is a safe and nurturing environment in which our campers and Yachad members discover the Tzelem Elokim (divine image) in others, and in themselves.</p>
+    </div>
+  </div>
+
+  <!-- O -->
+  <div class="value" data-i="2" style="--accent:#2E5EA8">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1532012197267-da84d127e765?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">O</div>
+      <div class="value-title">
+        <h3>Observe &amp; Study</h3>
+        <div class="value-hebrew">ללמוד ולעשות</div>
+      </div>
+      <p>The Torah is a tree of life that nurtures our campers and enables them to LEARN Torah in formal and informal ways from passionate, inspiring teachers, counselors and staff, and from each other. They then have the chance to LIVE that Torah in their bunks and on the ball fields, with teachers and peers. Torah learning, mitzvah observance, and Zionism define the natural rhythm of Morasha, every minute of every day, and help our campers grow in their service to Hashem.</p>
+    </div>
+  </div>
+
+  <!-- R -->
+  <div class="value" data-i="3" style="--accent:#7A4CA0">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">R</div>
+      <div class="value-title">
+        <h3>Responsibility</h3>
+        <div class="value-hebrew">כל ישראל ערבים זה בזה</div>
+      </div>
+      <p>"If I'm not for myself, who will be for me? If I am only for myself, what am I?" These words by Hillel are the keystone of personal and communal responsibility. At Morasha, campers learn and live what it means to be dependable and conscientious members of a family, a group, a community, a people, and a nation. Morasha inculcates the value of good citizenship — as Jews, Americans, and supporters of Israel.</p>
+    </div>
+  </div>
+
+  <!-- A — Appreciation -->
+  <div class="value" data-i="4" style="--accent:#C15827">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">A</div>
+      <div class="value-title">
+        <h3>Appreciation</h3>
+        <div class="value-hebrew">לשמע בקול תודה</div>
+      </div>
+      <p>Gratitude is our attitude — from the first tefilot we recite in the morning, to the brachot in the Dining Room, to the routine "thank you" expressed by campers and staff. Morasha campers learn to be thankful for the good fortunes from which they benefit, living and expressing their appreciation throughout their camp experience. After all, appreciation is the essence of a Yehudi, a Jew.</p>
+    </div>
+  </div>
+
+  <!-- S -->
+  <div class="value" data-i="5" style="--accent:#2E8B8B">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1530092285049-1c42085fd395?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">S</div>
+      <div class="value-title">
+        <h3>Skill Building</h3>
+        <div class="value-hebrew">יגיע כפיך כי תאכל</div>
+      </div>
+      <p>Out of the classrooms and onto the fields, courts, lake, pool, art room, stage, and beyond, Morasha campers develop their technical skills, confidence, leadership, and self-esteem. Learning how to do things right through instruction, practice, challenge, and experience, campers develop skills in athletics, aquatics, adventure, and the arts.</p>
+    </div>
+  </div>
+
+  <!-- H -->
+  <div class="value" data-i="6" style="--accent:#A02134">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">H</div>
+      <div class="value-title">
+        <h3>Heart &amp; Soul</h3>
+        <div class="value-hebrew">בכל לבבך ובכל נפשך</div>
+      </div>
+      <p>At Morasha, we aren't simply looking to give our campers something to do — but to teach our campers to approach everything they do with a sense of passion, spirit, excitement, and enthusiasm. Whether it's through a Color War or Shiria, zmirot or teffila, Morasha is a place for spirits to soar and for souls to be inspired. And that infectious spirit goes home with our campers and lasts, very often, a lifetime.</p>
+    </div>
+  </div>
+
+  <!-- A — Achdut -->
+  <div class="value" data-i="7" style="--accent:#D4A017">
+    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&q=80')"></div>
+    <div class="value-content">
+      <div class="value-letter">A</div>
+      <div class="value-title">
+        <h3>Achdut</h3>
+        <div class="value-hebrew">כאיש אחד בלב אחד</div>
+      </div>
+      <p>All for one and one for all. Living together in a bunk, playing together on a team, traveling together on a camp trip, and working together on a project all contribute to the creation of bonds and affection and the satisfaction of mutual achievement. All this creates a unity through which campers, counselors, and staff become the Morasha family.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="closing">
+  <div class="closing-inner">
+    <div class="eyebrow">Come See For Yourself</div>
+    <h2>Seven values. One unforgettable summer.</h2>
+    <p>The only way to truly understand Morasha is to experience it. Come tour the grounds, meet our senior staff, and feel the ruach for yourself.</p>
+    <div class="closing-actions">
+      <a href="#" class="btn btn-light">Request Info &amp; Book a Tour</a>
+      <a href="#" class="btn btn-ghost">Meet the Staff</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

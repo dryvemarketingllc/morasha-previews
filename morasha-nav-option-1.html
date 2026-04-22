@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morasha — Nav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --darkest-green: #142B15;
+    --kehillas-indigo: #1C326B;
+    --kollel-sienna: #974426;
+    --travel-blue: #306DA5;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fafaf7;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  header {
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    position: relative;
+    z-index: 10;
+  }
+  .nav-bar {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--darkest-green);
+    letter-spacing: -0.01em;
+  }
+  .nav-items {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .nav-item {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    padding: 22px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color .2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-item:hover { color: var(--green); }
+  .nav-item.has-dropdown::after {
+    content: "▾";
+    font-size: 9px;
+    opacity: 0.55;
+    transition: transform .2s;
+  }
+  .nav-item.has-dropdown:hover::after { transform: rotate(180deg); }
+  .nav-donate {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 9px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .nav-login {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    padding: 8px 4px;
+    transition: color .2s;
+  }
+  .nav-login svg { opacity: 0.7; transition: opacity .2s; }
+  .nav-login:hover { color: var(--green); }
+  .nav-login:hover svg { opacity: 1; }
+  .nav-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(0,0,0,0.12);
+    margin: 0 4px;
+  }
+
+  /* Dropdown show/hide */
+  .nav-item .dd {
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity .25s, transform .25s, visibility .25s;
+  }
+  .nav-item:hover > .dd,
+  .nav-item:focus-within > .dd {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+  .nav-item .dd::before {
+    content: ""; position: absolute;
+    left: 0; right: 0; top: -14px; height: 14px;
+  }
+
+  /* Classic dropdown */
+  .dd-classic {
+    position: absolute;
+    top: 100%;
+    left: -12px;
+    background: #fff;
+    min-width: 240px;
+    box-shadow: 0 14px 32px rgba(0,0,0,0.12);
+    border-radius: 6px;
+    z-index: 20;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 0;
+  }
+  .dd-classic a, .dd-classic .nested-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 20px;
+    font-size: 13.5px;
+    color: var(--charcoal);
+    border-left: 3px solid transparent;
+    transition: all .2s;
+    cursor: pointer;
+  }
+  .dd-classic a:hover, .dd-classic .nested-trigger:hover {
+    background: #f7f9f4;
+    border-left-color: var(--accent, var(--green));
+    color: var(--accent, var(--green));
+  }
+  .dd-classic a[data-camp="morasha"] { --accent: var(--green); }
+  .dd-classic a[data-camp="kehillas"] { --accent: var(--kehillas-indigo); }
+  .dd-classic a[data-camp="kollel"] { --accent: var(--kollel-sienna); }
+  .dd-classic .nested-trigger { --accent: var(--travel-blue); }
+  .dd-classic .chev { color: #bbb; font-size: 11px; }
+
+  .dd-classic .nested { position: relative; }
+  .dd-classic .nested-panel {
+    position: absolute;
+    left: calc(100% + 4px);
+    top: -8px;
+    background: #fff;
+    min-width: 200px;
+    box-shadow: 0 14px 32px rgba(0,0,0,0.12);
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-4px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+  }
+  .dd-classic .nested:hover .nested-panel {
+    opacity: 1; visibility: visible; transform: translateX(0);
+  }
+  .dd-classic .nested-panel a { border-left-color: transparent; }
+  .dd-classic .nested-panel a:hover {
+    background: #f4f7fb;
+    border-left-color: var(--travel-blue);
+    color: var(--travel-blue);
+  }
+  .dd-classic .nested-panel .tag {
+    padding: 6px 20px 2px;
+    font-family: var(--sans-cond);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+  }
+
+  /* ============ MOBILE ============ */
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--charcoal);
+  }
+  .mobile-toggle svg { display: block; }
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: #fff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    visibility: hidden;
+  }
+  .mobile-nav.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+  .mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .mobile-nav-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--charcoal);
+  }
+  .mobile-nav-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0 24px;
+  }
+  .mobile-nav-item {
+    display: block;
+    padding: 18px 24px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--charcoal);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    cursor: pointer;
+  }
+  .mobile-nav-item.has-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mobile-nav-item .caret {
+    font-size: 14px;
+    color: var(--text-grey);
+    transition: transform .3s;
+  }
+  .mobile-nav-item.open .caret { transform: rotate(180deg); }
+
+  .mobile-sub {
+    max-height: 0;
+    overflow: hidden;
+    background: #f7f9f4;
+    transition: max-height .35s cubic-bezier(.2,.8,.2,1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .mobile-sub.open { max-height: 600px; }
+  .mobile-sub a, .mobile-sub .mobile-sub-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px 14px 40px;
+    font-size: 15px;
+    color: var(--charcoal);
+    border-left: 3px solid transparent;
+    cursor: pointer;
+  }
+  .mobile-sub a[data-camp="morasha"] { border-left-color: var(--green); }
+  .mobile-sub a[data-camp="kehillas"] { border-left-color: var(--kehillas-indigo); }
+  .mobile-sub a[data-camp="kollel"] { border-left-color: var(--kollel-sienna); }
+  .mobile-sub .mobile-sub-trigger { border-left-color: var(--travel-blue); }
+
+  .mobile-sub-nested {
+    max-height: 0;
+    overflow: hidden;
+    background: #eef3e9;
+    transition: max-height .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .mobile-sub-nested.open { max-height: 300px; }
+  .mobile-sub-nested a {
+    padding: 12px 24px 12px 56px;
+    font-size: 14px;
+    color: var(--text-grey);
+    border-left: 3px solid var(--travel-blue);
+    display: block;
+  }
+
+  .mobile-nav-cta {
+    padding: 20px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .mobile-nav-cta .nav-donate {
+    text-align: center;
+    padding: 16px;
+    font-size: 15px;
+    border-radius: 4px;
+  }
+  .mobile-nav-cta .nav-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    font-size: 14px;
+    color: var(--charcoal);
+  }
+  .mobile-nav-cta .nav-login svg { opacity: 0.7; }
+
+  @media (max-width: 900px) {
+    .nav-items { display: none; }
+    .mobile-toggle { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-bar">
+    <div class="nav-logo">Morasha</div>
+    <div class="nav-items">
+      <div class="nav-item">Home</div>
+
+      <div class="nav-item has-dropdown">
+        About
+        <div class="dd dd-classic">
+          <a href="#">Mission &amp; Core Values <span class="chev">›</span></a>
+          <a href="#">History &amp; Legacy <span class="chev">›</span></a>
+          <a href="#">Leadership &amp; Staff <span class="chev">›</span></a>
+        </div>
+      </div>
+
+      <div class="nav-item has-dropdown">
+        Camps
+        <div class="dd dd-classic">
+          <a href="#" data-camp="morasha">Camp Morasha <span class="chev">›</span></a>
+          <a href="#" data-camp="kehillas">Kehillas Yaakov <span class="chev">›</span></a>
+          <div class="nested">
+            <div class="nested-trigger">Morasha Travel <span class="chev">›</span></div>
+            <div class="nested-panel">
+              <div class="tag">Travel Camps</div>
+              <a href="#">Sulam</a>
+              <a href="#">Amcha Boys</a>
+              <a href="#">Amcha Girls</a>
+            </div>
+          </div>
+          <a href="#" data-camp="kollel">Morasha Kollel <span class="chev">›</span></a>
+        </div>
+      </div>
+
+      <div class="nav-item">Dates &amp; Rates</div>
+      <div class="nav-item">Alumni &amp; Events</div>
+      <div class="nav-item">Rentals</div>
+      <div class="nav-item">Contact</div>
+      <a href="#" class="nav-login">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Apply / Login
+      </a>
+      <div class="nav-divider"></div>
+      <div class="nav-donate">Donate</div>
+    </div>
+
+    <button class="mobile-toggle" aria-label="Open menu" onclick="document.getElementById('mobileNav').classList.add('open')">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="4" y1="8" x2="22" y2="8"/>
+        <line x1="4" y1="13" x2="22" y2="13"/>
+        <line x1="4" y1="18" x2="22" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ MOBILE NAV ============ -->
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <div class="nav-logo">Morasha</div>
+    <button class="mobile-nav-close" aria-label="Close menu" onclick="document.getElementById('mobileNav').classList.remove('open')">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="6" y1="6" x2="20" y2="20"/>
+        <line x1="20" y1="6" x2="6" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-nav-body">
+    <a class="mobile-nav-item" href="#">Home</a>
+
+    <div class="mobile-nav-item has-sub" data-toggle="about">
+      About
+      <span class="caret">▾</span>
+    </div>
+    <div class="mobile-sub" data-sub="about">
+      <a href="#">Mission &amp; Core Values</a>
+      <a href="#">History &amp; Legacy</a>
+      <a href="#">Leadership &amp; Staff</a>
+    </div>
+
+    <div class="mobile-nav-item has-sub" data-toggle="programs">
+      Camps
+      <span class="caret">▾</span>
+    </div>
+    <div class="mobile-sub" data-sub="programs">
+      <a href="#" data-camp="morasha">Camp Morasha</a>
+      <a href="#" data-camp="kehillas">Kehillas Yaakov</a>
+      <div class="mobile-sub-trigger" data-toggle="travel">
+        Morasha Travel
+        <span class="caret">▾</span>
+      </div>
+      <div class="mobile-sub-nested" data-sub="travel">
+        <a href="#">Sulam</a>
+        <a href="#">Amcha Boys</a>
+        <a href="#">Amcha Girls</a>
+      </div>
+      <a href="#" data-camp="kollel">Morasha Kollel</a>
+    </div>
+
+    <a class="mobile-nav-item" href="#">Dates &amp; Rates</a>
+    <a class="mobile-nav-item" href="#">Alumni &amp; Events</a>
+    <a class="mobile-nav-item" href="#">Rentals</a>
+    <a class="mobile-nav-item" href="#">Contact</a>
+  </div>
+
+  <div class="mobile-nav-cta">
+    <a href="#" class="nav-donate">Donate</a>
+    <a href="#" class="nav-login">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      Apply / Login
+    </a>
+  </div>
+</nav>
+
+<script>
+  document.querySelectorAll('[data-toggle]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const key = trigger.dataset.toggle;
+      const panel = document.querySelector(`[data-sub="${key}"]`);
+      if (!panel) return;
+      trigger.classList.toggle('open');
+      panel.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>

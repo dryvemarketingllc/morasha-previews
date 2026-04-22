@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morasha — Donor Block Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --grey: #ECECEC;
+    --bg-warm: #F8F7F5;
+    --text-grey: #6B6B6B;
+    --charcoal: #222222;
+    --gold: #B8953E;
+    --gold-light: #F5EFDF;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  .option-label {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 72px 48px 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .option-label h2 {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .option-label p { font-size: 15px; color: #999; }
+  .divider { height: 1px; background: #E5E5E5; margin: 0 48px; max-width: 1344px; }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+  }
+  .btn-green { background: var(--darkest-green); color: #fff; }
+  .btn-green:hover { background: var(--green); }
+  .btn-outline {
+    background: transparent; color: var(--darkest-green);
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .btn-outline:hover { border-color: var(--darkest-green); }
+  .btn-light { background: #fff; color: var(--darkest-green); }
+  .btn-light:hover { background: var(--lightest-green); }
+
+  /* ============================================================
+     OPTION A — HORIZONTAL TICKER
+     Names scroll continuously like a marquee, two rows,
+     opposite directions. Elegant + shows many names.
+     ============================================================ */
+  .donor-a {
+    background: var(--darkest-green);
+    padding: 72px 0;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+  }
+  .donor-a-header {
+    max-width: 1200px;
+    margin: 0 auto 48px;
+    padding: 0 48px;
+  }
+  .donor-a-header .eyebrow { color: var(--gold); margin-bottom: 14px; }
+  .donor-a-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+  .ticker-row {
+    display: flex;
+    width: max-content;
+    gap: 12px;
+    padding: 6px 0;
+  }
+  .ticker-row.scroll-left { animation: ticker-left 60s linear infinite; }
+  .ticker-row.scroll-right { animation: ticker-right 60s linear infinite; }
+  @keyframes ticker-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes ticker-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  .ticker-name {
+    flex-shrink: 0;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+    transition: all .3s;
+  }
+  .ticker-name:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+  .donor-a-footer {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 0 48px;
+  }
+  .donor-a-footer a {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    transition: color .2s;
+  }
+  .donor-a-footer a:hover { color: #fff; }
+  .donor-a-footer a::after { content: " →"; }
+
+  /* ============================================================
+     OPTION B — FADING GRID
+     A fixed 4-col grid that cycles batches of names every few
+     seconds with a crossfade. Feels dynamic but controlled.
+     ============================================================ */
+  .donor-b {
+    background: var(--bg-warm);
+    padding: 80px 48px;
+    text-align: center;
+  }
+  .donor-b-inner { max-width: 1200px; margin: 0 auto; }
+  .donor-b-header { margin-bottom: 48px; }
+  .donor-b-header .eyebrow { color: var(--green); margin-bottom: 14px; }
+  .donor-b-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--darkest-green);
+    line-height: 0.95;
+    margin-bottom: 12px;
+  }
+  .donor-b-header p { font-size: 16px; color: var(--text-grey); }
+  .fade-grid-wrap {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  .fade-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    align-content: start;
+  }
+  .fade-grid.active { opacity: 1; }
+  .fade-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .fade-card .fc-name {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--darkest-green);
+    margin-bottom: 4px;
+  }
+  .fade-card .fc-note {
+    font-size: 12px;
+    color: var(--text-grey);
+  }
+  .donor-b-footer {
+    margin-top: 40px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  .fade-dots {
+    display: flex;
+    gap: 8px;
+    margin-right: 20px;
+  }
+  .fade-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--grey);
+    transition: background .3s;
+    cursor: pointer;
+  }
+  .fade-dots span.active { background: var(--green); }
+
+  /* ============================================================
+     OPTION C — VERTICAL SCROLL WALL
+     A contained panel with names flowing up continuously.
+     Feels like a living memorial wall.
+     ============================================================ */
+  .donor-c {
+    background: #fff;
+    padding: 80px 48px;
+  }
+  .donor-c-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .donor-c-copy .eyebrow { color: var(--green); margin-bottom: 14px; }
+  .donor-c-copy h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--darkest-green);
+    line-height: 0.95;
+    margin-bottom: 16px;
+  }
+  .donor-c-copy p {
+    font-size: 17px;
+    color: var(--text-grey);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+  .scroll-wall {
+    height: 420px;
+    overflow: hidden;
+    position: relative;
+    background: var(--darkest-green);
+    border-radius: 2px;
+  }
+  .scroll-wall::before,
+  .scroll-wall::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .scroll-wall::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--darkest-green), transparent);
+  }
+  .scroll-wall::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--darkest-green), transparent);
+  }
+  .scroll-track {
+    display: flex;
+    flex-direction: column;
+    animation: scroll-up 40s linear infinite;
+  }
+  @keyframes scroll-up {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  .scroll-name {
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: #fff;
+  }
+  .scroll-name .sn-name {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+  }
+  .scroll-name .sn-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ============================================================
+     OPTION D — COMPACT HONOR ROLL
+     Dense, elegant typographic wall. Names at different sizes
+     by tier. Feels like a museum benefactor wall.
+     ============================================================ */
+  .donor-d {
+    background: var(--darkest-green);
+    padding: 80px 48px;
+    text-align: center;
+    color: #fff;
+  }
+  .donor-d-inner { max-width: 1100px; margin: 0 auto; }
+  .donor-d-header { margin-bottom: 56px; }
+  .donor-d-header .eyebrow { color: var(--gold); margin-bottom: 14px; }
+  .donor-d-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+  .honor-tier {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .honor-tier:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .honor-tier-label {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .honor-names-lg {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 28px;
+  }
+  .honor-names-lg span {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .honor-names-md {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 24px;
+  }
+  .honor-names-md span {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+  }
+  .honor-names-sm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px 20px;
+  }
+  .honor-names-sm span {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+  }
+  .donor-d-footer {
+    margin-top: 48px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .donor-c-inner { grid-template-columns: 1fr; }
+    .scroll-wall { height: 340px; }
+    .fade-grid { grid-template-columns: repeat(2, 1fr); }
+    .fade-grid-wrap { height: 180px; }
+  }
+  @media (max-width: 640px) {
+    .option-label { padding: 48px 24px 16px; }
+    .divider { margin: 0 24px; }
+    .donor-a { padding: 56px 0; }
+    .donor-a-header, .donor-a-footer { padding: 0 24px; }
+    .donor-b { padding: 56px 24px; }
+    .donor-c { padding: 56px 24px; }
+    .donor-d { padding: 56px 24px; }
+    .fade-grid { grid-template-columns: 1fr 1fr; }
+    .fade-grid-wrap { height: 220px; }
+    .honor-names-lg span { font-size: 20px; }
+    .honor-names-md span { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ OPTION A — TICKER ============ -->
+<div class="option-label">
+  <h2>Option A</h2>
+  <p>Horizontal ticker — two rows scrolling in opposite directions, auto-loops</p>
+</div>
+<section class="donor-a">
+  <div class="donor-a-header">
+    <div class="eyebrow">Hakarat Hatov</div>
+    <h2>Thank You to Our Donors</h2>
+  </div>
+  <div style="overflow:hidden;">
+    <div class="ticker-row scroll-left">
+      <span class="ticker-name">Annie & Yale Baron</span>
+      <span class="ticker-name">Jessica & Jeremy Kirschner</span>
+      <span class="ticker-name">Nataly & Stephen Neuwirth</span>
+      <span class="ticker-name">Roz & David Savitsky</span>
+      <span class="ticker-name">Lisa & Yoni Wintner</span>
+      <span class="ticker-name">Doreen & Charlie Hadid</span>
+      <span class="ticker-name">Elisa & Alan Pines</span>
+      <span class="ticker-name">Lindsay & Daniel Setton</span>
+      <span class="ticker-name">Dara & David Orbach</span>
+      <span class="ticker-name">Donny & Arielle Rosenberg</span>
+      <span class="ticker-name">Abby & Josh Kaufthal</span>
+      <span class="ticker-name">Howard & Suri Boriskin</span>
+      <span class="ticker-name">Marci & Jeff Lefkovits</span>
+      <span class="ticker-name">Abby & Scott Herschmann</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-name">Annie & Yale Baron</span>
+      <span class="ticker-name">Jessica & Jeremy Kirschner</span>
+      <span class="ticker-name">Nataly & Stephen Neuwirth</span>
+      <span class="ticker-name">Roz & David Savitsky</span>
+      <span class="ticker-name">Lisa & Yoni Wintner</span>
+      <span class="ticker-name">Doreen & Charlie Hadid</span>
+      <span class="ticker-name">Elisa & Alan Pines</span>
+      <span class="ticker-name">Lindsay & Daniel Setton</span>
+      <span class="ticker-name">Dara & David Orbach</span>
+      <span class="ticker-name">Donny & Arielle Rosenberg</span>
+      <span class="ticker-name">Abby & Josh Kaufthal</span>
+      <span class="ticker-name">Howard & Suri Boriskin</span>
+      <span class="ticker-name">Marci & Jeff Lefkovits</span>
+      <span class="ticker-name">Abby & Scott Herschmann</span>
+    </div>
+  </div>
+  <div style="overflow:hidden;">
+    <div class="ticker-row scroll-right">
+      <span class="ticker-name">Chaya & Lorne Lieberman</span>
+      <span class="ticker-name">Tamar & Jonathan Croog</span>
+      <span class="ticker-name">Leora & Daniel Lowe</span>
+      <span class="ticker-name">Jody & David Perla</span>
+      <span class="ticker-name">Aleeza & Avi Lauer</span>
+      <span class="ticker-name">Jennifer & David Ottensoser</span>
+      <span class="ticker-name">Celeste & Asher Hackl</span>
+      <span class="ticker-name">Rachel & Mark Klein</span>
+      <span class="ticker-name">Suri & Howard Borkin</span>
+      <span class="ticker-name">Linda & Dan Kaufthal</span>
+      <span class="ticker-name">Gayle Lewis</span>
+      <span class="ticker-name">Sarabath & Kevin Fein</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-name">Chaya & Lorne Lieberman</span>
+      <span class="ticker-name">Tamar & Jonathan Croog</span>
+      <span class="ticker-name">Leora & Daniel Lowe</span>
+      <span class="ticker-name">Jody & David Perla</span>
+      <span class="ticker-name">Aleeza & Avi Lauer</span>
+      <span class="ticker-name">Jennifer & David Ottensoser</span>
+      <span class="ticker-name">Celeste & Asher Hackl</span>
+      <span class="ticker-name">Rachel & Mark Klein</span>
+      <span class="ticker-name">Suri & Howard Borkin</span>
+      <span class="ticker-name">Linda & Dan Kaufthal</span>
+      <span class="ticker-name">Gayle Lewis</span>
+      <span class="ticker-name">Sarabath & Kevin Fein</span>
+    </div>
+  </div>
+  <div class="donor-a-footer">
+    <a href="#">View the full Donor Wall</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ OPTION B — FADING GRID ============ -->
+<div class="option-label">
+  <h2>Option B</h2>
+  <p>Fading grid — cycles through batches of donors every 4 seconds, with dot indicators</p>
+</div>
+<section class="donor-b">
+  <div class="donor-b-inner">
+    <div class="donor-b-header">
+      <div class="eyebrow">Hakarat Hatov</div>
+      <h2>Thank You to Our Donors</h2>
+      <p>The families who build the spaces where memories are made.</p>
+    </div>
+    <div class="fade-grid-wrap" id="fadeWrap">
+      <div class="fade-grid active" data-page="0">
+        <div class="fade-card"><div class="fc-name">Seryl & Charles Kushner</div><div class="fc-note">Beis Kushner</div></div>
+        <div class="fade-card"><div class="fc-name">Israel Henry Beren Foundation</div><div class="fc-note">Beren Arena</div></div>
+        <div class="fade-card"><div class="fc-name">Nataly & Stephen Neuwirth</div><div class="fc-note">Mercazia PAC</div></div>
+        <div class="fade-card"><div class="fc-name">Lisa & Yoni Wintner</div><div class="fc-note">Aron Kodesh</div></div>
+        <div class="fade-card"><div class="fc-name">Jessica & Jeremy Kirschner</div><div class="fc-note">Court & Amud</div></div>
+        <div class="fade-card"><div class="fc-name">Doreen & Charlie Hadid</div><div class="fc-note">Bookshelf</div></div>
+        <div class="fade-card"><div class="fc-name">Roz & David Savitsky</div><div class="fc-note">Bookshelf & Scoreboard</div></div>
+        <div class="fade-card"><div class="fc-name">Dara & David Orbach</div><div class="fc-note">Court</div></div>
+      </div>
+      <div class="fade-grid" data-page="1">
+        <div class="fade-card"><div class="fc-name">Donny & Arielle Rosenberg</div><div class="fc-note">Court</div></div>
+        <div class="fade-card"><div class="fc-name">Annie & Yale Baron</div><div class="fc-note">Mezuza</div></div>
+        <div class="fade-card"><div class="fc-name">Celeste & Asher Hackl</div><div class="fc-note">Mezuza</div></div>
+        <div class="fade-card"><div class="fc-name">Abby & Josh Kaufthal</div><div class="fc-note">Bracket Board</div></div>
+        <div class="fade-card"><div class="fc-name">Howard & Suri Boriskin</div><div class="fc-note">Team Bench</div></div>
+        <div class="fade-card"><div class="fc-name">Abby & Scott Herschmann</div><div class="fc-note">Dining Hall</div></div>
+        <div class="fade-card"><div class="fc-name">Leora & Daniel Lowe</div><div class="fc-note">Dining Hall</div></div>
+        <div class="fade-card"><div class="fc-name">Jody & David Perla</div><div class="fc-note">Dining Hall</div></div>
+      </div>
+      <div class="fade-grid" data-page="2">
+        <div class="fade-card"><div class="fc-name">Marci & Jeff Lefkovits</div><div class="fc-note">Mezuza & Scoreboard</div></div>
+        <div class="fade-card"><div class="fc-name">Tamar & Jonathan Croog</div><div class="fc-note">Team Bench</div></div>
+        <div class="fade-card"><div class="fc-name">Lindsay & Daniel Setton</div><div class="fc-note">Bookshelf</div></div>
+        <div class="fade-card"><div class="fc-name">Chaya & Lorne Lieberman</div><div class="fc-note">Bookshelf</div></div>
+        <div class="fade-card"><div class="fc-name">Elisa & Alan Pines</div><div class="fc-note">Bookshelf</div></div>
+        <div class="fade-card"><div class="fc-name">Aleeza & Avi Lauer</div><div class="fc-note">Bracket Board</div></div>
+        <div class="fade-card"><div class="fc-name">Rachel & Mark Klein</div><div class="fc-note">Mezuza</div></div>
+        <div class="fade-card"><div class="fc-name">Suri & Howard Borkin</div><div class="fc-note">Mezuza</div></div>
+      </div>
+    </div>
+    <div class="donor-b-footer">
+      <div class="fade-dots" id="fadeDots">
+        <span class="active" data-page="0"></span>
+        <span data-page="1"></span>
+        <span data-page="2"></span>
+      </div>
+      <a href="#" class="btn btn-outline">View Full Donor Wall</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ OPTION C — VERTICAL SCROLL ============ -->
+<div class="option-label">
+  <h2>Option C</h2>
+  <p>Split layout — copy left, auto-scrolling name wall right (dark panel, memorial feel)</p>
+</div>
+<section class="donor-c">
+  <div class="donor-c-inner">
+    <div class="donor-c-copy">
+      <div class="eyebrow">Hakarat Hatov</div>
+      <h2>Thank You to Our Donors</h2>
+      <p>Morasha has stood at the intersection of Torah and community for generations. We honor the families whose generosity builds the spaces where memories are made.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="#" class="btn btn-green">View Full Donor Wall</a>
+        <a href="#" class="btn btn-outline">Explore Giving</a>
+      </div>
+    </div>
+    <div class="scroll-wall">
+      <div class="scroll-track">
+        <div class="scroll-name"><span class="sn-name">Seryl & Charles Kushner</span><span class="sn-desc">Beis Kushner</span></div>
+        <div class="scroll-name"><span class="sn-name">Israel Henry Beren Foundation</span><span class="sn-desc">Arena</span></div>
+        <div class="scroll-name"><span class="sn-name">Nataly & Stephen Neuwirth</span><span class="sn-desc">Mercazia PAC</span></div>
+        <div class="scroll-name"><span class="sn-name">Lisa & Yoni Wintner</span><span class="sn-desc">Aron Kodesh</span></div>
+        <div class="scroll-name"><span class="sn-name">Jessica & Jeremy Kirschner</span><span class="sn-desc">Court & Amud</span></div>
+        <div class="scroll-name"><span class="sn-name">Doreen & Charlie Hadid</span><span class="sn-desc">Bookshelf</span></div>
+        <div class="scroll-name"><span class="sn-name">Roz & David Savitsky</span><span class="sn-desc">Scoreboard</span></div>
+        <div class="scroll-name"><span class="sn-name">Dara & David Orbach</span><span class="sn-desc">Court</span></div>
+        <div class="scroll-name"><span class="sn-name">Donny & Arielle Rosenberg</span><span class="sn-desc">Court</span></div>
+        <div class="scroll-name"><span class="sn-name">Annie & Yale Baron</span><span class="sn-desc">Mezuza</span></div>
+        <div class="scroll-name"><span class="sn-name">Abby & Josh Kaufthal</span><span class="sn-desc">Bracket Board</span></div>
+        <div class="scroll-name"><span class="sn-name">Howard & Suri Boriskin</span><span class="sn-desc">Team Bench</span></div>
+        <div class="scroll-name"><span class="sn-name">Tamar & Jonathan Croog</span><span class="sn-desc">Team Bench</span></div>
+        <div class="scroll-name"><span class="sn-name">Abby & Scott Herschmann</span><span class="sn-desc">Dining Hall</span></div>
+        <div class="scroll-name"><span class="sn-name">Leora & Daniel Lowe</span><span class="sn-desc">Dining Hall</span></div>
+        <div class="scroll-name"><span class="sn-name">Jody & David Perla</span><span class="sn-desc">Dining Hall</span></div>
+        <div class="scroll-name"><span class="sn-name">Marci & Jeff Lefkovits</span><span class="sn-desc">Mezuza</span></div>
+        <div class="scroll-name"><span class="sn-name">Lindsay & Daniel Setton</span><span class="sn-desc">Bookshelf</span></div>
+        <div class="scroll-name"><span class="sn-name">Elisa & Alan Pines</span><span class="sn-desc">Bookshelf</span></div>
+        <div class="scroll-name"><span class="sn-name">Chaya & Lorne Lieberman</span><span class="sn-desc">Bookshelf</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="scroll-name"><span class="sn-name">Seryl & Charles Kushner</span><span class="sn-desc">Beis Kushner</span></div>
+        <div class="scroll-name"><span class="sn-name">Israel Henry Beren Foundation</span><span class="sn-desc">Arena</span></div>
+        <div class="scroll-name"><span class="sn-name">Nataly & Stephen Neuwirth</span><span class="sn-desc">Mercazia PAC</span></div>
+        <div class="scroll-name"><span class="sn-name">Lisa & Yoni Wintner</span><span class="sn-desc">Aron Kodesh</span></div>
+        <div class="scroll-name"><span class="sn-name">Jessica & Jeremy Kirschner</span><span class="sn-desc">Court & Amud</span></div>
+        <div class="scroll-name"><span class="sn-name">Doreen & Charlie Hadid</span><span class="sn-desc">Bookshelf</span></div>
+        <div class="scroll-name"><span class="sn-name">Roz & David Savitsky</span><span class="sn-desc">Scoreboard</span></div>
+        <div class="scroll-name"><span class="sn-name">Dara & David Orbach</span><span class="sn-desc">Court</span></div>
+        <div class="scroll-name"><span class="sn-name">Donny & Arielle Rosenberg</span><span class="sn-desc">Court</span></div>
+        <div class="scroll-name"><span class="sn-name">Annie & Yale Baron</span><span class="sn-desc">Mezuza</span></div>
+        <div class="scroll-name"><span class="sn-name">Abby & Josh Kaufthal</span><span class="sn-desc">Bracket Board</span></div>
+        <div class="scroll-name"><span class="sn-name">Howard & Suri Boriskin</span><span class="sn-desc">Team Bench</span></div>
+        <div class="scroll-name"><span class="sn-name">Tamar & Jonathan Croog</span><span class="sn-desc">Team Bench</span></div>
+        <div class="scroll-name"><span class="sn-name">Abby & Scott Herschmann</span><span class="sn-desc">Dining Hall</span></div>
+        <div class="scroll-name"><span class="sn-name">Leora & Daniel Lowe</span><span class="sn-desc">Dining Hall</span></div>
+        <div class="scroll-name"><span class="sn-name">Jody & David Perla</span><span class="sn-desc">Dining Hall</span></div>
+        <div class="scroll-name"><span class="sn-name">Marci & Jeff Lefkovits</span><span class="sn-desc">Mezuza</span></div>
+        <div class="scroll-name"><span class="sn-name">Lindsay & Daniel Setton</span><span class="sn-desc">Bookshelf</span></div>
+        <div class="scroll-name"><span class="sn-name">Elisa & Alan Pines</span><span class="sn-desc">Bookshelf</span></div>
+        <div class="scroll-name"><span class="sn-name">Chaya & Lorne Lieberman</span><span class="sn-desc">Bookshelf</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ OPTION D — MUSEUM WALL ============ -->
+<div class="option-label">
+  <h2>Option D</h2>
+  <p>Museum benefactor wall — names at different sizes by tier, all visible at once</p>
+</div>
+<section class="donor-d">
+  <div class="donor-d-inner">
+    <div class="donor-d-header">
+      <div class="eyebrow">Hakarat Hatov</div>
+      <h2>Thank You to Our Donors</h2>
+    </div>
+    <div class="honor-tier">
+      <div class="honor-tier-label">Building Dedications</div>
+      <div class="honor-names-lg">
+        <span>Seryl & Charles Kushner</span>
+        <span>Israel Henry Beren Foundation</span>
+        <span>Nataly & Stephen Neuwirth</span>
+      </div>
+    </div>
+    <div class="honor-tier">
+      <div class="honor-tier-label">Facility & Area Dedications</div>
+      <div class="honor-names-md">
+        <span>Lisa & Yoni Wintner</span>
+        <span>Jessica & Jeremy Kirschner</span>
+        <span>Dara & David Orbach</span>
+        <span>Donny & Arielle Rosenberg</span>
+        <span>Roz & David Savitsky</span>
+        <span>Marci & Jeff Lefkovits</span>
+        <span>Doreen & Charlie Hadid</span>
+        <span>Elisa & Alan Pines</span>
+        <span>Lindsay & Daniel Setton</span>
+        <span>Chaya & Lorne Lieberman</span>
+        <span>Tamar & Jonathan Croog</span>
+        <span>Howard & Suri Boriskin</span>
+      </div>
+    </div>
+    <div class="honor-tier">
+      <div class="honor-tier-label">Dedications & Contributions</div>
+      <div class="honor-names-sm">
+        <span>Annie & Yale Baron</span>
+        <span>Suri & Howard Borkin</span>
+        <span>Celeste & Asher Hackl</span>
+        <span>Frieda & Isaac Itzkovitz</span>
+        <span>Bernice & Seme Joszef</span>
+        <span>Rachel & Mark Klein</span>
+        <span>Shani & Aaron Malitzky</span>
+        <span>Aleeza & Avi Lauer</span>
+        <span>Jennifer & David Ottensoser</span>
+        <span>Tamar & Ben Blumenthal</span>
+        <span>Abby & Josh Kaufthal</span>
+        <span>Abby & Scott Herschmann</span>
+        <span>Leora & Daniel Lowe</span>
+        <span>Jody & David Perla</span>
+        <span>Gayle Lewis</span>
+        <span>Sophie Bendheim</span>
+      </div>
+    </div>
+    <div class="donor-d-footer">
+      <a href="#" class="btn btn-light">View Full Donor Wall</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FADING GRID SCRIPT ============ -->
+<script>
+(function() {
+  const wrap = document.getElementById('fadeWrap');
+  if (!wrap) return;
+  const grids = wrap.querySelectorAll('.fade-grid');
+  const dots = document.querySelectorAll('#fadeDots span');
+  let current = 0;
+  function show(idx) {
+    grids.forEach(g => g.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    grids[idx].classList.add('active');
+    dots[idx].classList.add('active');
+    current = idx;
+  }
+  dots.forEach(d => d.addEventListener('click', () => show(+d.dataset.page)));
+  setInterval(() => show((current + 1) % grids.length), 4000);
+})();
+</script>
+
+</body>
+</html>

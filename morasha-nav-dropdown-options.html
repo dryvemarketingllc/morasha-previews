@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morasha Nav Dropdowns — Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --kehillas-indigo: #1C326B;
+    --kehillas-darkest: #0F131E;
+    --kollel-sienna: #974426;
+    --kollel-darkest: #421A0C;
+    --travel-blue: #306DA5;
+    --travel-darkest: #092D4F;
+    --grey: #ECECEC;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); color: var(--charcoal); background: #fafaf7; -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; letter-spacing: -0.01em; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ============ Page chrome ============ */
+  .demo-header {
+    padding: 48px 48px 16px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .demo-header h1 { font-size: 32px; margin-bottom: 8px; }
+  .demo-header p { color: var(--text-grey); font-size: 14px; max-width: 720px; }
+  .instructions {
+    background: #fff8e1;
+    border: 1px solid #f3e3a7;
+    border-radius: 6px;
+    padding: 12px 18px;
+    font-size: 13px;
+    color: #6b5410;
+    max-width: 720px;
+    margin-top: 14px;
+  }
+  .option-block {
+    max-width: 1440px;
+    margin: 40px auto 0;
+    padding: 0 48px 56px;
+  }
+  .option-label {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .option-title { font-size: 24px; margin-bottom: 6px; }
+  .option-desc { color: var(--text-grey); font-size: 14px; margin-bottom: 20px; max-width: 780px; }
+  .nav-demo {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    position: relative;
+    overflow: visible;
+    min-height: 120px;
+  }
+  .demo-note {
+    background: #fafafa;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+    padding: 12px 32px;
+    font-size: 12.5px;
+    color: var(--text-grey);
+    font-style: italic;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ============ Shared nav bar ============ */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    position: relative;
+    z-index: 10;
+    background: #fff;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--darkest-green);
+  }
+  .nav-items {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .nav-item {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    padding: 22px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color .2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-item:hover { color: var(--green); }
+  .nav-item.has-dropdown::after {
+    content: "▾";
+    font-size: 9px;
+    opacity: 0.55;
+    transition: transform .2s;
+  }
+  .nav-item.has-dropdown:hover { color: var(--green); }
+  .nav-item.has-dropdown:hover::after { transform: rotate(180deg); }
+  .nav-donate {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 9px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .nav-login {
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ============ Dropdown show/hide shared rules ============ */
+  .nav-item .dd { opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .25s, transform .25s, visibility .25s; }
+  .nav-item:hover > .dd,
+  .nav-item:focus-within > .dd,
+  .nav-item.force-open > .dd {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+
+  /* Hover bridge - prevents flicker when moving cursor down to dropdown */
+  .nav-item .dd::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: -14px; height: 14px;
+  }
+
+  /* ================ OPTION 1: Classic ================ */
+  .dd-classic {
+    position: absolute;
+    top: 100%;
+    left: -12px;
+    background: #fff;
+    min-width: 240px;
+    box-shadow: 0 14px 32px rgba(0,0,0,0.12);
+    border-radius: 6px;
+    z-index: 20;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 0;
+  }
+  .dd-classic a, .dd-classic .nested-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 20px;
+    font-size: 13.5px;
+    color: var(--charcoal);
+    border-left: 3px solid transparent;
+    transition: all .2s;
+    cursor: pointer;
+  }
+  .dd-classic a:hover, .dd-classic .nested-trigger:hover {
+    background: #f7f9f4;
+    border-left-color: var(--accent, var(--green));
+    color: var(--accent, var(--green));
+  }
+  .dd-classic a[data-camp="morasha"] { --accent: var(--green); }
+  .dd-classic a[data-camp="kehillas"] { --accent: var(--kehillas-indigo); }
+  .dd-classic a[data-camp="kollel"] { --accent: var(--kollel-sienna); }
+  .dd-classic .nested-trigger { --accent: var(--travel-blue); }
+  .dd-classic .chev { color: #bbb; font-size: 11px; }
+
+  .dd-classic .nested { position: relative; }
+  .dd-classic .nested-panel {
+    position: absolute;
+    left: calc(100% + 4px);
+    top: -8px;
+    background: #fff;
+    min-width: 200px;
+    box-shadow: 0 14px 32px rgba(0,0,0,0.12);
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-4px);
+    transition: opacity .2s, transform .2s, visibility .2s;
+  }
+  .dd-classic .nested:hover .nested-panel,
+  .dd-classic .nested.force-open .nested-panel {
+    opacity: 1; visibility: visible; transform: translateX(0);
+  }
+  .dd-classic .nested-panel a { border-left-color: transparent; }
+  .dd-classic .nested-panel a:hover {
+    background: #f4f7fb;
+    border-left-color: var(--travel-blue);
+    color: var(--travel-blue);
+  }
+  .dd-classic .nested-panel .tag {
+    padding: 6px 20px 2px;
+    font-family: var(--sans-cond);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+  }
+
+  /* ================ OPTION 2: Mega photo ================ */
+  .dd-mega {
+    position: absolute;
+    top: 100%;
+    right: -200px;
+    background: #fff;
+    width: 880px;
+    box-shadow: 0 20px 48px rgba(0,0,0,0.14);
+    border-radius: 8px;
+    padding: 28px;
+    z-index: 20;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+  /* For right-side nav items, anchor dropdowns to the right edge */
+  .dd-mega.anchor-right { right: 0; left: auto; }
+
+  .dd-mega-intro h4 { font-size: 17px; margin-bottom: 8px; color: var(--darkest-green); }
+  .dd-mega-intro p { font-size: 13px; color: var(--text-grey); line-height: 1.55; margin-bottom: 12px; }
+  .dd-mega-intro .all { font-size: 12px; font-weight: 500; color: var(--green); }
+  .dd-mega-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .dd-mega-tile {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    display: block;
+  }
+  .dd-mega-tile .bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  }
+  .dd-mega-tile:hover .bg { transform: scale(1.08); }
+  .dd-mega-tile::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.8) 100%);
+    z-index: 1;
+  }
+  .dd-mega-tile::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 4px; background: var(--accent); z-index: 3;
+  }
+  .dd-mega-tile[data-camp="morasha"] { --accent: var(--green); }
+  .dd-mega-tile[data-camp="kehillas"] { --accent: var(--kehillas-indigo); }
+  .dd-mega-tile[data-camp="kollel"] { --accent: var(--kollel-sienna); }
+  .dd-mega-tile[data-camp="travel"] { --accent: var(--travel-blue); }
+  .dd-mega-tile .label { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; }
+  .dd-mega-tile h4 { font-size: 17px; line-height: 1; margin-bottom: 3px; }
+  .dd-mega-tile .tagline { font-size: 11px; opacity: 0.85; }
+  .dd-mega-travel-subs { margin-top: 8px; display: flex; gap: 4px; flex-wrap: wrap; }
+  .dd-mega-travel-subs a {
+    font-size: 10px; padding: 3px 7px;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 99px;
+  }
+
+  /* ================ OPTION 3: Two-column preview ================ */
+  .dd-preview {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    width: 560px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.14);
+    border-radius: 8px;
+    z-index: 20;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    overflow: hidden;
+  }
+  .dd-preview.anchor-left { right: auto; left: -12px; }
+  .dd-preview-list { padding: 14px 0; border-right: 1px solid rgba(0,0,0,0.06); }
+  .dd-preview-list a, .dd-preview-list .item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: background .2s, color .2s;
+    cursor: pointer;
+  }
+  .dd-preview-list .item:hover,
+  .dd-preview-list .item.active { background: #f5f7f2; color: var(--accent, var(--green)); }
+  .dd-preview-list .item[data-camp="morasha"] { --accent: var(--green); }
+  .dd-preview-list .item[data-camp="kehillas"] { --accent: var(--kehillas-indigo); }
+  .dd-preview-list .item[data-camp="kollel"] { --accent: var(--kollel-sienna); }
+  .dd-preview-list .item[data-camp="travel"] { --accent: var(--travel-blue); }
+  .dd-preview-list .item[data-target="mission"] { --accent: var(--green); }
+  .dd-preview-list .item[data-target="history"] { --accent: var(--dark-green); }
+  .dd-preview-list .item[data-target="leadership"] { --accent: var(--light-green); }
+  .dd-preview-list .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent, var(--text-grey));
+    flex-shrink: 0;
+  }
+  .dd-preview-list .sub-item {
+    padding-left: 40px;
+    font-size: 12.5px;
+    color: var(--text-grey);
+    font-weight: 400;
+  }
+  .dd-preview-list .sub-item .dot { display: none; }
+  .dd-preview-panel {
+    position: relative;
+    min-height: 300px;
+    background: var(--darkest-green);
+    color: #fff;
+  }
+  .dd-preview-panel .preview {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .dd-preview-panel .preview.active { opacity: 1; }
+  .dd-preview-panel .preview .bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+  }
+  .dd-preview-panel .preview::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20,43,21,0.15) 0%, rgba(20,43,21,0.85) 100%);
+  }
+  .dd-preview-panel .panel-content {
+    position: absolute;
+    left: 22px; right: 22px; bottom: 20px;
+    z-index: 2;
+  }
+  .dd-preview-panel h4 { font-size: 22px; margin-bottom: 4px; }
+  .dd-preview-panel p { font-size: 12.5px; opacity: 0.88; line-height: 1.5; }
+  .dd-preview-panel .more {
+    display: inline-block; margin-top: 12px;
+    font-size: 11.5px; font-weight: 500;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.32);
+    border-radius: 4px;
+  }
+
+  /* ================ OPTION 4: Color pills ================ */
+  .dd-pills {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    width: 720px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 20;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .dd-pills-row { display: flex; gap: 10px; }
+  .dd-pill {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 14px;
+    border-radius: 6px;
+    color: #fff;
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.1;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease;
+    position: relative;
+  }
+  .dd-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+  .dd-pill[data-camp="morasha"] { background: var(--green); }
+  .dd-pill[data-camp="kehillas"] { background: var(--kehillas-indigo); }
+  .dd-pill[data-camp="kollel"] { background: var(--kollel-sienna); }
+  .dd-pill[data-camp="travel"] { background: var(--travel-blue); }
+  .dd-pill .tag {
+    display: block;
+    font-family: var(--sans-cond);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .dd-pill.travel .subs {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 500;
+  }
+  .dd-pill.travel .subs a {
+    padding: 5px 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .dd-pill.travel .subs a:hover { background: rgba(255,255,255,0.28); }
+
+</style>
+</head>
+<body>
+
+<div class="demo-header">
+  <h1>Nav dropdowns — interactive options</h1>
+  <p>Four paired takes on the <em>About</em> and <em>Programs</em> dropdowns using the real MorashaCamps.com nav. Now actually interactive — hover the nav items to open the dropdowns.</p>
+  <div class="instructions">
+    <strong>Try it:</strong> Hover <em>About</em> or <em>Programs</em> in each nav bar. On Option 1, hovering Morasha Travel reveals its cascade panel. On Option 3, hovering items swaps the preview pane photo.
+  </div>
+</div>
+
+<!-- =========================================================
+     OPTION 1 — Classic paired
+     ========================================================= -->
+<div class="option-block">
+  <div class="option-label">Option 1</div>
+  <h2 class="option-title">Classic paired dropdowns</h2>
+  <p class="option-desc">Both dropdowns use the same slim vertical-list pattern. Programs gets a brand-color left bar per camp, and Morasha Travel opens a side-cascade panel with Sulam / Amcha Boys / Amcha Girls.</p>
+  <div class="nav-demo">
+    <div class="nav-bar">
+      <div class="nav-logo">Morasha</div>
+      <div class="nav-items">
+        <div class="nav-item">Home</div>
+        <div class="nav-item has-dropdown">
+          About
+          <div class="dd dd-classic">
+            <a href="#">Mission &amp; Core Values <span class="chev">›</span></a>
+            <a href="#">History &amp; Legacy <span class="chev">›</span></a>
+            <a href="#">Leadership &amp; Staff <span class="chev">›</span></a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          Programs
+          <div class="dd dd-classic">
+            <a href="#" data-camp="morasha">Camp Morasha <span class="chev">›</span></a>
+            <a href="#" data-camp="kehillas">Kehillas Yaakov <span class="chev">›</span></a>
+            <div class="nested">
+              <div class="nested-trigger">Morasha Travel <span class="chev">›</span></div>
+              <div class="nested-panel">
+                <div class="tag">Travel Programs</div>
+                <a href="#">Sulam</a>
+                <a href="#">Amcha Boys</a>
+                <a href="#">Amcha Girls</a>
+              </div>
+            </div>
+            <a href="#" data-camp="kollel">Morasha Kollel <span class="chev">›</span></a>
+          </div>
+        </div>
+        <div class="nav-item">Dates &amp; Rates</div>
+        <div class="nav-item">Alumni</div>
+        <div class="nav-item">Rentals</div>
+        <div class="nav-item">Contact</div>
+        <div class="nav-donate">Donate</div>
+        <div class="nav-login">Apply / Login</div>
+      </div>
+    </div>
+    <div class="demo-note">Pros: small footprint, familiar pattern, easy on mobile as accordion. Cons: the Travel side-cascade can be fiddly on touch — likely becomes a tap-to-expand inline section on mobile.</div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OPTION 2 — Programs mega photo menu
+     ========================================================= -->
+<div class="option-block">
+  <div class="option-label">Option 2</div>
+  <h2 class="option-title">Mega photo menu for Programs</h2>
+  <p class="option-desc">About stays as a simple column. Programs opens a wide drawer with an intro blurb on the left and four photo tiles on the right — mirroring the hero camps grid so the nav feels like a preview of the page.</p>
+  <div class="nav-demo" style="min-height: 480px;">
+    <div class="nav-bar">
+      <div class="nav-logo">Morasha</div>
+      <div class="nav-items">
+        <div class="nav-item">Home</div>
+        <div class="nav-item has-dropdown">
+          About
+          <div class="dd dd-classic">
+            <a href="#">Mission &amp; Core Values</a>
+            <a href="#">History &amp; Legacy</a>
+            <a href="#">Leadership &amp; Staff</a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          Programs
+          <div class="dd dd-mega">
+            <div class="dd-mega-intro">
+              <h4>Our programs</h4>
+              <p>Four distinct camps. One Morasha family. Shared values, distinct identities.</p>
+              <a href="#" class="all">View all programs →</a>
+            </div>
+            <div class="dd-mega-tiles">
+              <a class="dd-mega-tile" data-camp="morasha" href="#">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=500&q=80')"></div>
+                <div class="label">
+                  <h4>Camp Morasha</h4>
+                  <div class="tagline">The flagship summer.</div>
+                </div>
+              </a>
+              <a class="dd-mega-tile" data-camp="kehillas" href="#">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=500&q=80')"></div>
+                <div class="label">
+                  <h4>Kehillas Yaakov</h4>
+                  <div class="tagline">Launching 2027.</div>
+                </div>
+              </a>
+              <div class="dd-mega-tile" data-camp="travel">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1500051638674-ff996a0ec29e?w=500&q=80')"></div>
+                <div class="label">
+                  <h4>Morasha Travel</h4>
+                  <div class="tagline">Three programs.</div>
+                  <div class="dd-mega-travel-subs">
+                    <a href="#">Sulam</a>
+                    <a href="#">Amcha Boys</a>
+                    <a href="#">Amcha Girls</a>
+                  </div>
+                </div>
+              </div>
+              <a class="dd-mega-tile" data-camp="kollel" href="#">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=500&q=80')"></div>
+                <div class="label">
+                  <h4>Morasha Kollel</h4>
+                  <div class="tagline">Serious learning.</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">Dates &amp; Rates</div>
+        <div class="nav-item">Alumni</div>
+        <div class="nav-item">Rentals</div>
+        <div class="nav-item">Contact</div>
+        <div class="nav-donate">Donate</div>
+        <div class="nav-login">Apply / Login</div>
+      </div>
+    </div>
+    <div class="demo-note">Pros: max visual impact, reinforces camp brands, Travel's three programs get equal weight. Cons: tall and wide — needs good photography per camp.</div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OPTION 3 — Two-column with preview panel
+     ========================================================= -->
+<div class="option-block">
+  <div class="option-label">Option 3</div>
+  <h2 class="option-title">Two-column with live preview</h2>
+  <p class="option-desc">Both dropdowns use a unified list + preview pattern. Hover any item and the right panel swaps its photo and copy. Travel's three sub-programs sit indented in the list.</p>
+  <div class="nav-demo" style="min-height: 440px;">
+    <div class="nav-bar">
+      <div class="nav-logo">Morasha</div>
+      <div class="nav-items">
+        <div class="nav-item">Home</div>
+        <div class="nav-item has-dropdown">
+          About
+          <div class="dd dd-preview anchor-left" data-scope="about">
+            <div class="dd-preview-list">
+              <div class="item active" data-target="mission"><span class="dot"></span>Mission &amp; Core Values</div>
+              <div class="item" data-target="history"><span class="dot"></span>History &amp; Legacy</div>
+              <div class="item" data-target="leadership"><span class="dot"></span>Leadership &amp; Staff</div>
+            </div>
+            <div class="dd-preview-panel">
+              <div class="preview active" data-preview="mission">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Built on values</h4>
+                  <p>Seven values — Mutual Respect, Observe, Responsibility, Appreciation, Skill, Heart, Achdut — that shape everything we do.</p>
+                  <span class="more">Read more →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="history">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1509803874385-db7c23652552?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Sixty years of Morasha</h4>
+                  <p>Generations of Jewish summers that shape lives. A story of continuity, ruach, and community.</p>
+                  <span class="more">Our history →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="leadership">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Leadership &amp; Staff</h4>
+                  <p>The directors, advisors, and counselors who make Morasha Morasha.</p>
+                  <span class="more">Meet the team →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          Programs
+          <div class="dd dd-preview" data-scope="programs">
+            <div class="dd-preview-list">
+              <div class="item active" data-camp="morasha" data-target="morasha"><span class="dot"></span>Camp Morasha</div>
+              <div class="item" data-camp="kehillas" data-target="kehillas"><span class="dot"></span>Kehillas Yaakov</div>
+              <div class="item" data-camp="travel" data-target="travel"><span class="dot"></span>Morasha Travel</div>
+              <div class="item sub-item" data-target="sulam">Sulam</div>
+              <div class="item sub-item" data-target="amcha-boys">Amcha Boys</div>
+              <div class="item sub-item" data-target="amcha-girls">Amcha Girls</div>
+              <div class="item" data-camp="kollel" data-target="kollel"><span class="dot"></span>Morasha Kollel</div>
+            </div>
+            <div class="dd-preview-panel">
+              <div class="preview active" data-preview="morasha">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Camp Morasha</h4>
+                  <p>Six decades of summers that shape Jewish lives. Sports, arts, friendship, ruach.</p>
+                  <span class="more">Explore Camp Morasha →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="kehillas">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Kehillas Yaakov</h4>
+                  <p>A new boys' camp launching Summer 2027. Trial program this year.</p>
+                  <span class="more">Learn more →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="travel">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1500051638674-ff996a0ec29e?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Morasha Travel</h4>
+                  <p>Three distinct programs — Sulam, Amcha Boys, Amcha Girls — each with its own character.</p>
+                  <span class="more">All travel programs →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="sulam">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1515266591878-f93e32bc5937?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Sulam</h4>
+                  <p>The Morasha Travel program for the next step.</p>
+                  <span class="more">Explore Sulam →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="amcha-boys">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1533422902779-84b4bda3a30e?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Amcha Boys</h4>
+                  <p>Morasha Travel for boys — Israel, community, adventure.</p>
+                  <span class="more">Explore Amcha Boys →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="amcha-girls">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Amcha Girls</h4>
+                  <p>Morasha Travel for girls — Israel, community, adventure.</p>
+                  <span class="more">Explore Amcha Girls →</span>
+                </div>
+              </div>
+              <div class="preview" data-preview="kollel">
+                <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=700&q=80')"></div>
+                <div class="panel-content">
+                  <h4>Morasha Kollel</h4>
+                  <p>Serious learning for serious minds. Daytime chavruta, summer community.</p>
+                  <span class="more">Explore Kollel →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">Dates &amp; Rates</div>
+        <div class="nav-item">Alumni</div>
+        <div class="nav-item">Rentals</div>
+        <div class="nav-item">Contact</div>
+        <div class="nav-donate">Donate</div>
+        <div class="nav-login">Apply / Login</div>
+      </div>
+    </div>
+    <div class="demo-note">Pros: consistent system across both dropdowns, editorial feel, natural place for Kehillas Yaakov "Launching 2027" storytelling. Cons: requires 1 photo per item.</div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OPTION 4 — Brand color pills for Programs
+     ========================================================= -->
+<div class="option-block">
+  <div class="option-label">Option 4</div>
+  <h2 class="option-title">Brand-color pills for Programs</h2>
+  <p class="option-desc">About stays a simple column. Programs becomes a row of four bold, brand-colored pills. Travel pill expands inline with Sulam / Amcha Boys / Amcha Girls.</p>
+  <div class="nav-demo" style="min-height: 340px;">
+    <div class="nav-bar">
+      <div class="nav-logo">Morasha</div>
+      <div class="nav-items">
+        <div class="nav-item">Home</div>
+        <div class="nav-item has-dropdown">
+          About
+          <div class="dd dd-classic">
+            <a href="#">Mission &amp; Core Values</a>
+            <a href="#">History &amp; Legacy</a>
+            <a href="#">Leadership &amp; Staff</a>
+          </div>
+        </div>
+        <div class="nav-item has-dropdown">
+          Programs
+          <div class="dd dd-pills">
+            <div class="dd-pills-row">
+              <a class="dd-pill" data-camp="morasha" href="#">
+                <span class="tag">Flagship</span>
+                Camp<br/>Morasha
+              </a>
+              <a class="dd-pill" data-camp="kehillas" href="#">
+                <span class="tag">Launching 2027</span>
+                Kehillas<br/>Yaakov
+              </a>
+              <div class="dd-pill travel" data-camp="travel">
+                <span class="tag">Travel</span>
+                Morasha<br/>Travel
+                <div class="subs">
+                  <a href="#">Sulam <span>→</span></a>
+                  <a href="#">Amcha Boys <span>→</span></a>
+                  <a href="#">Amcha Girls <span>→</span></a>
+                </div>
+              </div>
+              <a class="dd-pill" data-camp="kollel" href="#">
+                <span class="tag">Learning</span>
+                Morasha<br/>Kollel
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="nav-item">Dates &amp; Rates</div>
+        <div class="nav-item">Alumni</div>
+        <div class="nav-item">Rentals</div>
+        <div class="nav-item">Contact</div>
+        <div class="nav-donate">Donate</div>
+        <div class="nav-login">Apply / Login</div>
+      </div>
+    </div>
+    <div class="demo-note">Pros: on-brand, no photos required, ships fast, great as a vertical stack on mobile. Cons: all-color can feel busy; less inviting than photo-driven options.</div>
+  </div>
+</div>
+
+<div style="max-width: 1440px; margin: 20px auto 80px; padding: 24px 48px 0; border-top: 1px solid rgba(0,0,0,0.08);">
+  <p style="color: var(--text-grey); font-size: 13px; line-height: 1.6; max-width: 780px;">
+    <strong style="color: var(--charcoal); font-family: var(--sans);">My recommendation:</strong> Option 3 — unified system, editorial feel, and the preview pane gives Kehillas Yaakov a natural stage for "Launching 2027." Option 2 is the strongest alternative if the nav should double as a camps showcase. Option 4 is the fastest to build.
+  </p>
+</div>
+
+<script>
+  // Option 3 — swap preview photo when hovering list items
+  document.querySelectorAll('.dd-preview').forEach(dd => {
+    const items = dd.querySelectorAll('.item');
+    const previews = dd.querySelectorAll('.preview');
+    items.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const target = item.dataset.target;
+        items.forEach(i => i.classList.remove('active'));
+        previews.forEach(p => p.classList.remove('active'));
+        item.classList.add('active');
+        const match = dd.querySelector(`.preview[data-preview="${target}"]`);
+        if (match) match.classList.add('active');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

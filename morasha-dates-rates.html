@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dates & Rates — Camp Morasha 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --grey: #ECECEC;
+    --bg-warm: #F8F7F5;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ============ PAGE HEADER BAR ============ */
+  .page-bar {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .page-bar h1 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .page-bar .bar-actions { display: flex; gap: 12px; align-items: center; }
+  .page-bar .bar-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    transition: color .2s;
+  }
+  .page-bar .bar-link:hover { color: #fff; }
+  .bar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #fff;
+    color: var(--darkest-green);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 2px;
+    transition: all .2s;
+  }
+  .bar-btn:hover { background: var(--light-green); }
+
+  /* ============ HERO ============ */
+  .dates-hero {
+    background: linear-gradient(165deg, var(--darkest-green) 0%, var(--dark-green) 100%);
+    color: #fff;
+    padding: 96px 48px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .dates-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 0%, rgba(155,186,145,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .dates-hero .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .dates-hero h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .dates-hero .subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+  }
+
+  /* ============ DATES GRID ============ */
+  .dates-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+  .section-header {
+    margin-bottom: 48px;
+  }
+  .section-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .section-header h3 {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--darkest-green);
+  }
+
+  .dates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .date-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-left: 4px solid var(--green);
+    padding: 32px 28px;
+    transition: all .3s ease;
+    position: relative;
+  }
+  .date-card:hover {
+    border-left-color: var(--darkest-green);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .date-card .card-label {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .date-card .card-date {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .date-card.highlight {
+    background: var(--darkest-green);
+    border-left-color: var(--light-green);
+  }
+  .date-card.highlight .card-label { color: var(--light-green); }
+  .date-card.highlight .card-date { color: #fff; }
+  .date-card.highlight:hover { border-left-color: #fff; }
+
+  /* ============ TUITION ============ */
+  .tuition-section {
+    background: var(--bg-warm);
+    padding: 80px 0;
+  }
+  .tuition-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .tuition-table-wrap {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .tuition-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  .tuition-table thead th {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 18px 28px;
+    text-align: left;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .tuition-table thead th:last-child {
+    background: var(--green);
+  }
+  .tuition-table tbody td {
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--charcoal);
+  }
+  .tuition-table tbody tr:last-child td { border-bottom: none; }
+  .tuition-table tbody tr:hover { background: rgba(70,118,75,0.03); }
+  .tuition-table .grade {
+    font-weight: 600;
+    color: var(--darkest-green);
+  }
+  .tuition-table .price {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+  }
+  .tuition-table .price-highlight {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em;
+  }
+  .tuition-notes {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .tuition-note {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.55;
+  }
+  .tuition-note .note-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--lightest-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .tuition-note .note-icon svg { color: var(--green); }
+
+  /* ============ REFUND POLICY ============ */
+  .refund-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 48px;
+  }
+  .refund-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .refund-timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .refund-timeline::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--light-green), #E8A87C, #D4585A);
+    border-radius: 2px;
+  }
+  .refund-item {
+    position: relative;
+    padding: 0 0 28px 0;
+  }
+  .refund-item:last-child { padding-bottom: 0; }
+  .refund-item::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--light-green);
+  }
+  .refund-item:last-child::before { border-color: #D4585A; }
+  .refund-item .refund-when {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    margin-bottom: 4px;
+  }
+  .refund-item .refund-amount {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.01em;
+  }
+  .refund-item .refund-detail {
+    font-size: 14px;
+    color: var(--text-grey);
+    margin-top: 2px;
+  }
+  .refund-note {
+    margin-top: 32px;
+    padding: 16px 20px;
+    background: rgba(212,88,90,0.06);
+    border-left: 3px solid #D4585A;
+    font-size: 13px;
+    color: var(--charcoal);
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* ============ INCLUDES STRIP ============ */
+  .includes-strip {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 56px 48px;
+  }
+  .includes-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .includes-inner .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 16px;
+  }
+  .includes-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+  }
+  .includes-list span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+  }
+  .includes-list span::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--light-green);
+    flex-shrink: 0;
+  }
+  .excludes {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .dates-grid { grid-template-columns: repeat(2, 1fr); }
+    .refund-layout { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 640px) {
+    .page-bar { padding: 16px 24px; }
+    .dates-hero { padding: 64px 24px 56px; }
+    .dates-section { padding: 56px 24px; }
+    .tuition-inner { padding: 0 24px; }
+    .tuition-section { padding: 56px 0; }
+    .dates-grid { grid-template-columns: 1fr; }
+    .tuition-table { font-size: 14px; }
+    .tuition-table thead th, .tuition-table tbody td { padding: 14px 16px; }
+    .tuition-table .price, .tuition-table .price-highlight { font-size: 18px; }
+    .refund-section { padding: 56px 24px; }
+    .includes-strip { padding: 40px 24px; }
+    .includes-list { flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE BAR ============ -->
+<div class="page-bar">
+  <h1>Camp Morasha</h1>
+  <div class="bar-actions">
+    <a href="#" class="bar-btn">Apply / Login</a>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="dates-hero">
+  <div class="eyebrow">Summer 2026</div>
+  <h2>Dates &amp; Rates</h2>
+  <p class="subtitle">Everything you need to plan your camper's summer.</p>
+</section>
+
+<!-- ============ DATES GRID ============ -->
+<section class="dates-section">
+  <div class="section-header">
+    <div class="eyebrow">Camp Morasha 2026</div>
+    <h3>Session Dates</h3>
+  </div>
+  <div class="dates-grid">
+    <div class="date-card highlight">
+      <div class="card-label">Full Summer</div>
+      <div class="card-date">June 30 — August 18</div>
+    </div>
+    <div class="date-card">
+      <div class="card-label">First Session</div>
+      <div class="card-date">June 30 — July 28</div>
+    </div>
+    <div class="date-card">
+      <div class="card-label">Second Session</div>
+      <div class="card-date">July 28 — August 18</div>
+    </div>
+    <div class="date-card">
+      <div class="card-label">Staff Orientation</div>
+      <div class="card-date">Sunday, June 28</div>
+    </div>
+    <div class="date-card">
+      <div class="card-label">Visiting Day</div>
+      <div class="card-date">August 2</div>
+    </div>
+    <div class="date-card">
+      <div class="card-label">Morasha Mania</div>
+      <div class="card-date">August 4 — August 6</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TUITION ============ -->
+<section class="tuition-section">
+  <div class="tuition-inner">
+    <div class="section-header">
+      <div class="eyebrow">Tuition</div>
+      <h3>2026 Camp Morasha Tuition</h3>
+    </div>
+    <div class="tuition-table-wrap">
+      <table class="tuition-table">
+        <thead>
+          <tr>
+            <th>Current Grade</th>
+            <th>First Session</th>
+            <th>Second Session</th>
+            <th>Full Summer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="grade">3rd — 6th Grade</td>
+            <td class="price">$6,800</td>
+            <td class="price">$5,100</td>
+            <td class="price-highlight">$10,700</td>
+          </tr>
+          <tr>
+            <td class="grade">7th — 9th Grade</td>
+            <td class="price">$6,800</td>
+            <td class="price">$5,600</td>
+            <td class="price-highlight">$11,200*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tuition-notes">
+      <div class="tuition-note">
+        <div class="note-icon">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <span>*Alufim/Fot (entering 10th grade): A $750 trip fee is added to partially cover the costs associated with the FimFotWest eight-day trip during the First Session. The six-day Road Trip during the Second Session is included in the listed tuition.</span>
+      </div>
+      <div class="tuition-note">
+        <div class="note-icon">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14"/></svg>
+        </div>
+        <span>Tuition does not include canteen or counselor tips.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INCLUDES STRIP ============ -->
+<section class="includes-strip">
+  <div class="includes-inner">
+    <div class="eyebrow">Tuition Includes</div>
+    <div class="includes-list">
+      <span>Transportation to camp</span>
+      <span>Laundry</span>
+      <span>Accident &amp; secondary care</span>
+      <span>All camp trips</span>
+      <span>Camp t-shirt</span>
+      <span>End-of-summer divisional apparel</span>
+    </div>
+    <div class="excludes">Divisional apparel applies to Full Summer / Second Session campers.</div>
+  </div>
+</section>
+
+<!-- ============ REFUND POLICY ============ -->
+<section class="refund-section">
+  <div class="refund-layout">
+    <div class="section-header">
+      <div class="eyebrow">Policy</div>
+      <h3>Camper Refund Policy</h3>
+    </div>
+    <div>
+      <div class="refund-timeline">
+        <div class="refund-item">
+          <div class="refund-when">Non-Accepted Campers</div>
+          <div class="refund-amount">$1,500 Application Fee Returned</div>
+        </div>
+        <div class="refund-item">
+          <div class="refund-when">Before October 1</div>
+          <div class="refund-amount">$250 Penalty</div>
+        </div>
+        <div class="refund-item">
+          <div class="refund-when">After October 1</div>
+          <div class="refund-amount">$1,500 Penalty</div>
+        </div>
+        <div class="refund-item">
+          <div class="refund-when">After December 1</div>
+          <div class="refund-amount">$2,500 Penalty</div>
+        </div>
+        <div class="refund-item">
+          <div class="refund-when">After February 1</div>
+          <div class="refund-amount">$3,500 Penalty</div>
+        </div>
+        <div class="refund-item">
+          <div class="refund-when">After April 1</div>
+          <div class="refund-amount">No Refund</div>
+        </div>
+      </div>
+      <div class="refund-note">These cancellation fees are applicable to both One Session and Full Summer Campers.</div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

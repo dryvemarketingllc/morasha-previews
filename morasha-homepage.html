@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morasha Camps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Kefa';
+    font-weight: 700;
+    src: local('Kefa Bold'), local('Kefa'), url('assets/fonts/Kefa.ttc') format('collection');
+  }
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --kehillas-indigo: #1C326B;
+    --kehillas-darkest: #0F131E;
+    --kollel-sienna: #974426;
+    --kollel-darkest: #421A0C;
+    --travel-blue: #306DA5;
+    --travel-darkest: #092D4F;
+    --grey: #ECECEC;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: 'Kefa', Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+  }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  /* ============ NAV ============ */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center;
+  }
+  .logo img { height: 40px; width: auto; display: block; }
+  footer .logo img { height: 44px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a.btn-primary { color: #fff; }
+  .nav-links a.btn-primary:hover { color: #fff; background: var(--green); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--darkest-green);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--green); }
+  .btn-outline {
+    background: transparent;
+    color: var(--darkest-green);
+    border: 1.5px solid var(--darkest-green);
+  }
+  .btn-outline:hover { background: var(--darkest-green); color: #fff; }
+  .btn-light {
+    background: #fff;
+    color: var(--darkest-green);
+  }
+  .btn-light:hover { background: var(--lightest-green); }
+  .btn-lg { padding: 16px 32px; font-size: 15px; }
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    height: 92vh;
+    min-height: 640px;
+    overflow: hidden;
+    color: #fff;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('assets/hero.png');
+    background-size: cover;
+    background-position: center;
+    animation: slowzoom 20s ease-in-out infinite alternate;
+  }
+  @keyframes slowzoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
+  }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20,43,21,0.15) 0%, rgba(20,43,21,0.05) 45%, rgba(20,43,21,0.8) 100%),
+      linear-gradient(270deg, rgba(20,43,21,0.55) 0%, rgba(20,43,21,0.1) 55%, rgba(20,43,21,0) 100%);
+  }
+  .hero-content {
+    position: absolute;
+    bottom: 80px; left: 0; right: 0;
+    z-index: 2;
+  }
+  .hero-content .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 16px;
+  }
+  .hero-content .container > * { max-width: 720px; }
+  .hero-actions { justify-content: flex-end; }
+  .hero .eyebrow { color: var(--lightest-green); }
+  .hero h1 {
+    font-size: clamp(44px, 5.5vw, 88px);
+    color: #fff;
+    max-width: 1100px;
+    text-wrap: balance;
+    white-space: nowrap;
+  }
+  .hero .tagline {
+    font-family: var(--sans);
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 400;
+    color: rgba(255,255,255,0.9);
+    margin-top: 8px;
+    letter-spacing: 0.01em;
+  }
+  .hero-actions {
+    display: flex; gap: 12px; margin-top: 24px;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px; right: 48px;
+    z-index: 2;
+    color: #fff;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0.85;
+  }
+  .scroll-hint::after {
+    content: "";
+    width: 40px; height: 1px;
+    background: #fff;
+    animation: slide 2s infinite;
+  }
+  @keyframes slide {
+    0%,100% { transform: scaleX(1); }
+    50% { transform: scaleX(0.4); }
+  }
+  /* ============ CAMPS GRID ============ */
+  .section { padding: 128px 0; }
+  .camps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .camp-card {
+    position: relative;
+    aspect-ratio: 3 / 4.4;
+    overflow: hidden;
+    cursor: pointer;
+    isolation: isolate;
+    color: #fff;
+    transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .camp-card:hover { transform: translateY(-8px); }
+  .camp-card .bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform 1s cubic-bezier(.2,.8,.2,1), filter .5s ease;
+    z-index: 0;
+  }
+  .camp-card:hover .bg { transform: scale(1.08); filter: saturate(0.3); }
+  .camp-card::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,0.85) 100%);
+    z-index: 1;
+  }
+  .camp-card .tint {
+    position: absolute; inset: 0;
+    z-index: 2;
+    opacity: 0;
+    mix-blend-mode: multiply;
+    transition: opacity .5s;
+  }
+  .camp-card:hover .tint { opacity: 0.88; }
+  .camp-card[data-camp="morasha"] { background: var(--darkest-green); }
+  .camp-card[data-camp="morasha"] .tint { background: var(--green); }
+  .camp-card[data-camp="kehillas"] { background: var(--kehillas-darkest); }
+  .camp-card[data-camp="kehillas"] .tint { background: var(--kehillas-indigo); }
+  .camp-card[data-camp="kollel"] { background: var(--kollel-darkest); }
+  .camp-card[data-camp="kollel"] .tint { background: var(--kollel-sienna); }
+  .camp-card[data-camp="travel"] { background: var(--travel-darkest); }
+  .camp-card[data-camp="travel"] .tint { background: var(--travel-blue); }
+  .camp-card .content {
+    position: absolute; inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 28px 32px 24px;
+  }
+  .camp-card h3 {
+    color: #fff;
+    font-size: clamp(44px, 4vw, 72px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+  /* Brand-color bar at bottom of each card — always visible */
+  .camp-card::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 6px;
+    z-index: 4;
+    pointer-events: none;
+    background: currentColor;
+    transition: height .35s ease;
+  }
+  .camp-card:hover::after { height: 10px; }
+  .camp-card[data-camp="morasha"] { color: var(--green); }
+  .camp-card[data-camp="kehillas"] { color: var(--kehillas-indigo); }
+  .camp-card[data-camp="kollel"] { color: var(--kollel-sienna); }
+  .camp-card[data-camp="travel"] { color: var(--travel-blue); }
+  /* Restore white text color inside the content layer */
+  .camp-card .content { color: #fff; }
+  .camp-card .arrow {
+    position: absolute;
+    bottom: 28px; right: 28px;
+    z-index: 4;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.25px solid rgba(255,255,255,0.65);
+    display: grid; place-items: center;
+    transition: all .35s;
+    color: #fff;
+  }
+  .camp-card .arrow svg { width: 12px; height: 12px; }
+  .camp-card:hover .arrow {
+    background: #fff; border-color: #fff; color: var(--charcoal); transform: translateX(4px);
+  }
+
+  /* Travel card sub-options on hover */
+  .camp-card.has-sub .content { transition: transform .5s cubic-bezier(.2,.8,.2,1); }
+  .camp-card.has-sub:hover .content { transform: translateY(-168px); }
+  .camp-card.has-sub:hover .arrow { opacity: 0; transform: scale(.7); }
+  .sub-options {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px 24px;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .3s ease, transform .4s cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+  }
+  .camp-card.has-sub:hover .sub-options {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .sub-options a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.28);
+    backdrop-filter: blur(8px);
+    border-radius: 4px;
+    color: #fff;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    transition: all .25s;
+  }
+  .sub-options a::after {
+    content: "→";
+    font-family: var(--serif);
+    font-size: 16px;
+    opacity: 0.7;
+    transition: transform .25s, opacity .25s;
+  }
+  .sub-options a:hover {
+    background: #fff;
+    color: var(--travel-darkest);
+    border-color: #fff;
+  }
+  .sub-options a:hover::after {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+  .launching {
+    position: absolute;
+    top: 24px; left: 24px;
+    z-index: 4;
+    background: #fff;
+    color: var(--kehillas-indigo);
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  .launching::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--kehillas-indigo);
+    animation: pulse 1.8s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.5; }
+  }
+  /* ============ LEGACY ============ */
+  .legacy {
+    position: relative;
+    padding: 200px 0;
+    color: #fff;
+    overflow: hidden;
+  }
+  .legacy-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=2000&q=85');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  .legacy::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(20,43,21,0.95) 0%, rgba(20,43,21,0.85) 50%, rgba(20,43,21,0.55) 100%);
+  }
+  .legacy .container { position: relative; z-index: 2; }
+  .legacy .eyebrow { color: var(--light-green); margin-bottom: 32px; }
+  .legacy h2 {
+    font-size: clamp(48px, 5.5vw, 88px);
+    max-width: 1000px;
+    margin-bottom: 32px;
+  }
+  .legacy p {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    max-width: 700px;
+    margin-bottom: 40px;
+    line-height: 1.55;
+  }
+  .legacy-actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    padding-bottom: 4px;
+    transition: all .25s;
+  }
+  .text-link:hover { border-color: #fff; gap: 16px; }
+  /* ============ CORE VALUES ============ */
+  .values-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    gap: 48px;
+  }
+  .values-header .eyebrow { color: var(--green); margin-bottom: 16px; }
+  .values-header h2 {
+    font-size: clamp(44px, 5vw, 72px);
+    color: var(--darkest-green);
+    max-width: 800px;
+  }
+  .values-header p {
+    font-size: 17px;
+    color: var(--text-grey);
+    max-width: 360px;
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--grey);
+    border-top: 1px solid var(--grey);
+    border-bottom: 1px solid var(--grey);
+  }
+  .value-card {
+    background: #fff;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background .35s ease;
+    cursor: pointer;
+    --accent: var(--green);
+  }
+  .value-card:hover {
+    background: color-mix(in srgb, var(--accent) 10%, #fff);
+  }
+  .value-num {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 56px;
+    color: var(--accent);
+    line-height: 1;
+    transition: color .35s ease;
+  }
+  .value-card h3 {
+    font-size: 28px;
+    color: var(--darkest-green);
+    transition: color .35s ease;
+  }
+  .value-card:hover h3 { color: var(--accent); }
+  .value-card .value-heb {
+    font-size: 15px;
+    color: var(--accent);
+    direction: rtl;
+    text-align: left;
+    margin-top: -12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+  .value-card p {
+    font-size: 15px;
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+  .value-card.value-last { grid-column: span 1; }
+  /* ============ DONATE BLOCK ============ */
+  .donate {
+    background: var(--darkest-green);
+    color: #fff;
+    overflow: hidden;
+  }
+  .donate-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+  .donate-copy {
+    padding: 128px 48px 128px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .donate .eyebrow { color: var(--light-green); margin-bottom: 24px; }
+  .donate h2 {
+    font-size: clamp(44px, 4.5vw, 72px);
+    margin-bottom: 24px;
+  }
+  .donate p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .donate-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .donate-img {
+    background-image: url('assets/donate.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 560px;
+  }
+  /* ============ RENTALS ============ */
+  .rentals {
+    background: linear-gradient(to right, var(--darkest-green) 0 50%, var(--lightest-green) 50% 100%);
+    overflow: hidden;
+  }
+  .rentals-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1440px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+  .rentals-img {
+    background-image: url('assets/rentals.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 560px;
+  }
+  .rentals-copy {
+    background: var(--lightest-green);
+    padding: 128px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .rentals .eyebrow { color: var(--dark-green); margin-bottom: 24px; }
+  .rentals h2 {
+    font-size: clamp(40px, 4vw, 64px);
+    color: var(--darkest-green);
+    margin-bottom: 24px;
+    max-width: 520px;
+  }
+  .rentals p {
+    font-size: 17px;
+    color: var(--dark-green);
+    max-width: 480px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  /* ============ STATS STRIP ============ */
+  .stats {
+    background: #fff;
+    border-top: 1px solid var(--grey);
+    border-bottom: 1px solid var(--grey);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    padding: 64px 32px;
+    text-align: left;
+    border-right: 1px solid var(--grey);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--green);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: var(--text-grey);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  /* ============ FOOTER ============ */
+  footer {
+    background: var(--darkest-green);
+    color: rgba(255,255,255,0.85);
+    padding: 96px 0 48px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 72px;
+  }
+  .footer-brand .logo { color: #fff; font-size: 32px; }
+  .footer-brand .logo-mark { background: #fff; color: var(--darkest-green); width: 44px; height: 44px; font-size: 24px; }
+  .footer-brand p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    max-width: 320px;
+    margin-top: 20px;
+  }
+  .footer-brand .newsletter {
+    margin-top: 32px;
+    display: flex;
+    gap: 8px;
+    max-width: 360px;
+  }
+  .footer-brand .newsletter input {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 14px;
+    border-radius: 2px;
+  }
+  .footer-brand .newsletter input::placeholder { color: rgba(255,255,255,0.5); }
+  .footer-brand .newsletter button {
+    background: #fff;
+    color: var(--darkest-green);
+    border: none;
+    padding: 0 24px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .footer-col h4 {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    transition: color .2s;
+  }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+  .socials { display: flex; gap: 16px; }
+  .socials a {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: all .2s;
+  }
+  .socials a:hover { background: #fff; color: var(--darkest-green); border-color: #fff; }
+  .socials svg { width: 14px; height: 14px; }
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .camps-grid { grid-template-columns: repeat(2, 1fr); }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2n) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--grey); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .donate-inner, .rentals-inner { grid-template-columns: 1fr; }
+    .donate-img, .rentals-img { min-height: 360px; order: 2; }
+    .rentals-inner .rentals-img { order: 2; }
+    .donate-copy, .rentals-copy { padding: 80px 32px; }
+  }
+  @media (max-width: 720px) {
+    .container, .nav { padding-left: 24px; padding-right: 24px; }
+    .section { padding: 80px 0; }
+    .nav-links a:not(.btn) { display: none; }
+    .camps-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
+    .values-header { flex-direction: column; align-items: flex-start; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat { border-right: none !important; border-bottom: 1px solid var(--grey); }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+    .hero { height: 80vh; min-height: 520px; }
+    .scroll-hint { display: none; }
+  }
+</style>
+</head>
+<body>
+<!-- NAV -->
+<header>
+  <nav class="nav">
+    <a href="#" class="logo" aria-label="Morasha Camps">
+      <img src="assets/logos/MorashaCamps_Color.svg" alt="Morasha Camps" />
+    </a>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Camps</a>
+      <a href="#">Dates & Rates</a>
+      <a href="#">Alumni & Events</a>
+      <a href="#">Rentals</a>
+      <a href="#">Contact</a>
+      <a href="#" class="btn btn-primary">Donate</a>
+    </div>
+  </nav>
+</header>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="container">
+      <div class="eyebrow">Est. 1964 · A Family of Camps</div>
+      <h1>Built on Values.<br/>Runs on Fun.</h1>
+      <p class="tagline">Four camps. One community. Sixty years of shaping Jewish summers that shape lives.</p>
+      <div class="hero-actions">
+        <a href="#camps" class="btn btn-light btn-lg">Explore the Camps</a>
+        <a href="#" class="btn btn-outline btn-lg" style="background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.4)">Our Story</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+<!-- CAMPS -->
+<section class="section" id="camps">
+  <div class="container">
+    <div class="camps-grid">
+      <a class="camp-card" data-camp="morasha" href="#">
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?w=900&q=80')"></div>
+        <div class="tint"></div>
+        <div class="content"><h3>Camp<br/>Morasha</h3></div>
+      </a>
+      <a class="camp-card" data-camp="kehillas" href="#">
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=900&q=80')"></div>
+        <div class="tint"></div>
+        <div class="launching">Launching 2027</div>
+        <div class="content"><h3>Kehillas<br/>Yaakov</h3></div>
+      </a>
+      <a class="camp-card" data-camp="kollel" href="#">
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1543269865-cbf427effbad?w=900&q=80')"></div>
+        <div class="tint"></div>
+        <div class="content"><h3>Morasha<br/>Kollel</h3></div>
+      </a>
+      <div class="camp-card has-sub" data-camp="travel" tabindex="0">
+        <div class="bg" style="background-image:url('https://images.unsplash.com/photo-1500051638674-ff996a0ec29e?w=900&q=80')"></div>
+        <div class="tint"></div>
+        <div class="content"><h3>Morasha<br/>Travel</h3></div>
+        <div class="sub-options">
+          <a href="#">Sulam</a>
+          <a href="#">Amcha Boys</a>
+          <a href="#">Amcha Girls</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- STATS STRIP -->
+<section class="stats">
+  <div class="container" style="padding: 0;">
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num">60+</div>
+        <div class="stat-label">Years of Morasha</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4</div>
+        <div class="stat-label">Camps & Programs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">15k</div>
+        <div class="stat-label">Alumni Worldwide</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1,200</div>
+        <div class="stat-label">Campers Each Summer</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- LEGACY -->
+<section class="legacy">
+  <div class="legacy-bg"></div>
+  <div class="container">
+    <div class="eyebrow">Morasha Legacy</div>
+    <h2>Built on Torah and Zionist values.</h2>
+    <p>Morasha Camps cultivates growth, character, and community through camping, travel, innovative programming, and education — seeds planted in these summers shape families for decades.</p>
+    <div class="legacy-actions">
+      <a href="#" class="btn btn-light btn-lg">Our History</a>
+      <a href="#" class="text-link">Meet Our Leadership
+        <svg width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 5h18M14 1l4 4-4 4"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+<!-- CORE VALUES -->
+<section class="section">
+  <div class="container">
+    <div class="values-header">
+      <div>
+        <div class="eyebrow">Core Values</div>
+        <h2>The seven values that spell Morasha.</h2>
+      </div>
+      <p>Our programs are built around seven values that guide our campers toward a life of meaning, learning, and leadership.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card" style="--accent:#46764B">
+        <div class="value-num">M</div>
+        <h3>Mutual Respect</h3>
+        <div class="value-heb">ואהבת לרעך כמוך</div>
+        <p>A safe and nurturing environment where campers and Yachad members discover the Tzelem Elokim — the divine image — in others, and in themselves.</p>
+      </div>
+      <div class="value-card" style="--accent:#2E5EA8">
+        <div class="value-num">O</div>
+        <h3>Observe &amp; Study</h3>
+        <div class="value-heb">ללמוד ולעשות</div>
+        <p>Campers LEARN Torah from passionate teachers and LIVE it in their bunks and on the ball fields — Torah, mitzvot, and Zionism woven into every day.</p>
+      </div>
+      <div class="value-card" style="--accent:#7A4CA0">
+        <div class="value-num">R</div>
+        <h3>Responsibility</h3>
+        <div class="value-heb">כל ישראל ערבים זה בזה</div>
+        <p>Hillel's words guide us: campers grow into dependable, conscientious members of a family, a community, a people, and a nation.</p>
+      </div>
+      <div class="value-card" style="--accent:#C15827">
+        <div class="value-num">A</div>
+        <h3>Appreciation</h3>
+        <div class="value-heb">לשמע בקול תודה</div>
+        <p>Gratitude is our attitude — from morning tefilot to brachot in the Dining Room to the routine "thank you." Appreciation is the essence of a Yehudi.</p>
+      </div>
+      <div class="value-card" style="--accent:#2E8B8B">
+        <div class="value-num">S</div>
+        <h3>Skill Building</h3>
+        <div class="value-heb">יגיע כפיך כי תאכל</div>
+        <p>On the fields, courts, lake, stage, and beyond, campers build technical skill, confidence, and leadership through athletics, aquatics, adventure, and the arts.</p>
+      </div>
+      <div class="value-card" style="--accent:#A02134">
+        <div class="value-num">H</div>
+        <h3>Heart &amp; Soul</h3>
+        <div class="value-heb">בכל לבבך ובכל נפשך</div>
+        <p>Everything at Morasha — Color War, Shiria, zmirot, tefilla — is approached with passion and ruach, so spirits soar and souls are inspired.</p>
+      </div>
+      <div class="value-card" style="--accent:#D4A017">
+        <div class="value-num">A</div>
+        <h3>Achdut</h3>
+        <div class="value-heb">כאיש אחד בלב אחד</div>
+        <p>All for one and one for all. Bunks, teams, trips, and projects forge the bonds and affection that make everyone part of the Morasha family.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DONATE -->
+<section class="donate">
+  <div class="donate-inner">
+    <div class="donate-copy">
+      <div class="eyebrow">Build the Future</div>
+      <h2>Your generosity fuels the magic of Morasha.</h2>
+      <p>Every pledge helps thousands of campers grow, lead, and build a lifelong connection to community and Jewish values.</p>
+      <div class="donate-actions">
+        <a href="#" class="btn btn-light btn-lg">Donate Now</a>
+        <a href="#" class="text-link">Explore Giving Opportunities
+          <svg width="20" height="10" viewBox="0 0 20 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M0 5h18M14 1l4 4-4 4"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="donate-img"></div>
+  </div>
+</section>
+<!-- RENTALS -->
+<section class="rentals">
+  <div class="rentals-inner">
+    <div class="rentals-img"></div>
+    <div class="rentals-copy">
+      <div class="eyebrow">Retreats & Rentals</div>
+      <h2>Your home for retreats, shabbatons & special occasions.</h2>
+      <p>Morasha Camps offers the perfect blend of comfort, nature, and community for unforgettable weekends and special events.</p>
+      <div>
+        <a href="#" class="btn btn-primary btn-lg">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="Morasha Camps">
+          <img src="assets/logos/MorashaCamps_White.svg" alt="Morasha Camps" />
+        </a>
+        <p>Built on values. Runs on fun. Sixty years of shaping Jewish summers that shape lives.</p>
+        <form class="newsletter">
+          <input type="email" placeholder="Enter your email" />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Leadership</a></li>
+          <li><a href="#">Alumni & Events</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Camps</h4>
+        <ul>
+          <li><a href="#">Camp Morasha</a></li>
+          <li><a href="#">Kehillas Yaakov</a></li>
+          <li><a href="#">Morasha Kollel</a></li>
+          <li><a href="#">Morasha Travel</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Travel</h4>
+        <ul>
+          <li><a href="#">Sulam</a></li>
+          <li><a href="#">Amcha Boys</a></li>
+          <li><a href="#">Amcha Girls</a></li>
+          <li><a href="#">Donate</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 1964–2026 Morasha Camps · All rights reserved</div>
+      <div class="socials">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

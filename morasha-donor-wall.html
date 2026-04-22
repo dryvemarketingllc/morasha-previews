@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Donor Wall — Morasha Camps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --grey: #ECECEC;
+    --bg-warm: #F8F7F5;
+    --text-grey: #6B6B6B;
+    --charcoal: #222222;
+    --gold: #B8953E;
+    --gold-light: #F5EFDF;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 140px 48px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(184,149,62,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, rgba(70,118,75,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+  .hero .eyebrow { color: var(--gold); margin-bottom: 24px; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 52ch;
+    margin: 0 auto;
+  }
+
+  /* ============ FACILITY NAV ============ */
+  .facility-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 0 48px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .facility-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  .facility-nav a {
+    flex-shrink: 0;
+    padding: 18px 24px;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-grey);
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .facility-nav a:hover,
+  .facility-nav a.active {
+    color: var(--darkest-green);
+    border-bottom-color: var(--green);
+  }
+
+  /* ============ FACILITY SECTION ============ */
+  .facility {
+    padding: 96px 48px;
+    border-bottom: 1px solid var(--grey);
+  }
+  .facility:nth-child(even) { background: var(--bg-warm); }
+  .facility-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Facility header */
+  .facility-header {
+    margin-bottom: 64px;
+    max-width: 680px;
+  }
+  .facility-header .eyebrow { color: var(--green); margin-bottom: 16px; }
+  .facility-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    color: var(--darkest-green);
+    margin-bottom: 16px;
+  }
+  .facility-header p {
+    font-size: 17px;
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+
+  /* Primary dedication — the big plaque */
+  .primary-dedication {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 56px 64px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .primary-dedication::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(255,255,255,0.15);
+    pointer-events: none;
+  }
+  .primary-dedication .ded-label {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .primary-dedication h3 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .primary-dedication .ded-donors {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  .primary-dedication .ded-message {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(255,255,255,0.6);
+    margin-top: 20px;
+    max-width: 48ch;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.55;
+  }
+
+  /* Sub-dedications grid */
+  .sub-dedications {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .sub-ded {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 32px 28px;
+    position: relative;
+    transition: box-shadow .3s ease;
+  }
+  .facility:nth-child(even) .sub-ded { background: #fff; }
+  .sub-ded:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+  .sub-ded::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--green);
+  }
+  .sub-ded .sub-type {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .sub-ded h4 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--darkest-green);
+    margin-bottom: 8px;
+  }
+  .sub-ded p {
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.55;
+  }
+
+  /* Donor tier lists */
+  .donor-tiers {
+    margin-top: 48px;
+  }
+  .donor-tier {
+    margin-bottom: 40px;
+  }
+  .donor-tier:last-child { margin-bottom: 0; }
+  .tier-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .tier-header h4 {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--darkest-green);
+    white-space: nowrap;
+  }
+  .tier-header::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--grey);
+  }
+  .tier-names {
+    column-count: 3;
+    column-gap: 32px;
+    font-size: 14px;
+    color: var(--charcoal);
+    line-height: 1.85;
+  }
+  .tier-names span {
+    display: block;
+    break-inside: avoid;
+  }
+
+  /* ============ CLOSING CTA ============ */
+  .closing {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 96px 48px;
+    text-align: center;
+  }
+  .closing-inner { max-width: 680px; margin: 0 auto; }
+  .closing .eyebrow { color: var(--gold); margin-bottom: 20px; }
+  .closing h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    margin-bottom: 20px;
+  }
+  .closing p {
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+  }
+  .btn-light { background: #fff; color: var(--darkest-green); }
+  .btn-light:hover { background: var(--lightest-green); }
+  .btn-ghost {
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+  .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .tier-names { column-count: 2; }
+    .sub-dedications { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 100px 24px 56px; }
+    .facility { padding: 64px 24px; }
+    .facility-nav { padding: 0 16px; }
+    .facility-nav a { padding: 14px 16px; font-size: 11px; }
+    .primary-dedication { padding: 40px 28px; }
+    .primary-dedication::before { inset: 6px; }
+    .tier-names { column-count: 1; }
+    .closing { padding: 64px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Hakarat Hatov</div>
+    <h1>The Morasha Donor Wall</h1>
+    <p>Morasha has stood at the intersection of Torah and community for generations. We honor the families whose generosity builds the spaces where memories are made.</p>
+  </div>
+</section>
+
+<!-- ============ FACILITY NAV ============ -->
+<nav class="facility-nav">
+  <div class="facility-nav-inner">
+    <a href="#beis-kushner" class="active">Beis Kushner</a>
+    <a href="#beren-arena">Beren Arena</a>
+    <a href="#mercazia">Mercazia PAC</a>
+    <a href="#dining-hall">Dining Hall</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     FACILITY 1 — BEIS KUSHNER
+     ============================================================ -->
+<section class="facility" id="beis-kushner">
+  <div class="facility-inner">
+    <div class="facility-header">
+      <div class="eyebrow">Facility Dedication</div>
+      <h2>Beis Kushner</h2>
+      <p>In honor of Seryl and Charles Kushner.</p>
+    </div>
+
+    <div class="primary-dedication">
+      <div class="ded-label">Beis Dedication</div>
+      <h3>The Kushner Family</h3>
+      <div class="ded-donors">Dedicated by their children in honor of the occasion of their 70th birthdays and 50th anniversary — July 2024</div>
+      <div class="ded-message">"I will build a tabernacle in my heart to glorify God's honor..."<br>— Rabbi Eliezer Azikri, Sefer Haredim</div>
+    </div>
+
+    <div class="sub-dedications">
+      <div class="sub-ded">
+        <div class="sub-type">Aron Kodesh Dedication</div>
+        <h4>The Lisa and Yoni Wintner Family</h4>
+        <p>Dedicated by Lisa and Yoni Wintner in honor of our children Leo, William, Caroline, James &amp; Elle</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Amud Dedication</div>
+        <h4>Jessica &amp; Jeremy Kirschner</h4>
+        <p>In honor of our children Michelle, Jordan &amp; Benjamin</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bima Dedication</div>
+        <h4>Anonymous</h4>
+        <p></p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Siddurim Dedication</div>
+        <h4>In Loving Memory</h4>
+        <p>Hon. Noach Dear A"H, grandfather of Eitan, Yonatan &amp; Eliana</p>
+      </div>
+    </div>
+
+    <!-- Bookshelf Dedications -->
+    <div class="sub-dedications">
+      <div class="sub-ded">
+        <div class="sub-type">Bookshelf Dedication</div>
+        <h4>Doreen &amp; Charlie Hadid</h4>
+        <p>In honor of our children Chloe, Ella, Mason, &amp; Jonas</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bookshelf Dedication</div>
+        <h4>Chaya &amp; Lorne Lieberman</h4>
+        <p>In honor of the incredible team at Camp Morasha</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bookshelf Dedication</div>
+        <h4>Elisa and Alan Pines &amp; Family</h4>
+        <p>In honor of our Morasha campers and the Morasha team</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bookshelf Dedication</div>
+        <h4>Roz and David Savitsky</h4>
+        <p>In honor of our grandchildren Jacob, Ben, Hannah, Alexa, Michaela, Micah, Victoria, Savannah &amp; Sierra</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bookshelf Dedication</div>
+        <h4>Lindsay &amp; Daniel Setton</h4>
+        <p>In honor of our parents &amp; our children Marcy, Neesy, Harrison, Annie, Moses, &amp; Joseph</p>
+      </div>
+    </div>
+
+    <!-- Mezuza Dedications -->
+    <div class="sub-dedications">
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Annie &amp; Yale Baron</h4>
+        <p>Dedicated to our wonderful children Joe &amp; Maayan, Ezra, Aluza, Eitan &amp; Moshe Baron</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Suri &amp; Howard Borkin</h4>
+        <p>Gabrielle, Dani, Michael, &amp; Emma — may this Beis Morasha inspire a love of learning, a passion for Torah, and foster boundless growth</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Celeste &amp; Asher Hackl and Family</h4>
+        <p>In honor of our brave Chayalim. May Hashem watch over them and protect them.</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Frieda &amp; Isaac Itzkovitz</h4>
+        <p>Dedicated in the merit and for the protection of all our brave Chayalim</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Bernice &amp; Seme Joszef</h4>
+        <p>In honor of our Morashank grandchildren Judah, Noah, Charlie &amp; Molly Joszef</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Rachel &amp; Mark Klein</h4>
+        <p>In memory of Rabbi Abraham Wahrhaftig — WWAD</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Marci &amp; Jeffrey Lefkovits</h4>
+        <p>In honor of our children. May they continue the legacy of learning Torah and living a vibrant Torah life</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Mezuza</div>
+        <h4>Shani &amp; Aaron Malitzky and Family</h4>
+        <p>In memory of our dear friend the Camp Morasha family, who dedicated his life in pursuit of spiritual growth and sanctification of Hashem's name</p>
+      </div>
+    </div>
+
+    <!-- Donor tiers -->
+    <div class="donor-tiers">
+      <div class="donor-tier">
+        <div class="tier-header"><h4>Chai Listing</h4></div>
+        <div class="tier-names">
+          <span>Lital &amp; Joshua Amini</span>
+          <span>Sherry &amp; Mark Frazel</span>
+          <span>Shandi &amp; Sruli Glaser</span>
+          <span>Robyn &amp; Shukie Grossman</span>
+          <span>Adar &amp; Paul Hilliker</span>
+          <span>Aleeza &amp; Avi Lauer</span>
+          <span>Orit &amp; Zach Olitner</span>
+          <span>Tamar &amp; Robert Scharf</span>
+          <span>Gayle &amp; Josh Yashir</span>
+        </div>
+      </div>
+      <div class="donor-tier">
+        <div class="tier-header"><h4>Builder Listing</h4></div>
+        <div class="tier-names">
+          <span>Linda &amp; Dan Kaufthal</span>
+          <span>Jamie &amp; Jonathan Leifer</span>
+          <span>Nicole &amp; Avi Lieberman</span>
+          <span>Tiki &amp; Simcha Lyons</span>
+          <span>Michelle &amp; Elliot Bines</span>
+          <span>Tali &amp; Justin Pines</span>
+          <span>Estie &amp; Jason Pinewski</span>
+          <span>Abby &amp; John Pollitt</span>
+          <span>Sharon &amp; David Rauch</span>
+          <span>Rachel &amp; Akiva Romanoff</span>
+          <span>Elana &amp; Rafi Roman</span>
+          <span>Chelsea &amp; Matthew Schames</span>
+          <span>Jamie &amp; Evan Schwago</span>
+          <span>Michal &amp; Yaniv Schiller</span>
+          <span>Dechie &amp; Steven Siegler</span>
+          <span>Tamara &amp; Rich Solomon</span>
+          <span>Paula Ira Spodek</span>
+          <span>Jamie &amp; Marc Srolovits</span>
+          <span>Danielle &amp; Josh Strauss</span>
+          <span>Rachel &amp; Jonathan Teller</span>
+        </div>
+      </div>
+      <div class="donor-tier">
+        <div class="tier-header"><h4>Foundation Listing</h4></div>
+        <div class="tier-names">
+          <span>Sarabath and Kevin Fein</span>
+          <span>Alisa &amp; Aron Hirtz</span>
+          <span>Abby &amp; Joshua Kaufthal</span>
+          <span>Kimrea &amp; Ben Solomoni</span>
+          <span>Ariella &amp; Ari Spodek</span>
+        </div>
+      </div>
+      <div class="donor-tier">
+        <div class="tier-header"><h4>Donor Listing</h4></div>
+        <div class="tier-names">
+          <span>Harvey Artz &amp; Honi Schwartz-Arfa</span>
+          <span>Ellen &amp; Morris Bienenfeld</span>
+          <span>Jenny &amp; Moshe Buchman</span>
+          <span>Lynda &amp; Arie Buchman</span>
+          <span>Karen &amp; Andrew Duani</span>
+          <span>Susan Franklin</span>
+          <span>Rachel &amp; Steven Fried</span>
+          <span>Alana &amp; Adam Gelnick</span>
+          <span>Morris &amp; Gold</span>
+          <span>Kristen &amp; Carl Gross</span>
+          <span>Micol &amp; Doron Katz</span>
+          <span>Michelle &amp; Doron Levine</span>
+          <span>Caroline &amp; Morris Masel</span>
+          <span>Chevi &amp; Moshe Medovoy</span>
+          <span>Ory Mossaioff</span>
+          <span>Suzy &amp; Paul Peyser</span>
+          <span>Elizabeth &amp; Michael Pinewski</span>
+          <span>Michael &amp; Steven Rosenverg</span>
+          <span>Rayma &amp; Ezra Rosenverg</span>
+          <span>Allison &amp; Vitzy Rubin</span>
+          <span>Stephanie &amp; Jeremy Sandel</span>
+          <span>Maren &amp; Robbie Scharf</span>
+          <span>Renee &amp; Josh Schmel</span>
+          <span>Steven Margulies</span>
+          <span>Melissa &amp; Joshua Mitgang</span>
+          <span>Rivkah &amp; Michael Most</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FACILITY 2 — BEREN ARENA
+     ============================================================ -->
+<section class="facility" id="beren-arena">
+  <div class="facility-inner">
+    <div class="facility-header">
+      <div class="eyebrow">Facility Dedication</div>
+      <h2>The Israel Henry Beren Arena</h2>
+      <p>Gift from the Israel Henry Beren Charitable Foundation. Robert M. Beren, Trustee. Israel Henry Beren · 1905–1994 · Marietta, Ohio.</p>
+    </div>
+
+    <div class="sub-dedications">
+      <div class="sub-ded">
+        <div class="sub-type">Court Dedication</div>
+        <h4>Jessica &amp; Jeremy Kirschner</h4>
+        <p>In memory of Joseph Kirschner, who was always our biggest fan and cheerleader both on and off the court. Donated by his children and grandchildren Michelle, Jordan, and Benjamin</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Court Dedication</div>
+        <h4>Dara and David Orbach</h4>
+        <p>In honor of our children, who always give it their all on and off the rink or court. May you always be successful in everything you do.</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Court Dedication</div>
+        <h4>Donny and Arielle Rosenberg</h4>
+        <p>"Success is never final. Failure is never fatal. It's courage that counts." — John Wooden. Let's go!</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">A/V System Dedication</div>
+        <h4>The Neuwirth Family</h4>
+        <p>Nataly and Stephen Neuwirth. Oren, Ely, Benny &amp; Nunu</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Scoreboard Dedication</div>
+        <h4>Roz and David Savitsky</h4>
+        <p>In honor of our grandchildren Jacob, Ben, Hannah &amp; Micah / Alexa, Michaela &amp; Victoria / Savannah</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Scoreboard Dedication</div>
+        <h4>Marci and Jeff Lefkovits and Family</h4>
+        <p>In honor of our dear parents Judy and Zoltan Lefkovits &amp; Barbara and Richard Rosenfield</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Team Bench Dedication</div>
+        <h4>Tamar and Jonathan Croog</h4>
+        <p>In honor of our dear parents/grandparents, Stan &amp; Aviva Adler (Morasha Couple #111). Julia, Ben &amp; Annie</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Team Bench Dedication</div>
+        <h4>Howard and Suri Boriskin</h4>
+        <p>For all the wins, losses, friendships and memories made on this court which last a lifetime. Gabrielle, Dani, Michael and Emma</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bracket Board Dedication</div>
+        <h4>Tamar and Ben Blumenthal</h4>
+        <p>In honor of Chani (Lah-er) &amp; Michael Barenholtz</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bracket Board Dedication</div>
+        <h4>Abby and Josh Kaufthal</h4>
+        <p>In gratitude to the dedicated Morasha staff and in honor of our children Joseph, Jack and Ella. Always play fair and have fun!</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bracket Board Dedication</div>
+        <h4>Aleeza and Avi Lauer</h4>
+        <p>In honor of their children and grandchildren and in memory of Avi's parents, Rabbi Elias &amp; Ilse Lauer, A"H</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Bracket Board Dedication</div>
+        <h4>Jennifer and David Ottensoser &amp; Family</h4>
+        <p>In honor and support of all the once and future Morasha athletes. Thanks for all the great memories, and wishing continued success in all your pursuits.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FACILITY 3 — MERCAZIA PERFORMING ARTS CENTER
+     ============================================================ -->
+<section class="facility" id="mercazia">
+  <div class="facility-inner">
+    <div class="facility-header">
+      <div class="eyebrow">Facility Dedication</div>
+      <h2>The Mercazia Performing Arts Center</h2>
+    </div>
+
+    <div class="primary-dedication">
+      <div class="ded-label">Dedicated By</div>
+      <h3>Nataly &amp; Stephen Neuwirth</h3>
+      <div class="ded-message">To all those who, through their dedication, inspiration, and love, make Camp Morasha the amazing place it is.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FACILITY 4 — DINING HALL
+     ============================================================ -->
+<section class="facility" id="dining-hall">
+  <div class="facility-inner">
+    <div class="facility-header">
+      <div class="eyebrow">Facility Dedication</div>
+      <h2>Dining Hall</h2>
+      <p>Dedication plaques honoring families who have made the heart of camp — the Dining Hall — possible.</p>
+    </div>
+
+    <div class="sub-dedications">
+      <div class="sub-ded">
+        <div class="sub-type">Table Dedication</div>
+        <h4>Herschmann</h4>
+        <p>Abby &amp; Scott Herschmann. In honor of our children Emily, Julia, Sara and Rae</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Table Dedication</div>
+        <h4>Saks</h4>
+        <p>May Hashem protect all who enter this doorway. Donated in gratitude from a Morasha couple</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Table Dedication</div>
+        <h4>Lewis</h4>
+        <p>In honor of my children David, Rafi, Sarah, and Hannah Lewis. Love, Mommy (Gayle Lewis)</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Table Dedication</div>
+        <h4>Lowe</h4>
+        <p>Dedication in honor of our dear parents Gene and Toby Rosenberg, Alan and Candy Lowe. Leora &amp; Daniel Lowe</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Table Dedication</div>
+        <h4>Bendheim</h4>
+        <p>Donated in memory of Avrum Drazin. Shifra, Dani, Charlie, Sam, Leebee, Arielle and Sophie Bendheim</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Table Dedication</div>
+        <h4>Perla</h4>
+        <p>In honor of our children Alex, Molly and Robbie Perla. With thanks, Jody &amp; David Perla</p>
+      </div>
+      <div class="sub-ded">
+        <div class="sub-type">Washing Station</div>
+        <h4>Goldschmiedt</h4>
+        <p>"Lift your hands in holiness and Bless Hashem"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="closing">
+  <div class="closing-inner">
+    <div class="eyebrow">Leave Your Mark</div>
+    <h2>Dedication opportunities are available.</h2>
+    <p>As Morasha continues to grow, we invite you to explore meaningful dedication opportunities within the areas that resonate most deeply with you.</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="#" class="btn btn-light">Explore Giving Opportunities</a>
+      <a href="#" class="btn btn-ghost">Donate Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCROLL SPY ============ -->
+<script>
+(function() {
+  const links = document.querySelectorAll('.facility-nav a');
+  const sections = document.querySelectorAll('.facility');
+  function onScroll() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

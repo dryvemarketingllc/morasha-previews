@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morasha — Hero Option B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222222;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    max-height: 960px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    background: var(--darkest-green);
+  }
+
+  /* ──────────────────────────────────────────────
+     SWAP IN THE REAL MORASHA HERO IMAGE BELOW
+     Replace the background-image URL with the
+     staging site's hero photo URL
+     ────────────────────────────────────────────── */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2025/04/morasha-hero.jpg')
+      center / cover no-repeat;
+    filter: saturate(0.4);
+    transform: scale(1.05);
+    transition: transform 8s ease-out;
+  }
+  .hero:hover .hero-bg { transform: scale(1.1); }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(20,43,21,0.35) 0%,
+      rgba(20,43,21,0.55) 45%,
+      rgba(20,43,21,0.82) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+    padding: 0 48px;
+  }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 32px;
+  }
+  .hero-content h1 {
+    font-family: var(--serif);
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.94;
+    margin-bottom: 44px;
+  }
+  .hero-content h1 span {
+    display: block;
+    color: var(--light-green);
+    font-style: italic;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+  }
+  .btn-light { background: #fff; color: var(--darkest-green); }
+  .btn-light:hover { background: var(--lightest-green); }
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 24px;
+    height: 40px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .hero-scroll::after {
+    content: "";
+    width: 3px;
+    height: 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+    animation: scroll-dot 1.8s ease-in-out infinite;
+  }
+  @keyframes scroll-dot {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(10px); opacity: 0.3; }
+  }
+
+  @media (max-width: 640px) {
+    .hero-content { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Camp Morasha &nbsp;·&nbsp; Since 1964</div>
+    <h1>Built on Values. <span>Runs on Fun.</span></h1>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-light">Explore Our Camps</a>
+      <a href="#" class="btn btn-outline">Watch Our Story</a>
+    </div>
+  </div>
+  <div class="hero-scroll"></div>
+</section>
+
+</body>
+</html>
