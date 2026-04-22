@@ -17,14 +17,39 @@ body, h1, h2, h3, h4, p, a, span, li, button, input, div {
 small, figcaption, .site-footer a { font-family: 'Roboto', sans-serif; }
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-/* ── VALUES CARD LETTER BOX ROUNDED ── */
-.fp__values__card-label {
+/* ── COLOR-CODED CAMP DROPDOWNS ── */
+.site-nav .sub-menu li a { 
+  border-left: 3px solid transparent;
+  transition: all .2s;
+}
+.site-nav .sub-menu li a:hover {
+  border-left-color: #46764B;
+}
+/* Kehilas Yaakov */
+.site-nav #menu-item-6045 > a:hover { border-left-color: #1C326B; color: #1C326B; }
+/* Morasha Kollel */
+.site-nav #menu-item-6046 > a:hover { border-left-color: #974426; color: #974426; }
+/* Morasha Travel */
+.site-nav #menu-item-6047 > a:hover { border-left-color: #306DA5; color: #306DA5; }
+/* Travel sub-items */
+.site-nav #menu-item-6047 .sub-menu li a:hover { border-left-color: #306DA5; color: #306DA5; }
+/* Camp Morasha */
+.site-nav #menu-item-6044 > a:hover { border-left-color: #46764B; color: #46764B; }
+</style>
+<style>
+/* ── VALUES CARD LETTER BOX — MATCH IMAGE RADIUS ── */
+.fp__values__card-image,
+.fp__values__card-image img {
   border-radius: 12px;
+}
+.fp__values__card-label {
+  border-radius: 0 0 12px 12px;
   overflow: hidden;
 }
 .fp__values__card-letter {
-  border-radius: 8px !important;
+  border-radius: 10px !important;
 }
 </style>
 </head><body class="home wp-singular page-template-default page page-id-2 wp-theme-morasha2026">
@@ -41,140 +66,46 @@ small, figcaption, .site-footer a { font-family: 'Roboto', sans-serif; }
 
 
 <!-- Site Navigation -->
-<style>
-/* ── NAV OPTION 1 ── */
-.new-nav-wrap header {
-  background: #fff;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  position: sticky; top: 0; z-index: 100;
-}
-.new-nav-wrap .nav-bar {
-  max-width: 1440px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 32px;
-}
-.new-nav-wrap .nav-logo {
-  font-family: Georgia, serif;
-  font-weight: 700; font-size: 22px;
-  color: #142B15; letter-spacing: -0.01em;
-}
-.new-nav-wrap .nav-logo img { height: 42px; width: auto; }
-.new-nav-wrap .nav-items {
-  display: flex; align-items: center; gap: 22px;
-}
-.new-nav-wrap .nav-item {
-  font-size: 13px; font-weight: 500; color: #222;
-  padding: 22px 0; cursor: pointer; position: relative;
-  transition: color .2s; display: flex; align-items: center; gap: 4px;
-  font-family: Kefa, 'Nunito Sans', sans-serif;
-}
-.new-nav-wrap .nav-item:hover { color: #46764B; }
-.new-nav-wrap .nav-item.has-dropdown::after {
-  content: "▾"; font-size: 9px; opacity: 0.55; transition: transform .2s;
-}
-.new-nav-wrap .nav-item.has-dropdown:hover::after { transform: rotate(180deg); }
-.new-nav-wrap .nav-donate {
-  background: #142B15; color: #fff; padding: 9px 18px;
-  border-radius: 4px; font-size: 13px; font-weight: 500;
-  text-decoration: none; font-family: Kefa, 'Nunito Sans', sans-serif;
-}
-.new-nav-wrap .nav-login {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; font-weight: 500; color: #222;
-  padding: 8px 4px; transition: color .2s; text-decoration: none;
-  font-family: Kefa, 'Nunito Sans', sans-serif;
-}
-.new-nav-wrap .nav-login:hover { color: #46764B; }
-.new-nav-wrap .nav-divider {
-  width: 1px; height: 20px; background: rgba(0,0,0,0.12); margin: 0 4px;
-}
-.new-nav-wrap .nav-item .dd {
-  opacity: 0; visibility: hidden; transform: translateY(-8px);
-  transition: opacity .25s, transform .25s, visibility .25s;
-}
-.new-nav-wrap .nav-item:hover > .dd {
-  opacity: 1; visibility: visible; transform: translateY(0);
-}
-.new-nav-wrap .nav-item .dd::before {
-  content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px;
-}
-.new-nav-wrap .dd-classic {
-  position: absolute; top: 100%; left: -12px;
-  background: #fff; min-width: 240px;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.12);
-  border-radius: 6px; z-index: 20;
-  border: 1px solid rgba(0,0,0,0.06); padding: 8px 0;
-}
-.new-nav-wrap .dd-classic a, .new-nav-wrap .dd-classic .nested-trigger {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 11px 20px; font-size: 13.5px; color: #222;
-  border-left: 3px solid transparent; transition: all .2s; cursor: pointer;
-  text-decoration: none; font-family: Kefa, 'Nunito Sans', sans-serif;
-}
-.new-nav-wrap .dd-classic a:hover, .new-nav-wrap .dd-classic .nested-trigger:hover {
-  background: #f7f9f4;
-  border-left-color: var(--accent, #46764B);
-  color: var(--accent, #46764B);
-}
-.new-nav-wrap .dd-classic a[data-camp="morasha"] { --accent: #46764B; }
-.new-nav-wrap .dd-classic a[data-camp="kehillas"] { --accent: #1C326B; }
-.new-nav-wrap .dd-classic a[data-camp="kollel"] { --accent: #974426; }
-.new-nav-wrap .dd-classic .nested-trigger { --accent: #306DA5; }
-.new-nav-wrap .dd-classic .chev { color: #bbb; font-size: 11px; }
-.new-nav-wrap .dd-classic .nested { position: relative; }
-.new-nav-wrap .dd-classic .nested-panel {
-  position: absolute; left: calc(100% + 4px); top: -8px;
-  background: #fff; min-width: 200px;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.12);
-  border-radius: 6px; border: 1px solid rgba(0,0,0,0.06);
-  padding: 8px 0; opacity: 0; visibility: hidden;
-  transform: translateX(-4px);
-  transition: opacity .2s, transform .2s, visibility .2s;
-}
-.new-nav-wrap .dd-classic .nested:hover .nested-panel {
-  opacity: 1; visibility: visible; transform: translateX(0);
-}
-.new-nav-wrap .dd-classic .nested-panel a { border-left-color: transparent; }
-.new-nav-wrap .dd-classic .nested-panel a:hover {
-  background: #f4f7fb; border-left-color: #306DA5; color: #306DA5;
-}
-.new-nav-wrap .dd-classic .nested-panel .tag {
-  padding: 6px 20px 2px; font-family: 'Roboto Condensed', sans-serif;
-  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #828282;
-}
-.new-nav-wrap .mobile-toggle {
-  display: none; background: none; border: none; cursor: pointer; padding: 8px; color: #222;
-}
-@media (max-width: 900px) {
-  .new-nav-wrap .nav-items { display: none; }
-  .new-nav-wrap .mobile-toggle { display: block; }
-}
-</style>
-<div class="new-nav-wrap">
-<header>
-  <div class="nav-bar">
-    <a href="#" class="nav-logo">
-      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Camp Morasha">
-    </a>
-    <div class="nav-items">
-      <div class="nav-item">About</div>
-      <div class="nav-item has-dropdown">
-        Camps
-        <div class="dd dd-classic">
-          <a href="#" data-camp="morasha">Camp Morasha <span class="chev">›</span></a>
-          <a href="#" data-camp="kehillas">Kehillas Yaakov <span class="chev">›</span></a>
-          <div class="nested">
-            <div class="nested-trigger">Morasha Travel <span class="chev">›</span></div>
-            <div class="nested-panel">
-              <div class="tag">Travel Camps</div>
-              <a href="#">Sulam · Boys &amp; Girls</a>
-              <a href="#">Amcha Boys</a>
-              <a href="#">Amcha Girls</a>
-            </div>
-          </div>
+<header class="site-nav" role="banner">
+    <div class="site-nav__inner">
+        <a href="https://morashastg1.wpenginepowered.com/" class="site-nav__logo" aria-label="Camp Morasha Home">
+            <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Camp Morasha" width="240" height="58">
+        </a>
+        <button class="site-nav__toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+      
+
+        <nav class="site-nav__menu" role="navigation" aria-label="Main navigation">
+                                          <ul id="menu-primary-navigation" class="site-nav__links"><li id="menu-item-6042" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6042"><a href="https://morashastg1.wpenginepowered.com/about/">About</a></li>
+<li id="menu-item-6043" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6043"><a href="#">Camps</a><button class="site-nav__dropdown-toggle" aria-label="Toggle submenu"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4"></path></svg></button>
+<ul class="sub-menu">
+	<li id="menu-item-6044" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6044"><a href="/campmorasha">Camp Morasha</a></li>
+	<li id="menu-item-6045" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6045"><a href="#">Kehilas Yaakov</a></li>
+	<li id="menu-item-6046" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6046"><a href="/kollel">Morasha Kollel</a></li>
+	<li id="menu-item-6047" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-6047"><a href="#">Morasha Travel</a><button class="site-nav__dropdown-toggle" aria-label="Toggle submenu"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M2 4l4 4 4-4"></path></svg></button>
+	<ul class="sub-menu">
+		<li id="menu-item-6121" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6121"><a href="/sulam">Sulam · Boys &amp; Girls</a></li>
+		<li id="menu-item-6122" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6122"><a href="/amcha">Amcha Boys</a></li>
+		<li id="menu-item-6123" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6123"><a href="/amcha-girls">Amcha Girls</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li id="menu-item-6048" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6048"><a href="https://morashastg1.wpenginepowered.com/the-morasha-experience/dates-fees/">Dates &amp; Rates</a></li>
+<li id="menu-item-6049" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6049"><a href="https://morashastg1.wpenginepowered.com/current-campers/reunions-events/">Alumni &amp; Events</a></li>
+<li id="menu-item-6120" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6120"><a href="https://morashastg1.wpenginepowered.com/rentals/">Rentals</a></li>
+<li id="menu-item-6051" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6051"><a href="/contact">Contact</a></li>
+</ul>              
+                        
+                    </nav>
+
+                              <a href="/give-back" class="site-nav__cta btn">Donate</a>
+                    
+    </div>
+</header>
+
           <a href="#" data-camp="kollel">Morasha Kollel <span class="chev">›</span></a>
         </div>
       </div>
