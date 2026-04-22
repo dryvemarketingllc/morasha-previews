@@ -219,6 +219,115 @@ figcaption</span> {
     <div class="change-desc"><strong>Scope:</strong> <code>/give-back/</code> page only (scoped to <code>.don__header</code>)</div>
   </div>
 
+  <!-- ── CHANGE 4: DONOR WALL PAGE ── -->
+  <div class="change-item" id="donor-wall">
+    <div class="change-date">April 22, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">New Page: Donor Wall</div>
+    <div class="change-desc">
+      Build a new <code>/donor-wall/</code> page as a custom page template. Displays all donors organized
+      by facility (Beis Kushner, Beren Arena, Mercazia PAC, Dining Hall). Each facility has a hero-style
+      header, a primary dedication plaque, and tiered donor grids.
+    </div>
+
+    <div class="change-desc"><strong>Preview:</strong>
+      <a href="morasha-donor-wall.html" style="color:#46764B;">Full Donor Wall page</a>
+    </div>
+
+    <div class="change-desc"><strong>Data structure (ACF):</strong> Create an ACF field group on the donor wall page template:</div>
+<pre><span class="comment">/* ACF Field Group: "Donor Wall" */</span>
+
+<span class="sel">Repeater:</span> <span class="val">facilities</span>
+  ├── <span class="prop">facility_name</span>        <span class="comment">// Text — e.g. "Beis Kushner"</span>
+  ├── <span class="prop">facility_subtitle</span>    <span class="comment">// Text — e.g. "Facility Dedication"</span>
+  ├── <span class="prop">facility_description</span> <span class="comment">// Textarea — optional intro text</span>
+  ├── <span class="prop">primary_label</span>        <span class="comment">// Text — e.g. "Beis Dedication"</span>
+  ├── <span class="prop">primary_family</span>       <span class="comment">// Text — e.g. "The Kushner Family"</span>
+  ├── <span class="prop">primary_inscription</span>  <span class="comment">// Textarea — dedication message</span>
+  ├── <span class="sel">Repeater:</span> <span class="val">sub_dedications</span>
+  │     ├── <span class="prop">sub_type</span>       <span class="comment">// Text — e.g. "Aron Kodesh Dedication"</span>
+  │     ├── <span class="prop">sub_family</span>     <span class="comment">// Text — donor family name</span>
+  │     └── <span class="prop">sub_note</span>       <span class="comment">// Textarea — dedication note</span>
+  └── <span class="sel">Repeater:</span> <span class="val">donor_tiers</span>
+        ├── <span class="prop">tier_label</span>     <span class="comment">// Text — e.g. "Benefactors", "Patrons"</span>
+        └── <span class="sel">Repeater:</span> <span class="val">donors</span>
+              └── <span class="prop">donor_name</span> <span class="comment">// Text — individual donor name</span></pre>
+
+    <div class="change-desc"><strong>Template file:</strong> <code>page-donor-wall.php</code></div>
+<pre><span class="tag">&lt;?php</span> <span class="comment">/* Template Name: Donor Wall */</span>
+get_header();
+
+<span class="comment">// Hero section (hardcoded or from page content)</span>
+<span class="tag">?&gt;</span>
+<span class="sel">&lt;section class="hero"&gt;</span> ... <span class="sel">&lt;/section&gt;</span>
+
+<span class="tag">&lt;?php</span>
+<span class="comment">// Loop through facilities</span>
+<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>) ): the_row();
+    <span class="comment">// Output facility header</span>
+    <span class="comment">// Output primary dedication plaque</span>
+    <span class="comment">// Loop sub_dedications</span>
+    <span class="comment">// Loop donor_tiers → loop donors</span>
+  <span class="prop">endwhile</span>;
+<span class="prop">endif</span>;
+
+get_footer();</pre>
+
+    <div class="change-desc"><strong>Scope:</strong> New page template + new ACF field group. CSS can go in <code>donor-wall.css</code>,
+      enqueued conditionally via <code>is_page_template('page-donor-wall.php')</code>.</div>
+  </div>
+
+  <!-- ── CHANGE 5: GIVE BACK ↔ DONOR WALL CONNECTION ── -->
+  <div class="change-item" id="donor-block-connection">
+    <div class="change-date">April 22, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">Give Back Page: Donor Block Should Pull Real Names</div>
+    <div class="change-desc">
+      The fading grid donor block on <code>/give-back/</code> currently shows placeholder names.
+      It should dynamically pull a subset of real donor names from the same ACF data that powers
+      the full <code>/donor-wall/</code> page, so names only need to be maintained in one place.
+    </div>
+
+    <div class="change-desc"><strong>How it works:</strong></div>
+<pre><span class="comment">// In the Give Back template (or a shortcode/block):</span>
+<span class="comment">// 1. Get the Donor Wall page by slug or ID</span>
+<span class="prop">$wall_page</span> = get_page_by_path(<span class="val">'donor-wall'</span>);
+
+<span class="comment">// 2. Pull all donor names from the ACF repeater</span>
+<span class="prop">$all_donors</span> = [];
+<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ): the_row();
+    <span class="prop">if</span>( have_rows(<span class="val">'donor_tiers'</span>) ):
+      <span class="prop">while</span>( have_rows(<span class="val">'donor_tiers'</span>) ): the_row();
+        <span class="prop">if</span>( have_rows(<span class="val">'donors'</span>) ):
+          <span class="prop">while</span>( have_rows(<span class="val">'donors'</span>) ): the_row();
+            <span class="prop">$all_donors</span>[] = get_sub_field(<span class="val">'donor_name'</span>);
+          <span class="prop">endwhile</span>;
+        <span class="prop">endif</span>;
+      <span class="prop">endwhile</span>;
+    <span class="prop">endif</span>;
+  <span class="prop">endwhile</span>;
+<span class="prop">endif</span>;
+
+<span class="comment">// 3. Shuffle and take 24 names (8 per page × 3 pages)</span>
+shuffle(<span class="prop">$all_donors</span>);
+<span class="prop">$display_donors</span> = array_slice(<span class="prop">$all_donors</span>, 0, 24);</pre>
+
+    <div class="note">
+      <strong>Key point:</strong> Donor names are entered once on the Donor Wall page via ACF.
+      The Give Back fading grid reads from that same data — no duplicate entry needed.
+      When a new donor is added to the wall, they automatically appear in the Give Back rotation.
+    </div>
+
+    <div class="change-desc"><strong>Previews:</strong>
+      <a href="morasha-giveback-preview.html" style="color:#46764B;">Give Back with donor block</a> &nbsp;|&nbsp;
+      <a href="morasha-donor-wall.html" style="color:#46764B;">Full Donor Wall</a>
+    </div>
+
+    <div class="change-desc"><strong>Scope:</strong> <code>/give-back/</code> page template. Depends on the Donor Wall ACF fields (Change #4) being set up first.</div>
+  </div>
+
 </div>
 
 <div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
