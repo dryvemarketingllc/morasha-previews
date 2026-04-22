@@ -356,6 +356,25 @@
 /* Override: push hero below fixed nav */
 .hero { padding-top: 140px; }
 
+/* Fix: theme CSS overrides heading colors — force white on dark backgrounds */
+.hero h1,
+.hero .eyebrow,
+.hero p {
+  color: #fff !important;
+}
+.hero .eyebrow { color: var(--gold) !important; }
+.hero p { color: rgba(255,255,255,0.7) !important; }
+
+.primary-dedication h3,
+.primary-dedication .ded-label,
+.primary-dedication .ded-donors,
+.primary-dedication .ded-message {
+  color: #fff !important;
+}
+.primary-dedication .ded-label { color: var(--gold) !important; }
+.primary-dedication .ded-donors { color: rgba(255,255,255,0.8) !important; }
+.primary-dedication .ded-message { color: rgba(255,255,255,0.6) !important; }
+
 /* Override: Kefa font for body text 14px+ */
 body, .hero p, .facility-nav a, .tier-label, .donor-name {
   font-family: Kefa, 'Nunito Sans', sans-serif;
