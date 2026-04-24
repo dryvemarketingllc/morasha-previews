@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BUILD: Donor Wall — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #B8953E; margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.new-page { background: #ede7f6; color: #4527a0; }
+  .status.connection { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 11px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>BUILD: Donor Wall</h1>
+  <p>New page build instructions. Mockup: morasha-donor-wall.html</p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status new-page">New Page</span>
+    <div class="change-title">Page Overview</div>
+    <div class="change-desc">
+      Build a new <code>/donor-wall/</code> page as a custom page template. This page displays all donors organized by facility (Beis Kushner, Beren Arena, Mercazia PAC, Dining Hall). Each facility has a hero-style header, a primary dedication plaque, sub-dedications grid, and tiered donor name lists.
+    </div>
+    <div class="change-desc">
+      <strong>Unique design elements:</strong> Uses a gold accent color (<code>#B8953E</code>) for labels and eyebrows. Facilities alternate between white and warm grey (<code>#F8F7F5</code>) backgrounds. A sticky facility nav sits below the hero.
+    </div>
+    <div class="change-desc">
+      <strong>Sections:</strong>
+    </div>
+    <div class="change-desc">
+      1. Hero (centered, gold accents)<br>
+      2. Sticky facility navigation bar<br>
+      3. Facility sections (repeating pattern per facility):<br>
+      &nbsp;&nbsp;&nbsp;a. Facility header (eyebrow + name + description)<br>
+      &nbsp;&nbsp;&nbsp;b. Primary dedication plaque (dark green, centered)<br>
+      &nbsp;&nbsp;&nbsp;c. Sub-dedications grid (cards with green left border)<br>
+      &nbsp;&nbsp;&nbsp;d. Donor tiers (Benefactors, Patrons, etc. with name columns)<br>
+      4. Closing CTA section
+    </div>
+    <div class="change-desc"><strong>Mockup:</strong> <a href="../morasha-donor-wall.html" style="color:#46764B;">morasha-donor-wall.html</a></div>
+
+    <div class="note">
+      <strong>Color palette note:</strong> The donor wall uses the standard green palette but adds:<br>
+      <code>--gold: #B8953E</code> (labels on dark backgrounds)<br>
+      <code>--gold-light: #F5EFDF</code><br>
+      <code>--bg-warm: #F8F7F5</code> (alternating facility backgrounds)
+    </div>
+  </div>
+
+  <!-- ── WORDPRESS IMPLEMENTATION ── -->
+  <div class="change-item">
+    <div class="change-title">WordPress Implementation</div>
+    <div class="change-desc"><strong>Page Template:</strong> <code>page-donor-wall.php</code></div>
+    <div class="change-desc"><strong>Template Name:</strong> <code>Donor Wall</code></div>
+    <div class="change-desc"><strong>Stylesheet:</strong> <code>donor-wall.css</code> &mdash; enqueue conditionally</div>
+
+    <div class="change-desc"><strong>ACF Field Group: "Donor Wall"</strong></div>
+<pre><span class="sel">Repeater:</span> <span class="val">facilities</span>
+  ├── <span class="prop">facility_name</span>        <span class="comment">// Text — e.g. "Beis Kushner"</span>
+  ├── <span class="prop">facility_subtitle</span>    <span class="comment">// Text — e.g. "Facility Dedication"</span>
+  ├── <span class="prop">facility_description</span> <span class="comment">// Textarea — optional intro text</span>
+  ├── <span class="prop">facility_anchor</span>      <span class="comment">// Text — "beis-kushner" (for sticky nav)</span>
+  ├── <span class="prop">primary_label</span>        <span class="comment">// Text — e.g. "Beis Dedication"</span>
+  ├── <span class="prop">primary_family</span>       <span class="comment">// Text — e.g. "The Kushner Family"</span>
+  ├── <span class="prop">primary_donors</span>       <span class="comment">// Textarea — dedication attribution</span>
+  ├── <span class="prop">primary_inscription</span>  <span class="comment">// Textarea — italic dedication message</span>
+  ├── <span class="sel">Repeater:</span> <span class="val">sub_dedications</span>
+  │     ├── <span class="prop">sub_type</span>       <span class="comment">// Text — e.g. "Aron Kodesh Dedication"</span>
+  │     ├── <span class="prop">sub_family</span>     <span class="comment">// Text — donor family name</span>
+  │     └── <span class="prop">sub_note</span>       <span class="comment">// Textarea — dedication note</span>
+  └── <span class="sel">Repeater:</span> <span class="val">donor_tiers</span>
+        ├── <span class="prop">tier_label</span>     <span class="comment">// Text — e.g. "Benefactors", "Patrons"</span>
+        └── <span class="sel">Repeater:</span> <span class="val">donors</span>
+              └── <span class="prop">donor_name</span> <span class="comment">// Text — individual donor name</span></pre>
+
+    <div class="change-desc"><strong>PHP template loop:</strong></div>
+<pre><span class="tag">&lt;?php</span> <span class="comment">/* Template Name: Donor Wall */</span>
+get_header();
+<span class="tag">?&gt;</span>
+<span class="sel">&lt;section class="hero"&gt;</span>...<span class="sel">&lt;/section&gt;</span>
+
+<span class="comment">&lt;!-- Sticky facility nav --&gt;</span>
+<span class="sel">&lt;nav class="facility-nav"&gt;</span>
+  <span class="sel">&lt;div class="facility-nav-inner"&gt;</span>
+<span class="tag">&lt;?php</span>
+<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>) ): the_row(); <span class="tag">?&gt;</span>
+    <span class="sel">&lt;a href="#</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'facility_anchor'</span>); <span class="tag">?&gt;</span><span class="sel">"&gt;</span>
+      <span class="tag">&lt;?php</span> the_sub_field(<span class="val">'facility_name'</span>); <span class="tag">?&gt;</span>
+    <span class="sel">&lt;/a&gt;</span>
+  <span class="tag">&lt;?php</span> <span class="prop">endwhile</span>; <span class="prop">endif</span>; <span class="tag">?&gt;</span>
+  <span class="sel">&lt;/div&gt;</span>
+<span class="sel">&lt;/nav&gt;</span>
+
+<span class="comment">&lt;!-- Facility sections --&gt;</span>
+<span class="tag">&lt;?php</span>
+<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>) ): the_row(); <span class="tag">?&gt;</span>
+  <span class="sel">&lt;section class="facility" id="</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'facility_anchor'</span>); <span class="tag">?&gt;</span><span class="sel">"&gt;</span>
+    <span class="sel">&lt;div class="facility-inner"&gt;</span>
+      <span class="comment">&lt;!-- facility-header --&gt;</span>
+      <span class="comment">&lt;!-- primary-dedication --&gt;</span>
+      <span class="comment">&lt;!-- sub-dedications grid --&gt;</span>
+      <span class="comment">&lt;!-- donor-tiers --&gt;</span>
+    <span class="sel">&lt;/div&gt;</span>
+  <span class="sel">&lt;/section&gt;</span>
+  <span class="tag">&lt;?php</span> <span class="prop">endwhile</span>; <span class="prop">endif</span>; <span class="tag">?&gt;</span>
+
+<span class="sel">&lt;section class="closing"&gt;</span>...<span class="sel">&lt;/section&gt;</span>
+<span class="tag">&lt;?php</span> get_footer(); <span class="tag">?&gt;</span></pre>
+  </div>
+
+  <!-- ── SECTION: HERO ── -->
+  <div class="change-item">
+    <div class="change-title">Section 1: Hero</div>
+    <div class="change-desc">
+      Centered hero on dark green background. Uses gold accent for the eyebrow ("Hakarat Hatov"). Includes a subtitle paragraph. Note the padding-top of 140px accounts for the fixed site nav.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.hero</span> {
+  <span class="prop">background</span>: <span class="val">#142B15</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">140px 48px 80px</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.hero::before</span> {
+  <span class="prop">background</span>:
+    <span class="val">radial-gradient(ellipse at 30% 20%, rgba(184,149,62,0.08) 0%, transparent 50%)</span>,
+    <span class="val">radial-gradient(ellipse at 80% 70%, rgba(70,118,75,0.15) 0%, transparent 50%)</span>;
+}
+<span class="sel">.hero .eyebrow</span> { <span class="prop">color</span>: <span class="val">#B8953E</span>; }
+<span class="sel">.hero h1</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(42px, 5vw, 68px)</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.025em</span>;
+  <span class="prop">line-height</span>: <span class="val">0.95</span>;
+}
+<span class="sel">.hero p</span> {
+  <span class="prop">font-size</span>: <span class="val">18px</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.7)</span>;
+  <span class="prop">max-width</span>: <span class="val">52ch</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+}</pre>
+  </div>
+
+  <!-- ── SECTION: STICKY NAV ── -->
+  <div class="change-item">
+    <div class="change-title">Section 2: Sticky Facility Navigation</div>
+    <div class="change-desc">
+      A sticky nav bar that pins to the top of the viewport as you scroll. Shows links for each facility. Horizontally scrollable on mobile.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.facility-nav</span> {
+  <span class="prop">position</span>: <span class="val">sticky</span>;
+  <span class="prop">top</span>: <span class="val">0</span>;
+  <span class="prop">z-index</span>: <span class="val">50</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(0,0,0,0.08)</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">overflow-x</span>: <span class="val">auto</span>;
+}
+<span class="sel">.facility-nav-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">1200px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+}
+<span class="sel">.facility-nav a</span> {
+  <span class="prop">flex-shrink</span>: <span class="val">0</span>;
+  <span class="prop">padding</span>: <span class="val">18px 24px</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.18em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#6B6B6B</span>;
+  <span class="prop">border-bottom</span>: <span class="val">2px solid transparent</span>;
+}
+<span class="sel">.facility-nav a:hover,
+.facility-nav a.active</span> {
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">border-bottom-color</span>: <span class="val">#46764B</span>;
+}</pre>
+
+    <div class="note">
+      <strong>JS needed:</strong> Add a small IntersectionObserver script that toggles the <code>.active</code> class on the correct facility nav link as the user scrolls past each facility section. This is optional for initial build but recommended.
+    </div>
+  </div>
+
+  <!-- ── SECTION: FACILITY PATTERN ── -->
+  <div class="change-item">
+    <div class="change-title">Section 3: Facility Layout (Repeating Pattern)</div>
+    <div class="change-desc">
+      Each facility follows the same layout: header, primary dedication plaque, sub-dedications grid, donor tier lists. Even-numbered facilities get the warm grey background.
+    </div>
+
+    <div class="change-desc"><strong>3a. Facility Header:</strong></div>
+<pre><span class="sel">.facility</span> {
+  <span class="prop">padding</span>: <span class="val">96px 48px</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid #ECECEC</span>;
+}
+<span class="sel">.facility:nth-child(even)</span> { <span class="prop">background</span>: <span class="val">#F8F7F5</span>; }
+<span class="sel">.facility-inner</span> { <span class="prop">max-width</span>: <span class="val">1200px</span>; <span class="prop">margin</span>: <span class="val">0 auto</span>; }
+<span class="sel">.facility-header</span> { <span class="prop">margin-bottom</span>: <span class="val">64px</span>; <span class="prop">max-width</span>: <span class="val">680px</span>; }
+<span class="sel">.facility-header .eyebrow</span> { <span class="prop">color</span>: <span class="val">#46764B</span>; }
+<span class="sel">.facility-header h2</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(36px, 4vw, 52px)</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}</pre>
+
+    <div class="change-desc"><strong>3b. Primary Dedication Plaque:</strong></div>
+<pre><span class="sel">.primary-dedication</span> {
+  <span class="prop">background</span>: <span class="val">#142B15</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">56px 64px</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">48px</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="comment">/* Inner border frame */</span>
+<span class="sel">.primary-dedication::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">8px</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.15)</span>;
+}
+<span class="sel">.primary-dedication .ded-label</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">11px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.25em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#B8953E</span>;
+}
+<span class="sel">.primary-dedication h3</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(28px, 3vw, 42px)</span>;
+}
+<span class="sel">.primary-dedication .ded-donors</span> {
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.8)</span>;
+}
+<span class="sel">.primary-dedication .ded-message</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-style</span>: <span class="val">italic</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.6)</span>;
+  <span class="prop">max-width</span>: <span class="val">48ch</span>;
+  <span class="prop">margin</span>: <span class="val">20px auto 0</span>;
+}</pre>
+
+    <div class="change-desc"><strong>3c. Sub-Dedications Grid:</strong></div>
+<pre><span class="sel">.sub-dedications</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(auto-fill, minmax(300px, 1fr))</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">48px</span>;
+}
+<span class="sel">.sub-ded</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(0,0,0,0.08)</span>;
+  <span class="prop">padding</span>: <span class="val">32px 28px</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+}
+<span class="sel">.sub-ded::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">left</span>: <span class="val">0</span>; <span class="prop">top</span>: <span class="val">0</span>; <span class="prop">bottom</span>: <span class="val">0</span>;
+  <span class="prop">width</span>: <span class="val">3px</span>;
+  <span class="prop">background</span>: <span class="val">#46764B</span>;
+}
+<span class="sel">.sub-ded:hover</span> {
+  <span class="prop">box-shadow</span>: <span class="val">0 6px 24px rgba(0,0,0,0.06)</span>;
+}
+<span class="sel">.sub-ded .sub-type</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">11px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.2em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+}
+<span class="sel">.sub-ded h4</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">20px</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}</pre>
+
+    <div class="change-desc"><strong>3d. Donor Tier Lists:</strong></div>
+<pre><span class="sel">.donor-tiers</span> { <span class="prop">margin-top</span>: <span class="val">48px</span>; }
+<span class="sel">.donor-tier</span> { <span class="prop">margin-bottom</span>: <span class="val">40px</span>; }
+<span class="sel">.tier-header</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">20px</span>;
+}
+<span class="sel">.tier-header h4</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.2em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">white-space</span>: <span class="val">nowrap</span>;
+}
+<span class="sel">.tier-header::after</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">flex</span>: <span class="val">1</span>;
+  <span class="prop">height</span>: <span class="val">1px</span>;
+  <span class="prop">background</span>: <span class="val">#ECECEC</span>;
+}
+<span class="sel">.tier-names</span> {
+  <span class="prop">column-count</span>: <span class="val">3</span>;
+  <span class="prop">column-gap</span>: <span class="val">32px</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;
+  <span class="prop">color</span>: <span class="val">#222</span>;
+  <span class="prop">line-height</span>: <span class="val">1.85</span>;
+}
+<span class="sel">.tier-names span</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">break-inside</span>: <span class="val">avoid</span>;
+}
+
+<span class="comment">/* Responsive */</span>
+<span class="sel">@media (max-width: 900px)</span> {
+  <span class="sel">.tier-names</span> { <span class="prop">column-count</span>: <span class="val">2</span>; }
+  <span class="sel">.sub-dedications</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; }
+}
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.tier-names</span> { <span class="prop">column-count</span>: <span class="val">1</span>; }
+  <span class="sel">.primary-dedication</span> { <span class="prop">padding</span>: <span class="val">40px 28px</span>; }
+  <span class="sel">.facility</span> { <span class="prop">padding</span>: <span class="val">64px 24px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── SECTION: CLOSING CTA ── -->
+  <div class="change-item">
+    <div class="change-title">Section 4: Closing CTA</div>
+    <div class="change-desc">
+      Dark green section at the bottom with gold eyebrow, heading, paragraph, and two buttons (solid white + ghost outline). Encourages donations.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.closing</span> {
+  <span class="prop">background</span>: <span class="val">#142B15</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">96px 48px</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+<span class="sel">.closing .eyebrow</span> { <span class="prop">color</span>: <span class="val">#B8953E</span>; }
+<span class="sel">.closing h2</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(32px, 3.5vw, 48px)</span>;
+}
+<span class="sel">.btn-light</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+<span class="sel">.btn-ghost</span> {
+  <span class="prop">background</span>: <span class="val">transparent</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.35)</span>;
+}</pre>
+  </div>
+
+  <!-- ── GIVE BACK PAGE CONNECTION ── -->
+  <div class="change-item">
+    <span class="status connection">Cross-Page Connection</span>
+    <div class="change-title">Give Back Page: Fading Grid Connection</div>
+    <div class="change-desc">
+      The fading donor grid on the <code>/give-back/</code> page should dynamically pull names from this Donor Wall's ACF data. This means donor names only need to be entered once (on this Donor Wall page), and the Give Back page reads from the same source.
+    </div>
+    <div class="change-desc"><strong>How it works:</strong></div>
+<pre><span class="comment">// In the Give Back template or shortcode:</span>
+<span class="prop">$wall_page</span> = get_page_by_path(<span class="val">'donor-wall'</span>);
+<span class="prop">$all_donors</span> = [];
+
+<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ): the_row();
+    <span class="prop">if</span>( have_rows(<span class="val">'donor_tiers'</span>) ):
+      <span class="prop">while</span>( have_rows(<span class="val">'donor_tiers'</span>) ): the_row();
+        <span class="prop">if</span>( have_rows(<span class="val">'donors'</span>) ):
+          <span class="prop">while</span>( have_rows(<span class="val">'donors'</span>) ): the_row();
+            <span class="prop">$all_donors</span>[] = get_sub_field(<span class="val">'donor_name'</span>);
+          <span class="prop">endwhile</span>;
+        <span class="prop">endif</span>;
+      <span class="prop">endwhile</span>;
+    <span class="prop">endif</span>;
+  <span class="prop">endwhile</span>;
+<span class="prop">endif</span>;
+
+<span class="comment">// Shuffle and take 24 (8 per page x 3 pages)</span>
+shuffle(<span class="prop">$all_donors</span>);
+<span class="prop">$display_donors</span> = array_slice(<span class="prop">$all_donors</span>, 0, 24);</pre>
+
+    <div class="note">
+      <strong>Key point:</strong> The Donor Wall ACF fields must be set up and populated BEFORE the Give Back fading grid can work with real names. Build the Donor Wall page first, populate data, then connect the Give Back page.
+    </div>
+  </div>
+
+  <!-- ── FACILITIES DATA ── -->
+  <div class="change-item">
+    <div class="change-title">Facility Data Summary</div>
+    <div class="change-desc">
+      The mockup includes 4 facilities. Here is a summary of the data volume per facility:
+    </div>
+    <div class="change-desc">
+      <strong>1. Beis Kushner</strong> — Primary dedication (The Kushner Family), 4 named sub-dedications (Aron Kodesh, Amud, Bima, Siddurim), 5 bookshelf dedications, multiple mezuza dedications, and tiered donor lists (Benefactors, Patrons, Supporters, Friends).<br><br>
+      <strong>2. Beren Arena</strong> — Primary dedication (Robert M. Beren), sub-dedications for various components, and tiered donor lists.<br><br>
+      <strong>3. Mercazia PAC</strong> — Primary dedication, sub-dedications, and tiered donors.<br><br>
+      <strong>4. Dining Hall</strong> — Primary dedication, sub-dedications, and tiered donors.
+    </div>
+    <div class="note">
+      <strong>Note for Izzy:</strong> The full donor data is extensive. Reference the mockup HTML for all names and dedications. The sub-dedications within Beis Kushner alone include Aron Kodesh, Amud, Bima, Siddurim, 5 Bookshelf dedications, and numerous Mezuza dedications. Each is a card in the sub-dedications grid.
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Hero is centered with gold (#B8953E) eyebrow accent</li>
+      <li>Sticky facility nav pins to top of viewport on scroll</li>
+      <li>Active facility link in nav shows green bottom border</li>
+      <li>Facility nav scrolls horizontally on mobile</li>
+      <li>Even-numbered facility sections have warm grey (#F8F7F5) background</li>
+      <li>Primary dedication plaque has inner border frame (8px inset)</li>
+      <li>Primary dedication uses gold for the label, white for the name</li>
+      <li>Inscription text is italic serif in 60% white</li>
+      <li>Sub-dedication cards have 3px green left border</li>
+      <li>Sub-dedication cards lift with box-shadow on hover</li>
+      <li>Tier headers show label + extending horizontal line</li>
+      <li>Donor names use CSS columns (3 cols desktop, 2 tablet, 1 mobile)</li>
+      <li>Names use break-inside: avoid to prevent splitting across columns</li>
+      <li>Closing CTA has both solid (btn-light) and outline (btn-ghost) buttons</li>
+      <li>All 4 facilities render with correct data</li>
+      <li>Give Back page can successfully pull donor names from this page's ACF data</li>
+      <li>Page uses site-wide nav and footer</li>
+      <li>Theme CSS overrides are handled (white text forced on dark backgrounds)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Camp Landing Page Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px; color: #555; line-height: 1.5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc; border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Camp Landing Page Changes</h1>
+  <p>Developer handoff for the Camp Morasha "About" / landing page redesign.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/campmorasha/" target="_blank">morashastg1.../campmorasha/</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-about.html" target="_blank">morasha-about.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      April 24, 2026
+    </div>
+  </div>
+
+  <div class="change-desc" style="margin-bottom:32px;">
+    <strong>Summary of changes:</strong> This is the individual camp landing page (Camp Morasha). Key changes: (1) introduce a two-tier fixed nav (super nav + green camp nav banner), (2) hero becomes a full-width photo with countdown calendar card overlay, (3) add a green camp info banner with dates/meta/CTAs, (4) build alternating pillar sections for Values/Fun/Spirit, (5) add a testimonial quote section, and (6) updated footer.
+  </div>
+
+  <!-- ── CHANGE 1: TWO-TIER NAV ── -->
+  <div class="change-item" id="nav">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Navigation: Two-Tier Header</div>
+    <div class="change-desc">
+      Replace the single nav bar with a two-tier fixed header. Tier 1 (super nav) is the site-wide white bar with logo + top-level links. Tier 2 (camp nav) is a green banner specific to the active camp, showing the camp name, sub-page links, and an "Apply / Login" CTA.
+    </div>
+
+    <table class="diff">
+      <tr><th>Element</th><th>Current (Staging)</th><th>Change to</th></tr>
+      <tr><td>Header structure</td><td>Single nav bar</td><td>Two-tier: <code>.nav-super</code> (white) + <code>.nav-camp</code> (green)</td></tr>
+      <tr><td>Tier 1 links</td><td>All nav links in one bar</td><td>Site-wide only: About, Camps, Alumni & Events, Rentals, Donate</td></tr>
+      <tr><td>Tier 2</td><td>Does not exist</td><td>Green bar: camp title (left) + camp-specific links + "Apply / Login" button</td></tr>
+      <tr><td>Position</td><td>Fixed or sticky</td><td>Fixed, top: 0, z-index: 100, backdrop blur</td></tr>
+      <tr><td>Hero padding-top</td><td>~80px</td><td>148px (to clear both nav tiers)</td></tr>
+    </table>
+
+    <div class="change-desc"><strong>Tier 2 (Camp Nav) CSS:</strong></div>
+<pre><span class="sel">.nav-camp</span> {
+  <span class="prop">background</span>: <span class="val">var(--green)</span>;  <span class="comment">/* #46764B */</span>
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.nav-camp-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">1440px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">18px 48px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">32px</span>;
+}
+<span class="sel">.nav-camp-title</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(24px, 2.4vw, 38px)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">margin-right</span>: <span class="val">auto</span>;
+}
+<span class="sel">.nav-camp-links a</span> {
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+  <span class="prop">font-weight</span>: <span class="val">400</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.nav-camp-links a.active</span> {
+  <span class="prop">border-bottom</span>: <span class="val">2px solid #fff</span>;
+  <span class="prop">padding-bottom</span>: <span class="val">2px</span>;
+}
+<span class="sel">.nav-camp-cta</span> {
+  <span class="prop">padding</span>: <span class="val">10px 20px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">color</span>: <span class="val">var(--green)</span>;
+  <span class="prop">font-weight</span>: <span class="val">500</span>;
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+  <span class="prop">border-radius</span>: <span class="val">4px</span>;
+}</pre>
+
+    <div class="note">
+      <strong>WordPress implementation:</strong> This second nav tier corresponds to the existing <code>.ph__sub-nav</code> on staging. It should render conditionally on camp-specific pages (Camp Morasha, Kehilas Yaakov, Kollel, etc.). The camp name and sub-links can be driven by a WordPress menu assigned per camp, or by ACF fields on camp parent pages. On mobile (below 640px), the camp links collapse and only the camp title + CTA remain visible.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 2: HERO WITH COUNTDOWN ── -->
+  <div class="change-item" id="hero">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Hero: Full-Width Photo with Countdown Card</div>
+    <div class="change-desc">
+      The hero becomes a full-width photo (16:6 aspect ratio, max 520px tall) with a floating countdown calendar card in the top-right corner.
+    </div>
+
+    <table class="diff">
+      <tr><th>Element</th><th>Current</th><th>Change to</th></tr>
+      <tr><td>Hero layout</td><td>Text-over-image or slider</td><td>Full-width background image, no text overlay</td></tr>
+      <tr><td>Aspect ratio</td><td>Varies</td><td>16:6 desktop, 16:9 tablet, 4:3 mobile</td></tr>
+      <tr><td>Countdown card</td><td>Does not exist</td><td>Floating white card, top-right, shows days until camp</td></tr>
+    </table>
+
+<pre><span class="sel">.hero</span> {
+  <span class="prop">padding-top</span>: <span class="val">148px</span>;  <span class="comment">/* clears two-tier header */</span>
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.hero-bg</span> {
+  <span class="prop">width</span>: <span class="val">100%</span>;
+  <span class="prop">aspect-ratio</span>: <span class="val">16 / 6</span>;
+  <span class="prop">max-height</span>: <span class="val">520px</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">background-position</span>: <span class="val">center</span>;
+}
+
+<span class="comment">/* Countdown card */</span>
+<span class="sel">.countdown-card</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">top</span>: <span class="val">32px</span>;
+  <span class="prop">right</span>: <span class="val">48px</span>;
+  <span class="prop">width</span>: <span class="val">160px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 12px 40px rgba(20,43,21,0.25)</span>;
+  <span class="prop">z-index</span>: <span class="val">3</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.countdown-card__top</span> {
+  <span class="prop">background</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">10px 14px</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">10px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.24em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+}
+<span class="sel">.countdown-card__num</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">68px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">line-height</span>: <span class="val">0.9</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.04em</span>;
+}</pre>
+
+    <div class="note">
+      <strong>Countdown logic:</strong> The countdown number should be calculated server-side or via JS. Set the target date (first day of camp) and display the difference in days. If camp has started, hide the card or show "Camp is in session!" instead.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 3: CAMP INFO BANNER ── -->
+  <div class="change-item" id="camp-info">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Camp Info Banner (Green Section)</div>
+    <div class="change-desc">
+      A new full-width green banner below the hero displaying camp dates, age range, location, and two CTAs. This section replaces/consolidates the scattered date info currently on the page.
+    </div>
+
+<pre><span class="sel">.camp-info</span> {
+  <span class="prop">padding</span>: <span class="val">72px 0 80px</span>;
+  <span class="prop">background</span>: <span class="val">var(--green)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+<span class="sel">.camp-dates</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(22px, 3vw, 40px)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+}
+<span class="sel">.camp-meta</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">10px 20px</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">40px</span>;
+}
+<span class="sel">.camp-ctas</span> {
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">gap</span>: <span class="val">12px</span>;
+  <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+}
+<span class="sel">.btn-white</span> { <span class="prop">background</span>: <span class="val">#fff</span>; <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>; }
+<span class="sel">.btn-outline-white</span> {
+  <span class="prop">background</span>: <span class="val">transparent</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.7)</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Content:</strong> "Tuesday, June 30 - Tuesday, August 18" (dates), "3rd - 9th Grade Boys & Girls" + "Lakewood, PA" (meta), "View Dates & Rates" (outline) + "Apply Now" (solid white) buttons. All content should be editable via ACF or the page editor.</div>
+  </div>
+
+  <!-- ── CHANGE 4: PILLARS ── -->
+  <div class="change-item" id="pillars">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Pillar Sections (Values / Fun / Spirit)</div>
+    <div class="change-desc">
+      Three alternating two-column sections replace the current content blocks. Each pillar has a large image on one side and a heading + description on the other. Odd pillars: image left, text right (white bg). Even pillars: image right, text left (lightest-green bg).
+    </div>
+
+<pre><span class="sel">.pillar</span> { <span class="prop">padding</span>: <span class="val">96px 0</span>; <span class="prop">background</span>: <span class="val">#fff</span>; }
+<span class="sel">.pillar.alt</span> { <span class="prop">background</span>: <span class="val">var(--lightest-green)</span>; }
+<span class="sel">.pillar-row</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1.1fr 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">72px</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+}
+<span class="sel">.pillar-row.reverse</span> {
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1.1fr</span>;
+}
+<span class="sel">.pillar-row.reverse .pillar-img</span> { <span class="prop">order</span>: <span class="val">2</span>; }
+<span class="sel">.pillar-row.reverse .pillar-body</span> { <span class="prop">order</span>: <span class="val">1</span>; }
+
+<span class="sel">.pillar-title</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(36px, 4vw, 56px)</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.02em</span>;
+}
+<span class="sel">.pillar-title .mark</span> {
+  <span class="prop">color</span>: <span class="val">var(--green)</span>;
+  <span class="prop">font-style</span>: <span class="val">italic</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Content for the three pillars:</strong></div>
+    <table class="diff">
+      <tr><th>Pillar</th><th>Heading</th><th>Key word (green italic)</th><th>Background</th></tr>
+      <tr><td>1</td><td>Built on <em>Values</em></td><td>Values</td><td>White, image left</td></tr>
+      <tr><td>2</td><td>Runs on <em>Fun</em></td><td>Fun</td><td>Lightest green, image right</td></tr>
+      <tr><td>3</td><td>Powered by <em>Spirit</em></td><td>Spirit</td><td>White, image left</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>Responsive:</strong> On tablet (1024px and below), pillars stack to single-column. The reverse order resets so images always appear above text. Images get aspect-ratio 16:10 and min-height 280px.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 5: TESTIMONIAL ── -->
+  <div class="change-item" id="testimonial">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">5. Testimonial Quote Section</div>
+    <div class="change-desc">
+      A new full-width dark-green section with centered quote text, smart quotes, and attribution. Decorative radial gradients add depth.
+    </div>
+
+<pre><span class="sel">.testimonial</span> {
+  <span class="prop">padding</span>: <span class="val">64px 0 72px</span>;
+  <span class="prop">background</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.testimonial::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>; <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>:
+    <span class="val">radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.18) 0%, transparent 50%)</span>;
+}
+<span class="sel">.testimonial-quote</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(22px, 2.2vw, 30px)</span>;
+  <span class="prop">line-height</span>: <span class="val">1.35</span>;
+  <span class="prop">max-width</span>: <span class="val">48ch</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+<span class="sel">.testimonial-quote::before</span> { <span class="prop">content</span>: <span class="val">'\201C'</span>; <span class="prop">color</span>: <span class="val">var(--light-green)</span>; }
+<span class="sel">.testimonial-quote::after</span> { <span class="prop">content</span>: <span class="val">'\201D'</span>; <span class="prop">color</span>: <span class="val">var(--light-green)</span>; }
+<span class="sel">.testimonial-attribution</span> {
+  <span class="prop">margin-top</span>: <span class="val">24px</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.7)</span>;
+}</pre>
+
+    <div class="note">
+      <strong>Content source:</strong> Quote text and attribution should be editable via ACF fields (textarea for quote, text for name, text for role). The mockup placeholder quote is: "You are changing lives, and altering the trajectory of these children and their neshamas."
+    </div>
+  </div>
+
+  <!-- ── CHANGE 6: FOOTER ── -->
+  <div class="change-item" id="footer">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">6. Footer: Updated Layout</div>
+    <div class="change-desc">
+      The footer receives the new standardized layout used across all pages: grey background (#ececec), brand column with logo + newsletter form + social icons on the left, and three link columns on the right. Copyright bar at bottom with divider.
+    </div>
+
+    <div class="change-desc">See the mockup for full footer HTML/CSS. The footer structure is shared site-wide, so implement it once in <code>footer.php</code>. Key classes: <code>.site-footer</code>, <code>.site-footer__brand</code>, <code>.site-footer__col</code>, <code>.site-footer__newsletter-form</code>, <code>.site-footer__copyright</code>.</div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item" id="qa">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Two-tier nav: super nav (white) + camp nav (green) both render and are fixed</li>
+      <li>Camp nav shows "Camp Morasha" title + sub-page links + "Apply / Login" CTA</li>
+      <li>Active camp sub-page link has white bottom border</li>
+      <li>On mobile, camp nav links hide; only title + CTA remain</li>
+      <li>Hero image is full-width with 16:6 aspect ratio on desktop</li>
+      <li>Countdown card floats in top-right of hero, shows correct day count</li>
+      <li>Countdown card scales down on tablet (140px) and mobile (120px)</li>
+      <li>Green camp info banner shows dates, meta info, and two CTA buttons</li>
+      <li>Three pillar sections alternate white/lightest-green backgrounds</li>
+      <li>Pillar 2 (Fun) has reversed layout: text left, image right</li>
+      <li>Pillar key words ("Values", "Fun", "Spirit") are green italic</li>
+      <li>Pillars stack single-column on tablet and below</li>
+      <li>Testimonial section: dark green background with radial gradient accents</li>
+      <li>Quote has smart open/close quotes in light-green</li>
+      <li>Footer matches the new standardized layout with newsletter form</li>
+      <li>All content is editable via page editor or ACF fields</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

@@ -93,6 +93,18 @@
     color: #bbb;
     border-top: 1px solid #eee;
   }
+  a.card .card-doc {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #e65100;
+    text-decoration: none;
+  }
+  a.card .card-doc:hover { text-decoration: underline; }
   @media (max-width: 640px) {
     .header { padding: 48px 24px 40px; }
     .grid { padding: 32px 24px; grid-template-columns: 1fr; }
@@ -109,49 +121,58 @@
 
 <div class="grid">
   <a class="card" href="morasha-mission-values.html">
-    <div class="card-file">Interior Page</div>
+    <div class="card-file">New Page</div>
     <div class="card-title">Core Mission & Values</div>
     <div class="card-desc">Hero with video slot, mission statement, 7 MORASHA values with Hebrew taglines.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/mission-values-BUILD.html'">Build Instructions</span>
   </a>
   <a class="card" href="morasha-dates-rates.html">
     <div class="card-file">Interior Page</div>
     <div class="card-title">Dates & Rates</div>
     <div class="card-desc">Session dates grid, tuition table, includes strip, refund policy timeline.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/dates-rates-CHANGES.html'">Change Doc</span>
   </a>
   <a class="card" href="morasha-about.html">
     <div class="card-file">Interior Page</div>
     <div class="card-title">Camp Landing Page</div>
     <div class="card-desc">Camp landing page for Morasha Camps.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/camp-landing-CHANGES.html'">Change Doc</span>
   </a>
   <a class="card" href="morasha-alumni-events.html">
     <div class="card-file">Interior Page</div>
     <div class="card-title">Alumni & Events</div>
     <div class="card-desc">Alumni community and upcoming events page.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/alumni-events-CHANGES.html'">Change Doc</span>
   </a>
   <a class="card" href="morasha-kollel-schedule.html">
-    <div class="card-file">Interior Page</div>
+    <div class="card-file">New Page</div>
     <div class="card-title">Kollel — Daily Schedule & Learning</div>
     <div class="card-desc">Daily schedule and learning program for Morasha Kollel.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/kollel-schedule-BUILD.html'">Build Instructions</span>
   </a>
   <a class="card" href="morasha-kollel-faqs.html">
-    <div class="card-file">Interior Page</div>
+    <div class="card-file">New Page</div>
     <div class="card-title">Kollel — FAQs & Camp Policies</div>
     <div class="card-desc">Frequently asked questions and policies for Morasha Kollel.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/kollel-faqs-BUILD.html'">Build Instructions</span>
   </a>
   <a class="card" href="morasha-rentals.html">
     <div class="card-file">Interior Page</div>
     <div class="card-title">Rentals</div>
     <div class="card-desc">Facility rentals page for Morasha Camps.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/rentals-CHANGES.html'">Change Doc</span>
   </a>
   <a class="card" href="morasha-shalhevet.html">
-    <div class="card-file">Interior Page</div>
+    <div class="card-file">New Page</div>
     <div class="card-title">Shalhevet Newsletter</div>
     <div class="card-desc">Morasha Camps newsletter page.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/shalhevet-BUILD.html'">Build Instructions</span>
   </a>
   <a class="card" href="morasha-donor-wall.html">
-    <div class="card-file">Interior Page</div>
+    <div class="card-file">New Page</div>
     <div class="card-title">Donor Wall</div>
     <div class="card-desc">Full donor wall organized by facility — Beis Kushner, Beren Arena, Mercazia, Dining Hall.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/donor-wall-BUILD.html'">Build Instructions</span>
   </a>
   <a class="card" href="morasha-nav-option-1.html">
     <div class="card-file">Component</div>
@@ -162,16 +183,18 @@
     <div class="card-file">In-Context Preview</div>
     <div class="card-title">Give Back Page — Option B Donor Block</div>
     <div class="card-desc">Full Give Back page mockup with the fading grid donor block in context.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/giveback-CHANGES.html'">Change Doc</span>
   </a>
   <a class="card" href="morasha-homepage-preview.html">
     <div class="card-file">In-Context Preview</div>
     <div class="card-title">Homepage — Option B Hero</div>
     <div class="card-desc">Full staging homepage with cinematic hero swapped in.</div>
+    <span class="card-doc" onclick="event.preventDefault(); window.location='docs/homepage-CHANGES.html'">Change Doc</span>
   </a>
   <a class="card" href="dev-notes.html" style="border-left-color:#e65100;">
     <div class="card-file">Developer</div>
-    <div class="card-title">Developer Change Notes</div>
-    <div class="card-desc">Running list of site-wide changes — font swaps, component updates, CSS fixes.</div>
+    <div class="card-title">Site-Wide Changes</div>
+    <div class="card-desc">Global changes — font swap (Kefa + Nunito Sans), color-coded nav dropdowns, and other cross-page updates.</div>
   </a>
 </div>
 

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BUILD: Core Mission &amp; Values — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.new-page { background: #ede7f6; color: #4527a0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 11px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>BUILD: Core Mission &amp; Values</h1>
+  <p>New page build instructions for the developer. Mockup reference: morasha-mission-values.html</p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status new-page">New Page</span>
+    <div class="change-title">Page Overview</div>
+    <div class="change-desc">
+      Build a new <code>/mission-values/</code> page (or <code>/about/mission-values/</code>). This is a brand-new page that showcases the camp's core mission statement and the 7 MORASHA values, each with a Hebrew tagline and unique accent color.
+    </div>
+    <div class="change-desc">
+      <strong>Sections on the page:</strong>
+    </div>
+    <div class="change-desc">
+      1. Video hero with inspirational quote<br>
+      2. Core Mission statement (two-column layout)<br>
+      3. Values intro / MORASHA letter banner<br>
+      4. Seven full-bleed value rows (alternating image/content sides, each with a unique accent color)
+    </div>
+    <div class="change-desc"><strong>Mockup file:</strong> <a href="../morasha-mission-values.html" style="color:#46764B;">morasha-mission-values.html</a></div>
+  </div>
+
+  <!-- ── WORDPRESS IMPLEMENTATION ── -->
+  <div class="change-item">
+    <div class="change-title">WordPress Implementation</div>
+    <div class="change-desc"><strong>Page Template:</strong> <code>page-mission-values.php</code></div>
+    <div class="change-desc"><strong>Template Name:</strong> <code>Mission &amp; Values</code></div>
+    <div class="change-desc"><strong>Stylesheet:</strong> <code>mission-values.css</code> &mdash; enqueue conditionally via <code>is_page_template('page-mission-values.php')</code></div>
+
+    <div class="change-desc"><strong>ACF Field Group: "Mission &amp; Values"</strong></div>
+<pre><span class="sel">Group:</span> <span class="val">Hero</span>
+  ├── <span class="prop">hero_eyebrow</span>        <span class="comment">// Text — "Core Mission & Values"</span>
+  ├── <span class="prop">hero_quote</span>          <span class="comment">// Textarea — main quote text</span>
+  ├── <span class="prop">hero_quote_highlight</span><span class="comment">// Text — the italic/highlighted portion</span>
+  ├── <span class="prop">hero_attribution</span>    <span class="comment">// Text — "The Morasha philosophy"</span>
+  ├── <span class="prop">hero_video_url</span>      <span class="comment">// File (video) — background video MP4</span>
+  ├── <span class="prop">hero_poster</span>         <span class="comment">// Image — fallback poster image</span>
+  └── <span class="prop">hero_cta_label</span>      <span class="comment">// Text — "Watch our story"</span>
+
+<span class="sel">Group:</span> <span class="val">Mission</span>
+  ├── <span class="prop">mission_eyebrow</span>     <span class="comment">// Text — "The Mission"</span>
+  ├── <span class="prop">mission_heading</span>     <span class="comment">// Text — "Education is the cornerstone"</span>
+  └── <span class="prop">mission_body</span>        <span class="comment">// WYSIWYG — full mission statement</span>
+
+<span class="sel">Group:</span> <span class="val">Values Intro</span>
+  ├── <span class="prop">values_heading</span>      <span class="comment">// Text — "The 7 values that spell Morasha"</span>
+  └── <span class="prop">values_subtext</span>      <span class="comment">// Textarea</span>
+
+<span class="sel">Repeater:</span> <span class="val">values</span>
+  ├── <span class="prop">letter</span>              <span class="comment">// Text — single letter (M, O, R, etc.)</span>
+  ├── <span class="prop">value_name</span>          <span class="comment">// Text — "Mutual Respect"</span>
+  ├── <span class="prop">hebrew_tagline</span>      <span class="comment">// Text — Hebrew text</span>
+  ├── <span class="prop">description</span>         <span class="comment">// WYSIWYG — value description</span>
+  ├── <span class="prop">image</span>               <span class="comment">// Image — full-bleed side image</span>
+  └── <span class="prop">accent_color</span>        <span class="comment">// Color picker — unique per value</span></pre>
+
+    <div class="note">
+      <strong>Accent colors from the mockup:</strong><br>
+      M (Mutual Respect): <code>#46764B</code> (green)<br>
+      O (Observe &amp; Study): <code>#2E5EA8</code> (blue)<br>
+      R (Responsibility): <code>#7A4CA0</code> (purple)<br>
+      A (Appreciation): <code>#C15827</code> (burnt orange)<br>
+      S (Skill Building): <code>#2E8B8B</code> (teal)<br>
+      H (Heart &amp; Soul): <code>#A02134</code> (red)<br>
+      A (Achdut): <code>#D4A017</code> (gold)
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: HERO ── -->
+  <div class="change-item">
+    <div class="change-title">Section 1: Video Hero</div>
+    <div class="change-desc">
+      Full-width hero with a background <code>&lt;video&gt;</code> element, a dark gradient overlay, and a quote with attribution. Includes a "Watch our story" play button CTA.
+    </div>
+    <div class="change-desc"><strong>HTML structure:</strong></div>
+<pre><span class="tag">&lt;section</span> class="<span class="sel">hero</span>"<span class="tag">&gt;</span>
+  <span class="tag">&lt;video</span> class="<span class="sel">hero-video</span>" autoplay muted loop playsinline poster="..."<span class="tag">&gt;</span>
+    <span class="tag">&lt;source</span> src="..." type="video/mp4"<span class="tag">&gt;</span>
+  <span class="tag">&lt;/video&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">hero-inner</span>"<span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">eyebrow</span>"<span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;h1</span> class="<span class="sel">hero-quote</span>"<span class="tag">&gt;</span>
+      ... <span class="tag">&lt;span</span> class="<span class="sel">mark</span>"<span class="tag">&gt;</span>highlighted text<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">hero-attrib</span>"<span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;a</span> class="<span class="sel">hero-play</span>" href="#mission"<span class="tag">&gt;</span>...<span class="tag">&lt;/a&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.hero</span> {
+  <span class="prop">padding</span>: <span class="val">128px 0 72px</span>;
+  <span class="prop">background</span>: <span class="val">#142B15</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+}
+<span class="sel">.hero-video</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">width</span>: <span class="val">100%</span>;
+  <span class="prop">height</span>: <span class="val">100%</span>;
+  <span class="prop">object-fit</span>: <span class="val">cover</span>;
+  <span class="prop">z-index</span>: <span class="val">0</span>;
+}
+<span class="sel">.hero::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>:
+    <span class="val">linear-gradient(180deg, rgba(20,43,21,0.55) 0%, rgba(20,43,21,0.75) 60%, rgba(20,43,21,0.92) 100%)</span>,
+    <span class="val">radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.25) 0%, transparent 55%)</span>,
+    <span class="val">radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.18) 0%, transparent 45%)</span>;
+  <span class="prop">z-index</span>: <span class="val">1</span>;
+}
+<span class="sel">.hero-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">z-index</span>: <span class="val">2</span>;
+}
+<span class="sel">.hero-quote</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(28px, 3.2vw, 46px)</span>;
+  <span class="prop">line-height</span>: <span class="val">1.1</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.02em</span>;
+  <span class="prop">max-width</span>: <span class="val">32ch</span>;
+}
+<span class="sel">.hero-quote .mark</span> {
+  <span class="prop">color</span>: <span class="val">#9BBA91</span>;
+  <span class="prop">font-style</span>: <span class="val">italic</span>;
+}
+<span class="sel">.hero-attrib</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.55)</span>;
+  <span class="prop">padding-left</span>: <span class="val">20px</span>;
+  <span class="prop">border-left</span>: <span class="val">2px solid #9BBA91</span>;
+}
+<span class="sel">.hero-play</span> {
+  <span class="prop">margin-top</span>: <span class="val">28px</span>;
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">14px</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+}
+<span class="sel">.hero-play .play-icon</span> {
+  <span class="prop">width</span>: <span class="val">44px</span>; <span class="prop">height</span>: <span class="val">44px</span>;
+  <span class="prop">border-radius</span>: <span class="val">50%</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.12)</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.4)</span>;
+  <span class="prop">backdrop-filter</span>: <span class="val">blur(6px)</span>;
+}</pre>
+  </div>
+
+  <!-- ── SECTION 2: CORE MISSION ── -->
+  <div class="change-item">
+    <div class="change-title">Section 2: Core Mission Statement</div>
+    <div class="change-desc">
+      Two-column layout: left side has the eyebrow + heading, right side has the mission paragraph in serif font. Uses CSS Grid.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.mission</span> {
+  <span class="prop">padding</span>: <span class="val">128px 0</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.mission-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">280px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">80px</span>;
+  <span class="prop">align-items</span>: <span class="val">start</span>;
+}
+<span class="sel">.mission-label .eyebrow</span> { <span class="prop">color</span>: <span class="val">#46764B</span>; }
+<span class="sel">.mission-label h2</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(40px, 4vw, 56px)</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+<span class="sel">.mission-body p</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">22px</span>;
+  <span class="prop">line-height</span>: <span class="val">1.5</span>;
+  <span class="prop">font-weight</span>: <span class="val">500</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+
+<span class="comment">/* Responsive: stacks at 1024px */</span>
+<span class="sel">@media (max-width: 1024px)</span> {
+  <span class="sel">.mission-inner</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; <span class="prop">gap</span>: <span class="val">40px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── SECTION 3: VALUES INTRO ── -->
+  <div class="change-item">
+    <div class="change-title">Section 3: Values Intro &amp; MORASHA Letter Banner</div>
+    <div class="change-desc">
+      Centered section on <code>#DAE4D0</code> (lightest green) background. Below the heading, the seven letters M-O-R-A-S-H-A are displayed as large serif characters with small keyword labels beneath each letter. Uses <code>data-word</code> attribute for the keyword via <code>::after</code>.
+    </div>
+    <div class="change-desc"><strong>HTML pattern:</strong></div>
+<pre><span class="tag">&lt;div</span> class="<span class="sel">morasha-word</span>"<span class="tag">&gt;</span>
+  <span class="tag">&lt;span</span> data-word="Mutual Respect"<span class="tag">&gt;</span>M<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;span</span> data-word="Observe &amp; Study"<span class="tag">&gt;</span>O<span class="tag">&lt;/span&gt;</span>
+  <span class="comment">&lt;!-- ... etc --&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.values-intro</span> {
+  <span class="prop">padding</span>: <span class="val">96px 0 64px</span>;
+  <span class="prop">background</span>: <span class="val">#DAE4D0</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+<span class="sel">.morasha-word</span> {
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">gap</span>: <span class="val">8px</span>;
+  <span class="prop">margin-top</span>: <span class="val">48px</span>;
+}
+<span class="sel">.morasha-word span</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(48px, 8vw, 128px)</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+<span class="sel">.morasha-word span::after</span> {
+  <span class="prop">content</span>: <span class="val">attr(data-word)</span>;
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">11px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+  <span class="prop">margin-top</span>: <span class="val">12px</span>;
+}</pre>
+    <div class="note">
+      <strong>Note:</strong> This banner section can be hardcoded since the letters and keywords never change. No ACF needed for this portion.
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: VALUE ROWS ── -->
+  <div class="change-item">
+    <div class="change-title">Section 4: The 7 Value Rows</div>
+    <div class="change-desc">
+      Seven full-bleed, two-column rows. Each row is a 50/50 grid with image on one side and content on the other. <strong>Even-numbered rows</strong> flip the order (image on right) using <code>direction: rtl</code> on the parent, then resetting <code>direction: ltr</code> on children.
+    </div>
+    <div class="change-desc">
+      Each value has a unique <code>--accent</code> CSS custom property set inline. This accent color controls the giant letter, the Hebrew tagline, and the image overlay.
+    </div>
+    <div class="change-desc"><strong>HTML pattern for each value row:</strong></div>
+<pre><span class="tag">&lt;div</span> class="<span class="sel">value</span>" data-i="1" style="--accent:#46764B"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">value-image</span>" style="background-image:url('...')"<span class="tag">&gt;&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">value-content</span>"<span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">value-letter</span>"<span class="tag">&gt;</span>M<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">value-title</span>"<span class="tag">&gt;</span>
+      <span class="tag">&lt;h3&gt;</span>Mutual Respect<span class="tag">&lt;/h3&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="sel">value-hebrew</span>"<span class="tag">&gt;</span>...Hebrew...<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Description...<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.value</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr</span>;
+  <span class="prop">min-height</span>: <span class="val">640px</span>;
+  <span class="prop">--accent</span>: <span class="val">var(--green)</span>;
+}
+<span class="comment">/* Flip even rows */</span>
+<span class="sel">.value[data-i="2"], .value[data-i="4"], .value[data-i="6"]</span> {
+  <span class="prop">direction</span>: <span class="val">rtl</span>;
+}
+<span class="sel">.value[data-i="2"] > *, .value[data-i="4"] > *, .value[data-i="6"] > *</span> {
+  <span class="prop">direction</span>: <span class="val">ltr</span>;
+}
+<span class="sel">.value-image</span> {
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">background-position</span>: <span class="val">center</span>;
+  <span class="prop">min-height</span>: <span class="val">480px</span>;
+}
+<span class="sel">.value-image::after</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>: <span class="val">var(--accent)</span>;
+  <span class="prop">mix-blend-mode</span>: <span class="val">multiply</span>;
+  <span class="prop">opacity</span>: <span class="val">0.35</span>;
+  <span class="prop">transition</span>: <span class="val">opacity .5s ease</span>;
+}
+<span class="sel">.value:hover .value-image::after</span> { <span class="prop">opacity</span>: <span class="val">0.15</span>; }
+<span class="sel">.value-content</span> {
+  <span class="prop">padding</span>: <span class="val">96px 80px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+}
+<span class="sel">.value-letter</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(120px, 14vw, 220px)</span>;
+  <span class="prop">line-height</span>: <span class="val">0.85</span>;
+  <span class="prop">color</span>: <span class="val">var(--accent)</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.04em</span>;
+}
+<span class="sel">.value-hebrew</span> {
+  <span class="prop">font-family</span>: <span class="val">'Frank Ruhl Libre', Georgia, serif</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(22px, 2vw, 30px)</span>;
+  <span class="prop">color</span>: <span class="val">var(--accent)</span>;
+  <span class="prop">direction</span>: <span class="val">rtl</span>;
+}
+<span class="sel">.value-content p</span> {
+  <span class="prop">font-size</span>: <span class="val">18px</span>;
+  <span class="prop">line-height</span>: <span class="val">1.65</span>;
+  <span class="prop">max-width</span>: <span class="val">48ch</span>;
+}
+
+<span class="comment">/* Responsive */</span>
+<span class="sel">@media (max-width: 1024px)</span> {
+  <span class="sel">.value</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; <span class="prop">min-height</span>: <span class="val">0</span>; }
+  <span class="sel">.value[data-i="2"], .value[data-i="4"], .value[data-i="6"]</span> { <span class="prop">direction</span>: <span class="val">ltr</span>; }
+  <span class="sel">.value-content</span> { <span class="prop">padding</span>: <span class="val">64px 48px</span>; }
+}</pre>
+
+    <div class="note">
+      <strong>Hebrew font:</strong> The mockup loads <code>Frank Ruhl Libre</code> from Google Fonts for the Hebrew taglines. Add this to the head: <code>&lt;link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&amp;display=swap" rel="stylesheet"&gt;</code>
+    </div>
+
+    <div class="note">
+      <strong>Image overlay positioning:</strong> The <code>.value-image</code> needs <code>position: relative</code> for the <code>::after</code> overlay to work. This is critical.
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Hero video autoplays muted on page load with poster fallback</li>
+      <li>Hero gradient overlay renders on top of video</li>
+      <li>Mission section is two-column on desktop, single-column on tablet/mobile</li>
+      <li>MORASHA letter banner is centered and each letter shows its keyword below</li>
+      <li>All 7 value rows display with correct accent colors</li>
+      <li>Even-numbered rows (O, A-Appreciation, H) have image on the right side</li>
+      <li>Odd-numbered rows (M, R, S, A-Achdut) have image on the left side</li>
+      <li>Hebrew taglines render right-to-left correctly</li>
+      <li>Image color overlay uses mix-blend-mode: multiply and fades on hover</li>
+      <li>Giant letters use the correct accent color per value</li>
+      <li>At 1024px, value rows stack to single column (image on top, content below)</li>
+      <li>At 640px, padding reduces and MORASHA letters shrink gracefully</li>
+      <li>All content is editable via ACF fields in WordPress admin</li>
+      <li>Page uses site-wide nav and footer (get_header / get_footer)</li>
+      <li>Frank Ruhl Libre font loads for Hebrew text</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

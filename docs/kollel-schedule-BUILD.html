@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BUILD: Kollel Daily Schedule — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: #3d1808;
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c79685; margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #974426; margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: #3d1808;
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.new-page { background: #ede7f6; color: #4527a0; }
+
+  .note {
+    background: #faf6f4;
+    border-left: 3px solid #974426;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 11px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>BUILD: Kollel Daily Schedule</h1>
+  <p>New page build instructions. Mockup: morasha-kollel-schedule.html</p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status new-page">New Page</span>
+    <div class="change-title">Page Overview</div>
+    <div class="change-desc">
+      Build a new <code>/kollel/schedule/</code> page for the Morasha Kollel daily schedule. This page uses the <strong>Kollel terracotta color palette</strong> (not the standard green). It displays two schedule tracks side-by-side: High School Kollel and 12th Grade Kollel.
+    </div>
+    <div class="change-desc">
+      <strong>Sections:</strong>
+    </div>
+    <div class="change-desc">
+      1. Hero with terracotta radial gradients<br>
+      2. Two-column schedule grid with time/activity rows
+    </div>
+    <div class="change-desc"><strong>Mockup:</strong> <a href="../morasha-kollel-schedule.html" style="color:#974426;">morasha-kollel-schedule.html</a></div>
+
+    <div class="note">
+      <strong>Kollel Color Palette (overrides the site-wide green):</strong><br>
+      <code>--green: #974426</code> (terracotta primary)<br>
+      <code>--dark-green: #5e2511</code> (terracotta dark)<br>
+      <code>--darkest-green: #3d1808</code> (deep brown, hero/headings)<br>
+      <code>--light-green: #c79685</code> (terracotta light)<br>
+      <code>--lightest-green: #e9cec5</code> (terracotta accent bg)
+    </div>
+  </div>
+
+  <!-- ── WORDPRESS IMPLEMENTATION ── -->
+  <div class="change-item">
+    <div class="change-title">WordPress Implementation</div>
+    <div class="change-desc"><strong>Page Template:</strong> <code>page-kollel-schedule.php</code></div>
+    <div class="change-desc"><strong>Template Name:</strong> <code>Kollel Schedule</code></div>
+    <div class="change-desc"><strong>Stylesheet:</strong> <code>kollel-schedule.css</code> &mdash; enqueue conditionally</div>
+
+    <div class="change-desc"><strong>ACF Field Group: "Kollel Schedule"</strong></div>
+<pre><span class="sel">Repeater:</span> <span class="val">tracks</span>
+  ├── <span class="prop">track_eyebrow</span>      <span class="comment">// Text — "Track 1"</span>
+  ├── <span class="prop">track_name</span>         <span class="comment">// Text — "High School Kollel"</span>
+  └── <span class="sel">Repeater:</span> <span class="val">schedule_rows</span>
+        ├── <span class="prop">time</span>           <span class="comment">// Text — "7:45 AM"</span>
+        ├── <span class="prop">activity</span>       <span class="comment">// Text — "Shacharis"</span>
+        └── <span class="prop">activity_note</span>  <span class="comment">// Textarea — optional detail text</span></pre>
+
+    <div class="change-desc"><strong>PHP loop structure:</strong></div>
+<pre><span class="tag">&lt;?php</span> <span class="comment">/* Template Name: Kollel Schedule */</span>
+get_header();
+<span class="tag">?&gt;</span>
+<span class="sel">&lt;section class="hero"&gt;</span>...<span class="sel">&lt;/section&gt;</span>
+<span class="sel">&lt;section class="schedules"&gt;</span>
+  <span class="sel">&lt;div class="schedules-inner"&gt;</span>
+    <span class="sel">&lt;div class="grid"&gt;</span>
+<span class="tag">&lt;?php</span>
+<span class="prop">if</span>( have_rows(<span class="val">'tracks'</span>) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'tracks'</span>) ): the_row(); <span class="tag">?&gt;</span>
+    <span class="sel">&lt;div class="track"&gt;</span>
+      <span class="sel">&lt;div class="track-head"&gt;</span>
+        <span class="sel">&lt;div class="eyebrow"&gt;</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'track_eyebrow'</span>); <span class="tag">?&gt;</span><span class="sel">&lt;/div&gt;</span>
+        <span class="sel">&lt;h3&gt;</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'track_name'</span>); <span class="tag">?&gt;</span><span class="sel">&lt;/h3&gt;</span>
+      <span class="sel">&lt;/div&gt;</span>
+      <span class="tag">&lt;?php</span> <span class="prop">if</span>( have_rows(<span class="val">'schedule_rows'</span>) ):
+        <span class="prop">while</span>( have_rows(<span class="val">'schedule_rows'</span>) ): the_row(); <span class="tag">?&gt;</span>
+        <span class="sel">&lt;div class="row"&gt;</span>
+          <span class="sel">&lt;div class="time"&gt;</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'time'</span>); <span class="tag">?&gt;</span><span class="sel">&lt;/div&gt;</span>
+          <span class="sel">&lt;div class="activity"&gt;</span>
+            <span class="sel">&lt;div class="activity-label"&gt;</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'activity'</span>); <span class="tag">?&gt;</span><span class="sel">&lt;/div&gt;</span>
+            <span class="tag">&lt;?php</span> <span class="prop">if</span>( get_sub_field(<span class="val">'activity_note'</span>) ): <span class="tag">?&gt;</span>
+              <span class="sel">&lt;div class="activity-note"&gt;</span><span class="tag">&lt;?php</span> the_sub_field(<span class="val">'activity_note'</span>); <span class="tag">?&gt;</span><span class="sel">&lt;/div&gt;</span>
+            <span class="tag">&lt;?php</span> <span class="prop">endif</span>; <span class="tag">?&gt;</span>
+          <span class="sel">&lt;/div&gt;</span>
+        <span class="sel">&lt;/div&gt;</span>
+      <span class="tag">&lt;?php</span> <span class="prop">endwhile</span>; <span class="prop">endif</span>; <span class="tag">?&gt;</span>
+    <span class="sel">&lt;/div&gt;</span>
+  <span class="tag">&lt;?php</span> <span class="prop">endwhile</span>; <span class="prop">endif</span>; <span class="tag">?&gt;</span>
+    <span class="sel">&lt;/div&gt;</span>
+  <span class="sel">&lt;/div&gt;</span>
+<span class="sel">&lt;/section&gt;</span>
+<span class="tag">&lt;?php</span> get_footer(); <span class="tag">?&gt;</span></pre>
+  </div>
+
+  <!-- ── SECTION 1: HERO ── -->
+  <div class="change-item">
+    <div class="change-title">Section 1: Hero</div>
+    <div class="change-desc">
+      Simple dark hero with the Kollel deep brown background (<code>#3d1808</code>) and terracotta radial gradient accents. No video, no image. Just eyebrow + title.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.hero</span> {
+  <span class="prop">padding</span>: <span class="val">128px 0 72px</span>;
+  <span class="prop">background</span>: <span class="val">#3d1808</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.hero::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>:
+    <span class="val">radial-gradient(ellipse at 15% 20%, rgba(151,68,38,0.45) 0%, transparent 55%)</span>,
+    <span class="val">radial-gradient(ellipse at 90% 80%, rgba(199,150,133,0.25) 0%, transparent 45%)</span>;
+}
+<span class="sel">.hero .eyebrow</span> { <span class="prop">color</span>: <span class="val">#c79685</span>; }
+<span class="sel">.hero h1</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(40px, 5vw, 72px)</span>;
+  <span class="prop">line-height</span>: <span class="val">1.0</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.02em</span>;
+  <span class="prop">max-width</span>: <span class="val">20ch</span>;
+}</pre>
+  </div>
+
+  <!-- ── SECTION 2: SCHEDULE GRID ── -->
+  <div class="change-item">
+    <div class="change-title">Section 2: Two-Column Schedule Grid</div>
+    <div class="change-desc">
+      The schedules section contains a two-column grid. Each column is a "track" with a header (eyebrow + title) and a series of time/activity rows.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.schedules</span> {
+  <span class="prop">padding</span>: <span class="val">96px 0 128px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.schedules-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+}
+<span class="sel">.grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">80px</span>;
+}
+<span class="sel">.track-head</span> {
+  <span class="prop">padding-bottom</span>: <span class="val">20px</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">12px</span>;
+  <span class="prop">border-bottom</span>: <span class="val">2px solid #3d1808</span>;
+}
+<span class="sel">.track-head .eyebrow</span> { <span class="prop">color</span>: <span class="val">#974426</span>; }
+<span class="sel">.track-head h3</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(24px, 2.2vw, 30px)</span>;
+  <span class="prop">color</span>: <span class="val">#3d1808</span>;
+}
+<span class="sel">.row</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">120px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+  <span class="prop">padding</span>: <span class="val">14px 0</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(61,24,8,0.1)</span>;
+  <span class="prop">align-items</span>: <span class="val">baseline</span>;
+}
+<span class="sel">.row:last-child</span> { <span class="prop">border-bottom</span>: <span class="val">none</span>; }
+<span class="sel">.time</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.1em</span>;
+  <span class="prop">color</span>: <span class="val">#974426</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">white-space</span>: <span class="val">nowrap</span>;
+}
+<span class="sel">.activity-label</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">17px</span>;
+  <span class="prop">color</span>: <span class="val">#3d1808</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.005em</span>;
+}
+<span class="sel">.activity-note</span> {
+  <span class="prop">margin-top</span>: <span class="val">6px</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;
+  <span class="prop">color</span>: <span class="val">#828282</span>;
+  <span class="prop">max-width</span>: <span class="val">38ch</span>;
+}
+
+<span class="comment">/* Responsive */</span>
+<span class="sel">@media (max-width: 1024px)</span> {
+  <span class="sel">.grid</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; <span class="prop">gap</span>: <span class="val">72px</span>; }
+}
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.row</span> { <span class="prop">grid-template-columns</span>: <span class="val">100px 1fr</span>; <span class="prop">gap</span>: <span class="val">16px</span>; }
+  <span class="sel">.time</span> { <span class="prop">font-size</span>: <span class="val">12px</span>; }
+  <span class="sel">.activity-label</span> { <span class="prop">font-size</span>: <span class="val">16px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── DATA NOTE ── -->
+  <div class="change-item">
+    <div class="change-title">Content Data</div>
+    <div class="change-desc">
+      <strong>Track 1 &mdash; High School Kollel:</strong> 17 rows (Shacharis 7:45 AM through Cake 11:30 PM)
+    </div>
+    <div class="change-desc">
+      <strong>Track 2 &mdash; 12th Grade Kollel:</strong> 13 rows (Shacharis 7:45 AM through Ma'ariv 10:00 PM)
+    </div>
+    <div class="note">
+      Izzy, the full schedule data is in the mockup HTML. Each row is just a time + activity label + optional note. When entering into ACF, the "Break" rows include a note like "Various sports leagues, activity options such as swimming, horseback riding, archery, etc."
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Page uses the terracotta palette, NOT the standard green</li>
+      <li>Hero uses deep brown (#3d1808) with terracotta radial gradients</li>
+      <li>Two schedule tracks display side-by-side on desktop</li>
+      <li>Track headers have a 2px solid bottom border in #3d1808</li>
+      <li>Time column is fixed 120px, aligned baseline with activity</li>
+      <li>Time text is Roboto Condensed, bold, uppercase, terracotta color</li>
+      <li>Activity labels are serif font, 17px, deep brown</li>
+      <li>Activity notes (where present) appear below the label in grey</li>
+      <li>Row dividers are subtle 1px lines at 10% opacity</li>
+      <li>At 1024px breakpoint, tracks stack vertically</li>
+      <li>At 640px, time column shrinks to 100px and font sizes reduce</li>
+      <li>All schedule data is editable via ACF repeater</li>
+      <li>Page uses site-wide nav and footer</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Homepage Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px; color: #555; line-height: 1.5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc; border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Homepage Changes</h1>
+  <p>Developer handoff for the homepage redesign. Change doc for Izzy.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/" target="_blank">morashastg1.wpenginepowered.com/</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-homepage-preview.html" target="_blank">morasha-homepage-preview.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      April 24, 2026
+    </div>
+  </div>
+
+  <div class="change-desc" style="margin-bottom:32px;">
+    <strong>Summary of changes:</strong> The homepage receives four key updates: (1) the hero section is replaced with a cinematic Option B hero, (2) Kefa/Nunito Sans replaces Roboto globally for 14px+ text, (3) nav dropdown items receive color-coded left borders per camp, and (4) the values slider letter boxes get rounded corners to match the photo cards.
+  </div>
+
+  <!-- ── CHANGE 1: HERO ── -->
+  <div class="change-item" id="hero">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Hero: Replace with Option B Cinematic</div>
+    <div class="change-desc">
+      Replace the current full-height hero slider with a shorter, centered cinematic hero. The new hero is capped at ~580px, uses a desaturated background photo with a dark gradient overlay, centered text, and two CTA buttons.
+    </div>
+
+    <table class="diff">
+      <tr><th>Element</th><th>Current (Staging)</th><th>Change to</th></tr>
+      <tr><td>Layout</td><td>Full-height image slider with left-aligned text</td><td>Centered content, min-height 60vh / max-height 580px</td></tr>
+      <tr><td>Eyebrow</td><td>None</td><td>"Since 1964" in light-green, Roboto Condensed 13px uppercase</td></tr>
+      <tr><td>Heading</td><td>Rotating headlines</td><td>"Built on Values." (white) + "Runs on Fun." (light-green italic) on separate line</td></tr>
+      <tr><td>Background photo</td><td>Full-color slider images</td><td>Single desaturated photo (filter: saturate(0.4)), scaled 1.05x</td></tr>
+      <tr><td>Overlay</td><td>Minimal or none</td><td>3-stop dark gradient: 0.4 &rarr; 0.6 &rarr; 0.85 opacity</td></tr>
+      <tr><td>CTAs</td><td>Single "Apply Now" button</td><td>Two buttons: "Explore Our Camps" (white solid) + "Watch Our Story" (white outline)</td></tr>
+      <tr><td>Scroll indicator</td><td>None</td><td>Animated pill-shaped scroll indicator at bottom center</td></tr>
+    </table>
+
+    <div class="change-desc"><strong>HTML structure:</strong></div>
+<pre><span class="tag">&lt;section</span> class="<span class="sel">hero-b</span>"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">hero-b-bg</span>"<span class="tag">&gt;&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">hero-b-content</span>"<span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">eyebrow</span>"<span class="tag">&gt;</span>Since 1964<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Built on Values. <span class="tag">&lt;span&gt;</span>Runs on Fun.<span class="tag">&lt;/span&gt;&lt;/h1&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">hero-actions</span>"<span class="tag">&gt;</span>
+      <span class="tag">&lt;a</span> href="#" class="<span class="sel">btn btn-light</span>"<span class="tag">&gt;</span>Explore Our Camps<span class="tag">&lt;/a&gt;</span>
+      <span class="tag">&lt;a</span> href="#" class="<span class="sel">btn btn-outline-w</span>"<span class="tag">&gt;</span>Watch Our Story<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">hero-b-scroll</span>"<span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="change-desc"><strong>CSS for the hero container:</strong></div>
+<pre><span class="sel">.hero-b</span> {
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">min-height</span>: <span class="val">60vh</span>;
+  <span class="prop">max-height</span>: <span class="val">580px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">background</span>: <span class="val">var(--darkest-green)</span>;
+}</pre>
+
+    <div class="change-desc"><strong>CSS for the desaturated background:</strong></div>
+<pre><span class="sel">.hero-b-bg</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>: <span class="val">url('...hero-image.png') center/cover</span>;
+  <span class="prop">filter</span>: <span class="val">saturate(0.4)</span>;
+  <span class="prop">transform</span>: <span class="val">scale(1.05)</span>;
+}</pre>
+
+    <div class="change-desc"><strong>CSS for the dark gradient overlay:</strong></div>
+<pre><span class="sel">.hero-b::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>: <span class="val">linear-gradient(180deg,
+    rgba(20,43,21,0.4) 0%,
+    rgba(20,43,21,0.6) 50%,
+    rgba(20,43,21,0.85) 100%
+  )</span>;
+  <span class="prop">z-index</span>: <span class="val">1</span>;
+}</pre>
+
+    <div class="change-desc"><strong>CSS for the heading:</strong></div>
+<pre><span class="sel">.hero-b-content h1</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(48px, 6vw, 88px)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.03em</span>;
+  <span class="prop">line-height</span>: <span class="val">0.94</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">28px</span>;
+}
+<span class="sel">.hero-b-content h1 span</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">color</span>: <span class="val">var(--light-green)</span>;  <span class="comment">/* #9BBA91 */</span>
+  <span class="prop">font-style</span>: <span class="val">italic</span>;
+}</pre>
+
+    <div class="change-desc"><strong>CSS for the two CTA buttons:</strong></div>
+<pre><span class="sel">.hero-b .btn</span> {
+  <span class="prop">padding</span>: <span class="val">14px 28px</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans)</span>;
+  <span class="prop">font-weight</span>: <span class="val">500</span>;
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+  <span class="prop">border-radius</span>: <span class="val">2px</span>;
+  <span class="prop">border</span>: <span class="val">none</span>;
+  <span class="prop">transition</span>: <span class="val">all .25s</span>;
+}
+<span class="sel">.hero-b .btn-light</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+}
+<span class="sel">.hero-b .btn-light:hover</span> {
+  <span class="prop">background</span>: <span class="val">var(--lightest-green)</span>;
+}
+<span class="sel">.hero-b .btn-outline-w</span> {
+  <span class="prop">background</span>: <span class="val">transparent</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.4)</span>;
+}
+<span class="sel">.hero-b .btn-outline-w:hover</span> {
+  <span class="prop">border-color</span>: <span class="val">#fff</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.1)</span>;
+}</pre>
+
+    <div class="change-desc"><strong>CSS for the animated scroll indicator:</strong></div>
+<pre><span class="sel">.hero-b-scroll</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">bottom</span>: <span class="val">32px</span>;
+  <span class="prop">left</span>: <span class="val">50%</span>;
+  <span class="prop">transform</span>: <span class="val">translateX(-50%)</span>;
+  <span class="prop">z-index</span>: <span class="val">2</span>;
+  <span class="prop">width</span>: <span class="val">24px</span>;
+  <span class="prop">height</span>: <span class="val">40px</span>;
+  <span class="prop">border</span>: <span class="val">2px solid rgba(255,255,255,0.35)</span>;
+  <span class="prop">border-radius</span>: <span class="val">12px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">padding-top</span>: <span class="val">8px</span>;
+}
+<span class="sel">.hero-b-scroll::after</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">width</span>: <span class="val">3px</span>;
+  <span class="prop">height</span>: <span class="val">8px</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.6)</span>;
+  <span class="prop">border-radius</span>: <span class="val">2px</span>;
+  <span class="prop">animation</span>: <span class="val">hero-scroll 1.8s ease-in-out infinite</span>;
+}
+<span class="sel">@keyframes hero-scroll</span> {
+  0%, 100% { <span class="prop">transform</span>: <span class="val">translateY(0)</span>; <span class="prop">opacity</span>: <span class="val">1</span>; }
+  50% { <span class="prop">transform</span>: <span class="val">translateY(10px)</span>; <span class="prop">opacity</span>: <span class="val">0.3</span>; }
+}</pre>
+
+    <div class="note">
+      <strong>Implementation note:</strong> The existing hero slider block/shortcode should be fully removed and replaced with a simple static section. No JS needed for the new hero (scroll indicator is CSS-only). The background image URL should be editable via ACF or the page editor.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 2: NAV DROPDOWN BORDERS ── -->
+  <div class="change-item" id="nav-dropdowns">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Nav: Color-Coded Dropdown Borders</div>
+    <div class="change-desc">
+      Each camp in the "Camps" dropdown should receive a colored left border on hover, matching its brand color. This adds visual identity to the nav without changing layout.
+    </div>
+
+    <table class="diff">
+      <tr><th>Camp</th><th>Current</th><th>Change to</th></tr>
+      <tr><td>Camp Morasha</td><td>No border on hover</td><td>Green left border <code>#46764B</code></td></tr>
+      <tr><td>Kehilas Yaakov</td><td>No border on hover</td><td>Navy left border <code>#1C326B</code></td></tr>
+      <tr><td>Morasha Kollel</td><td>No border on hover</td><td>Terracotta left border <code>#974426</code></td></tr>
+      <tr><td>Travel camps (Sulam, Amcha)</td><td>No border on hover</td><td>Blue left border <code>#306DA5</code></td></tr>
+    </table>
+
+    <div class="change-desc"><strong>CSS:</strong> Add these rules targeting the WP menu item IDs. Adjust IDs to match your actual menu items:</div>
+<pre><span class="comment">/* Base: all dropdown links get a transparent left border */</span>
+<span class="sel">.site-nav .sub-menu li a</span> {
+  <span class="prop">border-left</span>: <span class="val">3px solid transparent</span>;
+  <span class="prop">transition</span>: <span class="val">all .2s</span>;
+}
+<span class="sel">.site-nav .sub-menu li a:hover</span> {
+  <span class="prop">background</span>: <span class="val">#f7f9f4</span>;
+  <span class="prop">border-left-color</span>: <span class="val">#46764B</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+}
+
+<span class="comment">/* Camp Morasha (green) */</span>
+<span class="sel">#menu-item-6044 > a:hover</span> {
+  <span class="prop">border-left-color</span>: <span class="val">#46764B !important</span>;
+  <span class="prop">color</span>: <span class="val">#46764B !important</span>;
+}
+
+<span class="comment">/* Kehilas Yaakov (navy) */</span>
+<span class="sel">#menu-item-6045 > a:hover</span> {
+  <span class="prop">border-left-color</span>: <span class="val">#1C326B !important</span>;
+  <span class="prop">color</span>: <span class="val">#1C326B !important</span>;
+  <span class="prop">background</span>: <span class="val">#f4f5fb !important</span>;
+}
+
+<span class="comment">/* Morasha Kollel (terracotta) */</span>
+<span class="sel">#menu-item-6046 > a:hover</span> {
+  <span class="prop">border-left-color</span>: <span class="val">#974426 !important</span>;
+  <span class="prop">color</span>: <span class="val">#974426 !important</span>;
+  <span class="prop">background</span>: <span class="val">#faf5f3 !important</span>;
+}
+
+<span class="comment">/* Travel / Sulam / Amcha (blue) */</span>
+<span class="sel">#menu-item-6047 > a:hover,
+#menu-item-6047 .sub-menu li a:hover</span> {
+  <span class="prop">border-left-color</span>: <span class="val">#306DA5 !important</span>;
+  <span class="prop">color</span>: <span class="val">#306DA5 !important</span>;
+  <span class="prop">background</span>: <span class="val">#f4f7fb !important</span>;
+}</pre>
+
+    <div class="note">
+      <strong>Note:</strong> The menu item IDs (6044, 6045, etc.) come from the current staging site. Verify they match the production menu. If they differ, inspect the rendered HTML and update accordingly. The tinted background colors are subtle pastels chosen to complement each camp's brand.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 3: VALUES SLIDER ROUNDED CORNERS ── -->
+  <div class="change-item" id="values-radius">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Values Slider: Rounded Corners on Letter Boxes</div>
+    <div class="change-desc">
+      The Core Values slider cards currently have sharp corners on both the photo and the colored letter boxes. Add 12px border-radius to match the softer look used elsewhere in the redesign.
+    </div>
+
+    <table class="diff">
+      <tr><th>Element</th><th>Current</th><th>Change to</th></tr>
+      <tr><td>Card image container</td><td>border-radius: 0</td><td>border-radius: 12px</td></tr>
+      <tr><td>Card label bar</td><td>border-radius: 0</td><td>border-radius: 0 0 12px 12px</td></tr>
+      <tr><td>Letter circle/box</td><td>border-radius: 50% (circle)</td><td>border-radius: 10px (rounded square)</td></tr>
+    </table>
+
+<pre><span class="comment">/* Values card image — round all corners */</span>
+<span class="sel">.fp__values__card-image,
+.fp__values__card-image img</span> {
+  <span class="prop">border-radius</span>: <span class="val">12px</span>;
+}
+
+<span class="comment">/* Label bar — round bottom corners only */</span>
+<span class="sel">.fp__values__card-label</span> {
+  <span class="prop">border-radius</span>: <span class="val">0 0 12px 12px</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+
+<span class="comment">/* Letter box — rounded square instead of circle */</span>
+<span class="sel">.fp__values__card-letter</span> {
+  <span class="prop">border-radius</span>: <span class="val">10px !important</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Scope:</strong> Homepage values slider only. Classes are <code>.fp__values__card-*</code>.</div>
+  </div>
+
+  <!-- ── CHANGE 4: FONT SWAP (site-wide context) ── -->
+  <div class="change-item" id="font-swap">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Global Font Swap (applies here)</div>
+    <div class="change-desc">
+      Kefa (Apple system) with Nunito Sans fallback replaces Roboto/Montserrat/Nohemi for all text 14px and above. This is a site-wide change documented in <a href="../dev-notes.html#font-swap" style="color:var(--green);">dev-notes.html</a> but visually most impactful on the homepage headings, camp cards, and footer.
+    </div>
+
+<pre><span class="sel">:root</span> {
+  <span class="prop">--font-primary</span>: <span class="val">Kefa, 'Nunito Sans', sans-serif</span>;
+}
+<span class="comment">/* Apply to all body text, nav, buttons, etc. at 14px+ */</span>
+<span class="comment">/* Keep Roboto for sub-menus, form labels, small/figcaption */</span></pre>
+
+    <div class="change-desc"><strong>Scope:</strong> Global. See <a href="../dev-notes.html#font-swap" style="color:var(--green);">dev-notes.html Change #1</a> for full implementation steps.</div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item" id="qa">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Hero max-height is ~580px on desktop; does not exceed viewport height</li>
+      <li>Hero background photo is visibly desaturated (not full color)</li>
+      <li>Dark gradient overlay is present (text must be readable over any photo)</li>
+      <li>"Since 1964" eyebrow displays in Roboto Condensed, light-green, uppercase</li>
+      <li>"Built on Values." is white; "Runs on Fun." is light-green italic on its own line</li>
+      <li>Both CTA buttons render: white solid + white outline</li>
+      <li>Scroll indicator animates at bottom center of hero</li>
+      <li>Hero is responsive: padding collapses to 24px on mobile, text stays readable</li>
+      <li>Nav dropdown items show colored left borders on hover (green, navy, terracotta, blue)</li>
+      <li>Values slider cards have 12px rounded corners on images</li>
+      <li>Values letter boxes show as rounded squares (10px), not circles</li>
+      <li>Kefa font renders on macOS/iOS; Nunito Sans renders on Windows/Android</li>
+      <li>No font-size regression: text under 14px should still use Roboto</li>
+      <li>Footer, camp cards, legacy quote section all pick up the Kefa/Nunito font</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alumni &amp; Events Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px; color: #555; line-height: 1.5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc; border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Alumni &amp; Events Changes</h1>
+  <p>Developer handoff for the Alumni & Events / Reunions page redesign.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/current-campers/reunions-events/" target="_blank">morashastg1.../reunions-events/</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-alumni-events.html" target="_blank">morasha-alumni-events.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      April 24, 2026
+    </div>
+  </div>
+
+  <div class="change-desc" style="margin-bottom:32px;">
+    <strong>Summary of changes:</strong> The current Reunions & Events page is rebuilt as a dedicated "Alumni & Events" page. The redesign introduces: (1) a dark-green hero with radial gradient accents, (2) an Upcoming Events section with large two-column cards, (3) a Past Events section with a three-column grid, (4) an Archives section on lightest-green background, and (5) a single-tier nav (this is not a camp-specific page). The URL should change from <code>/current-campers/reunions-events/</code> to something like <code>/alumni-events/</code>.
+  </div>
+
+  <!-- ── CHANGE 1: HERO ── -->
+  <div class="change-item" id="hero">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Hero: Dark Green with Radial Gradients</div>
+    <div class="change-desc">
+      Replace the current page header with a full-width dark-green hero featuring radial gradient accents, an eyebrow, large serif heading, and descriptive subtitle.
+    </div>
+
+    <table class="diff">
+      <tr><th>Element</th><th>Current</th><th>Change to</th></tr>
+      <tr><td>Background</td><td>Image or plain</td><td>Solid <code>--darkest-green</code> with two radial gradient accents</td></tr>
+      <tr><td>Eyebrow</td><td>None</td><td>"Alumni & Events" in light-green, Roboto Condensed uppercase</td></tr>
+      <tr><td>Heading</td><td>Simple text</td><td>"Camp stays with you" — serif, clamp(40px, 5vw, 72px)</td></tr>
+      <tr><td>Subtitle</td><td>None or minimal</td><td>Paragraph in Kefa/serif, rgba white, max-width 54ch</td></tr>
+      <tr><td>Padding</td><td>Varies</td><td>128px top (for nav clearance), 72px bottom</td></tr>
+    </table>
+
+<pre><span class="sel">.hero</span> {
+  <span class="prop">padding</span>: <span class="val">128px 0 72px</span>;
+  <span class="prop">background</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.hero::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>; <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>:
+    <span class="val">radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.22) 0%, transparent 45%)</span>;
+  <span class="prop">pointer-events</span>: <span class="val">none</span>;
+}
+<span class="sel">.hero h1</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(40px, 5vw, 72px)</span>;
+  <span class="prop">max-width</span>: <span class="val">20ch</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+}
+<span class="sel">.hero-sub</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(18px, 1.6vw, 22px)</span>;
+  <span class="prop">max-width</span>: <span class="val">54ch</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.82)</span>;
+  <span class="prop">line-height</span>: <span class="val">1.5</span>;
+}</pre>
+  </div>
+
+  <!-- ── CHANGE 2: UPCOMING EVENTS ── -->
+  <div class="change-item" id="upcoming">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Upcoming Events: Two-Column Card Grid</div>
+    <div class="change-desc">
+      Upcoming events display as large cards in a 2-column grid. Each card has a 16:9 image at top, then a body with a date column (month/day/year stacked) separated by a thin border from the event title and description.
+    </div>
+
+<pre><span class="sel">.upcoming-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">32px</span>;
+}
+<span class="sel">.upcoming-card</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(20,43,21,0.1)</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">transition</span>: <span class="val">all .3s ease</span>;
+}
+<span class="sel">.upcoming-card:hover</span> {
+  <span class="prop">border-color</span>: <span class="val">var(--green)</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(-4px)</span>;
+}
+<span class="sel">.upcoming-body</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">100px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+  <span class="prop">padding</span>: <span class="val">28px 28px 32px</span>;
+}
+<span class="sel">.upcoming-date</span> {
+  <span class="prop">border-right</span>: <span class="val">1px solid rgba(20,43,21,0.1)</span>;
+  <span class="prop">padding-right</span>: <span class="val">20px</span>;
+}
+<span class="sel">.upcoming-month</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">color</span>: <span class="val">var(--green)</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+}
+<span class="sel">.upcoming-day</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">48px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">line-height</span>: <span class="val">0.9</span>;
+}
+<span class="sel">.upcoming-title</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(22px, 2vw, 28px)</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+}</pre>
+
+    <div class="note">
+      <strong>WordPress implementation:</strong> These should be pulled from a custom post type (e.g., <code>morasha_event</code>) or from an events plugin. Filter by upcoming (date >= today). If using ACF, fields needed: event_date (date picker), event_title, event_description, event_image. The date picker value can be split into month/day/year for the stacked display.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 3: PAST EVENTS ── -->
+  <div class="change-item" id="past">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Past Events: Three-Column Grid</div>
+    <div class="change-desc">
+      Past events are smaller cards in a 3-column grid (2-column on tablet, 1-column on mobile). Each has a 4:3 image, a date line with month/day/year in condensed uppercase, title, and short description.
+    </div>
+
+<pre><span class="sel">.past-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+}
+<span class="sel">.past-img</span> {
+  <span class="prop">aspect-ratio</span>: <span class="val">4 / 3</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">16px</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+}
+<span class="comment">/* Dark overlay that clears on hover */</span>
+<span class="sel">.past-img::after</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>; <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">opacity</span>: <span class="val">0.12</span>;
+  <span class="prop">transition</span>: <span class="val">opacity .3s</span>;
+}
+<span class="sel">.past-card:hover .past-img::after</span> { <span class="prop">opacity</span>: <span class="val">0</span>; }
+<span class="sel">.past-date-line</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.18em</span>;
+  <span class="prop">color</span>: <span class="val">var(--green)</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+}
+<span class="sel">.past-title</span> {
+  <span class="prop">font-size</span>: <span class="val">20px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+}
+<span class="sel">.past-desc</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+  <span class="prop">color</span>: <span class="val">var(--text-grey)</span>;  <span class="comment">/* #828282 */</span>
+}</pre>
+
+    <div class="note">
+      <strong>Data source:</strong> Same event CPT or plugin, filtered by past events (date < today). Consider limiting to the most recent 6 past events with a "View All" link if there are more.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 4: ARCHIVES ── -->
+  <div class="change-item" id="archives">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Archives Section</div>
+    <div class="change-desc">
+      A new lightest-green section at the bottom displays archive tiles (photo galleries, Shiria albums, etc.) in a 3-column grid. Each tile has a 4:3 image, dark overlay on default that clears on hover, and a label row with the name and an arrow icon.
+    </div>
+
+<pre><span class="sel">.archives</span> {
+  <span class="prop">padding</span>: <span class="val">96px 0 128px</span>;
+  <span class="prop">background</span>: <span class="val">var(--lightest-green)</span>;  <span class="comment">/* #DAE4D0 */</span>
+}
+<span class="sel">.archive-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">20px</span>;
+}
+<span class="sel">.archive-tile</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">transition</span>: <span class="val">transform .3s</span>;
+}
+<span class="sel">.archive-tile:hover</span> { <span class="prop">transform</span>: <span class="val">translateY(-4px)</span>; }
+<span class="sel">.archive-label</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+  <span class="prop">padding</span>: <span class="val">20px 24px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+}
+<span class="sel">.archive-name</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">18px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.01em</span>;
+}</pre>
+
+    <div class="note">
+      <strong>Content:</strong> The mockup shows 6 archive tiles including "Alumni Photo Gallery" and "Shiria Album Archive" as examples. These can be managed via an ACF repeater on the page (fields: archive_name, archive_image, archive_link) or as a custom taxonomy.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 5: NAV ── -->
+  <div class="change-item" id="nav">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">5. Navigation: Single-Tier (Site-Wide)</div>
+    <div class="change-desc">
+      This page uses the standard single-tier nav (not the two-tier camp nav). It has the logo on the left and site-wide links on the right including a "Donate" CTA button. This matches the existing staging nav structure but with the updated Kefa/Nunito Sans font applied.
+    </div>
+
+<pre><span class="sel">header</span> {
+  <span class="prop">position</span>: <span class="val">fixed</span>;
+  <span class="prop">top</span>: <span class="val">0</span>; <span class="prop">left</span>: <span class="val">0</span>; <span class="prop">right</span>: <span class="val">0</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.96)</span>;
+  <span class="prop">backdrop-filter</span>: <span class="val">blur(10px)</span>;
+  <span class="prop">z-index</span>: <span class="val">100</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(0,0,0,0.06)</span>;
+}
+<span class="sel">.nav</span> {
+  <span class="prop">max-width</span>: <span class="val">1440px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">20px 48px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+}</pre>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item" id="qa">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Hero: dark green background with visible radial gradient accents (subtle green glows)</li>
+      <li>Hero eyebrow reads "Alumni & Events" in light-green uppercase</li>
+      <li>Hero heading "Camp stays with you" renders in serif at appropriate clamp size</li>
+      <li>Subtitle text is semi-transparent white, max 54 characters wide</li>
+      <li>Upcoming Events: 2-column grid on desktop, 1-column on tablet</li>
+      <li>Upcoming card image is 16:9 ratio with dark overlay that fades on hover</li>
+      <li>Upcoming card body shows date column (month/day/year stacked) with right border separator</li>
+      <li>Card hover: border turns green, lifts 4px</li>
+      <li>Past Events: 3-column grid on desktop, 2 on tablet, 1 on mobile</li>
+      <li>Past event date line shows in Roboto Condensed uppercase with dot separator</li>
+      <li>Archives section: lightest-green background (#DAE4D0)</li>
+      <li>Archive tiles: white cards with 4:3 images, overlay clears on hover</li>
+      <li>Archive tile label shows name + arrow icon, lifts on hover</li>
+      <li>Archives grid: 3 columns desktop, 2 tablet, 1 mobile</li>
+      <li>Nav is single-tier (no camp sub-nav on this page)</li>
+      <li>Footer matches standardized site-wide layout</li>
+      <li>All event data is dynamic (CPT or ACF-driven, not hardcoded)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

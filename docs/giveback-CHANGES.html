@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Give Back Page — Developer Change Doc</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .qa-list {
+    list-style: none;
+    margin: 12px 0;
+    padding: 0;
+  }
+  .qa-list li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    padding: 6px 0 6px 28px;
+    position: relative;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .qa-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 2px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Give Back Page</h1>
+  <p>Developer change doc &mdash; all changes scoped to <code style="background:rgba(255,255,255,0.12); padding:2px 6px; border-radius:2px;">/give-back/</code></p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">Overview</div>
+    <div class="change-desc">
+      Three changes to the <strong>Give Back</strong> page on staging:<br>
+      <a href="https://morashastg1.wpenginepowered.com/give-back/" style="color:#46764B;">https://morashastg1.wpenginepowered.com/give-back/</a>
+    </div>
+    <div class="change-desc">
+      <strong>Preview mockup:</strong>
+      <a href="../morasha-giveback-preview.html" style="color:#46764B;">morasha-giveback-preview.html</a>
+    </div>
+    <div class="change-desc">
+      <strong>Color palette used throughout:</strong>
+    </div>
+<pre><span class="sel">:root</span> {
+  <span class="prop">--darkest-green</span>: <span class="val">#142B15</span>;
+  <span class="prop">--green</span>:         <span class="val">#46764B</span>;
+  <span class="prop">--light-green</span>:  <span class="val">#9BBA91</span>;
+  <span class="prop">--lightest-green</span>: <span class="val">#DAE4D0</span>;
+}</pre>
+  </div>
+
+  <!-- ── CHANGE 1: HERO IMAGE EDGE-TO-EDGE ── -->
+  <div class="change-item" id="hero-edge">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Hero Image Edge-to-Edge</div>
+    <div class="change-desc">
+      The hero photo on the Give Back page should extend to the right edge of the viewport.
+      Currently it is constrained by the <code>.container</code> wrapper's <code>max-width: 1400px</code>
+      and <code>padding-right: 20px</code>.
+    </div>
+
+    <div class="change-desc"><strong>CSS override</strong> (add to Give Back page styles):</div>
+<pre><span class="comment">/* Hero image: remove right-side container constraint */</span>
+<span class="sel">.don__header__inner.container</span> {
+  <span class="prop">padding-right</span>: <span class="val">0</span>;
+  <span class="prop">max-width</span>: <span class="val">none</span>;
+}
+
+<span class="sel">.don__header__image img</span> {
+  <span class="prop">width</span>: <span class="val">100%</span>;
+  <span class="prop">height</span>: <span class="val">100%</span>;
+  <span class="prop">object-fit</span>: <span class="val">cover</span>;
+}</pre>
+
+    <div class="note">
+      <strong>Scope:</strong> <code>/give-back/</code> only. These selectors are scoped to the
+      <code>.don__header</code> block so they will not affect other pages.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 2: FADING DONOR GRID ── -->
+  <div class="change-item" id="fading-grid">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Replace Static Donor Grid with Auto-Rotating Fading Grid</div>
+    <div class="change-desc">
+      Remove the current static donor card grid and replace it with
+      <strong>Option B &mdash; the fading grid</strong>. It shows 8 donors at a time across 3 pages,
+      cross-fading between them every 4 seconds. Users can also click dot navigation to jump to a page.
+      A "View Full Donor Wall" button links to <code>/donor-wall/</code>.
+    </div>
+
+    <div class="change-desc"><strong>Visual specs:</strong></div>
+    <div class="note">
+      Block background: <code>#ffffff</code> with <code>border-top: 1px solid #eee</code> and <code>border-bottom: 1px solid #eee</code><br>
+      Card background: <code>#f9f8f6</code> with <code>border: 1px solid rgba(0,0,0,0.08)</code><br>
+      Grid: 4 columns on desktop, 2 columns under 900px<br>
+      Auto-advance: every 4 seconds<br>
+      Transition: <code>opacity 1s ease</code> cross-fade
+    </div>
+
+    <div class="change-desc"><strong>Full CSS:</strong></div>
+<pre><span class="comment">/* ── Donor fading grid block ── */</span>
+<span class="sel">.donor-b-block</span> {
+  <span class="prop">background</span>: <span class="val">#ffffff</span>;
+  <span class="prop">padding</span>: <span class="val">64px 0</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+  <span class="prop">border-top</span>: <span class="val">1px solid #eee</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid #eee</span>;
+}
+<span class="sel">.donor-b-block *</span> { <span class="prop">box-sizing</span>: <span class="val">border-box</span>; }
+<span class="sel">.donor-b-inner2</span> {
+  <span class="prop">max-width</span>: <span class="val">1200px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+}
+
+<span class="comment">/* Header */</span>
+<span class="sel">.donor-b-header2</span> { <span class="prop">margin-bottom</span>: <span class="val">40px</span>; }
+<span class="sel">.donor-b-header2 .db-eyebrow</span> {
+  <span class="prop">font-family</span>: <span class="val">'Roboto Condensed', sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">12px</span>;
+}
+<span class="sel">.donor-b-header2 h2</span> {
+  <span class="prop">font-family</span>: <span class="val">Georgia, serif</span>;
+  <span class="prop">font-size</span>: <span class="val">42px</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.02em</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">line-height</span>: <span class="val">0.95</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">10px</span>;
+}
+<span class="sel">.donor-b-header2 p</span> {
+  <span class="prop">font-size</span>: <span class="val">16px</span>;
+  <span class="prop">color</span>: <span class="val">#6B6B6B</span>;
+  <span class="prop">margin</span>: <span class="val">0</span>;
+}
+
+<span class="comment">/* Fade grid container */</span>
+<span class="sel">.fade-grid-wrap</span> {
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">height</span>: <span class="val">210px</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.fade-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">12px</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">opacity</span>: <span class="val">0</span>;
+  <span class="prop">transition</span>: <span class="val">opacity 1s ease</span>;
+  <span class="prop">align-content</span>: <span class="val">start</span>;
+}
+<span class="sel">.fade-grid.active</span> { <span class="prop">opacity</span>: <span class="val">1</span>; }
+
+<span class="comment">/* Individual cards */</span>
+<span class="sel">.fade-card</span> {
+  <span class="prop">background</span>: <span class="val">#f9f8f6</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(0,0,0,0.08)</span>;
+  <span class="prop">padding</span>: <span class="val">22px 16px</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+<span class="sel">.fade-card .fc-name</span> {
+  <span class="prop">font-family</span>: <span class="val">Georgia, serif</span>;
+  <span class="prop">font-size</span>: <span class="val">16px</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">4px</span>;
+  <span class="prop">display</span>: <span class="val">block</span>;
+}
+<span class="sel">.fade-card .fc-note</span> {
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">color</span>: <span class="val">#888</span>;
+  <span class="prop">display</span>: <span class="val">block</span>;
+}
+
+<span class="comment">/* Footer: dots + button */</span>
+<span class="sel">.donor-b-footer2</span> {
+  <span class="prop">margin-top</span>: <span class="val">32px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">gap</span>: <span class="val">12px</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+}
+<span class="sel">.fade-dots</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">gap</span>: <span class="val">8px</span>;
+  <span class="prop">margin-right</span>: <span class="val">16px</span>;
+}
+<span class="sel">.fade-dots span</span> {
+  <span class="prop">width</span>: <span class="val">8px</span>;
+  <span class="prop">height</span>: <span class="val">8px</span>;
+  <span class="prop">border-radius</span>: <span class="val">50%</span>;
+  <span class="prop">background</span>: <span class="val">#ddd</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  <span class="prop">transition</span>: <span class="val">background .3s</span>;
+}
+<span class="sel">.fade-dots span.active</span> { <span class="prop">background</span>: <span class="val">#46764B</span>; }
+<span class="sel">.db-view-btn</span> {
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">6px</span>;
+  <span class="prop">padding</span>: <span class="val">10px 22px</span>;
+  <span class="prop">font-family</span>: <span class="val">'Roboto', sans-serif</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;
+  <span class="prop">font-weight</span>: <span class="val">500</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">border</span>: <span class="val">1px solid rgba(0,0,0,0.15)</span>;
+  <span class="prop">border-radius</span>: <span class="val">2px</span>;
+  <span class="prop">background</span>: <span class="val">transparent</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  <span class="prop">transition</span>: <span class="val">all .2s</span>;
+  <span class="prop">text-decoration</span>: <span class="val">none</span>;
+}
+<span class="sel">.db-view-btn:hover</span> {
+  <span class="prop">border-color</span>: <span class="val">#142B15</span>;
+  <span class="prop">background</span>: <span class="val">rgba(0,0,0,0.03)</span>;
+}
+
+<span class="comment">/* Responsive */</span>
+<span class="sel">@media (max-width: 900px)</span> {
+  <span class="sel">.fade-grid</span> { <span class="prop">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; }
+  <span class="sel">.fade-grid-wrap</span> { <span class="prop">height</span>: <span class="val">220px</span>; }
+}
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.donor-b-inner2</span> { <span class="prop">padding</span>: <span class="val">0 24px</span>; }
+  <span class="sel">.donor-b-header2 h2</span> { <span class="prop">font-size</span>: <span class="val">32px</span>; }
+  <span class="sel">.fade-grid-wrap</span> { <span class="prop">height</span>: <span class="val">240px</span>; }
+}</pre>
+
+    <div class="change-desc"><strong>HTML structure:</strong></div>
+<pre><span class="tag">&lt;section</span> class="<span class="val">donor-b-block</span>"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="val">donor-b-inner2</span>"<span class="tag">&gt;</span>
+
+    <span class="comment">&lt;!-- Header --&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="val">donor-b-header2</span>"<span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="val">db-eyebrow</span>"<span class="tag">&gt;</span>Hakarat Hatov<span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;h2&gt;</span>Thank You to Our Donors<span class="tag">&lt;/h2&gt;</span>
+      <span class="tag">&lt;p&gt;</span>The families who build the spaces where memories are made.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- Fading grid: 3 pages of 8 cards each --&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="val">fade-grid-wrap</span>" id="<span class="val">fadeWrap</span>"<span class="tag">&gt;</span>
+
+      <span class="comment">&lt;!-- Page 0 (visible on load) --&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="val">fade-grid active</span>" data-page="<span class="val">0</span>"<span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> class="<span class="val">fade-card</span>"<span class="tag">&gt;</span>
+          <span class="tag">&lt;span</span> class="<span class="val">fc-name</span>"<span class="tag">&gt;</span>Donor Name<span class="tag">&lt;/span&gt;</span>
+          <span class="tag">&lt;span</span> class="<span class="val">fc-note</span>"<span class="tag">&gt;</span>Dedication<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="comment">&lt;!-- ... repeat 8 cards total --&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+
+      <span class="comment">&lt;!-- Page 1 --&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="val">fade-grid</span>" data-page="<span class="val">1</span>"<span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- 8 cards --&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+
+      <span class="comment">&lt;!-- Page 2 --&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="val">fade-grid</span>" data-page="<span class="val">2</span>"<span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- 8 cards --&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- Footer: dot nav + link --&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="val">donor-b-footer2</span>"<span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="val">fade-dots</span>" id="<span class="val">fadeDots</span>"<span class="tag">&gt;</span>
+        <span class="tag">&lt;span</span> class="<span class="val">active</span>" data-page="<span class="val">0</span>"<span class="tag">&gt;&lt;/span&gt;</span>
+        <span class="tag">&lt;span</span> data-page="<span class="val">1</span>"<span class="tag">&gt;&lt;/span&gt;</span>
+        <span class="tag">&lt;span</span> data-page="<span class="val">2</span>"<span class="tag">&gt;&lt;/span&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;a</span> href="<span class="val">/donor-wall/</span>" class="<span class="val">db-view-btn</span>"<span class="tag">&gt;</span>View Full Donor Wall<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="change-desc"><strong>JavaScript</strong> (auto-rotation + dot click):</div>
+<pre><span class="comment">// Place inside a &lt;script&gt; tag after the donor block HTML</span>
+(<span class="prop">function</span>() {
+  <span class="prop">var</span> wrap  = document.getElementById(<span class="val">'fadeWrap'</span>);
+  <span class="prop">if</span> (!wrap) <span class="prop">return</span>;
+  <span class="prop">var</span> grids = wrap.querySelectorAll(<span class="val">'.fade-grid'</span>);
+  <span class="prop">var</span> dots  = document.querySelectorAll(<span class="val">'#fadeDots span'</span>);
+  <span class="prop">var</span> current = 0;
+
+  <span class="prop">function</span> show(idx) {
+    grids.forEach(<span class="prop">function</span>(g) { g.classList.remove(<span class="val">'active'</span>); });
+    dots.forEach(<span class="prop">function</span>(d)  { d.classList.remove(<span class="val">'active'</span>); });
+    grids[idx].classList.add(<span class="val">'active'</span>);
+    dots[idx].classList.add(<span class="val">'active'</span>);
+    current = idx;
+  }
+
+  <span class="comment">// Click handler for dot navigation</span>
+  dots.forEach(<span class="prop">function</span>(d) {
+    d.addEventListener(<span class="val">'click'</span>, <span class="prop">function</span>() {
+      show(+d.dataset.page);
+    });
+  });
+
+  <span class="comment">// Auto-advance every 4 seconds</span>
+  setInterval(<span class="prop">function</span>() {
+    show((current + 1) % grids.length);
+  }, <span class="val">4000</span>);
+})();</pre>
+  </div>
+
+  <!-- ── CHANGE 3: DYNAMIC DONOR NAMES ── -->
+  <div class="change-item" id="dynamic-names">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Pull Real Donor Names from Donor Wall ACF Data</div>
+    <div class="change-desc">
+      The fading grid currently shows hardcoded placeholder names. Eventually it should
+      dynamically pull a randomized subset of real donor names from the <code>/donor-wall/</code>
+      page's ACF repeater data, so names only need to be maintained in one place.
+    </div>
+
+    <div class="change-desc"><strong>PHP logic</strong> (for the Give Back template or a shortcode):</div>
+<pre><span class="comment">// 1. Get the Donor Wall page</span>
+<span class="prop">$wall_page</span> = get_page_by_path(<span class="val">'donor-wall'</span>);
+
+<span class="comment">// 2. Collect all donor names from ACF repeater</span>
+<span class="prop">$all_donors</span> = [];
+<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ):
+  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ): the_row();
+    <span class="prop">if</span>( have_rows(<span class="val">'donor_tiers'</span>) ):
+      <span class="prop">while</span>( have_rows(<span class="val">'donor_tiers'</span>) ): the_row();
+        <span class="prop">if</span>( have_rows(<span class="val">'donors'</span>) ):
+          <span class="prop">while</span>( have_rows(<span class="val">'donors'</span>) ): the_row();
+            <span class="prop">$all_donors</span>[] = get_sub_field(<span class="val">'donor_name'</span>);
+          <span class="prop">endwhile</span>;
+        <span class="prop">endif</span>;
+      <span class="prop">endwhile</span>;
+    <span class="prop">endif</span>;
+  <span class="prop">endwhile</span>;
+<span class="prop">endif</span>;
+
+<span class="comment">// 3. Shuffle and take 24 (8 per page x 3 pages)</span>
+shuffle(<span class="prop">$all_donors</span>);
+<span class="prop">$display_donors</span> = array_slice(<span class="prop">$all_donors</span>, 0, 24);</pre>
+
+    <div class="note">
+      <strong>Dependency:</strong> This change depends on the Donor Wall page and its ACF field group
+      being set up first. Until then, the hardcoded names from the mockup can remain in place.
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item" id="qa-checklist">
+    <div class="change-date">April 24, 2026</div>
+    <div class="change-title">QA Checklist</div>
+    <div class="change-desc">
+      Verify each item on staging before marking the Give Back page changes as complete.
+    </div>
+
+    <div class="change-desc"><strong>Hero image:</strong></div>
+    <ul class="qa-list">
+      <li>Hero image extends to the right edge of the browser viewport (no gap or padding on the right)</li>
+      <li>Left-side text content remains properly aligned within the container</li>
+      <li>Image uses <code>object-fit: cover</code> and does not distort at any width</li>
+      <li>Responsive: hero stacks gracefully on mobile (no horizontal overflow)</li>
+    </ul>
+
+    <div class="change-desc"><strong>Fading donor grid:</strong></div>
+    <ul class="qa-list">
+      <li>Block has white background with visible top and bottom borders</li>
+      <li>Cards render in a 4-column grid on desktop, 2-column under 900px</li>
+      <li>8 donor cards visible per page (no overflow or clipping)</li>
+      <li>Grid auto-advances every 4 seconds with a smooth 1-second cross-fade</li>
+      <li>Dot navigation: clicking a dot jumps to the correct page immediately</li>
+      <li>Active dot is green (<code>#46764B</code>), inactive dots are light grey</li>
+      <li>"View Full Donor Wall" button is visible and links to <code>/donor-wall/</code></li>
+      <li>Button hover state: border darkens, subtle background tint appears</li>
+      <li>No layout shift when pages transition (wrap height is fixed)</li>
+      <li>Mobile: grid wraps to 2 columns without horizontal scroll</li>
+    </ul>
+
+    <div class="change-desc"><strong>General:</strong></div>
+    <ul class="qa-list">
+      <li>No other sections on the Give Back page are affected by these CSS changes</li>
+      <li>Page load performance: no visible flash of unstyled content on the donor block</li>
+      <li>Cross-browser check: Chrome, Safari, Firefox (latest versions)</li>
+      <li>Accessibility: dot navigation is keyboard-focusable and has visible focus styles</li>
+      <li>The first page of cards (<code>data-page="0"</code>) has the <code>.active</code> class on load</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign &mdash; Dryve Marketing 2026</div>
+
+</body>
+</html>

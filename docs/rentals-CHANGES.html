@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rentals Page Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px; color: #555; line-height: 1.5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc; border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Rentals Page Changes</h1>
+  <p>Developer handoff for the Rentals page redesign.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/rentals/" target="_blank">morashastg1.../rentals/</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-rentals.html" target="_blank">morasha-rentals.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      April 24, 2026
+    </div>
+  </div>
+
+  <div class="change-desc" style="margin-bottom:32px;">
+    <strong>Summary of changes:</strong> The Rentals page is rebuilt with four distinct sections: (1) a cinematic image-backed hero with gradient overlay, (2) a "Types of Events" section with a 4-column tile grid, (3) a "Rental Facilities" section with 3-column cards on a lightest-green background, and (4) a "Get in Touch" section with a two-column layout (info + contact form). The page uses the single-tier nav.
+  </div>
+
+  <!-- ── CHANGE 1: HERO ── -->
+  <div class="change-item" id="hero">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Hero: Image-Backed with Gradient Overlay</div>
+    <div class="change-desc">
+      The hero uses a full-width background image with a three-stop gradient overlay (subtle to strong, top to bottom). The content is left-aligned with an eyebrow, large heading, and descriptive subtitle.
+    </div>
+
+    <table class="diff">
+      <tr><th>Element</th><th>Current</th><th>Change to</th></tr>
+      <tr><td>Background</td><td>Solid color or small image</td><td>Full-width photo with CSS gradient overlay</td></tr>
+      <tr><td>Min height</td><td>Varies</td><td>460px, flex centered</td></tr>
+      <tr><td>Eyebrow</td><td>None</td><td>"Rentals" in light-green uppercase</td></tr>
+      <tr><td>Heading</td><td>Simple text</td><td>"A venue built for gatherings" - serif, clamp(44px, 5.5vw, 80px)</td></tr>
+      <tr><td>Subtitle</td><td>None or minimal</td><td>Description paragraph, max 58ch</td></tr>
+    </table>
+
+<pre><span class="sel">.hero</span> {
+  <span class="prop">padding</span>: <span class="val">140px 0 72px</span>;
+  <span class="prop">background</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">min-height</span>: <span class="val">460px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+}
+<span class="sel">.hero-bg</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background-image</span>: <span class="val">url('...header-image.png')</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">background-position</span>: <span class="val">center</span>;
+  <span class="prop">z-index</span>: <span class="val">0</span>;
+}
+<span class="sel">.hero::before</span> {
+  <span class="prop">content</span>: <span class="val">""</span>;
+  <span class="prop">position</span>: <span class="val">absolute</span>; <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background</span>: <span class="val">linear-gradient(180deg,
+    rgba(20,43,21,0.15) 0%,
+    rgba(20,43,21,0.35) 60%,
+    rgba(20,43,21,0.6) 100%)</span>;
+  <span class="prop">z-index</span>: <span class="val">1</span>;
+}
+<span class="sel">.hero-inner</span> {
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">z-index</span>: <span class="val">2</span>;
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">width</span>: <span class="val">100%</span>;
+}
+<span class="sel">.hero h1</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(44px, 5.5vw, 80px)</span>;
+  <span class="prop">max-width</span>: <span class="val">18ch</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+}
+<span class="sel">.hero-sub</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(18px, 1.6vw, 22px)</span>;
+  <span class="prop">max-width</span>: <span class="val">58ch</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.82)</span>;
+}</pre>
+
+    <div class="note">
+      <strong>Image:</strong> The hero background image should be editable via the featured image or an ACF field. The gradient overlay ensures text remains readable regardless of image content.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 2: TYPES OF EVENTS ── -->
+  <div class="change-item" id="event-types">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Types of Events: 4-Column Tile Grid</div>
+    <div class="change-desc">
+      A new section with a two-column header (title left, description right) followed by a 4-column grid of tall image tiles. Each tile has a 4:5 portrait image with a label below.
+    </div>
+
+<pre><span class="sel">.event-types</span> {
+  <span class="prop">padding</span>: <span class="val">80px 0 72px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.event-types-head</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">340px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">80px</span>;
+  <span class="prop">align-items</span>: <span class="val">end</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">56px</span>;
+}
+<span class="sel">.event-types-head h2</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(40px, 4.5vw, 64px)</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+}
+<span class="sel">.event-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+}
+<span class="sel">.event-tile-img</span> {
+  <span class="prop">aspect-ratio</span>: <span class="val">4 / 5</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">background-position</span>: <span class="val">center</span>;
+  <span class="prop">transition</span>: <span class="val">transform .4s</span>;
+}
+<span class="sel">.event-tile:hover .event-tile-img</span> {
+  <span class="prop">transform</span>: <span class="val">scale(1.02)</span>;
+}
+<span class="sel">.event-tile-label</span> {
+  <span class="prop">padding</span>: <span class="val">20px 4px 0</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(18px, 1.5vw, 22px)</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Content:</strong> Four event types shown in the mockup:</div>
+    <table class="diff">
+      <tr><th>Tile</th><th>Label</th></tr>
+      <tr><td>1</td><td>School Shabbatons & Trips</td></tr>
+      <tr><td>2</td><td>Weekday & Weekend Retreats</td></tr>
+      <tr><td>3</td><td>Special Occasions & Smachot</td></tr>
+      <tr><td>4</td><td>Conferences & Offsite Retreats</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>Responsive:</strong> 4 columns on desktop, 2 on tablet (1024px), 1 on mobile (640px). On mobile the image aspect ratio changes to 16:9 for a better landscape view.
+    </div>
+  </div>
+
+  <!-- ── CHANGE 3: FACILITIES ── -->
+  <div class="change-item" id="facilities">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Rental Facilities: 3-Column Cards</div>
+    <div class="change-desc">
+      A lightest-green section with the same two-column header pattern, followed by a 3-column grid of white facility cards. Each card has a 4:3 image, title, description, and a "Learn more" link with arrow.
+    </div>
+
+<pre><span class="sel">.facilities</span> {
+  <span class="prop">padding</span>: <span class="val">80px 0</span>;
+  <span class="prop">background</span>: <span class="val">var(--lightest-green)</span>;
+}
+<span class="sel">.facility-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+}
+<span class="sel">.facility-card</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">transition</span>: <span class="val">transform .3s</span>;
+}
+<span class="sel">.facility-card:hover</span> { <span class="prop">transform</span>: <span class="val">translateY(-4px)</span>; }
+<span class="sel">.facility-img</span> {
+  <span class="prop">aspect-ratio</span>: <span class="val">4 / 3</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+}
+<span class="sel">.facility-body</span> { <span class="prop">padding</span>: <span class="val">28px</span>; }
+<span class="sel">.facility-title</span> {
+  <span class="prop">font-size</span>: <span class="val">22px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">10px</span>;
+}
+<span class="sel">.facility-desc</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">16px</span>;
+  <span class="prop">color</span>: <span class="val">var(--text-grey)</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">20px</span>;
+}
+<span class="sel">.facility-link</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.2em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">var(--green)</span>;
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">8px</span>;
+  <span class="prop">transition</span>: <span class="val">color .2s, gap .2s</span>;
+}
+<span class="sel">.facility-link:hover</span> {
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">gap</span>: <span class="val">12px</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Content:</strong> Three facility cards:</div>
+    <table class="diff">
+      <tr><th>Card</th><th>Title</th><th>Description</th></tr>
+      <tr><td>1</td><td>Common Spaces & Main Buildings</td><td>Dining rooms, beis medrash, simcha halls, and gathering spaces.</td></tr>
+      <tr><td>2</td><td>Group & Private Housing</td><td>Comfortable bunk-style lodging and private rooms for 100 to 1,000+ guests.</td></tr>
+      <tr><td>3</td><td>Outdoor Courts & Recreation</td><td>Sports fields, courts, pools, and waterfront.</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>Responsive:</strong> 3 columns on desktop, single column on tablet and below. The cards should be editable via ACF repeater (image, title, description, link URL).
+    </div>
+  </div>
+
+  <!-- ── CHANGE 4: CONTACT / GET IN TOUCH ── -->
+  <div class="change-item" id="contact">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Contact: Two-Column Layout with Form</div>
+    <div class="change-desc">
+      A white section with a two-column grid: left side has heading, description, pricing note callout, and direct email link; right side has a styled contact form on a lightest-green background.
+    </div>
+
+<pre><span class="sel">.contact-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">80px</span>;
+}
+
+<span class="comment">/* Pricing callout box */</span>
+<span class="sel">.price-note</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">16px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">padding</span>: <span class="val">18px 22px</span>;
+  <span class="prop">background</span>: <span class="val">var(--lightest-green)</span>;
+  <span class="prop">border-left</span>: <span class="val">3px solid var(--green)</span>;
+  <span class="prop">margin</span>: <span class="val">32px 0</span>;
+}
+
+<span class="comment">/* Email link */</span>
+<span class="sel">.email-row a</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">24px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid var(--green)</span>;
+}
+
+<span class="comment">/* Contact form */</span>
+<span class="sel">.contact-form</span> {
+  <span class="prop">background</span>: <span class="val">var(--lightest-green)</span>;
+  <span class="prop">padding</span>: <span class="val">48px</span>;
+}
+<span class="sel">.contact-form label</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-size</span>: <span class="val">11px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.2em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">var(--dark-green)</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">8px</span>;
+}
+<span class="sel">.contact-form input,
+.contact-form textarea</span> {
+  <span class="prop">width</span>: <span class="val">100%</span>;
+  <span class="prop">padding</span>: <span class="val">12px 14px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">1px solid transparent</span>;
+  <span class="prop">font-family</span>: <span class="val">var(--sans)</span>;
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+}
+<span class="sel">.contact-form input:focus,
+.contact-form textarea:focus</span> {
+  <span class="prop">border-color</span>: <span class="val">var(--green)</span>;
+}
+<span class="sel">.contact-form .field-row</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Form fields:</strong> First Name + Last Name (side by side), Email, Phone, Message (textarea), and a full-width "Send message" submit button.</div>
+
+    <div class="note">
+      <strong>WordPress implementation:</strong> The form can be built with Contact Form 7, Gravity Forms, or WPForms. Style the plugin output to match the mockup using the CSS above. The <code>.field-row</code> class handles the first/last name side-by-side layout. On mobile (640px), <code>.field-row</code> stacks to single column. The email address (<code>aryeh@campmorasha.com</code>) should be editable via ACF.
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item" id="qa">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Hero: background image visible through gradient overlay, text is readable</li>
+      <li>Hero min-height is 460px; flexbox vertically centers content</li>
+      <li>Hero eyebrow "Rentals" displays in light-green uppercase</li>
+      <li>Hero heading and subtitle render at correct clamp sizes</li>
+      <li>Types of Events: 4-column grid on desktop, 2 on tablet, 1 on mobile</li>
+      <li>Event tile images are 4:5 portrait ratio (switch to 16:9 on mobile)</li>
+      <li>Tile hover: image scales up 2% smoothly</li>
+      <li>Section header: title left (340px column), description right</li>
+      <li>Facilities section: lightest-green background (#DAE4D0)</li>
+      <li>Facility cards: white background, 4:3 image, body with title/desc/link</li>
+      <li>"Learn more" link: uppercase, green, arrow icon, gap widens on hover</li>
+      <li>Cards lift 4px on hover</li>
+      <li>Contact section: two equal columns with 80px gap</li>
+      <li>Pricing callout has green left border on lightest-green background</li>
+      <li>Email address renders as serif 24px with green underline</li>
+      <li>Contact form: lightest-green background, 48px padding</li>
+      <li>Form inputs: white background, green border on focus</li>
+      <li>First/Last name fields are side-by-side on desktop, stacked on mobile</li>
+      <li>Submit button: full-width, darkest-green, centered text</li>
+      <li>Contact form submission works (connected to CF7/Gravity/WPForms)</li>
+      <li>Nav is single-tier (no camp sub-nav)</li>
+      <li>Footer matches standardized layout</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

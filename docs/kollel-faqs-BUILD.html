@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BUILD: Kollel FAQs — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: #3d1808;
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c79685; margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: #974426; margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: #3d1808;
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.new-page { background: #ede7f6; color: #4527a0; }
+
+  .note {
+    background: #faf6f4;
+    border-left: 3px solid #974426;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 11px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>BUILD: Kollel FAQs</h1>
+  <p>New page build instructions. Mockup: morasha-kollel-faqs.html</p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status new-page">New Page</span>
+    <div class="change-title">Page Overview</div>
+    <div class="change-desc">
+      Build a new <code>/kollel/faqs/</code> page for Morasha Kollel FAQs. Uses the <strong>Kollel terracotta color palette</strong>. The page has 8 FAQ items using native <code>&lt;details&gt;/&lt;summary&gt;</code> HTML accordion elements (no JavaScript needed), plus a contact CTA block at the bottom.
+    </div>
+    <div class="change-desc">
+      <strong>Sections:</strong>
+    </div>
+    <div class="change-desc">
+      1. Hero (terracotta palette)<br>
+      2. FAQ section header<br>
+      3. Eight FAQ accordion items<br>
+      4. Contact CTA block
+    </div>
+    <div class="change-desc"><strong>Mockup:</strong> <a href="../morasha-kollel-faqs.html" style="color:#974426;">morasha-kollel-faqs.html</a></div>
+
+    <div class="note">
+      <strong>Kollel Color Palette:</strong><br>
+      <code>--green: #974426</code> / <code>--dark-green: #5e2511</code> / <code>--darkest-green: #3d1808</code><br>
+      <code>--light-green: #c79685</code> / <code>--lightest-green: #e9cec5</code>
+    </div>
+  </div>
+
+  <!-- ── WORDPRESS IMPLEMENTATION ── -->
+  <div class="change-item">
+    <div class="change-title">WordPress Implementation</div>
+    <div class="change-desc"><strong>Page Template:</strong> <code>page-kollel-faqs.php</code></div>
+    <div class="change-desc"><strong>Template Name:</strong> <code>Kollel FAQs</code></div>
+    <div class="change-desc"><strong>Stylesheet:</strong> <code>kollel-faqs.css</code> &mdash; enqueue conditionally</div>
+
+    <div class="change-desc"><strong>ACF Field Group: "Kollel FAQs"</strong></div>
+<pre><span class="sel">Group:</span> <span class="val">FAQ Header</span>
+  ├── <span class="prop">faq_eyebrow</span>       <span class="comment">// Text — "Before you pack"</span>
+  ├── <span class="prop">faq_heading</span>       <span class="comment">// Text — "The most common questions, answered"</span>
+  └── <span class="prop">faq_subtext</span>       <span class="comment">// Textarea — optional intro</span>
+
+<span class="sel">Repeater:</span> <span class="val">faqs</span>
+  ├── <span class="prop">question</span>          <span class="comment">// Text — the question</span>
+  └── <span class="prop">answer</span>            <span class="comment">// WYSIWYG — supports paragraphs, lists, italics</span>
+
+<span class="sel">Group:</span> <span class="val">Contact CTA</span>
+  ├── <span class="prop">cta_eyebrow</span>       <span class="comment">// Text — "Can't find what you're looking for?"</span>
+  ├── <span class="prop">cta_heading</span>       <span class="comment">// Text — "We're here to help"</span>
+  ├── <span class="prop">cta_text</span>          <span class="comment">// Textarea</span>
+  ├── <span class="prop">cta_button_label</span>  <span class="comment">// Text — "Contact us"</span>
+  └── <span class="prop">cta_button_url</span>    <span class="comment">// URL</span></pre>
+  </div>
+
+  <!-- ── SECTION: HERO ── -->
+  <div class="change-item">
+    <div class="change-title">Section 1: Hero</div>
+    <div class="change-desc">
+      Identical structure to the Kollel Schedule hero. Deep brown background with terracotta radial gradients. Eyebrow reads "Morasha Kollel", title reads "FAQs &amp; Camp Policies". Same CSS as the schedule page hero.
+    </div>
+  </div>
+
+  <!-- ── SECTION: FAQ ACCORDION ── -->
+  <div class="change-item">
+    <div class="change-title">Section 2: FAQ Accordion</div>
+    <div class="change-desc">
+      Uses native HTML <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> elements. No JS required. The first item should have the <code>open</code> attribute by default. Each item has a numbered index (01, 02, etc.), the question text, and a chevron icon that rotates 180 degrees when open.
+    </div>
+    <div class="change-desc"><strong>HTML pattern per FAQ item:</strong></div>
+<pre><span class="tag">&lt;details</span> class="<span class="sel">faq-item</span>"<span class="tag">&gt;</span>
+  <span class="tag">&lt;summary&gt;</span>
+    <span class="tag">&lt;span</span> class="<span class="sel">faq-q-num</span>"<span class="tag">&gt;</span>01<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;span</span> class="<span class="sel">faq-q-text</span>"<span class="tag">&gt;</span>Where is Morasha Kollel located?<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;span</span> class="<span class="sel">faq-q-icon</span>"<span class="tag">&gt;</span>
+      <span class="comment">&lt;!-- chevron SVG --&gt;</span>
+    <span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;/summary&gt;</span>
+  <span class="tag">&lt;div</span> class="<span class="sel">faq-a</span>"<span class="tag">&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Answer text...<span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/details&gt;</span></pre>
+
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.faqs</span> {
+  <span class="prop">padding</span>: <span class="val">96px 0 128px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.faqs-inner</span> {
+  <span class="prop">max-width</span>: <span class="val">880px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+}
+<span class="sel">.faq-item</span> {
+  <span class="prop">border-top</span>: <span class="val">1px solid rgba(61,24,8,0.14)</span>;
+}
+<span class="sel">.faq-item:last-of-type</span> {
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(61,24,8,0.14)</span>;
+}
+<span class="sel">.faq-item summary</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">48px 1fr 24px</span>;
+  <span class="prop">gap</span>: <span class="val">20px</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">padding</span>: <span class="val">28px 0</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  <span class="prop">list-style</span>: <span class="val">none</span>;
+}
+<span class="sel">.faq-item summary::-webkit-details-marker</span> { <span class="prop">display</span>: <span class="val">none</span>; }
+<span class="sel">.faq-q-num</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.18em</span>;
+  <span class="prop">color</span>: <span class="val">#974426</span>;
+}
+<span class="sel">.faq-q-text</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(18px, 1.6vw, 22px)</span>;
+  <span class="prop">color</span>: <span class="val">#3d1808</span>;
+  <span class="prop">line-height</span>: <span class="val">1.25</span>;
+}
+<span class="sel">.faq-q-icon</span> {
+  <span class="prop">color</span>: <span class="val">#974426</span>;
+  <span class="prop">transition</span>: <span class="val">transform .25s ease</span>;
+}
+<span class="sel">.faq-item[open] .faq-q-icon</span> {
+  <span class="prop">transform</span>: <span class="val">rotate(180deg)</span>;
+}
+<span class="sel">.faq-item[open] summary</span> {
+  <span class="prop">padding-bottom</span>: <span class="val">16px</span>;
+}
+<span class="sel">.faq-a</span> {
+  <span class="prop">padding</span>: <span class="val">0 0 32px 68px</span>;
+  <span class="prop">font-size</span>: <span class="val">17px</span>;
+  <span class="prop">line-height</span>: <span class="val">1.65</span>;
+  <span class="prop">color</span>: <span class="val">#222</span>;
+}
+<span class="sel">.faq-a p</span> { <span class="prop">margin-bottom</span>: <span class="val">16px</span>; }
+<span class="sel">.faq-a ul</span> { <span class="prop">padding-left</span>: <span class="val">20px</span>; <span class="prop">margin-bottom</span>: <span class="val">16px</span>; }
+<span class="sel">.faq-a li</span> { <span class="prop">margin-bottom</span>: <span class="val">8px</span>; }
+<span class="sel">.faq-a i, .faq-a em</span> { <span class="prop">color</span>: <span class="val">#5e2511</span>; }
+
+<span class="comment">/* Mobile */</span>
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.faq-item summary</span> { <span class="prop">grid-template-columns</span>: <span class="val">36px 1fr 20px</span>; <span class="prop">gap</span>: <span class="val">14px</span>; <span class="prop">padding</span>: <span class="val">22px 0</span>; }
+  <span class="sel">.faq-a</span> { <span class="prop">padding-left</span>: <span class="val">50px</span>; <span class="prop">font-size</span>: <span class="val">16px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── SECTION: CONTACT CTA ── -->
+  <div class="change-item">
+    <div class="change-title">Section 3: Contact CTA Block</div>
+    <div class="change-desc">
+      A centered CTA block that sits inside the FAQ container, below all FAQ items. Uses the Kollel accent background (<code>#e9cec5</code>).
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.contact-cta</span> {
+  <span class="prop">margin-top</span>: <span class="val">80px</span>;
+  <span class="prop">padding</span>: <span class="val">56px 48px</span>;
+  <span class="prop">background</span>: <span class="val">#e9cec5</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+<span class="sel">.contact-cta .eyebrow</span> { <span class="prop">color</span>: <span class="val">#974426</span>; }
+<span class="sel">.contact-cta h3</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(26px, 2.6vw, 36px)</span>;
+  <span class="prop">color</span>: <span class="val">#3d1808</span>;
+}
+<span class="sel">.contact-cta p</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">17px</span>;
+  <span class="prop">max-width</span>: <span class="val">44ch</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto 28px</span>;
+}</pre>
+  </div>
+
+  <!-- ── FAQ CONTENT ── -->
+  <div class="change-item">
+    <div class="change-title">FAQ Content (8 Items)</div>
+    <div class="change-desc">
+      The mockup includes these 8 questions:
+    </div>
+    <div class="change-desc">
+      01. Where is Morasha Kollel located?<br>
+      02. How does my child get to camp?<br>
+      03. How does my child's luggage get to camp?<br>
+      04. What electronics are permitted at Morasha Kollel?<br>
+      05. Is Morasha Kollel nut-free?<br>
+      06. What seforim should members of the Kollel bring?<br>
+      07. When may I visit my campers at camp?<br>
+      08. Do Kollel participants go on trips?
+    </div>
+    <div class="note">
+      <strong>Note for Izzy:</strong> Question 06 about seforim has the most complex answer, including a bulleted list with italic Hebrew terms. Make sure the WYSIWYG field supports lists and inline formatting. The full text is in the mockup file.
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Page uses the terracotta palette (NOT green)</li>
+      <li>Hero matches Kollel schedule hero styling</li>
+      <li>FAQ container is max-width 880px (narrower than usual)</li>
+      <li>First FAQ item is open by default</li>
+      <li>Clicking a summary opens/closes the answer (native HTML, no JS)</li>
+      <li>Chevron icon rotates 180 degrees when open</li>
+      <li>FAQ numbers (01-08) are Roboto Condensed, terracotta colored</li>
+      <li>Question text is serif, clamp(18px, 1.6vw, 22px), deep brown</li>
+      <li>Answer text has 68px left padding to align past the number column</li>
+      <li>Summary uses a 3-column grid: 48px number | 1fr question | 24px icon</li>
+      <li>Borders between items are subtle rgba(61,24,8,0.14)</li>
+      <li>Contact CTA block uses #e9cec5 background</li>
+      <li>Button in CTA uses terracotta primary style</li>
+      <li>Mobile: summary grid adjusts to 36px/1fr/20px, answer padding to 50px</li>
+      <li>All content editable via ACF</li>
+      <li>Default browser details marker is hidden (webkit + standard)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

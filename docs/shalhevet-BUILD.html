@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BUILD: Shalhevet Newsletter — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.new-page { background: #ede7f6; color: #4527a0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 11px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>BUILD: Shalhevet Newsletter</h1>
+  <p>New page build instructions. Mockup: morasha-shalhevet.html</p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status new-page">New Page</span>
+    <div class="change-title">Page Overview</div>
+    <div class="change-desc">
+      Build a new <code>/shalhevet/</code> page for the Shalhevet Newsletter archive. This page uses the <strong>standard Morasha green palette</strong>. It has three main areas: a hero, a featured issues grid (current summer), and a full archive organized by decade with pill-style navigation.
+    </div>
+    <div class="change-desc">
+      <strong>Sections:</strong>
+    </div>
+    <div class="change-desc">
+      1. Hero with subtle radial gradients<br>
+      2. Featured Issues grid (current summer's issues)<br>
+      3. Full Archive with decade pill navigation + year-organized rows
+    </div>
+    <div class="change-desc"><strong>Mockup:</strong> <a href="../morasha-shalhevet.html" style="color:#46764B;">morasha-shalhevet.html</a></div>
+    <div class="note">
+      <strong>Scope of the archive:</strong> The mockup includes issues going back to 1974. That is a LOT of data. The ACF structure needs to handle decades of content efficiently.
+    </div>
+  </div>
+
+  <!-- ── WORDPRESS IMPLEMENTATION ── -->
+  <div class="change-item">
+    <div class="change-title">WordPress Implementation</div>
+    <div class="change-desc"><strong>Page Template:</strong> <code>page-shalhevet.php</code></div>
+    <div class="change-desc"><strong>Template Name:</strong> <code>Shalhevet Newsletter</code></div>
+    <div class="change-desc"><strong>Stylesheet:</strong> <code>shalhevet.css</code> &mdash; enqueue conditionally</div>
+
+    <div class="change-desc"><strong>ACF Field Group: "Shalhevet Newsletter"</strong></div>
+<pre><span class="sel">Group:</span> <span class="val">Featured Section</span>
+  ├── <span class="prop">featured_eyebrow</span>    <span class="comment">// Text — "Summer 2025"</span>
+  ├── <span class="prop">featured_heading</span>    <span class="comment">// Text — "The latest issues"</span>
+  └── <span class="sel">Repeater:</span> <span class="val">featured_issues</span>
+        ├── <span class="prop">issue_label</span>     <span class="comment">// Text — "Issue 1"</span>
+        └── <span class="prop">issue_pdf</span>       <span class="comment">// File (PDF) — the PDF link</span>
+
+<span class="sel">Repeater:</span> <span class="val">decades</span>
+  ├── <span class="prop">decade_label</span>        <span class="comment">// Text — "The 2020s"</span>
+  ├── <span class="prop">decade_anchor</span>       <span class="comment">// Text — "decade-2020" (for pill nav)</span>
+  └── <span class="sel">Repeater:</span> <span class="val">years</span>
+        ├── <span class="prop">year</span>            <span class="comment">// Text — "2025"</span>
+        └── <span class="sel">Repeater:</span> <span class="val">issues</span>
+              ├── <span class="prop">issue_label</span> <span class="comment">// Text — "Issue 1"</span>
+              └── <span class="prop">issue_url</span>   <span class="comment">// URL — direct PDF link</span></pre>
+
+    <div class="note">
+      <strong>Alternative approach:</strong> Given the volume of data (50+ years), Izzy may want to consider a simpler approach: store the archive as a single WYSIWYG or code field per decade, rather than deeply nested repeaters. This avoids ACF performance issues with 3-level nested repeaters containing hundreds of rows. Discuss with David which approach is more maintainable.
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: HERO ── -->
+  <div class="change-item">
+    <div class="change-title">Section 1: Hero</div>
+    <div class="change-desc">
+      Taller hero than most pages (<code>padding: 180px 0 96px</code>). Dark green background with subtle radial gradients. Includes an eyebrow, large heading, and a subtitle paragraph.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.hero</span> {
+  <span class="prop">padding</span>: <span class="val">180px 0 96px</span>;
+  <span class="prop">background</span>: <span class="val">#142B15</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+}
+<span class="sel">.hero::before</span> {
+  <span class="prop">background</span>:
+    <span class="val">radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.35) 0%, transparent 55%)</span>,
+    <span class="val">radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.22) 0%, transparent 45%)</span>;
+}
+<span class="sel">.hero h1</span> {
+  <span class="prop">font-size</span>: <span class="val">clamp(44px, 6vw, 88px)</span>;
+  <span class="prop">max-width</span>: <span class="val">18ch</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">28px</span>;
+}
+<span class="sel">.hero-sub</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(18px, 1.6vw, 22px)</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.82)</span>;
+  <span class="prop">max-width</span>: <span class="val">52ch</span>;
+}</pre>
+  </div>
+
+  <!-- ── SECTION 2: FEATURED ISSUES ── -->
+  <div class="change-item">
+    <div class="change-title">Section 2: Featured Issues Grid</div>
+    <div class="change-desc">
+      White background section showing the current summer's issues as a responsive card grid. Each card is a clickable link to a PDF. Cards use the lightest green background with hover effects.
+    </div>
+    <div class="change-desc"><strong>Key CSS:</strong></div>
+<pre><span class="sel">.featured</span> {
+  <span class="prop">padding</span>: <span class="val">96px 0 64px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+}
+<span class="sel">.featured-grid</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(auto-fill, minmax(180px, 1fr))</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+}
+<span class="sel">.issue-card</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">padding</span>: <span class="val">28px 20px</span>;
+  <span class="prop">background</span>: <span class="val">#DAE4D0</span>;
+  <span class="prop">border</span>: <span class="val">1px solid transparent</span>;
+  <span class="prop">transition</span>: <span class="val">all .25s ease</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+}
+<span class="sel">.issue-card:hover</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border-color</span>: <span class="val">#46764B</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(-2px)</span>;
+}
+<span class="sel">.issue-card .issue-num</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">26px</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+
+<span class="comment">/* Mobile: 2 columns */</span>
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.featured-grid</span> { <span class="prop">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; <span class="prop">gap</span>: <span class="val">14px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── SECTION 3: ARCHIVE ── -->
+  <div class="change-item">
+    <div class="change-title">Section 3: Full Archive with Decade Navigation</div>
+    <div class="change-desc">
+      The archive section has a lightest green background (<code>#DAE4D0</code>). It includes:
+    </div>
+    <div class="change-desc">
+      <strong>a) Decade pill navigation:</strong> A row of pill-shaped links (2020s, 2010s, ... 1970s) that anchor-scroll to the corresponding decade block.
+    </div>
+    <div class="change-desc">
+      <strong>b) Decade blocks:</strong> Each decade has a label, then year rows. Each year row shows the year on the left and a flex-wrapped list of issue links on the right.
+    </div>
+    <div class="change-desc"><strong>Pill Nav CSS:</strong></div>
+<pre><span class="sel">.decade-nav</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">margin</span>: <span class="val">40px auto 56px</span>;
+  <span class="prop">padding</span>: <span class="val">0 48px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+  <span class="prop">gap</span>: <span class="val">8px</span>;
+}
+<span class="sel">.decade-nav a</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.2em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#2A522E</span>;
+  <span class="prop">padding</span>: <span class="val">10px 18px</span>;
+  <span class="prop">border</span>: <span class="val">1px solid #46764B</span>;
+  <span class="prop">border-radius</span>: <span class="val">100px</span>;
+  <span class="prop">transition</span>: <span class="val">all .2s</span>;
+}
+<span class="sel">.decade-nav a:hover</span> {
+  <span class="prop">background</span>: <span class="val">#142B15</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">border-color</span>: <span class="val">#142B15</span>;
+}</pre>
+
+    <div class="change-desc"><strong>Archive Row CSS:</strong></div>
+<pre><span class="sel">.archive</span> {
+  <span class="prop">padding</span>: <span class="val">96px 0 128px</span>;
+  <span class="prop">background</span>: <span class="val">#DAE4D0</span>;
+}
+<span class="sel">.decade-block</span> { <span class="prop">margin-bottom</span>: <span class="val">64px</span>; }
+<span class="sel">.decade-label</span> {
+  <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+  <span class="prop">padding-bottom</span>: <span class="val">16px</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(20,43,21,0.15)</span>;
+}
+<span class="sel">.archive-row</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">100px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">32px</span>;
+  <span class="prop">padding</span>: <span class="val">20px 0</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(20,43,21,0.08)</span>;
+  <span class="prop">align-items</span>: <span class="val">baseline</span>;
+}
+<span class="sel">.archive-year</span> {
+  <span class="prop">font-family</span>: <span class="val">var(--serif)</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">28px</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+<span class="sel">.archive-issues</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+  <span class="prop">gap</span>: <span class="val">20px 28px</span>;
+}
+<span class="sel">.archive-issues a</span> {
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+  <span class="prop">color</span>: <span class="val">#222</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid transparent</span>;
+  <span class="prop">transition</span>: <span class="val">all .2s</span>;
+}
+<span class="sel">.archive-issues a:hover</span> {
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">border-bottom-color</span>: <span class="val">#46764B</span>;
+}
+
+<span class="comment">/* Mobile */</span>
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.archive-row</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; <span class="prop">gap</span>: <span class="val">12px</span>; }
+  <span class="sel">.archive-year</span> { <span class="prop">font-size</span>: <span class="val">24px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── DATA NOTE ── -->
+  <div class="change-item">
+    <div class="change-title">Data Entry Notes</div>
+    <div class="change-desc">
+      The archive spans 6 decades (2020s through 1970s) with a total of approximately 50 years of issues. All PDF URLs are already established on the existing campmorasha.com domain (paths like <code>/wp-content/uploads/YEAR/MONTH/filename.pdf</code>).
+    </div>
+    <div class="note">
+      <strong>Important for Izzy:</strong> All issue links should open in a new tab (<code>target="_blank" rel="noopener"</code>). The featured issues section duplicates links from the archive's most recent year &mdash; this is intentional so the current summer stands out at the top.
+    </div>
+    <div class="note">
+      <strong>Performance consideration:</strong> With ~300 individual issue links on the page, keep the DOM simple. The mockup uses plain <code>&lt;a&gt;</code> tags inside flex containers &mdash; no cards or complex markup needed for the archive rows.
+    </div>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item">
+    <div class="change-title">QA Checklist</div>
+    <ul class="checklist">
+      <li>Hero is taller than standard (180px top padding) with subtitle paragraph</li>
+      <li>Featured issues grid uses auto-fill with minmax(180px, 1fr)</li>
+      <li>Issue cards have lightest green background, hover shows white bg + green border + lift</li>
+      <li>Decade pill nav pills are all visible, wrap on mobile</li>
+      <li>Clicking a decade pill smooth-scrolls to the correct decade block</li>
+      <li>Archive section uses lightest green (#DAE4D0) background</li>
+      <li>Year labels are large serif (28px) on the left, issues flex-wrap on the right</li>
+      <li>Issue links show underline on hover</li>
+      <li>All PDFs open in new tab</li>
+      <li>Mobile: archive rows stack (year on top, issues below)</li>
+      <li>Mobile: featured grid goes to 2 columns</li>
+      <li>Decade block labels have subtle bottom border separator</li>
+      <li>Last decade block has no bottom margin</li>
+      <li>All content is editable via ACF</li>
+      <li>Page uses standard site nav and footer (green palette)</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>

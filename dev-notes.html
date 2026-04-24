@@ -120,8 +120,8 @@
 
 <div class="page-header">
   <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
-  <h1>Developer Notes</h1>
-  <p>Ongoing list of site-wide changes for the Morasha Camps redesign.</p>
+  <h1>Site-Wide Changes</h1>
+  <p>Global changes that apply across all pages. Page-specific changes are linked from each card on the index.</p>
 </div>
 
 <div class="content">
@@ -169,163 +169,50 @@ figcaption</span> {
     <div class="change-desc"><strong>Files:</strong> <code>style.css</code>, theme <code>header.php</code> (for the Google Fonts link)</div>
   </div>
 
-  <!-- ── CHANGE 2: DONOR BLOCK ── -->
-  <div class="change-item" id="donor-block">
+  <!-- ── CHANGE 2: NAV DROPDOWN COLORS ── -->
+  <div class="change-item" id="nav-dropdowns">
     <div class="change-date">April 22, 2026</div>
     <span class="status pending">Pending</span>
-    <div class="change-title">Give Back Page: Replace Donor Block with Fading Grid</div>
+    <div class="change-title">Navigation: Color-Coded Dropdown Borders</div>
     <div class="change-desc">
-      Replace the current static donor card grid on <code>/give-back/</code> with an auto-rotating
-      fading grid (Option B). Shows 8 donors at a time across 3 pages, fades between them every 4 seconds,
-      with clickable dot navigation and a "View Full Donor Wall" link.
+      Add colored left borders to dropdown menu items based on which camp section they belong to.
+      This helps users visually distinguish between Camp Morasha, Kehilas Yaakov, Kollel, and Travel.
     </div>
 
-    <div class="change-desc"><strong>Background:</strong> White (<code>#ffffff</code>) with subtle top/bottom borders.
-      Cards use warm grey (<code>#f9f8f6</code>) for contrast.</div>
+<pre><span class="comment">/* Camp-specific accent colors */</span>
+<span class="sel">#menu-item-6044 a</span> { <span class="prop">border-left</span>: <span class="val">3px solid #46764B</span>; } <span class="comment">/* Camp Morasha — green */</span>
+<span class="sel">#menu-item-6045 a</span> { <span class="prop">border-left</span>: <span class="val">3px solid #1C326B</span>; } <span class="comment">/* Kehilas Yaakov — indigo */</span>
+<span class="sel">#menu-item-6046 a</span> { <span class="prop">border-left</span>: <span class="val">3px solid #974426</span>; } <span class="comment">/* Kollel — sienna */</span>
+<span class="sel">#menu-item-6047 a</span> { <span class="prop">border-left</span>: <span class="val">3px solid #306DA5</span>; } <span class="comment">/* Travel — blue */</span>
 
-    <div class="change-desc"><strong>Preview:</strong>
-      <a href="morasha-giveback-preview.html" style="color:#46764B;">Give Back with Option B in context</a> &nbsp;|&nbsp;
-      <a href="morasha-donor-block-options.html" style="color:#46764B;">All 4 donor block options</a>
-    </div>
-
-    <div class="change-desc"><strong>Standalone code:</strong> The HTML, CSS, and JS for the fading grid block
-      can be extracted from the preview page's <code>.donor-b-block</code> section.</div>
-
-    <div class="change-desc"><strong>Scope:</strong> <code>/give-back/</code> page only</div>
-  </div>
-
-  <!-- ── CHANGE 3: HEADER IMAGE ── -->
-  <div class="change-item" id="header-image">
-    <div class="change-date">April 22, 2026</div>
-    <span class="status pending">Pending</span>
-    <div class="change-title">Give Back Page: Hero Image Edge-to-Edge</div>
-    <div class="change-desc">
-      The hero photo on the Give Back page should extend to the right edge of the viewport.
-      Currently constrained by the <code>.container</code> wrapper's <code>max-width: 1400px</code>
-      and <code>padding-right: 20px</code>.
-    </div>
-
-    <div class="change-desc"><strong>Fix:</strong></div>
-<pre><span class="sel">.don__header__inner.container</span> {
-  <span class="prop">padding-right</span>: <span class="val">0</span>;
-  <span class="prop">max-width</span>: <span class="val">none</span>;
-}
-<span class="sel">.don__header__image img</span> {
-  <span class="prop">width</span>: <span class="val">100%</span>;
-  <span class="prop">height</span>: <span class="val">100%</span>;
-  <span class="prop">object-fit</span>: <span class="val">cover</span>;
+<span class="sel">.sub-menu a:hover</span> {
+  <span class="prop">background</span>: <span class="val">#f7f9f4</span>;
+  <span class="prop">padding-left</span>: <span class="val">12px</span>;
 }</pre>
 
-    <div class="change-desc"><strong>Scope:</strong> <code>/give-back/</code> page only (scoped to <code>.don__header</code>)</div>
-  </div>
-
-  <!-- ── CHANGE 4: DONOR WALL PAGE ── -->
-  <div class="change-item" id="donor-wall">
-    <div class="change-date">April 22, 2026</div>
-    <span class="status pending">Pending</span>
-    <div class="change-title">New Page: Donor Wall</div>
-    <div class="change-desc">
-      Build a new <code>/donor-wall/</code> page as a custom page template. Displays all donors organized
-      by facility (Beis Kushner, Beren Arena, Mercazia PAC, Dining Hall). Each facility has a hero-style
-      header, a primary dedication plaque, and tiered donor grids.
-    </div>
-
-    <div class="change-desc"><strong>Preview:</strong>
-      <a href="morasha-donor-wall.html" style="color:#46764B;">Full Donor Wall page</a>
-    </div>
-
-    <div class="change-desc"><strong>Data structure (ACF):</strong> Create an ACF field group on the donor wall page template:</div>
-<pre><span class="comment">/* ACF Field Group: "Donor Wall" */</span>
-
-<span class="sel">Repeater:</span> <span class="val">facilities</span>
-  ├── <span class="prop">facility_name</span>        <span class="comment">// Text — e.g. "Beis Kushner"</span>
-  ├── <span class="prop">facility_subtitle</span>    <span class="comment">// Text — e.g. "Facility Dedication"</span>
-  ├── <span class="prop">facility_description</span> <span class="comment">// Textarea — optional intro text</span>
-  ├── <span class="prop">primary_label</span>        <span class="comment">// Text — e.g. "Beis Dedication"</span>
-  ├── <span class="prop">primary_family</span>       <span class="comment">// Text — e.g. "The Kushner Family"</span>
-  ├── <span class="prop">primary_inscription</span>  <span class="comment">// Textarea — dedication message</span>
-  ├── <span class="sel">Repeater:</span> <span class="val">sub_dedications</span>
-  │     ├── <span class="prop">sub_type</span>       <span class="comment">// Text — e.g. "Aron Kodesh Dedication"</span>
-  │     ├── <span class="prop">sub_family</span>     <span class="comment">// Text — donor family name</span>
-  │     └── <span class="prop">sub_note</span>       <span class="comment">// Textarea — dedication note</span>
-  └── <span class="sel">Repeater:</span> <span class="val">donor_tiers</span>
-        ├── <span class="prop">tier_label</span>     <span class="comment">// Text — e.g. "Benefactors", "Patrons"</span>
-        └── <span class="sel">Repeater:</span> <span class="val">donors</span>
-              └── <span class="prop">donor_name</span> <span class="comment">// Text — individual donor name</span></pre>
-
-    <div class="change-desc"><strong>Template file:</strong> <code>page-donor-wall.php</code></div>
-<pre><span class="tag">&lt;?php</span> <span class="comment">/* Template Name: Donor Wall */</span>
-get_header();
-
-<span class="comment">// Hero section (hardcoded or from page content)</span>
-<span class="tag">?&gt;</span>
-<span class="sel">&lt;section class="hero"&gt;</span> ... <span class="sel">&lt;/section&gt;</span>
-
-<span class="tag">&lt;?php</span>
-<span class="comment">// Loop through facilities</span>
-<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>) ):
-  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>) ): the_row();
-    <span class="comment">// Output facility header</span>
-    <span class="comment">// Output primary dedication plaque</span>
-    <span class="comment">// Loop sub_dedications</span>
-    <span class="comment">// Loop donor_tiers → loop donors</span>
-  <span class="prop">endwhile</span>;
-<span class="prop">endif</span>;
-
-get_footer();</pre>
-
-    <div class="change-desc"><strong>Scope:</strong> New page template + new ACF field group. CSS can go in <code>donor-wall.css</code>,
-      enqueued conditionally via <code>is_page_template('page-donor-wall.php')</code>.</div>
-  </div>
-
-  <!-- ── CHANGE 5: GIVE BACK ↔ DONOR WALL CONNECTION ── -->
-  <div class="change-item" id="donor-block-connection">
-    <div class="change-date">April 22, 2026</div>
-    <span class="status pending">Pending</span>
-    <div class="change-title">Give Back Page: Donor Block Should Pull Real Names</div>
-    <div class="change-desc">
-      The fading grid donor block on <code>/give-back/</code> currently shows placeholder names.
-      It should dynamically pull a subset of real donor names from the same ACF data that powers
-      the full <code>/donor-wall/</code> page, so names only need to be maintained in one place.
-    </div>
-
-    <div class="change-desc"><strong>How it works:</strong></div>
-<pre><span class="comment">// In the Give Back template (or a shortcode/block):</span>
-<span class="comment">// 1. Get the Donor Wall page by slug or ID</span>
-<span class="prop">$wall_page</span> = get_page_by_path(<span class="val">'donor-wall'</span>);
-
-<span class="comment">// 2. Pull all donor names from the ACF repeater</span>
-<span class="prop">$all_donors</span> = [];
-<span class="prop">if</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ):
-  <span class="prop">while</span>( have_rows(<span class="val">'facilities'</span>, <span class="prop">$wall_page</span>->ID) ): the_row();
-    <span class="prop">if</span>( have_rows(<span class="val">'donor_tiers'</span>) ):
-      <span class="prop">while</span>( have_rows(<span class="val">'donor_tiers'</span>) ): the_row();
-        <span class="prop">if</span>( have_rows(<span class="val">'donors'</span>) ):
-          <span class="prop">while</span>( have_rows(<span class="val">'donors'</span>) ): the_row();
-            <span class="prop">$all_donors</span>[] = get_sub_field(<span class="val">'donor_name'</span>);
-          <span class="prop">endwhile</span>;
-        <span class="prop">endif</span>;
-      <span class="prop">endwhile</span>;
-    <span class="prop">endif</span>;
-  <span class="prop">endwhile</span>;
-<span class="prop">endif</span>;
-
-<span class="comment">// 3. Shuffle and take 24 names (8 per page × 3 pages)</span>
-shuffle(<span class="prop">$all_donors</span>);
-<span class="prop">$display_donors</span> = array_slice(<span class="prop">$all_donors</span>, 0, 24);</pre>
-
     <div class="note">
-      <strong>Key point:</strong> Donor names are entered once on the Donor Wall page via ACF.
-      The Give Back fading grid reads from that same data — no duplicate entry needed.
-      When a new donor is added to the wall, they automatically appear in the Give Back rotation.
+      <strong>Note:</strong> These target WordPress menu item IDs. If menu items are re-created,
+      the IDs will change and these selectors will need updating. A more robust approach would use
+      a custom CSS class added via <code>nav_menu_css_class</code> filter.
     </div>
 
-    <div class="change-desc"><strong>Previews:</strong>
-      <a href="morasha-giveback-preview.html" style="color:#46764B;">Give Back with donor block</a> &nbsp;|&nbsp;
-      <a href="morasha-donor-wall.html" style="color:#46764B;">Full Donor Wall</a>
-    </div>
+    <div class="change-desc"><strong>Scope:</strong> Global — main navigation on all pages.</div>
+    <div class="change-desc"><strong>Files:</strong> <code>style.css</code></div>
+  </div>
 
-    <div class="change-desc"><strong>Scope:</strong> <code>/give-back/</code> page template. Depends on the Donor Wall ACF fields (Change #4) being set up first.</div>
+  <!-- ── NOTE ABOUT PAGE-SPECIFIC DOCS ── -->
+  <div class="change-item" id="page-docs">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status approved" style="background:#e3f2fd; color:#1565c0;">Info</span>
+    <div class="change-title">Page-Specific Change & Build Docs</div>
+    <div class="change-desc">
+      Each page now has its own detailed change doc (for pages that exist on staging) or build instructions
+      (for new pages). These are linked from each card on the <a href="index.html" style="color:#46764B;">index page</a>.
+    </div>
+    <div class="change-desc">
+      <strong>Change docs:</strong> Homepage, Dates &amp; Rates, Camp Landing, Alumni &amp; Events, Rentals, Give Back<br>
+      <strong>Build instructions:</strong> Mission &amp; Values, Kollel Schedule, Kollel FAQs, Shalhevet Newsletter, Donor Wall
+    </div>
   </div>
 
 </div>

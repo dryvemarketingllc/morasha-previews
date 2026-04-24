@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dates &amp; Rates Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+  .change-desc ul {
+    margin: 8px 0 0 20px;
+    list-style: disc;
+  }
+  .change-desc ul li {
+    margin-bottom: 6px;
+  }
+  .change-desc code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+  pre .added { color: #b5cea8; }
+  pre .removed { color: #f48771; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .sub-heading {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--grey); margin: 24px 0 8px;
+  }
+
+  .qa-list {
+    list-style: none;
+    margin: 12px 0;
+    padding: 0;
+  }
+  .qa-list li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    padding: 6px 0 6px 28px;
+    position: relative;
+    border-bottom: 1px solid #f4f4f4;
+  }
+  .qa-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Dates &amp; Rates Changes</h1>
+  <p>Diff between the current staging implementation and the refined design. Confined to four sections: hero, dates grid, tuition, cancellation.</p>
+</div>
+
+<div class="content">
+
+  <!-- ── SECTION 1: HERO ── -->
+  <div class="change-item" id="hero">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Hero (.dp__header)</div>
+    <div class="change-desc">
+      Shrink the hero, rename the h1, and remove the dates grid from inside it. The dates grid moves to its own section below (see #2).
+    </div>
+
+    <div class="change-desc"><strong>Current state:</strong>
+      <ul>
+        <li>Background <code>#142b15</code> (correct, keep)</li>
+        <li>Contains h1 "2026 Camp Morasha Dates" and the entire dates grid nested inside</li>
+        <li>h1 font-size 56px desktop</li>
+        <li>Padding 46px top / 4rem bottom</li>
+      </ul>
+    </div>
+
+    <div class="change-desc"><strong>Change to:</strong>
+      <ul>
+        <li>Remove the dates grid from inside this section (move it to its own section)</li>
+        <li>Change h1 text from "2026 Camp Morasha Dates" to "Dates &amp; Rates"</li>
+        <li>Shrink the hero -- it no longer needs to fit a grid</li>
+        <li>Vertically center the h1 in the hero box</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">HTML Diff</div>
+<pre><span class="comment">&lt;!-- BEFORE --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__header"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__header__inner container"<span class="tag">&gt;</span>
+    <span class="tag">&lt;h1</span> class="dp__header__title"<span class="tag">&gt;</span><span class="removed">2026 Camp Morasha Dates</span><span class="tag">&lt;/h1&gt;</span>
+    <span class="removed">&lt;div class="dp__dates-grid"&gt;</span>
+      <span class="removed">&lt;!-- 6 date cards nested here --&gt;</span>
+    <span class="removed">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="comment">&lt;!-- AFTER --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__header"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__header__inner container"<span class="tag">&gt;</span>
+    <span class="tag">&lt;h1</span> class="dp__header__title"<span class="tag">&gt;</span><span class="added">Dates &amp; Rates</span><span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="sub-heading">CSS Diff</div>
+<pre><span class="comment">/* Add flex-centering and min-height, clear padding-bottom */</span>
+<span class="sel">.dp__header</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">min-height</span>: <span class="val">320px</span>;
+  <span class="prop">padding-top</span>: <span class="val">148px</span>;   <span class="comment">/* clears fixed two-tier nav */</span>
+  <span class="prop">padding-bottom</span>: <span class="val">0</span>;
+}
+<span class="sel">.dp__header__inner</span> { <span class="prop">width</span>: <span class="val">100%</span>; }
+
+<span class="comment">/* Remove the big bottom margin on the title */</span>
+<span class="sel">.dp__header__title</span> { <span class="prop">margin-bottom</span>: <span class="val">0</span>; }
+
+<span class="sel">@media (max-width: 1024px)</span> {
+  <span class="sel">.dp__header</span> { <span class="prop">padding-top</span>: <span class="val">128px</span>; <span class="prop">min-height</span>: <span class="val">280px</span>; }
+}
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.dp__header</span> { <span class="prop">padding-top</span>: <span class="val">104px</span>; <span class="prop">min-height</span>: <span class="val">220px</span>; }
+  <span class="sel">.dp__header__title</span> { <span class="prop">font-size</span>: <span class="val">36px</span>; }
+}</pre>
+  </div>
+
+  <!-- ── SECTION 2: DATES ── -->
+  <div class="change-item" id="dates">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Dates Section (new standalone section)</div>
+    <div class="change-desc">
+      Move the dates grid out of the hero into its own section on a white background. Redesign with left-aligned text, hairline borders, serif dates, and a highlighted Full Summer card.
+    </div>
+
+    <div class="change-desc"><strong>Current state:</strong>
+      <ul>
+        <li>Nested inside the dark-green hero</li>
+        <li>3-column grid of white cards, centered text</li>
+        <li>Label: light-green (<code>#9BBA91</code>) condensed bold uppercase, 20-24px</li>
+        <li>Date: Roboto medium 24-36px in dark-green</li>
+        <li>All cards identical (no highlight for Full Summer)</li>
+      </ul>
+    </div>
+
+    <div class="change-desc"><strong>Change to:</strong>
+      <ul>
+        <li>New standalone section on white background below the hero</li>
+        <li>Left-align label and date (not centered)</li>
+        <li>Label: condensed uppercase, smaller (12px), in primary green <code>#46764B</code></li>
+        <li>Date: serif (Kefa), 22-26px, dark green <code>#142B15</code></li>
+        <li>Highlight Full Summer card with light-green (<code>#DAE4D0</code>) background</li>
+        <li>Uniform hairline borders around every cell (no gap-based dividers)</li>
+        <li>Add section head: eyebrow "Camp Morasha" + h2 "2026 Dates"</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">HTML Diff</div>
+<pre><span class="comment">&lt;!-- BEFORE: grid was inside .dp__header with no section head --&gt;</span>
+
+<span class="comment">&lt;!-- AFTER: new top-level section --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__dates"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__dates__inner container"<span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class="dp__dates__head"<span class="tag">&gt;</span>
+      <span class="tag">&lt;span</span> class="dp__dates__eyebrow"<span class="tag">&gt;</span>Camp Morasha<span class="tag">&lt;/span&gt;</span>
+      <span class="tag">&lt;h2</span> class="dp__dates__title"<span class="tag">&gt;</span>2026 Dates<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class="dp__dates-grid"<span class="tag">&gt;</span>
+      <span class="tag">&lt;div</span> class="<span class="added">dp__date-card dp__date-card--feature</span>"<span class="tag">&gt;</span>
+        <span class="tag">&lt;span</span> class="dp__date-card__label"<span class="tag">&gt;</span>Full Summer<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;span</span> class="dp__date-card__date"<span class="tag">&gt;</span>June 30 &ndash; August 18<span class="tag">&lt;/span&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;div</span> class="dp__date-card"<span class="tag">&gt;</span>
+        <span class="tag">&lt;span</span> class="dp__date-card__label"<span class="tag">&gt;</span>First Session<span class="tag">&lt;/span&gt;</span>
+        <span class="tag">&lt;span</span> class="dp__date-card__date"<span class="tag">&gt;</span>June 30 &ndash; July 28<span class="tag">&lt;/span&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+      <span class="comment">&lt;!-- Second Session, Staff Orientation, Visiting Day, Morasha Mania --&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="sub-heading">CSS Diff</div>
+<pre><span class="sel">.dp__dates</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">80px 0</span>;
+}
+<span class="sel">.dp__dates__inner</span> { <span class="prop">max-width</span>: <span class="val">1100px</span>; <span class="prop">margin</span>: <span class="val">0 auto</span>; <span class="prop">padding</span>: <span class="val">0 48px</span>; }
+<span class="sel">.dp__dates__head</span> { <span class="prop">margin-bottom</span>: <span class="val">48px</span>; }
+<span class="sel">.dp__dates__eyebrow</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">14px</span>;
+  <span class="prop">font-family</span>: <span class="val">"Roboto Condensed", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+}
+<span class="sel">.dp__dates__title</span> {
+  <span class="prop">font-family</span>: <span class="val">"Kefa", Georgia, serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(32px, 3.5vw, 44px)</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.015em</span>;
+}
+
+<span class="comment">/* REPLACE existing .dp__dates-grid and .dp__date-card styles */</span>
+<span class="sel">.dp__dates-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+  <span class="prop">gap</span>: <span class="val">0</span>;                                  <span class="comment">/* was 1.25rem gap */</span>
+  <span class="prop">border-top</span>: <span class="val">1px solid rgba(20,43,21,0.12)</span>;
+  <span class="prop">border-left</span>: <span class="val">1px solid rgba(20,43,21,0.12)</span>;
+}
+<span class="sel">.dp__date-card</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">32px 28px</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">align-items</span>: <span class="val">flex-start</span>;                 <span class="comment">/* was: center */</span>
+  <span class="prop">text-align</span>: <span class="val">left</span>;                        <span class="comment">/* was: center */</span>
+  <span class="prop">border-right</span>: <span class="val">1px solid rgba(20,43,21,0.12)</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(20,43,21,0.12)</span>;
+  <span class="prop">border-radius</span>: <span class="val">0</span>;
+}
+<span class="sel">.dp__date-card--feature</span> {                  <span class="comment">/* NEW modifier */</span>
+  <span class="prop">background</span>: <span class="val">#DAE4D0</span>;
+}
+<span class="sel">.dp__date-card__label</span> {
+  <span class="prop">font-family</span>: <span class="val">"Roboto Condensed", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;                         <span class="comment">/* was 20-24px */</span>
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;                          <span class="comment">/* was #9BBA91 */</span>
+  <span class="prop">margin-bottom</span>: <span class="val">12px</span>;
+}
+<span class="sel">.dp__date-card__date</span> {
+  <span class="prop">font-family</span>: <span class="val">"Kefa", Georgia, serif</span>;     <span class="comment">/* was Roboto */</span>
+  <span class="prop">font-weight</span>: <span class="val">700</span>;                        <span class="comment">/* was 500 */</span>
+  <span class="prop">font-size</span>: <span class="val">clamp(22px, 1.8vw, 26px)</span>;     <span class="comment">/* was 24-36px */</span>
+  <span class="prop">line-height</span>: <span class="val">1.15</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.01em</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;                          <span class="comment">/* was #2A522E */</span>
+}
+
+<span class="sel">@media (max-width: 1024px)</span> {
+  <span class="sel">.dp__dates-grid</span> { <span class="prop">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; }
+}
+<span class="sel">@media (max-width: 640px)</span> {
+  <span class="sel">.dp__dates-grid</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; }
+}</pre>
+
+    <div class="note">
+      <strong>Content fix:</strong> "STaff Orientation" should be corrected to "Staff Orientation" (typo on the staging page).
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: TUITION ── -->
+  <div class="change-item" id="tuition">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Tuition Section (.dp__tuition)</div>
+    <div class="change-desc">
+      New background color, cleaner table styling, swapped order of "Tuition includes" and Alufim footnote with visual emphasis flipped.
+    </div>
+
+    <div class="change-desc"><strong>Current state:</strong>
+      <ul>
+        <li>White background</li>
+        <li>h2 "2026 Camp Morasha Tuition" -- 56px serif</li>
+        <li>Table: dark-green header row, alternating row backgrounds (odd <code>#DAE4D0</code>, even <code>#9BBA91</code>)</li>
+        <li>Footnote paragraph (Alufim) -- 18-20px Roboto, grey, centered</li>
+        <li>"Tuition includes" paragraph below -- 18-20px Roboto, charcoal, left-aligned</li>
+      </ul>
+    </div>
+
+    <div class="change-desc"><strong>Change to:</strong>
+      <ul>
+        <li>Background changes to lightest green <code>#DAE4D0</code></li>
+        <li>h2 text becomes "2026 Rates" (shorter), with a small condensed "Tuition" eyebrow above</li>
+        <li>Table: keep dark-green header row. Drop alternating row colors -- rows on white with hairline dividers. Prices right-aligned in serif. Grade column in serif.</li>
+        <li>Move "Tuition includes" up to sit immediately below the table, inside a white box with green eyebrow label</li>
+        <li>Move the Alufim footnote down, rendered as muted grey small sans-serif (fine print)</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">HTML Diff</div>
+<pre><span class="comment">&lt;!-- BEFORE --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__tuition"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__tuition__inner container"<span class="tag">&gt;</span>
+    <span class="tag">&lt;h2</span> class="dp__tuition__title"<span class="tag">&gt;</span><span class="removed">2026 Camp Morasha Tuition</span><span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;div</span> class="dp__tuition__table-wrap"<span class="tag">&gt;</span>
+      <span class="tag">&lt;table</span> class="dp__tuition__table"<span class="tag">&gt;</span>...<span class="tag">&lt;/table&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="removed">&lt;p class="dp__tuition__footnote"&gt;*Alufim/fot...&lt;/p&gt;</span>
+    <span class="removed">&lt;p class="dp__tuition__included"&gt;Tuition includes...&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="comment">&lt;!-- AFTER --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__tuition"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__tuition__inner container"<span class="tag">&gt;</span>
+    <span class="added">&lt;div class="dp__tuition__head"&gt;</span>
+      <span class="added">&lt;span class="dp__tuition__eyebrow"&gt;Tuition&lt;/span&gt;</span>
+      <span class="tag">&lt;h2</span> class="dp__tuition__title"<span class="tag">&gt;</span><span class="added">2026 Rates</span><span class="tag">&lt;/h2&gt;</span>
+    <span class="added">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class="dp__tuition__table-wrap"<span class="tag">&gt;</span>
+      <span class="tag">&lt;table</span> class="dp__tuition__table"<span class="tag">&gt;</span>...<span class="tag">&lt;/table&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="added">&lt;div class="dp__tuition__included"&gt;</span>
+      <span class="added">&lt;strong&gt;Tuition includes&lt;/strong&gt;</span>
+      <span class="added">Transportation to camp, laundry, accident and</span>
+      <span class="added">secondary care, all camp trips, camp t-shirt,</span>
+      <span class="added">and end-of-summer divisional apparel...</span>
+    <span class="added">&lt;/div&gt;</span>
+    <span class="added">&lt;p class="dp__tuition__footnote"&gt;</span>
+      <span class="added">&lt;sup&gt;*&lt;/sup&gt; &lt;strong&gt;Alufim/fot&lt;/strong&gt; ...</span>
+    <span class="added">&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="sub-heading">CSS Diff</div>
+<pre><span class="sel">.dp__tuition</span> {
+  <span class="prop">background</span>: <span class="val">#DAE4D0</span>;                     <span class="comment">/* was white */</span>
+  <span class="prop">padding</span>: <span class="val">80px 0</span>;
+}
+<span class="sel">.dp__tuition__inner</span> { <span class="prop">max-width</span>: <span class="val">1100px</span>; <span class="prop">margin</span>: <span class="val">0 auto</span>; <span class="prop">padding</span>: <span class="val">0 48px</span>; }
+
+<span class="comment">/* New section head with eyebrow */</span>
+<span class="sel">.dp__tuition__head</span> { <span class="prop">margin-bottom</span>: <span class="val">48px</span>; }
+<span class="sel">.dp__tuition__eyebrow</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">14px</span>;
+  <span class="prop">font-family</span>: <span class="val">"Roboto Condensed", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+}
+<span class="sel">.dp__tuition__title</span> {
+  <span class="prop">font-family</span>: <span class="val">"Kefa", Georgia, serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(32px, 3.5vw, 44px)</span>;    <span class="comment">/* was 56px */</span>
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">0</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.015em</span>;
+}
+
+<span class="comment">/* Table: drop pastel alternation, right-align prices, serif numbers */</span>
+<span class="sel">.dp__tuition__table</span> { <span class="prop">background</span>: <span class="val">#fff</span>; <span class="prop">border-collapse</span>: <span class="val">collapse</span>; }
+<span class="sel">.dp__tuition__table thead tr</span> { <span class="prop">background</span>: <span class="val">#142B15</span>; }
+<span class="sel">.dp__tuition__table thead th</span> {
+  <span class="prop">font-family</span>: <span class="val">"Roboto Condensed", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">20px 24px</span>;
+  <span class="prop">text-align</span>: <span class="val">left</span>;
+}
+<span class="sel">.dp__tuition__table thead th:not(:first-child)</span> { <span class="prop">text-align</span>: <span class="val">right</span>; }
+<span class="sel">.dp__tuition__table tbody tr:nth-child(odd),
+.dp__tuition__table tbody tr:nth-child(even)</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;                         <span class="comment">/* kill the pastel alternation */</span>
+}
+<span class="sel">.dp__tuition__table tbody td</span> {
+  <span class="prop">padding</span>: <span class="val">28px 24px</span>;
+  <span class="prop">font-family</span>: <span class="val">"Kefa", Georgia, serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">vertical-align</span>: <span class="val">middle</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(20,43,21,0.1)</span>;
+}
+<span class="sel">.dp__tuition__table tbody tr:last-child td</span> { <span class="prop">border-bottom</span>: <span class="val">none</span>; }
+<span class="sel">.dp__tuition__table td:first-child</span> {       <span class="comment">/* Grade column */</span>
+  <span class="prop">font-size</span>: <span class="val">18px</span>;
+  <span class="prop">width</span>: <span class="val">180px</span>;
+}
+<span class="sel">.dp__tuition__table td:not(:first-child)</span> { <span class="comment">/* Price columns */</span>
+  <span class="prop">text-align</span>: <span class="val">right</span>;
+  <span class="prop">font-size</span>: <span class="val">clamp(22px, 2vw, 28px)</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.015em</span>;
+}
+
+<span class="comment">/* "Tuition includes" -- prominent white box with green eyebrow */</span>
+<span class="sel">.dp__tuition__included</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">padding</span>: <span class="val">24px 28px</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">20px</span>;
+  <span class="prop">font-family</span>: <span class="val">"Roboto", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">400</span>;
+  <span class="prop">font-size</span>: <span class="val">16px</span>;
+  <span class="prop">line-height</span>: <span class="val">1.65</span>;
+  <span class="prop">color</span>: <span class="val">#222</span>;
+  <span class="prop">text-align</span>: <span class="val">left</span>;
+}
+<span class="sel">.dp__tuition__included strong</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">font-family</span>: <span class="val">"Roboto Condensed", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">12px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">8px</span>;
+}
+
+<span class="comment">/* Alufim footnote -- muted fine print */</span>
+<span class="sel">.dp__tuition__footnote</span> {
+  <span class="prop">font-family</span>: <span class="val">"Roboto", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">400</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;                          <span class="comment">/* was 18-20px */</span>
+  <span class="prop">color</span>: <span class="val">#828282</span>;
+  <span class="prop">line-height</span>: <span class="val">1.6</span>;
+  <span class="prop">text-align</span>: <span class="val">left</span>;                         <span class="comment">/* was centered */</span>
+  <span class="prop">max-width</span>: <span class="val">none</span>;
+  <span class="prop">padding</span>: <span class="val">0 4px</span>;
+  <span class="prop">margin</span>: <span class="val">0</span>;
+}
+<span class="sel">.dp__tuition__footnote sup</span> { <span class="prop">color</span>: <span class="val">#46764B</span>; <span class="prop">font-weight</span>: <span class="val">700</span>; }
+<span class="sel">.dp__tuition__footnote strong</span> { <span class="prop">color</span>: <span class="val">#142B15</span>; <span class="prop">font-weight</span>: <span class="val">700</span>; }</pre>
+
+    <div class="note">
+      <strong>Keep:</strong> The existing <code>.dp__tuition__table-wrap { overflow-x: auto }</code> rule should stay for mobile scroll.
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: CANCELLATION ── -->
+  <div class="change-item" id="cancellation">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Cancellation Section (.dp__cancel)</div>
+    <div class="change-desc">
+      De-emphasize this section: smaller heading, background swapped to white, itemized list with deadlines bold and penalties muted.
+    </div>
+
+    <div class="change-desc"><strong>Current state:</strong>
+      <ul>
+        <li>Background lightest green <code>#DAE4D0</code></li>
+        <li>h2 "Camper Refund Policy" -- 28-36px Roboto medium, centered</li>
+        <li>2-column grid with cancellation rules as lines of plain text separated by <code>&lt;br /&gt;</code></li>
+        <li>Small italic centered note at the bottom</li>
+        <li>Feels like another hero-scale section competing with the pricing info above</li>
+      </ul>
+    </div>
+
+    <div class="change-desc"><strong>Change to:</strong>
+      <ul>
+        <li>Background changes to white (clearly secondary to the green Tuition section above)</li>
+        <li>Dramatically de-emphasize the heading -- 20px tight serif, left-aligned, with small "Refund policy" eyebrow</li>
+        <li>2-column head: title on the left, intro note becomes a paragraph on the right</li>
+        <li>Replace the 2-column text blobs with an itemized list of hairline-divided rows: <code>[deadline] [penalty]</code></li>
+        <li>Deadline bold in dark green on the left; penalty plain-weight grey on the right</li>
+        <li>Keep the "No refund" line visually distinct (muted red) without shouting</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">HTML Diff</div>
+<pre><span class="comment">&lt;!-- BEFORE --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__cancel"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__cancel__inner container"<span class="tag">&gt;</span>
+    <span class="tag">&lt;h2</span> class="dp__cancel__title"<span class="tag">&gt;</span><span class="removed">Camper Refund Policy</span><span class="tag">&lt;/h2&gt;</span>
+    <span class="removed">&lt;div class="dp__cancel__columns"&gt;</span>
+      <span class="removed">&lt;div class="dp__cancel__col"&gt;...&lt;/div&gt;</span>
+      <span class="removed">&lt;div class="dp__cancel__col"&gt;...&lt;/div&gt;</span>
+    <span class="removed">&lt;/div&gt;</span>
+    <span class="removed">&lt;p class="dp__cancel__note"&gt;These cancellation fees...&lt;/p&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="comment">&lt;!-- AFTER --&gt;</span>
+<span class="tag">&lt;section</span> class="dp__cancel"<span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> class="dp__cancel__inner container"<span class="tag">&gt;</span>
+    <span class="added">&lt;div class="dp__cancel__head"&gt;</span>
+      <span class="added">&lt;div&gt;</span>
+        <span class="added">&lt;span class="dp__cancel__eyebrow"&gt;Refund policy&lt;/span&gt;</span>
+        <span class="tag">&lt;h2</span> class="dp__cancel__title"<span class="tag">&gt;</span><span class="added">Cancellation schedule</span><span class="tag">&lt;/h2&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+      <span class="added">&lt;p class="dp__cancel__note"&gt;Cancellation fees apply to</span>
+        <span class="added">both One Session and Full Summer campers...&lt;/p&gt;</span>
+    <span class="added">&lt;/div&gt;</span>
+    <span class="added">&lt;div class="dp__cancel__list"&gt;</span>
+      <span class="added">&lt;div class="dp__cancel__row"&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__when"&gt;Non-accepted campers&lt;/div&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__penalty dp__cancel__penalty--none"&gt;</span>
+          <span class="added">$1,500 Application fee returned&lt;/div&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+      <span class="added">&lt;div class="dp__cancel__row"&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__when"&gt;Cancellations before October 1&lt;/div&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__penalty"&gt;$250 penalty&lt;/div&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+      <span class="added">&lt;div class="dp__cancel__row"&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__when"&gt;Cancellations after October 1&lt;/div&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__penalty"&gt;$1,500 penalty&lt;/div&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+      <span class="added">&lt;div class="dp__cancel__row"&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__when"&gt;Cancellations after December 1&lt;/div&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__penalty"&gt;$2,500 penalty&lt;/div&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+      <span class="added">&lt;div class="dp__cancel__row"&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__when"&gt;Cancellations after February 1&lt;/div&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__penalty"&gt;$3,500 penalty&lt;/div&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+      <span class="added">&lt;div class="dp__cancel__row"&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__when"&gt;Cancellations after April 1&lt;/div&gt;</span>
+        <span class="added">&lt;div class="dp__cancel__penalty dp__cancel__penalty--full"&gt;</span>
+          <span class="added">No refund&lt;/div&gt;</span>
+      <span class="added">&lt;/div&gt;</span>
+    <span class="added">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/section&gt;</span></pre>
+
+    <div class="sub-heading">CSS Diff</div>
+<pre><span class="sel">.dp__cancel</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;                         <span class="comment">/* was #DAE4D0 */</span>
+  <span class="prop">padding</span>: <span class="val">56px 0 72px</span>;
+}
+<span class="sel">.dp__cancel__inner</span> { <span class="prop">max-width</span>: <span class="val">1100px</span>; <span class="prop">margin</span>: <span class="val">0 auto</span>; <span class="prop">padding</span>: <span class="val">0 48px</span>; }
+
+<span class="sel">.dp__cancel__head</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">280px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">56px</span>;
+  <span class="prop">align-items</span>: <span class="val">start</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+}
+<span class="sel">.dp__cancel__eyebrow</span> {
+  <span class="prop">display</span>: <span class="val">block</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">10px</span>;
+  <span class="prop">font-family</span>: <span class="val">"Roboto Condensed", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">11px</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">#46764B</span>;
+}
+<span class="sel">.dp__cancel__title</span> {
+  <span class="prop">font-family</span>: <span class="val">"Kefa", Georgia, serif</span>;      <span class="comment">/* was Roboto medium */</span>
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">20px</span>;                          <span class="comment">/* was 28-36px */</span>
+  <span class="prop">line-height</span>: <span class="val">1.2</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+  <span class="prop">text-align</span>: <span class="val">left</span>;                         <span class="comment">/* was centered */</span>
+  <span class="prop">margin-bottom</span>: <span class="val">0</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">-0.005em</span>;
+}
+<span class="sel">.dp__cancel__note</span> {
+  <span class="prop">font-family</span>: <span class="val">"Roboto", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">400</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>;
+  <span class="prop">font-style</span>: <span class="val">normal</span>;
+  <span class="prop">color</span>: <span class="val">#828282</span>;
+  <span class="prop">line-height</span>: <span class="val">1.6</span>;
+  <span class="prop">text-align</span>: <span class="val">left</span>;
+  <span class="prop">max-width</span>: <span class="val">56ch</span>;
+}
+
+<span class="comment">/* REPLACE .dp__cancel__columns with itemized list */</span>
+<span class="sel">.dp__cancel__list</span> {
+  <span class="prop">border-top</span>: <span class="val">1px solid rgba(20,43,21,0.1)</span>;
+}
+<span class="sel">.dp__cancel__row</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">340px 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">24px</span>;
+  <span class="prop">padding</span>: <span class="val">12px 0</span>;
+  <span class="prop">border-bottom</span>: <span class="val">1px solid rgba(20,43,21,0.08)</span>;
+  <span class="prop">align-items</span>: <span class="val">baseline</span>;
+}
+<span class="sel">.dp__cancel__when</span> {                         <span class="comment">/* LEFT -- emphasized */</span>
+  <span class="prop">font-family</span>: <span class="val">"Roboto", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;
+  <span class="prop">color</span>: <span class="val">#142B15</span>;
+}
+<span class="sel">.dp__cancel__penalty</span> {                      <span class="comment">/* RIGHT -- muted */</span>
+  <span class="prop">font-family</span>: <span class="val">"Roboto", sans-serif</span>;
+  <span class="prop">font-weight</span>: <span class="val">400</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>;
+  <span class="prop">color</span>: <span class="val">#828282</span>;
+}
+<span class="sel">.dp__cancel__penalty--none</span> {
+  <span class="prop">color</span>: <span class="val">#828282</span>;
+  <span class="prop">font-style</span>: <span class="val">italic</span>;
+}
+<span class="sel">.dp__cancel__penalty--full</span> {
+  <span class="prop">color</span>: <span class="val">#a3341f</span>;                           <span class="comment">/* muted red for "No refund" */</span>
+}
+
+<span class="sel">@media (max-width: 1024px)</span> {
+  <span class="sel">.dp__cancel__head</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; <span class="prop">gap</span>: <span class="val">16px</span>; <span class="prop">margin-bottom</span>: <span class="val">32px</span>; }
+  <span class="sel">.dp__cancel__row</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; <span class="prop">gap</span>: <span class="val">6px</span>; <span class="prop">padding</span>: <span class="val">10px 0</span>; }
+}</pre>
+  </div>
+
+  <!-- ── SECTION ORDER ── -->
+  <div class="change-item" id="section-order">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">Final Section Order on Page</div>
+    <div class="change-desc">
+      The sequence stays the same, but the Dates grid now lives in its own section instead of nested in the hero:
+    </div>
+<pre><span class="val">Hero</span>         (<span class="sel">dp__header</span>)   <span class="comment">— dark green, h1 "Dates &amp; Rates" only</span>
+<span class="val">Dates</span>        (<span class="sel">dp__dates</span>)    <span class="comment">— white, 3-col grid, Full Summer featured  (new section)</span>
+<span class="val">Tuition</span>      (<span class="sel">dp__tuition</span>)  <span class="comment">— lightest green, table + includes box + footnote</span>
+<span class="val">Cancellation</span> (<span class="sel">dp__cancel</span>)   <span class="comment">— white, de-emphasized list</span></pre>
+  </div>
+
+  <!-- ── QA CHECKLIST ── -->
+  <div class="change-item" id="qa-checklist">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">QA Checklist</div>
+    <div class="change-desc">
+      Verify each of the following after implementation:
+    </div>
+    <ul class="qa-list">
+      <li>"STaff Orientation" corrected to "Staff Orientation" (typo fix)</li>
+      <li>h1 text changed to "Dates &amp; Rates"</li>
+      <li>Dates grid moved out of hero into its own section</li>
+      <li>Full Summer card has light-green fill (<code>#DAE4D0</code>)</li>
+      <li>Tuition section background is lightest green</li>
+      <li>Table rows are white (no pastel alternation)</li>
+      <li>"Tuition includes" is in a white box ABOVE the Alufim footnote</li>
+      <li>Alufim footnote is small grey fine print</li>
+      <li>Cancellation section is on white, title is small serif, rows are hairline-divided</li>
+      <li>Deadlines bold / penalties plain grey</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>
