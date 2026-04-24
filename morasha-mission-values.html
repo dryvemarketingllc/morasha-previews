@@ -8,6 +8,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+    font-family: 'Kefa';
+    font-weight: 700;
+    src: local('Kefa Bold'), local('Kefa'), url('assets/fonts/Kefa.ttc') format('collection');
+  }
   :root {
     --green: #46764B;
     --dark-green: #2A522E;
@@ -17,7 +22,7 @@
     --grey: #ECECEC;
     --text-grey: #828282;
     --charcoal: #222222;
-    --serif: Georgia, 'Times New Roman', serif;
+    --serif: 'Kefa', Georgia, 'Times New Roman', serif;
     --sans: 'Roboto', system-ui, sans-serif;
     --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
     --hebrew: 'Frank Ruhl Libre', Georgia, serif;
@@ -31,6 +36,7 @@
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
   }
+  img { display: block; max-width: 100%; }
   a { text-decoration: none; color: inherit; }
   h1, h2, h3, h4 {
     font-family: var(--serif);
@@ -51,7 +57,7 @@
     padding: 0 48px;
   }
 
-  /* ============ NAV (simplified for demo) ============ */
+  /* ============ NAV (from homepage) ============ */
   header {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -68,14 +74,14 @@
     align-items: center;
     justify-content: space-between;
   }
-  .logo {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 22px;
-    letter-spacing: -0.02em;
-    color: var(--darkest-green);
+  .logo { display: flex; align-items: center; }
+  .logo img { height: 40px; width: auto; display: block; }
+  footer .logo img { height: 44px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
   }
-  .nav-links { display: flex; align-items: center; gap: 36px; }
   .nav-links a {
     font-size: 14px;
     font-weight: 500;
@@ -83,28 +89,32 @@
     transition: color .2s;
   }
   .nav-links a:hover { color: var(--green); }
-  .nav-cta {
+  .nav-links a.btn-primary { color: #fff; }
+  .nav-links a.btn-primary:hover { color: #fff; background: var(--green); }
+  .btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    background: var(--darkest-green);
-    color: #fff !important;
-    border-radius: 2px;
-    font-size: 13px;
+    padding: 12px 24px;
+    font-family: var(--sans);
     font-weight: 500;
-    transition: background .25s;
+    font-size: 14px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
   }
-  .nav-cta:hover { background: var(--green); }
+  .btn-primary { background: var(--darkest-green); color: #fff; }
+  .btn-primary:hover { background: var(--green); }
 
-  /* ============ HERO ============ */
+  /* ============ HERO (shortened) ============ */
   .hero {
-    padding: 200px 0 140px;
+    padding: 128px 0 72px;
     background: var(--darkest-green);
     color: #fff;
     position: relative;
     overflow: hidden;
-    min-height: 720px;
     display: flex;
     align-items: center;
   }
@@ -136,7 +146,7 @@
     width: 100%;
   }
   .hero-play {
-    margin-top: 56px;
+    margin-top: 28px;
     display: inline-flex;
     align-items: center;
     gap: 14px;
@@ -151,7 +161,7 @@
   }
   .hero-play:hover { color: var(--light-green); }
   .hero-play .play-icon {
-    width: 48px; height: 48px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     background: rgba(255,255,255,0.12);
     border: 1px solid rgba(255,255,255,0.4);
@@ -168,16 +178,16 @@
   .hero-play .play-icon svg { margin-left: 2px; }
   .hero .eyebrow {
     color: var(--light-green);
-    margin-bottom: 32px;
+    margin-bottom: 18px;
   }
   .hero-quote {
     font-family: var(--serif);
     font-weight: 700;
-    font-size: clamp(40px, 5.2vw, 78px);
-    line-height: 1.02;
+    font-size: clamp(28px, 3.2vw, 46px);
+    line-height: 1.1;
     letter-spacing: -0.02em;
-    max-width: 18ch;
-    margin-bottom: 40px;
+    max-width: 32ch;
+    margin-bottom: 20px;
   }
   .hero-quote .mark {
     color: var(--light-green);
@@ -214,19 +224,12 @@
     color: var(--darkest-green);
   }
   .mission-body p {
-    font-size: 19px;
-    line-height: 1.65;
-    color: var(--charcoal);
-    margin-bottom: 24px;
-  }
-  .mission-body p:last-child { margin-bottom: 0; }
-  .mission-body p.lead {
     font-family: var(--serif);
-    font-size: 26px;
-    line-height: 1.4;
+    font-size: 22px;
+    line-height: 1.5;
     font-weight: 500;
     color: var(--darkest-green);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.005em;
   }
 
   /* ============ VALUES INTRO ============ */
@@ -351,99 +354,190 @@
     color: var(--charcoal);
     max-width: 48ch;
   }
-
-  /* ============ CLOSING ============ */
-  .closing {
-    padding: 140px 0;
-    background: var(--darkest-green);
-    color: #fff;
-    text-align: center;
+  /* ============ FOOTER (Morasha 2026 spec) ============ */
+  .site-footer {
+    background: #ececec;
+    padding: 48px 0 24px;
   }
-  .closing-inner {
-    max-width: 780px;
+  .site-footer__container {
+    max-width: 1440px;
     margin: 0 auto;
     padding: 0 48px;
   }
-  .closing .eyebrow {
-    color: var(--light-green);
-    margin-bottom: 24px;
-  }
-  .closing h2 {
-    font-size: clamp(36px, 4vw, 56px);
-    margin-bottom: 24px;
-    letter-spacing: -0.02em;
-  }
-  .closing p {
-    font-size: 19px;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 40px;
-  }
-  .closing-actions {
-    display: inline-flex;
-    gap: 14px;
+  .site-footer__inner {
+    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 40px;
+    padding-bottom: 40px;
   }
-  .btn {
-    display: inline-flex;
+  .site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-right: auto;
+    flex: 0 1 358px;
+  }
+  .site-footer__logo { color: #142b15; display: inline-block; }
+  .site-footer__logo img,
+  .site-footer__logo svg { height: 58px; width: auto; display: block; }
+  .site-footer__newsletter-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--dark-green);
+    margin: 0 0 8px;
+  }
+  .site-footer__newsletter-form {
+    display: flex;
+    gap: 4px;
+    max-width: 348px;
+    width: 100%;
+    height: 42px;
+  }
+  .site-footer__newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    height: 42px;
+    padding: 10px 12px;
+    border: none;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--green);
+    background: #fff;
+    outline: none;
+  }
+  .site-footer__newsletter-form input::placeholder {
+    color: var(--dark-green);
+    opacity: .6;
+  }
+  .site-footer__newsletter-form input:focus {
+    outline: 2px solid var(--green);
+    outline-offset: -2px;
+  }
+  .site-footer__newsletter-form button {
+    flex: 0 0 113px;
+    width: 113px;
+    height: 42px;
+    background: var(--dark-green);
+    border: 1px solid var(--dark-green);
+    color: #fff;
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .site-footer__newsletter-form button:hover { opacity: .85; }
+  .site-footer__social { display: flex; gap: 8px; }
+  .site-footer__social a {
+    display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: #142b15;
+    transition: opacity .2s;
+  }
+  .site-footer__social a:hover { opacity: .7; }
+  .site-footer__social svg { width: 20px; height: 20px; }
+  .site-footer__col { flex: 0 1 187px; }
+  .site-footer__col h4 {
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 15px;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: all .25s;
+    font-size: 16px;
+    color: #142b15;
+    margin: 0 0 16px;
+    letter-spacing: 0;
+    line-height: 1.4;
   }
-  .btn-light { background: #fff; color: var(--darkest-green); }
-  .btn-light:hover { background: var(--light-green); color: var(--darkest-green); }
-  .btn-ghost {
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.35);
+  .site-footer__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
   }
-  .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+  .site-footer__col a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    color: #2a522e;
+    line-height: 22px;
+    transition: color .2s;
+  }
+  .site-footer__col a:hover { color: #46764b; }
+  .site-footer__copyright {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: #2a522e;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid #d0d0cf;
+  }
+  .site-footer__copyright a { color: #2a522e; text-decoration: none; }
+  .site-footer__copyright a:hover { text-decoration: underline; }
+  @media (max-width: 1024px) {
+    .site-footer__inner { gap: 32px; }
+    .site-footer__col { flex: 0 1 50%; }
+  }
+  @media (max-width: 640px) {
+    .site-footer__container { padding: 0 24px; }
+    .site-footer__inner { gap: 24px; }
+    .site-footer__col { flex: 0 1 100%; }
+  }
+
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1024px) {
-    .hero { padding: 140px 0 96px; }
+    .hero { padding: 104px 0 56px; }
     .mission { padding: 96px 0; }
     .mission-inner { grid-template-columns: 1fr; gap: 40px; }
     .value { grid-template-columns: 1fr; min-height: 0; }
     .value[data-i="2"], .value[data-i="4"], .value[data-i="6"] { direction: ltr; }
     .value-image { min-height: 360px; }
     .value-content { padding: 64px 48px; }
-    .closing { padding: 96px 0; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 640px) {
-    .container, .nav, .hero-inner, .mission-inner, .closing-inner { padding-left: 24px; padding-right: 24px; }
+    .container, .nav, .hero-inner, .mission-inner { padding-left: 24px; padding-right: 24px; }
     .nav { padding: 16px 24px; }
     .nav-links { gap: 16px; }
-    .nav-links a:not(.nav-cta) { display: none; }
-    .hero { padding: 120px 0 72px; }
+    .nav-links a:not(.btn) { display: none; }
+    .hero { padding: 96px 0 48px; }
     .mission { padding: 72px 0; }
+    .mission-body p { font-size: 19px; }
     .values-intro { padding: 72px 0 48px; }
     .morasha-word span { font-size: 56px; }
     .morasha-word span::after { font-size: 9px; letter-spacing: 0.15em; }
     .value-content { padding: 56px 24px; }
     .value-letter { font-size: 120px; }
-    .closing { padding: 72px 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
   }
 </style>
 </head>
 <body>
 
+<!-- ============ NAV ============ -->
 <header>
   <nav class="nav">
-    <div class="logo">Morasha</div>
+    <a href="index.html" class="logo" aria-label="Morasha Camps">
+      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+    </a>
     <div class="nav-links">
       <a href="#">About</a>
       <a href="#">Camps</a>
-      <a href="#">Giving</a>
-      <a href="#" class="nav-cta">Apply</a>
+      <a href="morasha-dates-rates.html">Dates &amp; Rates</a>
+      <a href="#">Alumni &amp; Events</a>
+      <a href="#">Rentals</a>
+      <a href="#">Contact</a>
+      <a href="#" class="btn btn-primary">Donate</a>
     </div>
   </nav>
 </header>
@@ -473,10 +567,9 @@
   <div class="mission-inner">
     <div class="mission-label">
       <div class="eyebrow">The Mission</div>
-      <h2>Education is the cornerstone.</h2>
+      <h2>Education is the cornerstone</h2>
     </div>
     <div class="mission-body">
-      <p class="lead">Education is the cornerstone of the Morasha experience.</p>
       <p>Camp Morasha integrates the best in informal and formal Jewish education in all of its programming and activities through a transformative and fun, co-ed, outdoor summer experience for Jewish youth. Through commitment to Torah principles and engagement with nature and the larger world, the camp inspires an enduring love of Judaism, Israel, and community.</p>
     </div>
   </div>
@@ -485,18 +578,8 @@
 <!-- ============ VALUES INTRO ============ -->
 <section class="values-intro">
   <div class="container">
-    <div class="eyebrow">The Seven Values</div>
-    <h2>The values that spell Morasha.</h2>
+    <h2>The 7 values that spell Morasha</h2>
     <p>Our programs are built around seven values — one for each letter of our name — that guide our campers toward a life of meaning, learning, and leadership.</p>
-    <div class="morasha-word" aria-hidden="true">
-      <span data-word="Respect">M</span>
-      <span data-word="Observe">O</span>
-      <span data-word="Responsibility">R</span>
-      <span data-word="Appreciation">A</span>
-      <span data-word="Skill">S</span>
-      <span data-word="Heart">H</span>
-      <span data-word="Achdut">A</span>
-    </div>
   </div>
 </section>
 
@@ -505,7 +588,7 @@
 
   <!-- M -->
   <div class="value" data-i="1" style="--accent:#46764B">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider1.png')"></div>
     <div class="value-content">
       <div class="value-letter">M</div>
       <div class="value-title">
@@ -518,7 +601,7 @@
 
   <!-- O -->
   <div class="value" data-i="2" style="--accent:#2E5EA8">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1532012197267-da84d127e765?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider2.png')"></div>
     <div class="value-content">
       <div class="value-letter">O</div>
       <div class="value-title">
@@ -531,7 +614,7 @@
 
   <!-- R -->
   <div class="value" data-i="3" style="--accent:#7A4CA0">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider3.png')"></div>
     <div class="value-content">
       <div class="value-letter">R</div>
       <div class="value-title">
@@ -544,7 +627,7 @@
 
   <!-- A — Appreciation -->
   <div class="value" data-i="4" style="--accent:#C15827">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export1.png')"></div>
     <div class="value-content">
       <div class="value-letter">A</div>
       <div class="value-title">
@@ -557,7 +640,7 @@
 
   <!-- S -->
   <div class="value" data-i="5" style="--accent:#2E8B8B">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1530092285049-1c42085fd395?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export2.png')"></div>
     <div class="value-content">
       <div class="value-letter">S</div>
       <div class="value-title">
@@ -570,7 +653,7 @@
 
   <!-- H -->
   <div class="value" data-i="6" style="--accent:#A02134">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export3.png')"></div>
     <div class="value-content">
       <div class="value-letter">H</div>
       <div class="value-title">
@@ -583,7 +666,7 @@
 
   <!-- A — Achdut -->
   <div class="value" data-i="7" style="--accent:#D4A017">
-    <div class="value-image" style="background-image:url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1200&q=80')"></div>
+    <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export4.png')"></div>
     <div class="value-content">
       <div class="value-letter">A</div>
       <div class="value-title">
@@ -596,18 +679,63 @@
 
 </section>
 
-<!-- ============ CLOSING ============ -->
-<section class="closing">
-  <div class="closing-inner">
-    <div class="eyebrow">Come See For Yourself</div>
-    <h2>Seven values. One unforgettable summer.</h2>
-    <p>The only way to truly understand Morasha is to experience it. Come tour the grounds, meet our senior staff, and feel the ruach for yourself.</p>
-    <div class="closing-actions">
-      <a href="#" class="btn btn-light">Request Info &amp; Book a Tour</a>
-      <a href="#" class="btn btn-ghost">Meet the Staff</a>
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
+          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+        </a>
+        <div class="site-footer__newsletter">
+          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
+          <form class="site-footer__newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="site-footer__social">
+          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__col">
+        <ul class="site-footer__menu">
+          <li><a href="/about">About</a></li>
+          <li><a href="#">Alumni &amp; Events</a></li>
+          <li><a href="#">Rentals</a></li>
+          <li><a href="#">Donate</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Camps</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Camp Morasha</a></li>
+          <li><a href="#">Kehilas Yaakov</a></li>
+          <li><a href="#">Morasha Kollel</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>&nbsp;</h4>
+        <ul class="site-footer__menu">
+          <li><a href="/sulam">Sulam</a></li>
+          <li><a href="/amcha">Amcha Boys</a></li>
+          <li><a href="/amcha-girls">Amcha Girls</a></li>
+        </ul>
+      </div>
+
     </div>
+
+    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
   </div>
-</section>
+</footer>
 
 </body>
 </html>

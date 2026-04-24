@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shalhevet Newsletter — Morasha Camps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Kefa';
+    font-weight: 700;
+    src: local('Kefa Bold'), local('Kefa'), url('assets/fonts/Kefa.ttc') format('collection');
+  }
+  :root {
+    --green: #46764B;
+    --dark-green: #2A522E;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --grey: #ECECEC;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: 'Kefa', Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+    --hebrew: 'Frank Ruhl Libre', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+  }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ============ NAV ============ */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; }
+  .logo img { height: 40px; width: auto; display: block; }
+  footer .logo img { height: 44px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a.btn-primary { color: #fff; }
+  .nav-links a.btn-primary:hover { color: #fff; background: var(--green); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--darkest-green); color: #fff; }
+  .btn-primary:hover { background: var(--green); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 180px 0 96px;
+    background: var(--darkest-green);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.22) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero .eyebrow {
+    color: var(--light-green);
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+    margin-bottom: 28px;
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(18px, 1.6vw, 22px);
+    max-width: 52ch;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.5;
+  }
+
+  /* ============ FEATURED ============ */
+  .featured {
+    padding: 96px 0 64px;
+    background: #fff;
+  }
+  .featured-head {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+    padding: 0 48px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .featured-head .eyebrow { color: var(--green); }
+  .featured-head h2 {
+    font-size: clamp(36px, 4vw, 52px);
+    color: var(--darkest-green);
+    margin-top: 12px;
+  }
+  .featured-head p {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--text-grey);
+    max-width: 38ch;
+    line-height: 1.5;
+  }
+  .featured-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .issue-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 20px;
+    background: var(--lightest-green);
+    border: 1px solid transparent;
+    transition: all .25s ease;
+    cursor: pointer;
+  }
+  .issue-card:hover {
+    background: #fff;
+    border-color: var(--green);
+    transform: translateY(-2px);
+  }
+  .issue-card .issue-num {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--darkest-green);
+    line-height: 1;
+    letter-spacing: -0.015em;
+  }
+
+  /* ============ ARCHIVE ============ */
+  .archive {
+    padding: 96px 0 128px;
+    background: var(--lightest-green);
+  }
+  .archive-head {
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    padding: 0 48px;
+  }
+  .archive-head .eyebrow { color: var(--green); margin-bottom: 16px; }
+  .archive-head h2 {
+    font-size: clamp(36px, 4vw, 52px);
+    color: var(--darkest-green);
+    margin-bottom: 16px;
+  }
+  .archive-head p {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--charcoal);
+    max-width: 56ch;
+    line-height: 1.5;
+  }
+  .decade-nav {
+    max-width: 1100px;
+    margin: 40px auto 56px;
+    padding: 0 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .decade-nav a {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dark-green);
+    padding: 10px 18px;
+    border: 1px solid var(--green);
+    border-radius: 100px;
+    transition: all .2s;
+  }
+  .decade-nav a:hover {
+    background: var(--darkest-green);
+    color: #fff;
+    border-color: var(--darkest-green);
+  }
+  .archive-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .decade-block {
+    margin-bottom: 64px;
+  }
+  .decade-block:last-child { margin-bottom: 0; }
+  .decade-label {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(20,43,21,0.15);
+  }
+  .decade-label .eyebrow { color: var(--dark-green); }
+  .archive-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(20,43,21,0.08);
+    align-items: baseline;
+  }
+  .archive-row:last-child { border-bottom: none; }
+  .archive-year {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--darkest-green);
+    letter-spacing: -0.01em;
+  }
+  .archive-issues {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 28px;
+  }
+  .archive-issues a {
+    font-size: 15px;
+    color: var(--charcoal);
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  .archive-issues a:hover {
+    color: var(--darkest-green);
+    border-bottom-color: var(--green);
+  }
+  /* ============ FOOTER (Morasha 2026 spec) ============ */
+  .site-footer {
+    background: #ececec;
+    padding: 48px 0 24px;
+  }
+  .site-footer__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+  .site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-right: auto;
+    flex: 0 1 358px;
+  }
+  .site-footer__logo { color: #142b15; display: inline-block; }
+  .site-footer__logo img,
+  .site-footer__logo svg { height: 58px; width: auto; display: block; }
+  .site-footer__newsletter-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--dark-green);
+    margin: 0 0 8px;
+  }
+  .site-footer__newsletter-form {
+    display: flex;
+    gap: 4px;
+    max-width: 348px;
+    width: 100%;
+    height: 42px;
+  }
+  .site-footer__newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    height: 42px;
+    padding: 10px 12px;
+    border: none;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--green);
+    background: #fff;
+    outline: none;
+  }
+  .site-footer__newsletter-form input::placeholder {
+    color: var(--dark-green);
+    opacity: .6;
+  }
+  .site-footer__newsletter-form input:focus {
+    outline: 2px solid var(--green);
+    outline-offset: -2px;
+  }
+  .site-footer__newsletter-form button {
+    flex: 0 0 113px;
+    width: 113px;
+    height: 42px;
+    background: var(--dark-green);
+    border: 1px solid var(--dark-green);
+    color: #fff;
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .site-footer__newsletter-form button:hover { opacity: .85; }
+  .site-footer__social { display: flex; gap: 8px; }
+  .site-footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: #142b15;
+    transition: opacity .2s;
+  }
+  .site-footer__social a:hover { opacity: .7; }
+  .site-footer__social svg { width: 20px; height: 20px; }
+  .site-footer__col { flex: 0 1 187px; }
+  .site-footer__col h4 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 16px;
+    color: #142b15;
+    margin: 0 0 16px;
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+  .site-footer__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .site-footer__col a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    color: #2a522e;
+    line-height: 22px;
+    transition: color .2s;
+  }
+  .site-footer__col a:hover { color: #46764b; }
+  .site-footer__copyright {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: #2a522e;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid #d0d0cf;
+  }
+  .site-footer__copyright a { color: #2a522e; text-decoration: none; }
+  .site-footer__copyright a:hover { text-decoration: underline; }
+  @media (max-width: 1024px) {
+    .site-footer__inner { gap: 32px; }
+    .site-footer__col { flex: 0 1 50%; }
+  }
+  @media (max-width: 640px) {
+    .site-footer__container { padding: 0 24px; }
+    .site-footer__inner { gap: 24px; }
+    .site-footer__col { flex: 0 1 100%; }
+  }
+
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .hero { padding: 140px 0 72px; }
+    .featured { padding: 72px 0 48px; }
+    .archive { padding: 72px 0 96px; }
+  }
+  @media (max-width: 640px) {
+    .container, .nav, .hero-inner, .featured-head, .featured-grid, .archive-head, .archive-inner, .decade-nav { padding-left: 24px; padding-right: 24px; }
+    .nav { padding: 16px 24px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.btn) { display: none; }
+    .hero { padding: 120px 0 64px; }
+    .featured-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .issue-card { padding: 22px 18px; }
+    .archive-row { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
+    .archive-year { font-size: 24px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header>
+  <nav class="nav">
+    <a href="index.html" class="logo" aria-label="Morasha Camps">
+      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+    </a>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Camps</a>
+      <a href="morasha-dates-rates.html">Dates &amp; Rates</a>
+      <a href="#">Alumni &amp; Events</a>
+      <a href="#">Rentals</a>
+      <a href="#">Contact</a>
+      <a href="#" class="btn btn-primary">Donate</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">The Shalhevet Newsletter</div>
+    <h1>Camp life, on the page</h1>
+  </div>
+</section>
+
+<!-- ============ FEATURED ============ -->
+<section class="featured">
+  <div class="featured-head">
+    <div>
+      <div class="eyebrow">Summer 2025</div>
+      <h2>The latest issues</h2>
+    </div>
+  </div>
+  <div class="featured-grid">
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/07/Week-1-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 1</span>
+      </a>
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/07/Issue-2-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 2</span>
+      </a>
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/07/Issue-3-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 3</span>
+      </a>
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/07/Issue-4-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 4</span>
+      </a>
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/08/Issue-5-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 5</span>
+      </a>
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/08/Issue-6-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 6</span>
+      </a>
+      <a class="issue-card featured" href="https://campmorasha.com/wp-content/uploads/2025/08/Shalhevet-7-2025.pdf" target="_blank" rel="noopener">
+        <span class="issue-num">Issue 7</span>
+      </a>
+  </div>
+</section>
+
+<!-- ============ ARCHIVE ============ -->
+<section class="archive">
+  <div class="archive-head">
+    <div class="eyebrow">The Full Archive</div>
+    <h2>Every issue, every summer</h2>
+    <p>Shalhevet has been a Morasha tradition since the mid-1970s. Browse by decade, year, or jump to a specific issue.</p>
+  </div>
+  <nav class="decade-nav">
+      <a href="#decade-2020">2020s</a>
+      <a href="#decade-2010">2010s</a>
+      <a href="#decade-2000">2000s</a>
+      <a href="#decade-1990">1990s</a>
+      <a href="#decade-1980">1980s</a>
+      <a href="#decade-1970">1970s</a>
+  </nav>
+  <div class="archive-inner">
+    <div class="decade-block" id="decade-2020">
+      <div class="decade-label"><span class="eyebrow">The 2020s</span></div>
+      <div class="archive-row">
+        <div class="archive-year">2025</div>
+        <div class="archive-issues"><a href="https://campmorasha.com/wp-content/uploads/2025/07/Week-1-2025.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="https://campmorasha.com/wp-content/uploads/2025/07/Issue-2-2025.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="https://campmorasha.com/wp-content/uploads/2025/07/Issue-3-2025.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="https://campmorasha.com/wp-content/uploads/2025/07/Issue-4-2025.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="https://campmorasha.com/wp-content/uploads/2025/08/Issue-5-2025.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="https://campmorasha.com/wp-content/uploads/2025/08/Issue-6-2025.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="https://campmorasha.com/wp-content/uploads/2025/08/Shalhevet-7-2025.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2024</div>
+        <div class="archive-issues"><a href="https://campmorasha.com/wp-content/uploads/2024/07/Issue-1-2024.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="https://campmorasha.com/wp-content/uploads/2024/07/Issue-2-2024.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="https://campmorasha.com/wp-content/uploads/2024/07/Issue3-2024.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="https://campmorasha.com/wp-content/uploads/2024/07/Shalhevet-4.pdf.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="https://campmorasha.com/wp-content/uploads/2024/08/Shalhevet-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="https://campmorasha.com/wp-content/uploads/2024/08/Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="https://campmorasha.com/wp-content/uploads/2024/08/Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2023</div>
+        <div class="archive-issues"><a href="https://campmorasha.com/wp-content/uploads/2023/06/Issue-1-2023.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="https://campmorasha.com/wp-content/uploads/2023/07/Week-2-2023.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="https://campmorasha.com/wp-content/uploads/2023/07/Morasha-Shalhevet-2023-week-3-1.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="https://campmorasha.com/wp-content/uploads/2023/07/Week-4-2023.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="https://campmorasha.com/wp-content/uploads/2023/07/Week-5-2023.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="https://campmorasha.com/wp-content/uploads/2023/08/Morasha-Shalhevet-2023-week-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2022</div>
+        <div class="archive-issues"><a href="https://campmorasha.com/wp-content/uploads/2022/07/Week-1-2022.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="https://campmorasha.com/wp-content/uploads/2022/07/Issue-2-2022.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="https://campmorasha.com/wp-content/uploads/2022/07/Week-3-2022.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="https://campmorasha.com/wp-content/uploads/2022/07/Week-4-2022.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="https://campmorasha.com/wp-content/uploads/2022/07/Week-5-2022.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="https://campmorasha.com/wp-content/uploads/2022/08/Issue-6-2022.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="https://campmorasha.com/wp-content/uploads/2022/08/Week-7-2022.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2021</div>
+        <div class="archive-issues"><a href="https://campmorasha.com/weekone2021" target="_blank" rel="noopener">Issue 1</a> <a href="https://campmorasha.com/wp-content/uploads/2021/07/WeekTwo2021.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="https://campmorasha.com/wp-content/uploads/2021/07/WeekThree2021.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="https://campmorasha.com/wp-content/uploads/2021/07/Week-4-2021.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="https://campmorasha.com/wp-content/uploads/2021/07/Week52021.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="https://campmorasha.com/wp-content/uploads/2021/08/Week-6-2021.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="https://campmorasha.com/wp-content/uploads/2021/08/Week-7-2021.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+    </div>
+    <div class="decade-block" id="decade-2010">
+      <div class="decade-label"><span class="eyebrow">The 2010s</span></div>
+      <div class="archive-row">
+        <div class="archive-year">2019</div>
+        <div class="archive-issues"><a href="http://campmorasha.com/wp-content/uploads/2019/07/Week12019.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com/wp-content/uploads/2019/07/Issue2-2019.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com/wp-content/uploads/2019/07/Issue3_2019.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com/wp-content/uploads/2019/07/Week-4-2019.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com/wp-content/uploads/2019/08/Week-5-2019.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com/wp-content/uploads/2019/08/Week6-2019-1.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com/wp-content/uploads/2019/08/Issue7_2019.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2018</div>
+        <div class="archive-issues"><a href="http://campmorasha.com/wp-content/uploads/2018/06/Week-1-2018.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com/wp-content/uploads/2018/07/Week-Two-2018.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com/wp-content/uploads/2018/07/Shalhevet-week-3-2018.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com/wp-content/uploads/2018/07/Week-4-2018.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com/wp-content/uploads/2018/07/Week52018.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com/wp-content/uploads/2018/08/Week-6-2018.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com/shalhevet-week-7-2018" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2017</div>
+        <div class="archive-issues"><a href="http://campmorasha.com/wp-content/uploads/2017/06/WeekOne2017.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com/wp-content/uploads/2017/07/Week22017.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com/wp-content/uploads/2017/07/Shalhevet-week-3-2017.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com/wp-content/uploads/2017/07/WeekFour2017.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com/wp-content/uploads/2017/07/Shalhevet-week-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com/wp-content/uploads/2017/08/Shalhevet-week-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2016</div>
+        <div class="archive-issues"><a href="http://campmorasha.com/wp-content/uploads/2016/07/Week12016_Small.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com/wp-content/uploads/2016/07/Week2_Small.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com/wp-content/uploads/2016/07/Week3Small.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com/wp-content/uploads/2016/07/Shalhevet-week-4-2016.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com/wp-content/uploads/2016/08/ShalhevetWeek5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com/wp-content/uploads/2016/08/ShalhevetWeek7-CW-Edition.pdf" target="_blank" rel="noopener">Issue 6 &#8211; CW Edition</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2015</div>
+        <div class="archive-issues"><a href="http://campmorasha.com/wp-content/uploads/2015/07/Shalhevet-week-1-2015.compressed.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com/wp-content/uploads/2015/07/Shalhevet-week-2-2015.compressed.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com/wp-content/uploads/2015/07/Week3_Small.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com/wp-content/uploads/2015/07/Week42015_Small.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com/wp-content/uploads/2015/07/Week5_2015.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com/wp-content/uploads/2015/08/Week6_2015Small.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com/wp-content/uploads/2015/08/Week7_2015Small.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2014</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2014-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2014-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2013</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2013-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2013-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2013-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2013-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2013-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2013-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2012</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2012-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2011</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2011-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2010</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2010-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+    </div>
+    <div class="decade-block" id="decade-2000">
+      <div class="decade-label"><span class="eyebrow">The 2000s</span></div>
+      <div class="archive-row">
+        <div class="archive-year">2009</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2009-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2009-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2009-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2009-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2009-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2009-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2008</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2008-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2008-Issue-2pdf.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2008-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2008-Theme-Booklet.pdf" target="_blank" rel="noopener">Theme Booklet</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2007</div>
+        <div class="archive-issues"><a href="http://campmorasha.com/wp-content/uploads/2015/02/2006-Issue-11.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-31.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-41.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-51.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-61.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2006</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2006-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2005</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2005-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2005-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2005-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2005-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2005-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2005-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2004</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2004-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2004-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2004-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2004-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2003</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2003-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2003-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2003-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2002</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2002-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2002-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2002-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2002-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2002-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2002-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2001</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2001-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">2000</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/2000-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+    </div>
+    <div class="decade-block" id="decade-1990">
+      <div class="decade-label"><span class="eyebrow">The 1990s</span></div>
+      <div class="archive-row">
+        <div class="archive-year">1999</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1999-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1999-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1999-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1999-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1999-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1998</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1998-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1998-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1998-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1998-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1997</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1997-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1996</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1996-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1995</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1995-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1994</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1994-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1993</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1993-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1992</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1992-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1992-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1992-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1992-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1992-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1992-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1991</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1991-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1990</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1990-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+    </div>
+    <div class="decade-block" id="decade-1980">
+      <div class="decade-label"><span class="eyebrow">The 1980s</span></div>
+      <div class="archive-row">
+        <div class="archive-year">1989</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-5-full.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1989-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1988</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1988-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1987</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1987-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1987-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1987-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1987-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1986</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-11.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-31.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-81.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1985</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1985-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1985-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1985-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1985-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1985-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1985-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1984</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1986-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1983</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1983-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1983-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1983-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1982</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1982-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1982-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1982-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1982-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1981</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1981-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1981-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1981-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1981-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1980</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1980-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1980-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1980-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1980-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+    </div>
+    <div class="decade-block" id="decade-1970">
+      <div class="decade-label"><span class="eyebrow">The 1970s</span></div>
+      <div class="archive-row">
+        <div class="archive-year">1979</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1979-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1979-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1979-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1978</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1978-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1978-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1978-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1977</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1977-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1977-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1977-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1977-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1977-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1977-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1976</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-6.pdf" target="_blank" rel="noopener">Issue 6</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-7.pdf" target="_blank" rel="noopener">Issue 7</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1976-Issue-8.pdf" target="_blank" rel="noopener">Issue 8</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1975</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1975-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1975-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1975-Issue-3.pdf" target="_blank" rel="noopener">Issue 3</a></div>
+      </div>
+      <div class="archive-row">
+        <div class="archive-year">1974</div>
+        <div class="archive-issues"><a href="http://campmorasha.com//wp-content/uploads/2015/02/1974-Issue-1.pdf" target="_blank" rel="noopener">Issue 1</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1974-Issue-2.pdf" target="_blank" rel="noopener">Issue 2</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1974-Issue-2.pdf" target="_blank" rel="noopener">Issue 3</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1974-Issue-4.pdf" target="_blank" rel="noopener">Issue 4</a> <a href="http://campmorasha.com//wp-content/uploads/2015/02/1974-Issue-5.pdf" target="_blank" rel="noopener">Issue 5</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
+          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+        </a>
+        <div class="site-footer__newsletter">
+          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
+          <form class="site-footer__newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="site-footer__social">
+          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__col">
+        <ul class="site-footer__menu">
+          <li><a href="/about">About</a></li>
+          <li><a href="#">Alumni &amp; Events</a></li>
+          <li><a href="#">Rentals</a></li>
+          <li><a href="#">Donate</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Camps</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Camp Morasha</a></li>
+          <li><a href="#">Kehilas Yaakov</a></li>
+          <li><a href="#">Morasha Kollel</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>&nbsp;</h4>
+        <ul class="site-footer__menu">
+          <li><a href="/sulam">Sulam</a></li>
+          <li><a href="/amcha">Amcha Boys</a></li>
+          <li><a href="/amcha-girls">Amcha Girls</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

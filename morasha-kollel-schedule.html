@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Schedule & Learning — Morasha Kollel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Kefa';
+    font-weight: 700;
+    src: local('Kefa Bold'), local('Kefa'), url('assets/fonts/Kefa.ttc') format('collection');
+  }
+  :root {
+    --green: #974426;       /* Kollel primary (terracotta) */
+    --dark-green: #5e2511;   /* Kollel primary-dark */
+    --darkest-green: #3d1808; /* Deep brown for hero/footer */
+    --light-green: #c79685;  /* Kollel primary-light */
+    --lightest-green: #e9cec5; /* Kollel accent-bg */
+    --grey: #ECECEC;
+    --text-grey: #828282;
+    --charcoal: #222222;
+    --serif: 'Kefa', Georgia, 'Times New Roman', serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.0;
+  }
+  .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  /* ============ NAV ============ */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; }
+  .logo img { height: 40px; width: auto; display: block; }
+  footer .logo img { height: 44px; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a.btn-primary { color: #fff; }
+  .nav-links a.btn-primary:hover { color: #fff; background: var(--green); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+  }
+  .btn-primary { background: var(--darkest-green); color: #fff; }
+  .btn-primary:hover { background: var(--green); }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 128px 0 72px;
+    background: var(--darkest-green);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(151,68,38,0.45) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(199,150,133,0.25) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero .eyebrow {
+    color: var(--light-green);
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+  }
+
+  /* ============ SCHEDULES ============ */
+  .schedules {
+    padding: 96px 0 128px;
+    background: #fff;
+  }
+  .schedules-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .schedules-head {
+    margin-bottom: 64px;
+    max-width: 720px;
+  }
+  .schedules-head .eyebrow { color: var(--green); margin-bottom: 16px; }
+  .schedules-head h2 {
+    font-size: clamp(32px, 3.5vw, 44px);
+    color: var(--darkest-green);
+    margin-bottom: 20px;
+  }
+  .schedules-head p {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--text-grey);
+    line-height: 1.5;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .track-head {
+    padding-bottom: 20px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--darkest-green);
+  }
+  .track-head .eyebrow { color: var(--green); margin-bottom: 8px; }
+  .track-head h3 {
+    font-size: clamp(24px, 2.2vw, 30px);
+    color: var(--darkest-green);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(61,24,8,0.1);
+    align-items: baseline;
+  }
+  .row:last-child { border-bottom: none; }
+  .time {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .activity-label {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--darkest-green);
+    letter-spacing: -0.005em;
+    line-height: 1.35;
+  }
+  .activity-note {
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.5;
+    max-width: 38ch;
+  }
+  /* ============ FOOTER (Morasha 2026 spec) ============ */
+  .site-footer {
+    background: #ececec;
+    padding: 48px 0 24px;
+  }
+  .site-footer__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+  .site-footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-right: auto;
+    flex: 0 1 358px;
+  }
+  .site-footer__logo { color: #142b15; display: inline-block; }
+  .site-footer__logo img,
+  .site-footer__logo svg { height: 58px; width: auto; display: block; }
+  .site-footer__newsletter-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--dark-green);
+    margin: 0 0 8px;
+  }
+  .site-footer__newsletter-form {
+    display: flex;
+    gap: 4px;
+    max-width: 348px;
+    width: 100%;
+    height: 42px;
+  }
+  .site-footer__newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    height: 42px;
+    padding: 10px 12px;
+    border: none;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--green);
+    background: #fff;
+    outline: none;
+  }
+  .site-footer__newsletter-form input::placeholder {
+    color: var(--dark-green);
+    opacity: .6;
+  }
+  .site-footer__newsletter-form input:focus {
+    outline: 2px solid var(--green);
+    outline-offset: -2px;
+  }
+  .site-footer__newsletter-form button {
+    flex: 0 0 113px;
+    width: 113px;
+    height: 42px;
+    background: var(--dark-green);
+    border: 1px solid var(--dark-green);
+    color: #fff;
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .site-footer__newsletter-form button:hover { opacity: .85; }
+  .site-footer__social { display: flex; gap: 8px; }
+  .site-footer__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: #142b15;
+    transition: opacity .2s;
+  }
+  .site-footer__social a:hover { opacity: .7; }
+  .site-footer__social svg { width: 20px; height: 20px; }
+  .site-footer__col { flex: 0 1 187px; }
+  .site-footer__col h4 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 16px;
+    color: #142b15;
+    margin: 0 0 16px;
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+  .site-footer__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .site-footer__col a {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    color: #2a522e;
+    line-height: 22px;
+    transition: color .2s;
+  }
+  .site-footer__col a:hover { color: #46764b; }
+  .site-footer__copyright {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: #2a522e;
+    margin: 0;
+    padding-top: 16px;
+    border-top: 1px solid #d0d0cf;
+  }
+  .site-footer__copyright a { color: #2a522e; text-decoration: none; }
+  .site-footer__copyright a:hover { text-decoration: underline; }
+  @media (max-width: 1024px) {
+    .site-footer__inner { gap: 32px; }
+    .site-footer__col { flex: 0 1 50%; }
+  }
+  @media (max-width: 640px) {
+    .site-footer__container { padding: 0 24px; }
+    .site-footer__inner { gap: 24px; }
+    .site-footer__col { flex: 0 1 100%; }
+  }
+
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .hero { padding: 104px 0 56px; }
+    .schedules { padding: 72px 0 96px; }
+    .grid { grid-template-columns: 1fr; gap: 72px; }
+  }
+  @media (max-width: 640px) {
+    .container, .nav, .hero-inner, .schedules-inner { padding-left: 24px; padding-right: 24px; }
+    .nav { padding: 16px 24px; }
+    .nav-links { gap: 16px; }
+    .nav-links a:not(.btn) { display: none; }
+    .hero { padding: 96px 0 48px; }
+    .row { grid-template-columns: 100px 1fr; gap: 16px; }
+    .time { font-size: 12px; }
+    .activity-label { font-size: 16px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header>
+  <nav class="nav">
+    <a href="index.html" class="logo" aria-label="Morasha Camps">
+      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+    </a>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Camps</a>
+      <a href="morasha-dates-rates.html">Dates &amp; Rates</a>
+      <a href="#">Alumni &amp; Events</a>
+      <a href="#">Rentals</a>
+      <a href="#">Contact</a>
+      <a href="#" class="btn btn-primary">Donate</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Morasha Kollel</div>
+    <h1>Daily Schedule &amp; Learning</h1>
+  </div>
+</section>
+
+<!-- ============ SCHEDULES ============ -->
+<section class="schedules">
+  <div class="schedules-inner">
+    <div class="grid">
+
+      <div class="track">
+        <div class="track-head">
+          <div class="eyebrow">Track 1</div>
+          <h3>High School Kollel</h3>
+        </div>
+      <div class="row">
+        <div class="time">7:45 AM</div>
+        <div class="activity">
+          <div class="activity-label">Shacharis</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">8:40 AM</div>
+        <div class="activity">
+          <div class="activity-label">Breakfast</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">9:15 AM</div>
+        <div class="activity">
+          <div class="activity-label">Halacha Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">10:00 – 12:00</div>
+        <div class="activity">
+          <div class="activity-label">Morning Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">12:00 PM</div>
+        <div class="activity">
+          <div class="activity-label">Iyun Shiur by Kollel Rebbeim</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">1:15 PM</div>
+        <div class="activity">
+          <div class="activity-label">Lunch</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">1:45 PM</div>
+        <div class="activity">
+          <div class="activity-label">Break</div>
+          <div class="activity-note">Various sports leagues, activity options such as swimming, horseback riding, archery, etc.</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">4:45 PM</div>
+        <div class="activity">
+          <div class="activity-label">Mincha</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">5:05 PM</div>
+        <div class="activity">
+          <div class="activity-label">Bekius Shiurim by Rebbeim & Counselors</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">6:10 PM</div>
+        <div class="activity">
+          <div class="activity-label">Chazara Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">6:45 PM</div>
+        <div class="activity">
+          <div class="activity-label">Dinner</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">7:30 PM</div>
+        <div class="activity">
+          <div class="activity-label">HS / College Kollel Chavrusa</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">8:35 PM</div>
+        <div class="activity">
+          <div class="activity-label">Mishnayos Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">9:05 PM</div>
+        <div class="activity">
+          <div class="activity-label">Freestyle Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">9:40 PM</div>
+        <div class="activity">
+          <div class="activity-label">Sichas Mussar with Rav Cohen</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">10:00 PM</div>
+        <div class="activity">
+          <div class="activity-label">Ma'ariv</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">11:30 PM</div>
+        <div class="activity">
+          <div class="activity-label">Cake</div>
+          
+        </div>
+      </div>
+      </div>
+
+      <div class="track">
+        <div class="track-head">
+          <div class="eyebrow">Track 2</div>
+          <h3>12th Grade Kollel</h3>
+        </div>
+      <div class="row">
+        <div class="time">7:45 AM</div>
+        <div class="activity">
+          <div class="activity-label">Shacharis</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">8:30 AM</div>
+        <div class="activity">
+          <div class="activity-label">Breakfast</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">9:10 AM</div>
+        <div class="activity">
+          <div class="activity-label">Halachah Shiur with Rabbi Mordechai Willig</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">9:35 – 12:00</div>
+        <div class="activity">
+          <div class="activity-label">Morning Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">12:15 PM</div>
+        <div class="activity">
+          <div class="activity-label">Iyun Shiur</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">1:15 PM</div>
+        <div class="activity">
+          <div class="activity-label">Mincha</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">1:30 PM</div>
+        <div class="activity">
+          <div class="activity-label">Lunch & Break</div>
+          <div class="activity-note">Various sports leagues, activity options such as swimming, horseback riding, archery, etc.</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">4:45 PM</div>
+        <div class="activity">
+          <div class="activity-label">Afternoon Bekiyus Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">6:30 PM</div>
+        <div class="activity">
+          <div class="activity-label">Dinner</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">7:30 PM</div>
+        <div class="activity">
+          <div class="activity-label">HS / College Kollel Chavrusa</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">8:30 PM</div>
+        <div class="activity">
+          <div class="activity-label">Chaburah by Post 12th Grade Counselor / Open Seder</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">9:40 PM</div>
+        <div class="activity">
+          <div class="activity-label">Mussar with R' Cohen</div>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="time">10:00 PM</div>
+        <div class="activity">
+          <div class="activity-label">Ma'ariv</div>
+          
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
+          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+        </a>
+        <div class="site-footer__newsletter">
+          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
+          <form class="site-footer__newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="site-footer__social">
+          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__col">
+        <ul class="site-footer__menu">
+          <li><a href="/about">About</a></li>
+          <li><a href="#">Alumni &amp; Events</a></li>
+          <li><a href="#">Rentals</a></li>
+          <li><a href="#">Donate</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Camps</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Camp Morasha</a></li>
+          <li><a href="#">Kehilas Yaakov</a></li>
+          <li><a href="#">Morasha Kollel</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>&nbsp;</h4>
+        <ul class="site-footer__menu">
+          <li><a href="/sulam">Sulam</a></li>
+          <li><a href="/amcha">Amcha Boys</a></li>
+          <li><a href="/amcha-girls">Amcha Girls</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
