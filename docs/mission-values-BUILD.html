@@ -154,7 +154,7 @@
       <strong>Sections on the page:</strong>
     </div>
     <div class="change-desc">
-      1. Video hero with inspirational quote<br>
+      1. Hero with inspirational quote<br>
       2. Core Mission statement (two-column layout)<br>
       3. Values intro / MORASHA letter banner<br>
       4. Seven full-bleed value rows (alternating image/content sides, each with a unique accent color)
@@ -175,9 +175,9 @@
   ├── <span class="prop">hero_quote</span>          <span class="comment">// Textarea — main quote text</span>
   ├── <span class="prop">hero_quote_highlight</span><span class="comment">// Text — the italic/highlighted portion</span>
   ├── <span class="prop">hero_attribution</span>    <span class="comment">// Text — "The Morasha philosophy"</span>
-  ├── <span class="prop">hero_video_url</span>      <span class="comment">// File (video) — background video MP4</span>
+  ├── <span class="prop">hero_poster_url</span>     <span class="comment">// Image — optional background image for hero</span>
   ├── <span class="prop">hero_poster</span>         <span class="comment">// Image — fallback poster image</span>
-  └── <span class="prop">hero_cta_label</span>      <span class="comment">// Text — "Watch our story"</span>
+  └── <span class="prop">hero_attrib</span>         <span class="comment">// Text — "The Morasha philosophy"</span>
 
 <span class="sel">Group:</span> <span class="val">Mission</span>
   ├── <span class="prop">mission_eyebrow</span>     <span class="comment">// Text — "The Mission"</span>
@@ -210,22 +210,18 @@
 
   <!-- ── SECTION 1: HERO ── -->
   <div class="change-item">
-    <div class="change-title">Section 1: Video Hero</div>
+    <div class="change-title">Section 1: Hero</div>
     <div class="change-desc">
-      Full-width hero with a background <code>&lt;video&gt;</code> element, a dark gradient overlay, and a quote with attribution. Includes a "Watch our story" play button CTA.
+      Full-width hero with a dark gradient overlay and an inspirational quote with attribution. No video — just the gradient background with radial accents.
     </div>
     <div class="change-desc"><strong>HTML structure:</strong></div>
 <pre><span class="tag">&lt;section</span> class="<span class="sel">hero</span>"<span class="tag">&gt;</span>
-  <span class="tag">&lt;video</span> class="<span class="sel">hero-video</span>" autoplay muted loop playsinline poster="..."<span class="tag">&gt;</span>
-    <span class="tag">&lt;source</span> src="..." type="video/mp4"<span class="tag">&gt;</span>
-  <span class="tag">&lt;/video&gt;</span>
   <span class="tag">&lt;div</span> class="<span class="sel">hero-inner</span>"<span class="tag">&gt;</span>
-    <span class="tag">&lt;div</span> class="<span class="sel">eyebrow</span>"<span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">eyebrow</span>"<span class="tag">&gt;</span>Core Mission &amp; Values<span class="tag">&lt;/div&gt;</span>
     <span class="tag">&lt;h1</span> class="<span class="sel">hero-quote</span>"<span class="tag">&gt;</span>
-      ... <span class="tag">&lt;span</span> class="<span class="sel">mark</span>"<span class="tag">&gt;</span>highlighted text<span class="tag">&lt;/span&gt;</span>
+      Teaching kids to count isn't nearly as important as <span class="tag">&lt;span</span> class="<span class="sel">mark</span>"<span class="tag">&gt;</span>teaching them what counts.<span class="tag">&lt;/span&gt;</span>
     <span class="tag">&lt;/h1&gt;</span>
-    <span class="tag">&lt;div</span> class="<span class="sel">hero-attrib</span>"<span class="tag">&gt;</span>...<span class="tag">&lt;/div&gt;</span>
-    <span class="tag">&lt;a</span> class="<span class="sel">hero-play</span>" href="#mission"<span class="tag">&gt;</span>...<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;div</span> class="<span class="sel">hero-attrib</span>"<span class="tag">&gt;</span>The Morasha philosophy<span class="tag">&lt;/div&gt;</span>
   <span class="tag">&lt;/div&gt;</span>
 <span class="tag">&lt;/section&gt;</span></pre>
 
@@ -238,14 +234,6 @@
   <span class="prop">overflow</span>: <span class="val">hidden</span>;
   <span class="prop">display</span>: <span class="val">flex</span>;
   <span class="prop">align-items</span>: <span class="val">center</span>;
-}
-<span class="sel">.hero-video</span> {
-  <span class="prop">position</span>: <span class="val">absolute</span>;
-  <span class="prop">inset</span>: <span class="val">0</span>;
-  <span class="prop">width</span>: <span class="val">100%</span>;
-  <span class="prop">height</span>: <span class="val">100%</span>;
-  <span class="prop">object-fit</span>: <span class="val">cover</span>;
-  <span class="prop">z-index</span>: <span class="val">0</span>;
 }
 <span class="sel">.hero::before</span> {
   <span class="prop">content</span>: <span class="val">""</span>;
@@ -284,23 +272,7 @@
   <span class="prop">padding-left</span>: <span class="val">20px</span>;
   <span class="prop">border-left</span>: <span class="val">2px solid #9BBA91</span>;
 }
-<span class="sel">.hero-play</span> {
-  <span class="prop">margin-top</span>: <span class="val">28px</span>;
-  <span class="prop">display</span>: <span class="val">inline-flex</span>;
-  <span class="prop">align-items</span>: <span class="val">center</span>;
-  <span class="prop">gap</span>: <span class="val">14px</span>;
-  <span class="prop">font-family</span>: <span class="val">var(--sans-cond)</span>;
-  <span class="prop">font-size</span>: <span class="val">12px</span>;
-  <span class="prop">letter-spacing</span>: <span class="val">0.22em</span>;
-  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
-}
-<span class="sel">.hero-play .play-icon</span> {
-  <span class="prop">width</span>: <span class="val">44px</span>; <span class="prop">height</span>: <span class="val">44px</span>;
-  <span class="prop">border-radius</span>: <span class="val">50%</span>;
-  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.12)</span>;
-  <span class="prop">border</span>: <span class="val">1px solid rgba(255,255,255,0.4)</span>;
-  <span class="prop">backdrop-filter</span>: <span class="val">blur(6px)</span>;
-}</pre>
+</pre>
   </div>
 
   <!-- ── SECTION 2: CORE MISSION ── -->
@@ -482,8 +454,7 @@
   <div class="change-item">
     <div class="change-title">QA Checklist</div>
     <ul class="checklist">
-      <li>Hero video autoplays muted on page load with poster fallback</li>
-      <li>Hero gradient overlay renders on top of video</li>
+      <li>Hero gradient overlay renders correctly with radial accents</li>
       <li>Mission section is two-column on desktop, single-column on tablet/mobile</li>
       <li>MORASHA letter banner is centered and each letter shows its keyword below</li>
       <li>All 7 value rows display with correct accent colors</li>
