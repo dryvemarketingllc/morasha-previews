@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Donate – Camp Morasha</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Variables ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --darkest-green: #142B15;
+  --dark-green: #2A522E;
+  --green: #46764B;
+  --light-green: #9BBA91;
+  --lightest-green: #DAE4D0;
+  --cream: #f9f8f6;
+  --mky-indigo: #1C326B;
+  --travel-blue: #306DA5;
+  --kollel-sienna: #974426;
+  --text: #2a2a2a;
+  --text-muted: #6B6B6B;
+  --border: rgba(0,0,0,0.08);
+  --serif: Georgia, "Times New Roman", Times, serif;
+  --sans: "Kefa", "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --sans-ui: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --sans-cond: "Roboto Condensed", "Roboto", sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans-ui);
+  color: var(--text);
+  background: #fff;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ── Site Nav ── */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.site-header .nav {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo { display: flex; align-items: center; }
+.site-header .logo img { height: 40px; width: auto; display: block; }
+.site-header .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+.site-header .nav-links a {
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  transition: color .2s;
+}
+.site-header .nav-links a:hover { color: var(--green); }
+.site-header .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  background: var(--darkest-green) !important;
+  color: #fff !important;
+  transition: all .25s;
+}
+.site-header .nav-btn:hover { background: var(--green) !important; }
+
+/* ── Hero ── */
+.hero {
+  background: var(--darkest-green);
+  color: #fff;
+  padding: 140px 0 48px;
+  text-align: center;
+}
+.hero .eyebrow {
+  font-family: var(--sans-cond);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--light-green);
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero p {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.75;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── Main Layout ── */
+.donate-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── Form ── */
+.form-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.form-section {
+  padding: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.form-section:last-child { border-bottom: none; }
+.form-section__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--darkest-green);
+  color: #fff;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+.form-section__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.form-section__title {
+  font-family: var(--sans-ui);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--darkest-green);
+}
+
+/* Program selector cards */
+.program-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.program-card {
+  position: relative;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+.program-card:hover {
+  border-color: var(--light-green);
+}
+.program-card.selected {
+  border-color: var(--green);
+  background: rgba(70, 118, 75, 0.04);
+}
+.program-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.program-card input { display: none; }
+.program-card__name {
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--darkest-green);
+  margin-bottom: 2px;
+}
+.program-card__desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+/* Camp-specific accent on selected */
+.program-card[data-camp="morasha"].selected { border-color: var(--green); }
+.program-card[data-camp="mky"].selected { border-color: var(--mky-indigo); background: rgba(28,50,107,0.04); }
+.program-card[data-camp="mky"].selected::after { background: var(--mky-indigo); }
+.program-card[data-camp="travel"].selected { border-color: var(--travel-blue); background: rgba(48,109,165,0.04); }
+.program-card[data-camp="travel"].selected::after { background: var(--travel-blue); }
+.program-card[data-camp="kollel"].selected { border-color: var(--kollel-sienna); background: rgba(151,68,38,0.04); }
+.program-card[data-camp="kollel"].selected::after { background: var(--kollel-sienna); }
+.program-card[data-camp="general"].selected { border-color: var(--darkest-green); }
+.program-card[data-camp="general"].selected::after { background: var(--darkest-green); }
+
+/* Opportunity dropdown */
+.field-group {
+  margin-bottom: 20px;
+}
+.field-group:last-child { margin-bottom: 0; }
+.field-label {
+  display: block;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+.field-input,
+.field-select,
+.field-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--sans-ui);
+  font-size: 15px;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field-input:focus,
+.field-select:focus,
+.field-textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(70,118,75,0.1);
+}
+.field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B6B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+.field-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.field-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Amount selector */
+.amount-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.amount-option {
+  padding: 14px 8px;
+  text-align: center;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
+}
+.amount-option:hover {
+  border-color: var(--light-green);
+}
+.amount-option.selected {
+  border-color: var(--green);
+  background: rgba(70,118,75,0.04);
+}
+.amount-option input { display: none; }
+.amount-option__value {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--darkest-green);
+  display: block;
+}
+.amount-option__label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  display: block;
+}
+.amount-custom {
+  position: relative;
+}
+.amount-custom__prefix {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.amount-custom .field-input {
+  padding-left: 28px;
+  font-family: var(--serif);
+  font-size: 18px;
+}
+
+/* Dedication type */
+.dedication-options {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.dedication-option {
+  flex: 1;
+  padding: 10px 12px;
+  text-align: center;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  background: #fff;
+}
+.dedication-option:hover { border-color: var(--light-green); }
+.dedication-option.selected {
+  border-color: var(--green);
+  color: var(--darkest-green);
+  background: rgba(70,118,75,0.04);
+}
+.dedication-option input { display: none; }
+
+/* Payment toggle */
+.payment-toggle {
+  display: flex;
+  background: var(--cream);
+  border-radius: 6px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+.payment-toggle__option {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  border: none;
+}
+.payment-toggle__option.active {
+  background: #fff;
+  color: var(--darkest-green);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Submit */
+.submit-btn {
+  width: 100%;
+  padding: 16px 24px;
+  font-family: var(--sans-ui);
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--darkest-green);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.02em;
+}
+.submit-btn:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(20,43,21,0.25);
+}
+
+/* ── Sidebar ── */
+.sidebar { position: sticky; top: 100px; }
+
+.sidebar-card {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 16px;
+}
+.sidebar-card__title {
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--darkest-green);
+  margin-bottom: 12px;
+}
+.sidebar-card p,
+.sidebar-card li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.sidebar-card ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar-card li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.sidebar-card li:last-child { border-bottom: none; }
+.sidebar-card li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--green);
+}
+
+.sidebar-summary {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 16px;
+}
+.sidebar-summary__title {
+  font-family: var(--sans-cond);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.summary-row__label { color: var(--text-muted); }
+.summary-row__value {
+  font-weight: 500;
+  color: var(--darkest-green);
+}
+.summary-row--total {
+  border-top: 2px solid var(--darkest-green);
+  margin-top: 8px;
+  padding-top: 12px;
+}
+.summary-row--total .summary-row__label {
+  font-weight: 600;
+  color: var(--darkest-green);
+}
+.summary-row--total .summary-row__value {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sidebar-contact {
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.sidebar-contact a {
+  color: var(--green);
+  font-weight: 500;
+}
+
+/* ── Back Link ── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green);
+  margin-bottom: 24px;
+  transition: gap 0.2s;
+}
+.back-link:hover { gap: 10px; }
+
+/* ── Site Footer ── */
+.site-footer {
+  background: #ececec;
+  padding: 48px 0 24px;
+}
+.site-footer__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-right: auto;
+  flex: 0 1 358px;
+}
+.site-footer__logo { color: #142b15; display: inline-block; }
+.site-footer__logo img { height: 58px; width: auto; display: block; }
+.site-footer__newsletter-label {
+  font-family: var(--sans-ui);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--dark-green);
+  margin: 0 0 8px;
+}
+.site-footer__newsletter-form {
+  display: flex;
+  gap: 4px;
+  max-width: 348px;
+  height: 42px;
+}
+.site-footer__newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 10px 12px;
+  border: none;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  color: var(--green);
+  background: #fff;
+  outline: none;
+}
+.site-footer__newsletter-form input::placeholder { color: var(--dark-green); opacity: .6; }
+.site-footer__newsletter-form button {
+  flex: 0 0 113px;
+  height: 42px;
+  background: var(--dark-green);
+  border: 1px solid var(--dark-green);
+  color: #fff;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.site-footer__newsletter-form button:hover { opacity: .85; }
+.site-footer__social { display: flex; gap: 8px; }
+.site-footer__social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 4px;
+  color: #142b15;
+  transition: opacity .2s;
+}
+.site-footer__social a:hover { opacity: .7; }
+.site-footer__social svg { width: 20px; height: 20px; }
+.site-footer__col { flex: 0 1 187px; }
+.site-footer__col h4 {
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 16px;
+  color: #142b15;
+  margin: 0 0 16px;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+.site-footer__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.site-footer__col a {
+  font-family: var(--sans-ui);
+  font-size: 16px;
+  color: #2a522e;
+  transition: color .2s;
+}
+.site-footer__col a:hover { color: #46764b; }
+.site-footer__copyright {
+  text-align: center;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  color: #2a522e;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid #d0d0cf;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .donate-layout {
+    grid-template-columns: 1fr;
+    padding: 32px 20px 64px;
+  }
+  .sidebar { position: static; }
+  .program-cards { grid-template-columns: 1fr 1fr; }
+  .amount-grid { grid-template-columns: repeat(3, 1fr); }
+  .field-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 110px 0 40px; }
+  .site-header .nav { padding: 16px 24px; }
+  .site-header .nav-links { gap: 16px; }
+  .site-header .nav-links a:not(.nav-btn) { display: none; }
+  .program-cards { grid-template-columns: 1fr; }
+  .dedication-options { flex-wrap: wrap; }
+  .site-footer__container { padding: 0 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ SITE NAV ══════ -->
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo" aria-label="Morasha Camps">
+      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+    </a>
+    <div class="nav-links">
+      <a href="#">About</a>
+      <a href="#">Camps</a>
+      <a href="morasha-dates-rates.html">Dates &amp; Rates</a>
+      <a href="#">Alumni &amp; Events</a>
+      <a href="#">Rentals</a>
+      <a href="#">Contact</a>
+      <a href="#" class="nav-btn">Donate</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="eyebrow">Give Back</div>
+  <h1>Make Your Dedication</h1>
+  <p>Partner with the area that resonates most deeply with you, and help build the spaces where memories are made.</p>
+</section>
+
+<!-- ══════ FORM LAYOUT ══════ -->
+<div class="donate-layout">
+  <div class="form-area">
+
+    <a href="morasha-giveback-v2.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Giving Opportunities
+    </a>
+
+    <div class="form-card">
+
+      <!-- Step 1: Choose Program -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <span class="form-section__number">1</span>
+          <h2 class="form-section__title">Choose a Camp</h2>
+        </div>
+        <div class="program-cards">
+          <label class="program-card selected" data-camp="morasha" onclick="selectProgram(this)">
+            <input type="radio" name="program" value="morasha" checked>
+            <div class="program-card__name">Camp Morasha</div>
+          </label>
+          <label class="program-card" data-camp="mky" onclick="selectProgram(this)">
+            <input type="radio" name="program" value="mky">
+            <div class="program-card__name">Kehillas Yaakov</div>
+          </label>
+          <label class="program-card" data-camp="travel" onclick="selectProgram(this)">
+            <input type="radio" name="program" value="travel">
+            <div class="program-card__name">Morasha Travel</div>
+          </label>
+          <label class="program-card" data-camp="kollel" onclick="selectProgram(this)">
+            <input type="radio" name="program" value="kollel">
+            <div class="program-card__name">Morasha Kollel</div>
+          </label>
+          <label class="program-card" data-camp="general" onclick="selectProgram(this)" style="grid-column: 1 / -1;">
+            <input type="radio" name="program" value="general">
+            <div class="program-card__name">General Morasha Fund</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Step 2: Select Opportunity or Amount -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <span class="form-section__number">2</span>
+          <h2 class="form-section__title">Select an Opportunity</h2>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Dedication opportunity (optional)</label>
+          <select class="field-select" id="opportunitySelect" onchange="updateSummary()">
+            <option value="">Choose a specific opportunity...</option>
+            <optgroup label="Legacy Dedications">
+              <option value="3600000">Campus Naming — $3,600,000</option>
+              <option value="1000000">Dining Hall Naming — $1,000,000</option>
+              <option value="720000">Main Amphitheater Naming — $720,000</option>
+              <option value="720000b">Turf Football Field Naming — $720,000</option>
+              <option value="500000">Health Center Naming — $500,000</option>
+              <option value="500000b">Arts Village Naming — $500,000</option>
+            </optgroup>
+            <optgroup label="Meaningful Dedications">
+              <option value="72000">Pool Slide &amp; Poolside — $72,000</option>
+              <option value="36000">BMP Furniture &amp; Seforim — $36,000</option>
+              <option value="18000">Performing Arts Lighting — $18,000</option>
+              <option value="10000">500 New Siddurim — $10,000</option>
+              <option value="5000">Beis Seforim — $5,000</option>
+              <option value="3600">Weekend Scholar-in-Residence — $3,600</option>
+              <option value="1800">Mezuzah Dedication — $1,800</option>
+              <option value="1000">Outdoor Picnic Table — $1,000</option>
+              <option value="720">Dedicate a Day of Learning — $720</option>
+            </optgroup>
+            <option value="custom">Other / Custom Amount</option>
+          </select>
+        </div>
+
+        <div class="field-group" id="customAmountGroup" style="display:none;">
+          <label class="field-label">Donation amount</label>
+          <div class="amount-grid">
+            <label class="amount-option" onclick="selectAmount(this, 1000)">
+              <input type="radio" name="amount" value="1000">
+              <span class="amount-option__value">$1,000</span>
+            </label>
+            <label class="amount-option" onclick="selectAmount(this, 5000)">
+              <input type="radio" name="amount" value="5000">
+              <span class="amount-option__value">$5,000</span>
+            </label>
+            <label class="amount-option" onclick="selectAmount(this, 10000)">
+              <input type="radio" name="amount" value="10000">
+              <span class="amount-option__value">$10,000</span>
+            </label>
+            <label class="amount-option" onclick="selectAmount(this, 18000)">
+              <input type="radio" name="amount" value="18000">
+              <span class="amount-option__value">$18,000</span>
+            </label>
+            <label class="amount-option" onclick="selectAmount(this, 36000)">
+              <input type="radio" name="amount" value="36000">
+              <span class="amount-option__value">$36,000</span>
+            </label>
+            <label class="amount-option" onclick="selectAmount(this, 0)">
+              <input type="radio" name="amount" value="other">
+              <span class="amount-option__value">Other</span>
+            </label>
+          </div>
+          <div class="amount-custom">
+            <span class="amount-custom__prefix">$</span>
+            <input type="text" class="field-input" id="customAmount" placeholder="Enter amount" oninput="updateSummary()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Dedication Details -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <span class="form-section__number">3</span>
+          <h2 class="form-section__title">Dedication Details</h2>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">This donation is made...</label>
+          <div class="dedication-options">
+            <label class="dedication-option selected" onclick="selectDedication(this)">
+              <input type="radio" name="dedication_type" value="honor" checked>
+              In Honor Of
+            </label>
+            <label class="dedication-option" onclick="selectDedication(this)">
+              <input type="radio" name="dedication_type" value="memory">
+              In Memory Of
+            </label>
+            <label class="dedication-option" onclick="selectDedication(this)">
+              <input type="radio" name="dedication_type" value="celebration">
+              In Celebration Of
+            </label>
+            <label class="dedication-option" onclick="selectDedication(this)">
+              <input type="radio" name="dedication_type" value="none">
+              No Dedication
+            </label>
+          </div>
+        </div>
+
+        <div id="dedicationFields">
+          <div class="field-group">
+            <label class="field-label">Honoree name(s)</label>
+            <input type="text" class="field-input" placeholder="e.g. The Schwartz Family">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Dedication message (optional)</label>
+            <textarea class="field-textarea" placeholder="e.g. In honor of their dedication to Torah education and the Morasha community..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Your Information -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <span class="form-section__number">4</span>
+          <h2 class="form-section__title">Your Information</h2>
+        </div>
+
+        <div class="field-row field-group">
+          <div>
+            <label class="field-label">First name</label>
+            <input type="text" class="field-input" placeholder="First name">
+          </div>
+          <div>
+            <label class="field-label">Last name</label>
+            <input type="text" class="field-input" placeholder="Last name">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email</label>
+          <input type="email" class="field-input" placeholder="you@example.com">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Phone (optional)</label>
+          <input type="tel" class="field-input" placeholder="(555) 123-4567">
+        </div>
+        <div class="field-group">
+          <label class="field-label">How your name should appear on the Donor Wall</label>
+          <input type="text" class="field-input" placeholder="e.g. Sarah & David Schwartz" id="donorWallName">
+          <div class="field-hint">Leave blank to remain anonymous</div>
+        </div>
+      </div>
+
+      <!-- Step 5: Payment -->
+      <div class="form-section">
+        <div class="form-section__header">
+          <span class="form-section__number">5</span>
+          <h2 class="form-section__title">Payment</h2>
+        </div>
+
+        <div class="payment-toggle">
+          <button class="payment-toggle__option active" onclick="togglePayment(this, 'full')">Pay in Full</button>
+          <button class="payment-toggle__option" onclick="togglePayment(this, 'pledge')">Multi-Year Pledge</button>
+        </div>
+
+        <div id="pledgeFields" style="display:none;">
+          <div class="field-row field-group">
+            <div>
+              <label class="field-label">Number of years</label>
+              <select class="field-select">
+                <option>2 years</option>
+                <option>3 years</option>
+                <option>4 years</option>
+                <option>5 years</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label">Payment frequency</label>
+              <select class="field-select">
+                <option>Annual</option>
+                <option>Semi-annual</option>
+                <option>Quarterly</option>
+                <option>Monthly</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Card number</label>
+          <input type="text" class="field-input" placeholder="1234 5678 9012 3456" disabled style="background:#f5f5f5; cursor:not-allowed;">
+          <div class="field-hint">Payment processing will be integrated with your payment provider</div>
+        </div>
+
+        <div class="field-row field-group">
+          <div>
+            <label class="field-label">Expiry</label>
+            <input type="text" class="field-input" placeholder="MM / YY" disabled style="background:#f5f5f5; cursor:not-allowed;">
+          </div>
+          <div>
+            <label class="field-label">CVC</label>
+            <input type="text" class="field-input" placeholder="123" disabled style="background:#f5f5f5; cursor:not-allowed;">
+          </div>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="alert('This is a mockup — payment processing would be handled by your payment provider (Stripe, PayPal, etc.)')">Complete Donation</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════ SIDEBAR ══════ -->
+  <aside class="sidebar">
+
+    <div class="sidebar-summary" id="summaryCard">
+      <div class="sidebar-summary__title">Your Donation</div>
+      <div class="summary-row">
+        <span class="summary-row__label">Program</span>
+        <span class="summary-row__value" id="summaryProgram">Camp Morasha</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-row__label">Opportunity</span>
+        <span class="summary-row__value" id="summaryOpp">—</span>
+      </div>
+      <div class="summary-row summary-row--total">
+        <span class="summary-row__label">Total</span>
+        <span class="summary-row__value" id="summaryTotal">—</span>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card__title">Good to Know</div>
+      <ul>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          All donations are fully tax-deductible
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Pledges may be fulfilled over a multi-year payment schedule
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          A tax receipt will be sent to your email address
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4L6 11.3 2.7 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Your name will appear on the Donor Wall (unless you prefer to remain anonymous)
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-contact">
+      Questions about giving?<br>
+      Contact <a href="mailto:giving@campmorasha.com">giving@campmorasha.com</a><br>
+      or call <a href="tel:+12125551964">(212) 555-1964</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ══════ SITE FOOTER ══════ -->
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
+          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+        </a>
+        <div>
+          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
+          <form class="site-footer__newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="site-footer__social">
+          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <ul><li><a href="#">About</a></li><li><a href="#">Alumni &amp; Events</a></li><li><a href="#">Rentals</a></li><li><a href="#">Donate</a></li></ul>
+      </div>
+      <div class="site-footer__col">
+        <h4>Camps</h4>
+        <ul><li><a href="#">Camp Morasha</a></li><li><a href="#">Kehilas Yaakov</a></li><li><a href="#">Morasha Kollel</a></li></ul>
+      </div>
+      <div class="site-footer__col">
+        <h4>&nbsp;</h4>
+        <ul><li><a href="#">Sulam</a></li><li><a href="#">Amcha Boys</a></li><li><a href="#">Amcha Girls</a></li></ul>
+      </div>
+    </div>
+    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<!-- ══════ Scripts ══════ -->
+<script>
+function selectProgram(el) {
+  document.querySelectorAll('.program-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+
+  const names = { morasha: 'Camp Morasha', mky: 'Kehillas Yaakov', travel: 'Morasha Travel', kollel: 'Morasha Kollel', general: 'General Fund' };
+  document.getElementById('summaryProgram').textContent = names[el.dataset.camp] || '—';
+  updateSummary();
+}
+
+function selectAmount(el, val) {
+  document.querySelectorAll('.amount-option').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  if (val > 0) {
+    document.getElementById('customAmount').value = val.toLocaleString();
+  } else {
+    document.getElementById('customAmount').value = '';
+    document.getElementById('customAmount').focus();
+  }
+  updateSummary();
+}
+
+function selectDedication(el) {
+  document.querySelectorAll('.dedication-option').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const val = el.querySelector('input').value;
+  document.getElementById('dedicationFields').style.display = val === 'none' ? 'none' : 'block';
+}
+
+function togglePayment(el, type) {
+  document.querySelectorAll('.payment-toggle__option').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pledgeFields').style.display = type === 'pledge' ? 'block' : 'none';
+}
+
+function updateSummary() {
+  const sel = document.getElementById('opportunitySelect');
+  const oppEl = document.getElementById('summaryOpp');
+  const totalEl = document.getElementById('summaryTotal');
+  const customGroup = document.getElementById('customAmountGroup');
+
+  if (sel.value === 'custom' || sel.value === '') {
+    if (sel.value === 'custom') {
+      customGroup.style.display = 'block';
+      oppEl.textContent = 'Custom';
+      const custom = document.getElementById('customAmount').value.replace(/[^0-9]/g, '');
+      totalEl.textContent = custom ? '$' + parseInt(custom).toLocaleString() : '—';
+    } else {
+      customGroup.style.display = 'none';
+      oppEl.textContent = '—';
+      totalEl.textContent = '—';
+    }
+  } else {
+    customGroup.style.display = 'none';
+    const text = sel.options[sel.selectedIndex].text;
+    const name = text.split(' — ')[0];
+    const price = text.split(' — ')[1] || '';
+    oppEl.textContent = name;
+    totalEl.textContent = price || '—';
+  }
+}
+</script>
+
+</body>
+</html>

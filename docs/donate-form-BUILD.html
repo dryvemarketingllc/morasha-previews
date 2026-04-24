@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Donation Form — Developer Build Doc</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.new { background: #e8f5e9; color: #2e7d32; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .qa-list {
+    list-style: none;
+    margin: 12px 0;
+    padding: 0;
+  }
+  .qa-list li {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    padding: 6px 0 6px 28px;
+    position: relative;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .qa-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 2px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Donation Form Page</h1>
+  <p>Build instructions &mdash; new page at <code style="background:rgba(255,255,255,0.12); padding:2px 6px; border-radius:2px;">/donate/</code></p>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="change-item">
+    <div class="change-date">April 24, 2026</div>
+    <span class="status new">New Page</span>
+    <div class="change-title">Overview</div>
+    <div class="change-desc">
+      A new standalone donation form page that serves as the action destination from the Give Back page. The page has a compact hero, a multi-step form card, and a sticky sidebar with donation summary and informational notes.
+    </div>
+    <div class="note">
+      <strong>Preview:</strong> <a href="../morasha-donate-form.html" style="color:var(--green);">morasha-donate-form.html</a><br>
+      <strong>URL:</strong> <code>/donate/</code><br>
+      <strong>WordPress template:</strong> Create a new page template <code>page-donate.php</code>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: PAGE LAYOUT ── -->
+  <div class="change-item">
+    <div class="change-date">Layout</div>
+    <div class="change-title">Page Layout</div>
+    <div class="change-desc">
+      Two-column grid layout below a compact dark green hero. Form on the left (main column), sticky sidebar on the right.
+    </div>
+    <pre>
+<span class="sel">.donate-layout</span> {
+  <span class="prop">max-width</span>: <span class="val">1100px</span>;
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 340px</span>;
+  <span class="prop">gap</span>: <span class="val">48px</span>;
+  <span class="prop">padding</span>: <span class="val">48px 32px 80px</span>;
+}
+<span class="comment">/* Collapses to single column below 860px */</span></pre>
+  </div>
+
+  <!-- ── SECTION 2: FORM STEPS ── -->
+  <div class="change-item">
+    <div class="change-date">Form</div>
+    <div class="change-title">Multi-Step Form Card</div>
+    <div class="change-desc">
+      The form is a single card with five numbered sections separated by hairline borders. Each section has a green numbered circle and a title.
+    </div>
+    <pre>
+<span class="comment">/* Step 1: Choose a Camp */</span>
+&mdash; 2&times;2 grid of selectable camp cards + full-width General Fund option
+&mdash; Cards: Camp Morasha, Kehillas Yaakov, Morasha Travel, Morasha Kollel, General Morasha Fund
+&mdash; Selected state: camp accent color border + checkmark badge
+&mdash; Camp accent colors: green / indigo / blue / sienna / darkest-green
+
+<span class="comment">/* Step 2: Select an Opportunity */</span>
+&mdash; Dropdown populated from ACF opportunity data, grouped by Legacy / Meaningful
+&mdash; Dropdown options should change based on camp selected in Step 1
+&mdash; "Other / Custom Amount" option shows a quick-select grid + custom input
+&mdash; Quick-select amounts: $1K, $5K, $10K, $18K, $36K, Other
+
+<span class="comment">/* Step 3: Dedication Details */</span>
+&mdash; Toggle: In Honor Of | In Memory Of | In Celebration Of | No Dedication
+&mdash; When "No Dedication" selected, hide honoree name + message fields
+&mdash; Fields: Honoree name(s), Dedication message (textarea, optional)
+
+<span class="comment">/* Step 4: Your Information */</span>
+&mdash; First name + Last name (side by side)
+&mdash; Email
+&mdash; Phone (optional)
+&mdash; "How your name should appear on the Donor Wall" with hint: "Leave blank to remain anonymous"
+
+<span class="comment">/* Step 5: Payment */</span>
+&mdash; Toggle: Pay in Full | Multi-Year Pledge
+&mdash; Pledge shows: Number of years (2-5) + Payment frequency (Annual/Semi/Quarterly/Monthly)
+&mdash; Card fields: integrate with payment processor (Stripe, PayPal, etc.)
+&mdash; Submit button: "Complete Donation"</pre>
+  </div>
+
+  <!-- ── SECTION 3: SIDEBAR ── -->
+  <div class="change-item">
+    <div class="change-date">Sidebar</div>
+    <div class="change-title">Sticky Sidebar</div>
+    <div class="change-desc">
+      Right sidebar sticks on scroll. Contains three elements:
+    </div>
+    <pre>
+<span class="comment">/* 1. Donation Summary Card */</span>
+&mdash; Updates dynamically as form is filled
+&mdash; Shows: Program, Opportunity name, Total amount
+&mdash; Total has bold serif font with top border
+
+<span class="comment">/* 2. Good to Know Card */</span>
+&mdash; Cream background, checklist with green checkmarks
+&mdash; Items: tax-deductible, multi-year pledges, tax receipt, donor wall
+
+<span class="comment">/* 3. Contact Line */</span>
+&mdash; Centered text: "Questions about giving?"
+&mdash; Email + phone links</pre>
+  </div>
+
+  <!-- ── SECTION 4: URL PARAMETERS ── -->
+  <div class="change-item">
+    <div class="change-date">Integration</div>
+    <div class="change-title">URL Parameters &amp; Deep Linking</div>
+    <div class="change-desc">
+      The Give Back page should link to the donation form with URL parameters to pre-select the camp and optionally an opportunity. This allows "Donate Now" buttons in each camp section to pass context.
+    </div>
+    <pre>
+<span class="comment">/* URL parameter format */</span>
+/donate/?camp=morasha
+/donate/?camp=mky
+/donate/?camp=travel
+/donate/?camp=kollel
+/donate/?camp=general
+
+<span class="comment">/* Optional: pre-select opportunity */</span>
+/donate/?camp=morasha&opp=campus-naming
+
+<span class="comment">/* On page load, read params and:
+   1. Select the matching camp card
+   2. Filter the opportunity dropdown to that camp
+   3. If opp param present, select that opportunity */</span></pre>
+  </div>
+
+  <!-- ── SECTION 5: ACF STRUCTURE ── -->
+  <div class="change-item">
+    <div class="change-date">WordPress</div>
+    <div class="change-title">ACF Data Structure</div>
+    <div class="change-desc">
+      The opportunity dropdown should pull from the same ACF Repeater fields used on the Give Back page. Each camp has its own set of opportunities.
+    </div>
+    <pre>
+<span class="comment">/* Existing ACF structure from Give Back page */</span>
+Camp &rarr; Opportunity Blocks (Repeater)
+  &rarr; Block Heading (e.g. "Legacy Dedication Opportunities")
+  &rarr; Opportunity Items (Repeater)
+    &rarr; Name (text)
+    &rarr; Price (text)
+    &rarr; Is Hidden (boolean, for "See More" toggle)
+
+<span class="comment">/* The donation form reads the same data
+   and populates the &lt;select&gt; dropdown grouped
+   by block heading (Legacy / Meaningful) */</span></pre>
+  </div>
+
+  <!-- ── QA ── -->
+  <div class="change-item">
+    <div class="change-date">QA Checklist</div>
+    <div class="change-title">QA &amp; Testing</div>
+    <ul class="qa-list">
+      <li>Camp cards select/deselect with correct accent colors</li>
+      <li>Opportunity dropdown filters by selected camp</li>
+      <li>"Other / Custom Amount" shows amount grid and custom input</li>
+      <li>Sidebar summary updates dynamically on form changes</li>
+      <li>Dedication type toggles show/hide honoree fields</li>
+      <li>Pay in Full / Multi-Year Pledge toggle shows/hides pledge options</li>
+      <li>URL parameters pre-select camp and opportunity on page load</li>
+      <li>Responsive: single column below 860px, sidebar moves below form</li>
+      <li>Payment integration with chosen processor (Stripe, PayPal, etc.)</li>
+      <li>"Back to Giving Opportunities" link returns to Give Back page</li>
+      <li>Form validation: required fields (name, email, amount)</li>
+      <li>Tax receipt confirmation email triggers on successful submission</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  Dryve Marketing &mdash; Morasha Camps 2026 Redesign &mdash; <a href="../index.html" style="color:#888;">Back to Index</a>
+</div>
+
+</body>
+</html>
