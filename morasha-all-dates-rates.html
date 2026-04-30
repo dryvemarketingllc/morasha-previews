@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Dates & Rates – Morasha Camps</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --darkest-green: #142B15;
+  --dark-green: #1e3a20;
+  --green: #46764B;
+  --light-green: #9BBA91;
+  --lightest-green: #DAE4D0;
+  --cream: #f9f8f6;
+  --mky-indigo: #1C326B;
+  --travel-blue: #306DA5;
+  --kollel-sienna: #974426;
+  --text: #2a2a2a;
+  --text-muted: #6B6B6B;
+  --serif: Georgia, "Times New Roman", Times, serif;
+  --sans: "Kefa", "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --sans-ui: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --sans-cond: "Roboto Condensed", "Roboto", sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── Site Nav ── */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(10px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.site-header .nav {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo { display: flex; align-items: center; }
+.site-header .logo img { height: 40px; width: auto; display: block; }
+.site-header .nav-links { display: flex; align-items: center; gap: 36px; }
+.site-header .nav-links a {
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  transition: color .2s;
+  text-decoration: none;
+}
+.site-header .nav-links a:hover { color: var(--green); }
+.site-header .nav-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: all .25s;
+  white-space: nowrap;
+  background: var(--darkest-green) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+.site-header .nav-btn:hover { background: var(--green) !important; }
+
+/* ── Hero ── */
+.hero {
+  margin-top: 81px;
+  background: var(--darkest-green);
+  padding: 64px 48px 56px;
+  text-align: center;
+}
+.hero__title {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.hero__text {
+  font-family: var(--sans);
+  font-size: 17px;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Sticky Camp Nav ── */
+.camp-nav {
+  position: sticky;
+  top: 81px;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.camp-nav__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0 24px;
+}
+.camp-nav__link {
+  flex-shrink: 0;
+  padding: 16px 22px;
+  font-family: var(--sans-cond);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #999;
+  border-bottom: 2px solid transparent;
+  transition: all .2s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.camp-nav__link:hover { color: var(--text); }
+.camp-nav__link.active {
+  color: var(--green);
+  border-bottom-color: var(--green);
+}
+
+/* ── Camp Section ── */
+.camp-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 48px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.camp-section:last-of-type { border-bottom: none; }
+
+.camp-section__eyebrow {
+  font-family: var(--sans-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--section-accent, var(--green));
+  margin-bottom: 8px;
+}
+.camp-section__title {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--darkest-green);
+  margin-bottom: 40px;
+}
+
+/* Section accent colors */
+.camp-section--morasha { --section-accent: var(--green); }
+.camp-section--kollel { --section-accent: var(--kollel-sienna); }
+.camp-section--mky { --section-accent: var(--mky-indigo); }
+.camp-section--sulam { --section-accent: var(--travel-blue); }
+.camp-section--amcha-boys { --section-accent: var(--travel-blue); }
+.camp-section--amcha-girls { --section-accent: var(--travel-blue); }
+
+/* ── Dates Grid ── */
+.dates-block { margin-bottom: 40px; }
+.dates-block__label {
+  font-family: var(--sans-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.dates-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.date-chip {
+  background: var(--cream);
+  border-radius: 6px;
+  padding: 14px 20px;
+  flex: 0 1 auto;
+  min-width: 180px;
+}
+.date-chip__label {
+  font-family: var(--sans-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.date-chip__value {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--darkest-green);
+}
+
+/* ── Tuition Table ── */
+.tuition-block { margin-bottom: 40px; }
+.tuition-block__label {
+  font-family: var(--sans-cond);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.tuition-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+}
+.tuition-table thead th {
+  background: var(--section-accent, var(--green));
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+  text-align: left;
+}
+.tuition-table thead th:first-child { border-radius: 6px 0 0 0; }
+.tuition-table thead th:last-child { border-radius: 0 6px 0 0; }
+.tuition-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: var(--text);
+}
+.tuition-table tbody tr:last-child td { border-bottom: none; }
+.tuition-table tbody tr:nth-child(even) td { background: var(--cream); }
+
+.tuition-note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 12px;
+}
+
+/* ── Refund Policy ── */
+.refund-block { margin-top: 8px; }
+.refund-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--section-accent, var(--green));
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 8px 0;
+  transition: opacity .2s;
+}
+.refund-toggle:hover { opacity: 0.7; }
+.refund-toggle svg {
+  width: 14px;
+  height: 14px;
+  transition: transform .2s;
+}
+.refund-toggle.open svg { transform: rotate(180deg); }
+
+.refund-content {
+  display: none;
+  margin-top: 16px;
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 24px;
+}
+.refund-content.open { display: block; }
+.refund-content__title {
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--darkest-green);
+  margin-bottom: 4px;
+}
+.refund-content__note {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.refund-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+}
+.refund-table td {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  vertical-align: top;
+}
+.refund-table td:first-child {
+  color: var(--text-muted);
+  padding-right: 24px;
+  width: 55%;
+}
+.refund-table td:last-child {
+  font-weight: 500;
+  color: var(--text);
+  text-align: right;
+}
+.refund-table tr:last-child td { border-bottom: none; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero { padding: 48px 24px 40px; }
+  .hero__title { font-size: 32px; }
+  .camp-section { padding: 48px 24px; }
+  .camp-section__title { font-size: 26px; }
+  .dates-grid { flex-direction: column; }
+  .date-chip { min-width: auto; }
+  .camp-nav__link { padding: 14px 16px; font-size: 11px; }
+  .tuition-table { font-size: 13px; }
+  .tuition-table thead th, .tuition-table tbody td { padding: 10px 10px; }
+}
+@media (max-width: 640px) {
+  .site-header .nav { padding: 16px 24px; }
+  .site-header .nav-links { gap: 16px; }
+  .site-header .nav-links a:not(.nav-btn) { display: none; }
+}
+
+/* ── Site Footer ── */
+.site-footer { background: #ececec; padding: 48px 0 24px; }
+.site-footer__container { max-width: 1440px; margin: 0 auto; padding: 0 48px; }
+.site-footer__inner { display: flex; flex-wrap: wrap; gap: 40px; padding-bottom: 40px; }
+.site-footer__brand { display: flex; flex-direction: column; gap: 20px; margin-right: auto; flex: 0 1 358px; }
+.site-footer__logo { color: #142b15; display: inline-block; }
+.site-footer__logo img { height: 58px; width: auto; display: block; }
+.site-footer__newsletter-label { font-family: var(--sans-ui); font-weight: 600; font-size: 16px; color: #2A522E; margin: 0 0 8px; }
+.site-footer__newsletter-form { display: flex; gap: 4px; max-width: 348px; width: 100%; height: 42px; }
+.site-footer__newsletter-form input { flex: 1; min-width: 0; height: 42px; padding: 10px 12px; border: none; font-family: var(--sans-ui); font-size: 14px; color: var(--green); background: #fff; outline: none; }
+.site-footer__newsletter-form input::placeholder { color: #2A522E; opacity: .6; }
+.site-footer__newsletter-form button { flex: 0 0 113px; height: 42px; background: #2A522E; border: 1px solid #2A522E; color: #fff; padding: 10px 16px; font-family: var(--sans-ui); font-size: 14px; cursor: pointer; transition: opacity .2s; }
+.site-footer__newsletter-form button:hover { opacity: .85; }
+.site-footer__social { display: flex; gap: 8px; }
+.site-footer__social a { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 4px; color: #142b15; transition: opacity .2s; }
+.site-footer__social a:hover { opacity: .7; }
+.site-footer__social svg { width: 20px; height: 20px; }
+.site-footer__col { flex: 0 1 187px; }
+.site-footer__col h4 { font-family: var(--sans-ui); font-weight: 500; font-size: 16px; color: #142b15; margin: 0 0 16px; }
+.site-footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 22px; }
+.site-footer__col a { font-family: var(--sans-ui); font-size: 16px; color: #2a522e; transition: color .2s; }
+.site-footer__col a:hover { color: #46764b; }
+.site-footer__copyright { text-align: center; font-family: var(--sans-ui); font-size: 14px; color: #2a522e; margin: 0; padding-top: 16px; border-top: 1px solid #d0d0cf; }
+.site-footer__copyright a { color: #2a522e; }
+@media (max-width: 640px) {
+  .site-footer__container { padding: 0 24px; }
+  .site-footer__inner { gap: 24px; }
+  .site-footer__col { flex: 0 1 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ SITE HEADER ══════ -->
+<header class="site-header">
+  <nav class="nav">
+    <a href="index.html" class="logo">
+      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+    </a>
+    <div class="nav-links">
+      <a href="#">Camps</a>
+      <a href="#">Alumni &amp; Events</a>
+      <a href="#">Rentals</a>
+      <a href="morasha-donate-form.html" class="nav-btn">Donate Now</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <h1 class="hero__title">All Dates &amp; Rates</h1>
+  <p class="hero__text">2026 session dates, tuition, and refund policies for all Morasha programs.</p>
+</section>
+
+<!-- ══════ STICKY CAMP NAV ══════ -->
+<nav class="camp-nav">
+  <div class="camp-nav__inner">
+    <a href="#morasha" class="camp-nav__link active">Camp Morasha</a>
+    <a href="#kollel" class="camp-nav__link">Morasha Kollel</a>
+    <a href="#mky" class="camp-nav__link">Kehillas Yaakov</a>
+    <a href="#sulam" class="camp-nav__link">Sulam</a>
+    <a href="#amcha-boys" class="camp-nav__link">Amcha Boys</a>
+    <a href="#amcha-girls" class="camp-nav__link">Amcha Girls</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     CAMP MORASHA
+     ══════════════════════════════════════ -->
+<section class="camp-section camp-section--morasha" id="morasha">
+  <div class="camp-section__eyebrow">Camp Morasha</div>
+  <h2 class="camp-section__title">2026 Dates &amp; Rates</h2>
+
+  <div class="dates-block">
+    <div class="dates-block__label">2026 Dates</div>
+    <div class="dates-grid">
+      <div class="date-chip">
+        <div class="date-chip__label">First Session</div>
+        <div class="date-chip__value">June 30 – July 28</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Full Summer</div>
+        <div class="date-chip__value">June 30 – August 18</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Second Session</div>
+        <div class="date-chip__value">July 28 – August 18</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Staff Orientation</div>
+        <div class="date-chip__value">June 28</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Visiting Day</div>
+        <div class="date-chip__value">August 2</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Morasha Mania</div>
+        <div class="date-chip__value">August 4 – 6</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tuition-block">
+    <div class="tuition-block__label">2026 Tuition</div>
+    <table class="tuition-table">
+      <thead>
+        <tr><th>Current Grade</th><th>First Session</th><th>Second Session</th><th>Full Summer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>3rd – 6th</td><td>$6,800</td><td>$5,100</td><td>$10,700</td></tr>
+        <tr><td>7th – 9th</td><td>$6,800</td><td>$5,600</td><td>$11,200*</td></tr>
+      </tbody>
+    </table>
+    <p class="tuition-note">Tuition includes transportation to camp, laundry, accident and secondary care, all camp trips, camp t-shirt, and end-of-summer divisional apparel (for Full Summer / Second Session campers). Does not include canteen or counselor tips.</p>
+    <p class="tuition-note">*Alufim/fot (entering 10th grade): A $750 trip fee is added to partially cover the costs associated with the FimFotWest eight-day trip during the First Session. The six-day Road Trip during the Second Session is included in the listed tuition.</p>
+  </div>
+
+  <div class="refund-block">
+    <button class="refund-toggle" onclick="toggleRefund(this)">
+      Refund Policy
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="refund-content">
+      <div class="refund-content__title">Camper Refund Policy</div>
+      <div class="refund-content__note">These cancellation fees are applicable to both One Session and Full Summer Campers.</div>
+      <table class="refund-table">
+        <tr><td>Non-Accepted Campers</td><td>$1,500 Application Fee Returned</td></tr>
+        <tr><td>Cancellations before October 1</td><td>$250 Penalty</td></tr>
+        <tr><td>Cancellations after October 1</td><td>$1,500 Penalty</td></tr>
+        <tr><td>Cancellations after December 1</td><td>$2,500 Penalty</td></tr>
+        <tr><td>Cancellations after February 1</td><td>$3,500 Penalty</td></tr>
+        <tr><td>Cancellations after April 1</td><td>No Refund</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     MORASHA KOLLEL
+     ══════════════════════════════════════ -->
+<section class="camp-section camp-section--kollel" id="kollel">
+  <div class="camp-section__eyebrow">Morasha Kollel</div>
+  <h2 class="camp-section__title">2026 Dates &amp; Rates</h2>
+
+  <div class="dates-block">
+    <div class="dates-block__label">2026 Dates</div>
+    <div class="dates-grid">
+      <div class="date-chip">
+        <div class="date-chip__label">Full Summer</div>
+        <div class="date-chip__value">June 30 – August 18</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">First Session</div>
+        <div class="date-chip__value">June 30 – July 28</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Second Session</div>
+        <div class="date-chip__value">July 28 – August 18</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Staff Orientation</div>
+        <div class="date-chip__value">June 28</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Visiting Day</div>
+        <div class="date-chip__value">August 2</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tuition-block">
+    <div class="tuition-block__label">2026 Tuition</div>
+    <table class="tuition-table">
+      <thead>
+        <tr><th>Program</th><th>First Session</th><th>Second Session</th><th>Full Summer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>HS Kollel</td><td>$2,600</td><td>$1,950</td><td>$4,200</td></tr>
+        <tr><td>12th Grade Kollel</td><td>$1,800</td><td>$1,350</td><td>$2,900</td></tr>
+        <tr><td>College Kollel</td><td>$600</td><td>$450</td><td>$900</td></tr>
+      </tbody>
+    </table>
+    <p class="tuition-note">The $500 Kollel application fee (included in tuition prices above) is not refundable nor transferable after May 15th.</p>
+    <p class="tuition-note">*Early bird special for all Kollel applications submitted before February 15: $250 off Full Summer, $100 off 1st Session, $100 off 2nd Session!</p>
+  </div>
+
+  <div class="refund-block">
+    <button class="refund-toggle" onclick="toggleRefund(this)">
+      Refund Policy
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="refund-content">
+      <div class="refund-content__title">Camper Refund Policy</div>
+      <div class="refund-content__note">These cancellation fees are applicable to both One Session and Full Summer Campers.</div>
+      <table class="refund-table">
+        <tr><td>Non-Accepted Campers</td><td>$1,500 Application Fee Returned</td></tr>
+        <tr><td>Cancellations before October 1</td><td>$250 Penalty</td></tr>
+        <tr><td>Cancellations after October 1</td><td>$1,500 Penalty</td></tr>
+        <tr><td>Cancellations after December 1</td><td>$2,500 Penalty</td></tr>
+        <tr><td>Cancellations after February 1</td><td>$3,500 Penalty</td></tr>
+        <tr><td>Cancellations after April 1</td><td>No Refund</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     KEHILLAS YAAKOV
+     ══════════════════════════════════════ -->
+<section class="camp-section camp-section--mky" id="mky">
+  <div class="camp-section__eyebrow">Morasha Kehillas Yaakov</div>
+  <h2 class="camp-section__title">2026 Dates &amp; Rates</h2>
+
+  <div class="dates-block">
+    <div class="dates-block__label">2026 Dates</div>
+    <div class="dates-grid">
+      <div class="date-chip">
+        <div class="date-chip__label">Full Summer</div>
+        <div class="date-chip__value">June 29 – August 17</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">First Session</div>
+        <div class="date-chip__value">June 29 – July 27</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Second Session</div>
+        <div class="date-chip__value">July 27 – August 17</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Staff Orientation</div>
+        <div class="date-chip__value">June 27</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Visiting Day</div>
+        <div class="date-chip__value">July 18</div>
+      </div>
+      <div class="date-chip">
+        <div class="date-chip__label">Trial (Name TBD)</div>
+        <div class="date-chip__value">Coming Soon!</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tuition-block">
+    <div class="tuition-block__label">2026 Tuition</div>
+    <table class="tuition-table">
+      <thead>
+        <tr><th>Current Grade</th><th>First Session</th><th>Second Session</th><th>Full Summer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>7th – 9th</td><td>$6,800</td><td>$5,100</td><td>$10,700</td></tr>
+        <tr><td>3rd – 6th</td><td>$6,800</td><td>$5,600</td><td>$11,200*</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="refund-block">
+    <button class="refund-toggle" onclick="toggleRefund(this)">
+      Refund Policy
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="refund-content">
+      <div class="refund-content__title">Kehillas Yaakov Refund Policy</div>
+      <div class="refund-content__note">These cancellation fees are applicable to both One Session and Full Summer Campers.</div>
+      <table class="refund-table">
+        <tr><td>Non-Accepted Campers</td><td>$1,500 Application Fee Returned</td></tr>
+        <tr><td>Cancellations before October 1</td><td>$250 Penalty</td></tr>
+        <tr><td>Cancellations after October 1</td><td>$1,500 Penalty</td></tr>
+        <tr><td>Cancellations after December 1</td><td>$2,500 Penalty</td></tr>
+        <tr><td>Cancellations after February 1</td><td>$3,500 Penalty</td></tr>
+        <tr><td>Cancellations after April 1</td><td>No Refund</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SULAM
+     ══════════════════════════════════════ -->
+<section class="camp-section camp-section--sulam" id="sulam">
+  <div class="camp-section__eyebrow">Sulam</div>
+  <h2 class="camp-section__title">2026 Dates &amp; Rates</h2>
+
+  <div class="dates-block">
+    <div class="dates-block__label">2026 Dates</div>
+    <div class="dates-grid">
+      <div class="date-chip">
+        <div class="date-chip__label">Sulam Summer</div>
+        <div class="date-chip__value">July 8 – August 14</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tuition-block">
+    <div class="tuition-block__label">2026 Tuition</div>
+    <table class="tuition-table">
+      <thead>
+        <tr><th>Current Grade</th><th>Full Summer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>10th Grade</td><td>$10,200</td></tr>
+      </tbody>
+    </table>
+    <p class="tuition-note">+ $1,000 Application Fee</p>
+  </div>
+
+  <div class="refund-block">
+    <button class="refund-toggle" onclick="toggleRefund(this)">
+      Refund Policy
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="refund-content">
+      <div class="refund-content__title">Morasha Travel Refund Policy</div>
+      <div class="refund-content__note">In the event of a last-minute cancellation of the entire Sulam program, or the program is required to leave Israel earlier than its scheduled end-date, Camp will refund partial tuition (tuition minus all non-refundable expenses already incurred), within 2 weeks of the cancellation.</div>
+      <table class="refund-table">
+        <tr><td>Non-Accepted Campers</td><td>$1,000 Application Fee Returned</td></tr>
+        <tr><td>Accepted Campers who Don't Enroll</td><td>50% of $1,000 Fee Returned</td></tr>
+        <tr><td>Cancellations after December 1</td><td>$1,500 Penalty</td></tr>
+        <tr><td>Cancellations after January 1</td><td>$2,500 Penalty</td></tr>
+        <tr><td>Cancellations after March 1</td><td>$3,500 Penalty</td></tr>
+        <tr><td>Cancellations after May 1</td><td>No Refund</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     AMCHA BOYS
+     ══════════════════════════════════════ -->
+<section class="camp-section camp-section--amcha-boys" id="amcha-boys">
+  <div class="camp-section__eyebrow">Amcha Boys</div>
+  <h2 class="camp-section__title">2026 Dates &amp; Rates</h2>
+
+  <div class="dates-block">
+    <div class="dates-block__label">2026 Dates</div>
+    <div class="dates-grid">
+      <div class="date-chip">
+        <div class="date-chip__label">Amcha Boys Summer</div>
+        <div class="date-chip__value">July 5 – August 11</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tuition-block">
+    <div class="tuition-block__label">2026 Tuition</div>
+    <table class="tuition-table">
+      <thead>
+        <tr><th>Current Grade</th><th>Full Summer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>10th Grade Boys</td><td>$10,200</td></tr>
+      </tbody>
+    </table>
+    <p class="tuition-note">+ $1,000 Application Fee</p>
+  </div>
+
+  <div class="refund-block">
+    <button class="refund-toggle" onclick="toggleRefund(this)">
+      Refund Policy
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="refund-content">
+      <div class="refund-content__title">Morasha Travel Refund Policy</div>
+      <div class="refund-content__note">In the event of a last-minute cancellation of the entire Amcha Boys summer, or the program is required to leave Israel earlier than its scheduled end-date, Camp will refund partial tuition (tuition minus all non-refundable expenses already incurred), within 2 weeks of the cancellation.</div>
+      <table class="refund-table">
+        <tr><td>Non-Accepted Campers</td><td>$1,000 Application Fee Returned</td></tr>
+        <tr><td>Accepted Campers who Don't Enroll</td><td>50% of $1,000 Fee Returned</td></tr>
+        <tr><td>Cancellations after December 1</td><td>$1,500 Penalty</td></tr>
+        <tr><td>Cancellations after January 1</td><td>$2,500 Penalty</td></tr>
+        <tr><td>Cancellations after March 1</td><td>$3,500 Penalty</td></tr>
+        <tr><td>Cancellations after May 1</td><td>No Refund</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     AMCHA GIRLS
+     ══════════════════════════════════════ -->
+<section class="camp-section camp-section--amcha-girls" id="amcha-girls">
+  <div class="camp-section__eyebrow">Amcha Girls</div>
+  <h2 class="camp-section__title">2026 Dates &amp; Rates</h2>
+
+  <div class="dates-block">
+    <div class="dates-block__label">2026 Dates</div>
+    <div class="dates-grid">
+      <div class="date-chip">
+        <div class="date-chip__label">Amcha Girls Summer</div>
+        <div class="date-chip__value">TBD</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tuition-block">
+    <div class="tuition-block__label">2026 Tuition</div>
+    <table class="tuition-table">
+      <thead>
+        <tr><th>Current Grade</th><th>Full Summer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>10th Grade Girls</td><td>$10,200</td></tr>
+      </tbody>
+    </table>
+    <p class="tuition-note">+ $1,000 Application Fee</p>
+  </div>
+
+  <div class="refund-block">
+    <button class="refund-toggle" onclick="toggleRefund(this)">
+      Refund Policy
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="refund-content">
+      <div class="refund-content__title">Morasha Travel Refund Policy</div>
+      <div class="refund-content__note">In the event of a last-minute cancellation of the entire Amcha Girls program, or the program is required to leave Israel earlier than its scheduled end-date, Camp will refund partial tuition (tuition minus all non-refundable expenses already incurred), within 2 weeks of the cancellation.</div>
+      <table class="refund-table">
+        <tr><td>Non-Accepted Campers</td><td>$1,000 Application Fee Returned</td></tr>
+        <tr><td>Accepted Campers who Don't Enroll</td><td>50% of $1,000 Fee Returned</td></tr>
+        <tr><td>Cancellations after December 1</td><td>$1,500 Penalty</td></tr>
+        <tr><td>Cancellations after January 1</td><td>$2,500 Penalty</td></tr>
+        <tr><td>Cancellations after March 1</td><td>$3,500 Penalty</td></tr>
+        <tr><td>Cancellations after May 1</td><td>No Refund</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SITE FOOTER ══════ -->
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
+          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+        </a>
+        <div class="site-footer__newsletter">
+          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
+          <form class="site-footer__newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="site-footer__social">
+          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        </div>
+      </div>
+      <div class="site-footer__col">
+        <ul class="site-footer__menu">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Alumni &amp; Events</a></li>
+          <li><a href="#">Rentals</a></li>
+          <li><a href="#">Donate</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h4>Camps</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Camp Morasha</a></li>
+          <li><a href="#">Kehilas Yaakov</a></li>
+          <li><a href="#">Morasha Kollel</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__col">
+        <h4>&nbsp;</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Sulam</a></li>
+          <li><a href="#">Amcha Boys</a></li>
+          <li><a href="#">Amcha Girls</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+function toggleRefund(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+// Sticky nav highlight on scroll
+(function() {
+  const links = document.querySelectorAll('.camp-nav__link');
+  const sections = document.querySelectorAll('.camp-section');
+
+  function onScroll() {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.offsetTop - 200;
+      if (window.scrollY >= top) current = s.id;
+    });
+    links.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+</body>
+</html>
