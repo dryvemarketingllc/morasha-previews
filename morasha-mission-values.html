@@ -354,6 +354,33 @@
     color: var(--charcoal);
     max-width: 48ch;
   }
+  .value-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .value-play:hover { opacity: 0.75; }
+  .value-play .play-icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform .2s;
+  }
+  .value-play .play-icon svg { margin-left: 2px; }
+  .value-play:hover .play-icon { transform: scale(1.1); }
   /* ============ FOOTER (Morasha 2026 spec) ============ */
   .site-footer {
     background: #ececec;
@@ -577,8 +604,8 @@
 <!-- ============ VALUE ROWS ============ -->
 <section class="values">
 
-  <!-- M -->
-  <div class="value" data-i="1" style="--accent:#46764B">
+  <!-- M — Middot / Mutual Respect -->
+  <div class="value" data-i="1" style="--accent:#679620">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider1.png')"></div>
     <div class="value-content">
       <div class="value-letter">M</div>
@@ -590,8 +617,8 @@
     </div>
   </div>
 
-  <!-- O -->
-  <div class="value" data-i="2" style="--accent:#2E5EA8">
+  <!-- O — Olam HaTorah -->
+  <div class="value" data-i="2" style="--accent:#335E9A">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider2.png')"></div>
     <div class="value-content">
       <div class="value-letter">O</div>
@@ -600,11 +627,15 @@
         <div class="value-hebrew">ללמוד ולעשות</div>
       </div>
       <p>The Torah is a tree of life that nurtures our campers and enables them to LEARN Torah in formal and informal ways from passionate, inspiring teachers, counselors and staff, and from each other. They then have the chance to LIVE that Torah in their bunks and on the ball fields, with teachers and peers. Torah learning, mitzvah observance, and Zionism define the natural rhythm of Morasha, every minute of every day, and help our campers grow in their service to Hashem.</p>
+      <a href="#" class="value-play" style="--accent:#335E9A">
+        <span class="play-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21"/></svg></span>
+        Play Video
+      </a>
     </div>
   </div>
 
-  <!-- R -->
-  <div class="value" data-i="3" style="--accent:#7A4CA0">
+  <!-- R — Responsibility -->
+  <div class="value" data-i="3" style="--accent:#514495">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider3.png')"></div>
     <div class="value-content">
       <div class="value-letter">R</div>
@@ -617,7 +648,7 @@
   </div>
 
   <!-- A — Appreciation -->
-  <div class="value" data-i="4" style="--accent:#C15827">
+  <div class="value" data-i="4" style="--accent:#CE781C">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export1.png')"></div>
     <div class="value-content">
       <div class="value-letter">A</div>
@@ -629,8 +660,8 @@
     </div>
   </div>
 
-  <!-- S -->
-  <div class="value" data-i="5" style="--accent:#2E8B8B">
+  <!-- S — Skills -->
+  <div class="value" data-i="5" style="--accent:#228A83">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export2.png')"></div>
     <div class="value-content">
       <div class="value-letter">S</div>
@@ -639,11 +670,15 @@
         <div class="value-hebrew">יגיע כפיך כי תאכל</div>
       </div>
       <p>Out of the classrooms and onto the fields, courts, lake, pool, art room, stage, and beyond, Morasha campers develop their technical skills, confidence, leadership, and self-esteem. Learning how to do things right through instruction, practice, challenge, and experience, campers develop skills in athletics, aquatics, adventure, and the arts.</p>
+      <a href="#" class="value-play" style="--accent:#228A83">
+        <span class="play-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21"/></svg></span>
+        Play Video
+      </a>
     </div>
   </div>
 
-  <!-- H -->
-  <div class="value" data-i="6" style="--accent:#A02134">
+  <!-- H — Heart & Soul -->
+  <div class="value" data-i="6" style="--accent:#D33F49">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export3.png')"></div>
     <div class="value-content">
       <div class="value-letter">H</div>
@@ -656,7 +691,7 @@
   </div>
 
   <!-- A — Achdut -->
-  <div class="value" data-i="7" style="--accent:#D4A017">
+  <div class="value" data-i="7" style="--accent:#E09902">
     <div class="value-image" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export4.png')"></div>
     <div class="value-content">
       <div class="value-letter">A</div>
@@ -665,6 +700,10 @@
         <div class="value-hebrew">כאיש אחד בלב אחד</div>
       </div>
       <p>All for one and one for all. Living together in a bunk, playing together on a team, traveling together on a camp trip, and working together on a project all contribute to the creation of bonds and affection and the satisfaction of mutual achievement. All this creates a unity through which campers, counselors, and staff become the Morasha family.</p>
+      <a href="#" class="value-play" style="--accent:#E09902">
+        <span class="play-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21"/></svg></span>
+        Play Video
+      </a>
     </div>
   </div>
 
