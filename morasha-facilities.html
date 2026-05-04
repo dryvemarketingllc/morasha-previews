@@ -235,12 +235,18 @@ img { max-width: 100%; display: block; }
 /* ══════════════════════════════════
    PHOTO SLIDESHOW
    ══════════════════════════════════ */
+.slideshow-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
 .slideshow {
   position: relative;
   width: 100%;
   height: 480px;
   overflow: hidden;
   background: var(--darkest-green);
+  border-radius: 8px;
 }
 .slideshow__track {
   display: flex;
@@ -305,52 +311,7 @@ img { max-width: 100%; display: block; }
   transform: scale(1.2);
 }
 
-/* ══════════════════════════════════
-   STAT BAR
-   ══════════════════════════════════ */
-.stat-bar {
-  background: var(--green);
-  padding: 0 48px;
-}
-.stat-bar__inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  gap: 0;
-}
-.stat-bar__item {
-  flex: 1;
-  max-width: 240px;
-  text-align: center;
-  padding: 28px 20px;
-  position: relative;
-}
-.stat-bar__item + .stat-bar__item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 20%;
-  bottom: 20%;
-  width: 1px;
-  background: rgba(255,255,255,0.2);
-}
-.stat-bar__number {
-  font-family: var(--serif);
-  font-size: 32px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.stat-bar__label {
-  font-family: var(--sans-ui);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-}
+/* (stat bar removed) */
 
 
 /* ══════════════════════════════════
@@ -437,8 +398,6 @@ img { max-width: 100%; display: block; }
    RESPONSIVE
    ══════════════════════════════════ */
 @media (max-width: 1024px) {
-  .stat-bar__inner { flex-wrap: wrap; }
-  .stat-bar__item { flex: 0 0 33.33%; max-width: none; }
   .site-footer__inner { gap: 32px; }
   .site-footer__col { flex: 0 1 50%; }
 }
@@ -446,14 +405,12 @@ img { max-width: 100%; display: block; }
   .hero { padding: 56px 24px 48px; }
   .hero__title { font-size: 36px; }
   .hero__text { font-size: 16px; }
-  .slideshow { height: 300px; }
+  .slideshow-wrap { padding: 0 24px; }
+  .slideshow { height: 280px; }
   .slideshow__arrow { width: 36px; height: 36px; }
   .slideshow__arrow--prev { left: 12px; }
   .slideshow__arrow--next { right: 12px; }
   .slideshow__arrow svg { width: 18px; height: 18px; }
-  .stat-bar { padding: 0 24px; }
-  .stat-bar__item { flex: 0 0 50%; padding: 20px 16px; }
-  .stat-bar__number { font-size: 26px; }
   .facilities { padding: 48px 24px; }
   .facility-section__grid { grid-template-columns: 1fr; }
   .facility-section__title { font-size: 22px; }
@@ -490,6 +447,7 @@ img { max-width: 100%; display: block; }
 </section>
 
 <!-- ══════ PHOTO SLIDESHOW ══════ -->
+<div class="slideshow-wrap" style="padding-top:48px; padding-bottom:48px;">
 <section class="slideshow" aria-label="Campus photo gallery">
   <div class="slideshow__track" id="slideshowTrack">
     <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-34.jpg" alt="Camp Morasha campus aerial view" loading="eager" /></div>
@@ -512,31 +470,6 @@ img { max-width: 100%; display: block; }
 
   <div class="slideshow__dots" id="slideDots"></div>
 </section>
-
-<!-- ══════ STAT BAR ══════ -->
-<div class="stat-bar">
-  <div class="stat-bar__inner">
-    <div class="stat-bar__item">
-      <div class="stat-bar__number">400</div>
-      <div class="stat-bar__label">Acres</div>
-    </div>
-    <div class="stat-bar__item">
-      <div class="stat-bar__number">55</div>
-      <div class="stat-bar__label">Bunkhouses</div>
-    </div>
-    <div class="stat-bar__item">
-      <div class="stat-bar__number">14</div>
-      <div class="stat-bar__label">Basketball Courts</div>
-    </div>
-    <div class="stat-bar__item">
-      <div class="stat-bar__number">6</div>
-      <div class="stat-bar__label">Tennis Courts</div>
-    </div>
-    <div class="stat-bar__item">
-      <div class="stat-bar__number">3</div>
-      <div class="stat-bar__label">Waterfronts</div>
-    </div>
-  </div>
 </div>
 
 <!-- ══════ FACILITY SECTIONS ══════ -->
