@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Activities, Events & Trips Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  .checklist { list-style: none; padding: 0; margin: 12px 0; }
+  .checklist li {
+    padding: 8px 0 8px 28px;
+    position: relative;
+    font-size: 14px; color: #555; line-height: 1.5;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute; left: 0; top: 10px;
+    width: 16px; height: 16px;
+    border: 2px solid #ccc; border-radius: 3px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Activities, Events &amp; Trips</h1>
+  <p>Developer handoff for the Activities, Events &amp; Trips page redesign.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/the-morasha-experience/activities-events-trips/" target="_blank">morashastg1.../activities-events-trips/</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-activities.html" target="_blank">morasha-activities.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      May 4, 2026
+    </div>
+  </div>
+
+  <div class="change-desc" style="margin-bottom:32px;">
+    <strong>Summary:</strong> Full visual redesign of the Activities, Events &amp; Trips page. The existing content/copy is preserved — the layout, typography, and structure are updated to match the new site design system. Key changes: (1) dark green hero title banner, (2) Daily Activities presented in a 2&times;2 card grid with SVG icons and green checkmark lists, (3) dark green "Trips" intro band, (4) trip descriptions as labeled text blocks, (5) day trips as a two-column bullet list, (6) green "Special Events" closing band, (7) two-tier nav and site footer.
+  </div>
+
+  <!-- ─── CHANGE 1 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Hero Banner</div>
+    <div class="change-desc">Replace the current header with a simple dark green (<code>#142B15</code>) title banner. The page title "Activities, Events &amp; Trips" is displayed in Kefa Bold, 48px, white. No background image — the staging site does not have a hero photo for this page.</div>
+    <div class="note">The hero must account for the fixed two-tier nav (super nav + camp nav) with <code>padding-top: 148px</code>.</div>
+  </div>
+
+  <!-- ─── CHANGE 2 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Daily Activities Section</div>
+    <div class="change-desc">Light grey background (<code>#eef1eb</code>) section spanning full width. Contains a heading "Build those skills!", a "DAILY ACTIVITIES" eyebrow label (Roboto Condensed, green), and the intro paragraph from existing copy.</div>
+    <div class="change-desc">Activities are displayed in a <strong>2&times;2 card grid</strong> (white cards, 10px border-radius, subtle shadow). Each card has:</div>
+    <ul class="checklist">
+      <li>Centered SVG icon (56px, dark green stroke)</li>
+      <li>Category heading in Kefa Bold, 22px</li>
+      <li>Two-column checkmark list — each item has a green SVG checkmark (stroke-based, <code>#46764B</code>)</li>
+    </ul>
+    <div class="change-desc" style="margin-top:12px;">The four categories are: <strong>Athletics</strong> (14 items), <strong>Aquatics</strong> (11 items), <strong>Arts</strong> (12 items), <strong>Adventure</strong> (8 items). All copy from existing page.</div>
+    <div class="note">Grid collapses to single column below 768px. Checkmark lists collapse to single column at the same breakpoint.</div>
+  </div>
+
+  <!-- ─── CHANGE 3 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Trips Intro Band</div>
+    <div class="change-desc">Full-width dark green (<code>#142B15</code>) band with heading "Discover and explore!", eyebrow "OVERNIGHT AND DAY TRIPS" (Roboto Condensed, light green), and the existing intro paragraph. White text at 75% opacity for the body copy.</div>
+  </div>
+
+  <!-- ─── CHANGE 4 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Trip Descriptions</div>
+    <div class="change-desc">White background section with three trip blocks. Each block has an uppercase label in Roboto Condensed (dark green) and a body paragraph in Roboto 16px. Trips listed: Road Trip, NYC Bash, Lake George Wilderness Trip. All copy from existing page.</div>
+    <div class="change-desc" style="margin-top:8px;">Below the trip blocks, a <strong>Day Trips</strong> subsection appears after a thin separator line. Day trips are displayed as a two-column bulleted list (green bullets) listing 10 destinations.</div>
+  </div>
+
+  <!-- ─── CHANGE 5 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">5. Special Events Band</div>
+    <div class="change-desc">Full-width green (<code>#46764B</code>) closing band. Heading "Never a Dull Moment!", eyebrow "SPECIAL EVENTS" (Roboto Condensed, lightest green), and the existing special events paragraph. White text at 82% opacity for body copy.</div>
+  </div>
+
+  <!-- ─── CHANGE 6 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">6. Navigation &amp; Footer</div>
+    <div class="change-desc">Use the <strong>two-tier fixed navigation</strong> matching the Camp Landing Page (morasha-about.html):</div>
+    <table class="diff">
+      <tr><th>Element</th><th>Details</th></tr>
+      <tr><td>Super Nav (Tier 1)</td><td>Logo + Camps, Alumni &amp; Events, Rentals, Donate Now button</td></tr>
+      <tr><td>Camp Nav (Tier 2)</td><td>Green (<code>#46764B</code>) banner: "Camp Morasha" title + The Morasha Experience (active), Current Families, Dates &amp; Rates, Mania, Join Our Staff, Contact + Apply / Login CTA</td></tr>
+      <tr><td>Footer</td><td>Standard site footer: logo, newsletter signup, social icons, column links, copyright</td></tr>
+    </table>
+  </div>
+
+  <!-- ─── CHANGE 7 ─── -->
+  <div class="change-item">
+    <span class="status pending">Pending</span>
+    <div class="change-title">7. Typography</div>
+    <div class="change-desc">All typography follows the site-wide design system:</div>
+    <table class="diff">
+      <tr><th>Element</th><th>Font</th></tr>
+      <tr><td>Page title (h1)</td><td>Kefa Bold, 48px</td></tr>
+      <tr><td>Section headings (h2)</td><td>Kefa Bold, 34px</td></tr>
+      <tr><td>Card headings (h3)</td><td>Kefa Bold, 22px</td></tr>
+      <tr><td>Eyebrow labels</td><td>Roboto Condensed Bold, 14px, uppercase</td></tr>
+      <tr><td>Trip labels</td><td>Roboto Condensed Bold, 15px, uppercase</td></tr>
+      <tr><td>Body text</td><td>Roboto, 16px</td></tr>
+      <tr><td>List items</td><td>Roboto, 15px</td></tr>
+      <tr><td>Nav / UI elements</td><td>Roboto</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>
