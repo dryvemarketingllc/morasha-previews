@@ -207,7 +207,7 @@ img { max-width: 100%; display: block; }
 
 
 /* ══════════════════════════════════
-   HERO
+   HERO (text with optional bg photo)
    ══════════════════════════════════ */
 .hero {
   margin-top: 81px;
@@ -230,6 +230,79 @@ img { max-width: 100%; display: block; }
   color: rgba(255,255,255,0.75);
   max-width: 680px;
   margin: 0 auto;
+}
+
+/* ══════════════════════════════════
+   PHOTO SLIDESHOW
+   ══════════════════════════════════ */
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  background: var(--darkest-green);
+}
+.slideshow__track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform;
+}
+.slideshow__slide {
+  min-width: 100%;
+  height: 100%;
+}
+.slideshow__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Nav arrows */
+.slideshow__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+}
+.slideshow__arrow:hover { background: rgba(255,255,255,0.3); }
+.slideshow__arrow--prev { left: 20px; }
+.slideshow__arrow--next { right: 20px; }
+.slideshow__arrow svg { width: 22px; height: 22px; }
+/* Dot indicators */
+.slideshow__dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 8px;
+}
+.slideshow__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .2s, transform .2s;
+}
+.slideshow__dot.active {
+  background: #fff;
+  transform: scale(1.2);
 }
 
 /* ══════════════════════════════════
@@ -373,6 +446,11 @@ img { max-width: 100%; display: block; }
   .hero { padding: 56px 24px 48px; }
   .hero__title { font-size: 36px; }
   .hero__text { font-size: 16px; }
+  .slideshow { height: 300px; }
+  .slideshow__arrow { width: 36px; height: 36px; }
+  .slideshow__arrow--prev { left: 12px; }
+  .slideshow__arrow--next { right: 12px; }
+  .slideshow__arrow svg { width: 18px; height: 18px; }
   .stat-bar { padding: 0 24px; }
   .stat-bar__item { flex: 0 0 50%; padding: 20px 16px; }
   .stat-bar__number { font-size: 26px; }
@@ -407,8 +485,32 @@ img { max-width: 100%; display: block; }
 
 <!-- ══════ HERO ══════ -->
 <section class="hero">
-  <h1 class="hero__title">Facilities</h1>
-  <p class="hero__text">Our 400-acre property includes a full range of recreational facilities that satisfy the varied athletic interests of our campers.</p>
+  <h1 class="hero__title">Campus</h1>
+  <p class="hero__text">Our 400-acre property includes a full range of recreational facilities that satisfy the varied athletic, aquatic, artistic, and adventure interests of our campers.</p>
+</section>
+
+<!-- ══════ PHOTO SLIDESHOW ══════ -->
+<section class="slideshow" aria-label="Campus photo gallery">
+  <div class="slideshow__track" id="slideshowTrack">
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-34.jpg" alt="Camp Morasha campus aerial view" loading="eager" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-37-scaled.jpg" alt="Camp Morasha facilities" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-19.jpg" alt="Camp Morasha grounds" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-9-1-scaled.jpg" alt="Camp Morasha sports facilities" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-23.jpg" alt="Camp Morasha buildings" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-2.jpg" alt="Camp Morasha outdoor areas" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-21.jpg" alt="Camp Morasha recreation" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/D85_1561-1-morasha-waterfront--scaled.jpg" alt="Camp Morasha waterfront" loading="lazy" /></div>
+    <div class="slideshow__slide"><img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-10.jpg" alt="Camp Morasha campus" loading="lazy" /></div>
+  </div>
+
+  <button class="slideshow__arrow slideshow__arrow--prev" aria-label="Previous photo" id="slidePrev">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="slideshow__arrow slideshow__arrow--next" aria-label="Next photo" id="slideNext">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+
+  <div class="slideshow__dots" id="slideDots"></div>
 </section>
 
 <!-- ══════ STAT BAR ══════ -->
@@ -713,5 +815,67 @@ img { max-width: 100%; display: block; }
   </div>
 </footer>
 
+<script>
+(function() {
+  const track = document.getElementById('slideshowTrack');
+  const slides = track.children;
+  const total = slides.length;
+  const dotsContainer = document.getElementById('slideDots');
+  let current = 0;
+  let autoTimer;
+
+  // Build dots
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'slideshow__dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+    dot.addEventListener('click', function() { goTo(i); resetAuto(); });
+    dotsContainer.appendChild(dot);
+  }
+  const dots = dotsContainer.children;
+
+  function goTo(index) {
+    current = ((index % total) + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.toggle('active', i === current);
+    }
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  document.getElementById('slideNext').addEventListener('click', function() { next(); resetAuto(); });
+  document.getElementById('slidePrev').addEventListener('click', function() { prev(); resetAuto(); });
+
+  // Auto-advance every 5 seconds
+  function startAuto() { autoTimer = setInterval(next, 5000); }
+  function resetAuto() { clearInterval(autoTimer); startAuto(); }
+  startAuto();
+
+  // Pause on hover
+  var slideshow = track.closest('.slideshow');
+  slideshow.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+  slideshow.addEventListener('mouseleave', startAuto);
+
+  // Touch/swipe support
+  let startX = 0, startY = 0, isDragging = false;
+  track.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) next(); else prev();
+      resetAuto();
+    }
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
