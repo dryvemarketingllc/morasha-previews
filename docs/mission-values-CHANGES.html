@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Core Mission & Values — Change Log</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 18%; font-weight: 500; color: var(--charcoal); }
+
+  .swatch {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 6px;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Core Mission &amp; Values</h1>
+  <p>Change log for the Core Mission &amp; Values page.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/the-morasha-experience/core-mission-values/" target="_blank">morashastg1.../core-mission-values/</a>
+    </div>
+    <div>
+      <span class="meta-label">Old Site</span>
+      <a href="https://campmorasha.com/the-morasha-experience/core-mission-values" target="_blank">campmorasha.com/.../core-mission-values</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-mission-values.html" target="_blank">morasha-mission-values.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      May 4, 2026
+    </div>
+  </div>
+
+  <!-- ─── CHANGE 1 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Value Accent Colors Updated</div>
+    <div class="change-desc">Each MORASHA value now uses its correct brand color extracted from the old site (campmorasha.com). These colors are applied to the large letter, Hebrew tagline, image overlay tint, and Play Video button.</div>
+    <table class="diff">
+      <tr><th>Letter</th><th>Value</th><th>Old Hex</th><th>New Hex</th></tr>
+      <tr><td>M</td><td>Mutual Respect</td><td><span class="swatch" style="background:#46764B"></span><code>#46764B</code></td><td><span class="swatch" style="background:#679620"></span><code>#679620</code></td></tr>
+      <tr><td>O</td><td>Observe &amp; Study</td><td><span class="swatch" style="background:#2E5EA8"></span><code>#2E5EA8</code></td><td><span class="swatch" style="background:#335E9A"></span><code>#335E9A</code></td></tr>
+      <tr><td>R</td><td>Responsibility</td><td><span class="swatch" style="background:#7A4CA0"></span><code>#7A4CA0</code></td><td><span class="swatch" style="background:#514495"></span><code>#514495</code></td></tr>
+      <tr><td>A</td><td>Appreciation</td><td><span class="swatch" style="background:#C15827"></span><code>#C15827</code></td><td><span class="swatch" style="background:#CE781C"></span><code>#CE781C</code></td></tr>
+      <tr><td>S</td><td>Skill Building</td><td><span class="swatch" style="background:#2E8B8B"></span><code>#2E8B8B</code></td><td><span class="swatch" style="background:#228A83"></span><code>#228A83</code> (teal)</td></tr>
+      <tr><td>H</td><td>Heart &amp; Soul</td><td><span class="swatch" style="background:#A02134"></span><code>#A02134</code></td><td><span class="swatch" style="background:#D33F49"></span><code>#D33F49</code></td></tr>
+      <tr><td>A</td><td>Achdut</td><td><span class="swatch" style="background:#D4A017"></span><code>#D4A017</code></td><td><span class="swatch" style="background:#E09902"></span><code>#E09902</code> (gold/amber)</td></tr>
+    </table>
+    <div class="note"><strong>Key swaps:</strong> Skills is now teal (<code>#228A83</code>), Achdut is now gold/amber (<code>#E09902</code>). These were swapped from the initial mockup per client direction.</div>
+  </div>
+
+  <!-- ─── CHANGE 2 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Play Video Buttons Added</div>
+    <div class="change-desc">Three values have YouTube videos on the old site. A "Play Video" button has been added below the paragraph for each:</div>
+    <table class="diff">
+      <tr><th>Value</th><th>Button Color</th><th>Notes</th></tr>
+      <tr><td><strong>O</strong> — Observe &amp; Study</td><td><span class="swatch" style="background:#335E9A"></span> Blue</td><td>Uses accent color for filled circle icon + label</td></tr>
+      <tr><td><strong>S</strong> — Skill Building</td><td><span class="swatch" style="background:#228A83"></span> Teal</td><td>Same pattern</td></tr>
+      <tr><td><strong>A</strong> — Achdut</td><td><span class="swatch" style="background:#E09902"></span> Gold</td><td>Same pattern</td></tr>
+    </table>
+    <div class="change-desc" style="margin-top:8px;">Button design: 36px filled circle with white play triangle + "PLAY VIDEO" label in Roboto Condensed Bold 12px, uppercase, accent-colored. Positioned 24px below the paragraph text. Scales up on hover.</div>
+    <div class="note">Developer note: Each button should open a lightbox/modal with the corresponding YouTube embed. The YouTube IDs will need to be pulled from the old site or provided by the client.</div>
+  </div>
+
+  <!-- ─── CHANGE 3 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status approved">No Change</span>
+    <div class="change-title">3. Value Names &amp; Copy</div>
+    <div class="change-desc">All value names, Hebrew taglines, and paragraph copy remain unchanged from the initial build. "H" is confirmed as "Heart &amp; Soul" (not "Hashkafa" or other variants).</div>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>
