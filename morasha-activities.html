@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Activities, Events & Trips — Camp Morasha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #46764B;
+    --darkest-green: #142B15;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --text-grey: #828282;
+    --cream: #fafaf7;
+    --serif: Georgia, 'Times New Roman', serif;
+    --body: 'Nunito Sans', system-ui, sans-serif;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--body);
+    color: var(--charcoal);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 72px 48px 64px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  /* ===== SECTION LAYOUT ===== */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 48px;
+  }
+  .section-header {
+    margin-bottom: 32px;
+  }
+  .section-header h2 {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .section-header p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.65;
+    max-width: 780px;
+  }
+
+  /* ===== DAILY ACTIVITIES — 4-COLUMN GRID ===== */
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .activity-card {
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--green);
+  }
+  .activity-card-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--darkest-green);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .activity-card-icon svg {
+    width: 22px;
+    height: 22px;
+    color: #fff;
+    stroke: #fff;
+    fill: none;
+  }
+  .activity-card h3 {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--darkest-green);
+    margin-bottom: 14px;
+  }
+  .activity-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--charcoal);
+    white-space: nowrap;
+  }
+
+  /* ===== TRIPS SECTION ===== */
+  .trips-bg {
+    background: var(--cream);
+  }
+
+  /* Overnight trips — card layout */
+  .overnight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .trip-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 28px 24px;
+    border-left: 3px solid var(--green);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .trip-card h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--darkest-green);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .trip-card p {
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Day Trips */
+  .day-trips-label {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .day-trips-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .day-chip {
+    background: #fff;
+    border: 1px solid rgba(70,118,75,0.2);
+    padding: 8px 18px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--darkest-green);
+  }
+
+  /* ===== SPECIAL EVENTS ===== */
+  .events-band {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px;
+    text-align: center;
+  }
+  .events-band .inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .events-eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 14px;
+  }
+  .events-band h2 {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .events-band p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.65;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .events-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+  .event-tag {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .activities-grid { grid-template-columns: repeat(2, 1fr); }
+    .overnight-grid { grid-template-columns: 1fr; }
+    .hero { padding: 56px 24px 48px; }
+    .hero h1 { font-size: 34px; }
+    .section { padding: 48px 24px; }
+    .events-band { padding: 48px 24px; }
+  }
+  @media (max-width: 540px) {
+    .activities-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Camp Morasha</div>
+  <h1>Activities, Events & Trips</h1>
+</div>
+
+<!-- DAILY ACTIVITIES -->
+<div class="section">
+  <div class="section-header">
+    <h2>Daily Activities</h2>
+    <p>Our 400-acre property includes a full range of recreational facilities that satisfy the varied athletic, aquatic, artistic, and adventure interests of our campers. We offer a wide array of activities, ranging from intense sports to the best of the fine arts. These experiences encourage campers to discover and develop their individual abilities in ways that connect to their personal interests and lifestyles. Participation in camp-wide activities also gives them the opportunity to express their talents in a group setting.</p>
+  </div>
+
+  <div class="activities-grid">
+    <!-- Athletics -->
+    <div class="activity-card">
+      <div class="activity-card-icon">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+      </div>
+      <h3>Athletics</h3>
+      <div class="activity-chips">
+        <span class="chip">Aerobics</span>
+        <span class="chip">Baseball</span>
+        <span class="chip">Basketball</span>
+        <span class="chip">Gaga</span>
+        <span class="chip">Golf</span>
+        <span class="chip">Hockey</span>
+        <span class="chip">Jump Rope</span>
+        <span class="chip">Kickball</span>
+        <span class="chip">Flag Football</span>
+        <span class="chip">Soccer</span>
+        <span class="chip">Spin</span>
+        <span class="chip">Team Handball</span>
+        <span class="chip">Tennis Academy</span>
+        <span class="chip">Newcomb / Volleyball</span>
+      </div>
+    </div>
+
+    <!-- Aquatics -->
+    <div class="activity-card">
+      <div class="activity-card-icon">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 7c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>
+      </div>
+      <h3>Aquatics</h3>
+      <div class="activity-chips">
+        <span class="chip">Canoeing</span>
+        <span class="chip">Fishing</span>
+        <span class="chip">Kayaking</span>
+        <span class="chip">Iceberg</span>
+        <span class="chip">Pool Swim</span>
+        <span class="chip">Sailing</span>
+        <span class="chip">Swim Instruction</span>
+        <span class="chip">Trampoline</span>
+        <span class="chip">Tubing</span>
+        <span class="chip">Water Skiing</span>
+        <span class="chip">Water Volleyball</span>
+      </div>
+    </div>
+
+    <!-- Arts -->
+    <div class="activity-card">
+      <div class="activity-card-icon">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Arts</h3>
+      <div class="activity-chips">
+        <span class="chip">Arts and Crafts</span>
+        <span class="chip">Baking</span>
+        <span class="chip">Ceramics</span>
+        <span class="chip">Dance</span>
+        <span class="chip">Drama</span>
+        <span class="chip">Ductigami</span>
+        <span class="chip">Glass Fusing</span>
+        <span class="chip">Music Studio</span>
+        <span class="chip">Photo Editing</span>
+        <span class="chip">Stomp</span>
+        <span class="chip">Woodshop</span>
+        <span class="chip">Video Editing</span>
+      </div>
+    </div>
+
+    <!-- Adventure -->
+    <div class="activity-card">
+      <div class="activity-card-icon">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18L12 4 3 20z"/><path d="M12 16v-4"/><circle cx="12" cy="13" r="0.5"/></svg>
+      </div>
+      <h3>Adventure</h3>
+      <div class="activity-chips">
+        <span class="chip">Archery</span>
+        <span class="chip">Horseback Riding</span>
+        <span class="chip">IsraelXP</span>
+        <span class="chip">Nature</span>
+        <span class="chip">Overnights</span>
+        <span class="chip">Paintball</span>
+        <span class="chip">Riflery</span>
+        <span class="chip">Rock Climb</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OVERNIGHT & DAY TRIPS -->
+<div class="trips-bg">
+  <div class="section">
+    <div class="section-header">
+      <h2>Overnight and Day Trips</h2>
+      <p>Trips offer unique opportunities for campers to form special bonds with their peers in a different setting. Each trip is crafted down to the smallest detail, ensuring that every camper has an unforgettable experience in a safe and fun environment. Take a moment to see what trips our campers enjoy each summer.</p>
+    </div>
+
+    <div class="overnight-grid">
+      <div class="trip-card">
+        <h3>Road Trip</h3>
+        <p>Our oldest campers fly down to Florida and begin a 6-day, 6-state road trip up the East Coast. This trip includes a wide range of fun and inspiring activities while exposing campers to different "walks of life" across the American landscape. Whether it's an awesome day at Universal Studios in Orlando, an inspiring Shabbat in Washington, DC, an intense day with the Marines in South Carolina, or a relaxing day at Virginia Beach, this trip promises to be unforgettable.</p>
+      </div>
+      <div class="trip-card">
+        <h3>NYC Bash</h3>
+        <p>This two-day trip is a non-stop experience of raw excitement for our Manhigim/GOT campers. They've never seen NYC like this—featuring a limo scavenger hunt through the city, an all-night sleepover at the Sportime USA arcade complex, the IMAX experience, Bounce Trampoline Park, and a Golden Movie Ticket. It's unlike anything else.</p>
+      </div>
+      <div class="trip-card">
+        <h3>Lake George Wilderness Trip</h3>
+        <p>This trip is all about the thrill and exhilaration of the outdoors. It's a two-day experience packed with intensity and fun, where our Ilanot campers are challenged at the Adirondack Extreme Adventure Course and on whitewater rafting excursions. The trip also includes a visit to Six Flags in Lake George and an outdoor drive-in movie.</p>
+      </div>
+    </div>
+
+    <div class="day-trips-label">Day Trips</div>
+    <div class="day-trips-chips">
+      <span class="day-chip">Great Wolf Lodge</span>
+      <span class="day-chip">Hershey Park</span>
+      <span class="day-chip">Dorney Park</span>
+      <span class="day-chip">Six Flags</span>
+      <span class="day-chip">Camelbeach Water Park</span>
+      <span class="day-chip">Lehigh River Rafting & Biking</span>
+      <span class="day-chip">Scranton/Wilkes-Barre Yankees Games</span>
+      <span class="day-chip">Binghamton Mets Games</span>
+      <span class="day-chip">Paintball & Woodbourne</span>
+      <span class="day-chip">Skate Estate</span>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIAL EVENTS -->
+<div class="events-band">
+  <div class="inner">
+    <div class="events-eyebrow">Special Events</div>
+    <h2>Never a Dull Moment!</h2>
+    <p>Color War, Shiria, Olympics, Purim in July, Super Bowl Sunday, FIFA, Morasha Cup, Intercamps, Gsquared—the list goes on. We invest a tremendous amount of time and thought each year designing fun, dynamic, and educational programs. These experiences give campers the opportunity to express a wide range of skills and strengths while learning in an informal setting. It's our camp spirit, deep-rooted tradition, and constant energy that keep campers coming back summer after summer.</p>
+    <div class="events-tags">
+      <span class="event-tag">Color War</span>
+      <span class="event-tag">Shiria</span>
+      <span class="event-tag">Olympics</span>
+      <span class="event-tag">Purim in July</span>
+      <span class="event-tag">Super Bowl Sunday</span>
+      <span class="event-tag">FIFA</span>
+      <span class="event-tag">Morasha Cup</span>
+      <span class="event-tag">Intercamps</span>
+      <span class="event-tag">Gsquared</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
