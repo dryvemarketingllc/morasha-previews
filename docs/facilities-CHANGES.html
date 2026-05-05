@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facilities Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Facilities / Campus</h1>
+  <p>Developer handoff for the Facilities page redesign.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/the-morasha-experience/facilities/" target="_blank">morashastg1.../facilities/</a>
+    </div>
+    <div>
+      <span class="meta-label">Old Site</span>
+      <a href="https://campmorasha.com/the-morasha-experience/facilities" target="_blank">campmorasha.com/.../facilities</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup Reference</span>
+      <a href="../morasha-facilities.html" target="_blank">morasha-facilities.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      May 5, 2026
+    </div>
+  </div>
+
+  <!-- ─── CHANGE 1 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 5, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Two-Tier Navigation</div>
+    <div class="change-desc">Replace the single-row site header with the standard two-tier fixed navigation used across all Camp Morasha interior pages:</div>
+    <table class="diff">
+      <tr><th>Element</th><th>Details</th></tr>
+      <tr><td>Super Nav (Tier 1)</td><td>White bar: Logo + Camps, Alumni &amp; Events, Rentals, Donate Now button</td></tr>
+      <tr><td>Camp Nav (Tier 2)</td><td>Green (<code>#46764B</code>) banner: "Camp Morasha" title + The Morasha Experience (active), Current Families, Dates &amp; Rates, Mania, Join Our Staff, Contact + Apply / Login CTA</td></tr>
+    </table>
+    <div class="note">The hero must account for the fixed two-tier nav with <code>padding-top: 228px</code> (148px nav clearance + 80px breathing room).</div>
+  </div>
+
+  <!-- ─── CHANGE 2 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Hero Section — Text Only</div>
+    <div class="change-desc">Simple dark green (<code>#142B15</code>) title banner. The page title "Campus" is displayed in the serif font stack (Kefa/Georgia), 52px, white, centered. Below the title, the existing intro paragraph in Roboto 18px at 75% white opacity, max-width 680px.</div>
+    <div class="note">No hero photo — the staging site does not have a hero image for this page. If a photo becomes available, it can be added as a background-image on the hero section.</div>
+  </div>
+
+  <!-- ─── CHANGE 3 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Photo Slideshow</div>
+    <div class="change-desc">A contained (not edge-to-edge) photo slideshow gallery sits between the hero and the facility listings. Specs:</div>
+    <table class="diff">
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Container</td><td><code>max-width: 1200px</code>, <code>padding: 0 48px</code>, centered</td></tr>
+      <tr><td>Slideshow</td><td><code>height: 480px</code>, <code>border-radius: 8px</code>, dark green background</td></tr>
+      <tr><td>Photos</td><td>9 campus images (Yehuda Joffe Photography), <code>object-fit: cover</code></td></tr>
+      <tr><td>Transition</td><td>CSS transform translateX, 0.6s cubic-bezier ease</td></tr>
+      <tr><td>Auto-advance</td><td>Every 5 seconds, pauses on hover</td></tr>
+      <tr><td>Navigation</td><td>Prev/next arrow buttons (48px circles, frosted glass style) + dot indicators at bottom</td></tr>
+      <tr><td>Touch</td><td>Swipe support for mobile (40px threshold)</td></tr>
+      <tr><td>Spacing</td><td><code>padding-top: 48px</code>, <code>padding-bottom: 24px</code> on wrapper</td></tr>
+    </table>
+    <div class="change-desc" style="margin-top:8px;">Photo sources (all from staging <code>/wp-content/uploads/2026/05/</code>):</div>
+    <table class="diff">
+      <tr><th>#</th><th>Filename</th></tr>
+      <tr><td>1</td><td>Yehuda-Joffe-Photography-34.jpg</td></tr>
+      <tr><td>2</td><td>Yehuda-Joffe-Photography-37-scaled.jpg</td></tr>
+      <tr><td>3</td><td>Yehuda-Joffe-Photography-19.jpg</td></tr>
+      <tr><td>4</td><td>Yehuda-Joffe-Photography-9-1-scaled.jpg</td></tr>
+      <tr><td>5</td><td>Yehuda-Joffe-Photography-23.jpg</td></tr>
+      <tr><td>6</td><td>Yehuda-Joffe-Photography-2.jpg</td></tr>
+      <tr><td>7</td><td>Yehuda-Joffe-Photography-21.jpg</td></tr>
+      <tr><td>8</td><td>D85_1561-1-morasha-waterfront--scaled.jpg</td></tr>
+      <tr><td>9</td><td>Yehuda-Joffe-Photography-10.jpg</td></tr>
+    </table>
+    <div class="note">Developer note: On mobile (&lt;640px), slideshow height drops to 280px and padding reduces to 0 24px. Arrow buttons shrink to 36px.</div>
+  </div>
+
+  <!-- ─── CHANGE 4 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Stat Bar Removed</div>
+    <div class="change-desc">The "400 Acres / 55 Bunkhouses / ..." stat bar that was between the hero and the facility categories has been removed. The slideshow replaces it as the visual anchor between hero and content.</div>
+  </div>
+
+  <!-- ─── CHANGE 5 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">5. Facility Categories Layout</div>
+    <div class="change-desc">Facilities are organized into 5 categorized sections, each with a header (SVG icon + section title) and an auto-fill grid of facility items:</div>
+    <table class="diff">
+      <tr><th>Category</th><th>Items</th></tr>
+      <tr><td>Campus &amp; Main Buildings</td><td>55 Bunkhouses, 70 Private Residences, Dining Hall, Canteen Complex, Main Office</td></tr>
+      <tr><td>Sports &amp; Swim</td><td>2 Indoor Gyms, 14 Basketball Courts, 4 Beach Volleyball, 4 Asphalt Volleyball, 7 Hockey Rinks, 6 Tennis Courts, 5 Baseball Fields, 4 Football/Soccer Fields, Olympic Pool, 3 Waterfront Areas, 2 Aqua Parks</td></tr>
+      <tr><td>Learning &amp; Davening</td><td>2 Batei Midrash, Gan Ha'Sefer, Boys Shul, Strick Library, 12 Learning Gazebos, Girls Pavilion, Beach Pavilion</td></tr>
+      <tr><td>Theater &amp; The Arts</td><td>Performing Arts Center, Music Recording Studio, Pargod Mini Theater, Arts Village (7 Studios), Fitness Center (5 Studios)</td></tr>
+      <tr><td>Outdoor Adventure</td><td>Horseback Riding, 2 Rock Climbing Walls + Zip Lines, Treetop Adventure, Archery, Riflery, Paintball, Fishing Dock, Hiking Trails, 3 Overnight Sites, 2 Bonfire Areas</td></tr>
+    </table>
+    <div class="change-desc" style="margin-top:8px;">Each item is a rounded card (<code>border-radius: 6px</code>, cream background <code>#f9f8f6</code>) with a green dot and facility name. Grid uses <code>grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))</code> with 12px gap. Cards highlight to lightest green on hover.</div>
+  </div>
+
+  <!-- ─── CHANGE 6 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status approved">No Change</span>
+    <div class="change-title">6. Content &amp; Copy</div>
+    <div class="change-desc">All facility names and descriptions are preserved from the existing staging site. No copy changes — layout and visual treatment only.</div>
+  </div>
+
+  <!-- ─── CHANGE 7 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 4, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">7. Footer</div>
+    <div class="change-desc">Standard site footer matching other interior pages: logo, newsletter signup, social icons (YouTube, Instagram), column links (About, Alumni, Rentals, Donate, Camps), copyright bar.</div>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>
