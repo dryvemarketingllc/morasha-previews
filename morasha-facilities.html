@@ -7,44 +7,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ── Site Nav ── */
-.site-header {
+/* ── NAV (two-tier: super + camp) ── */
+header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  background: rgba(255,255,255,0.96);
+  background: rgba(255,255,255,0.97);
   backdrop-filter: blur(10px);
   z-index: 200;
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
-.site-header .nav {
+/* Tier 1: super nav (site-wide) */
+.nav-super { border-bottom: 1px solid rgba(0,0,0,0.06); }
+.nav-super-inner {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 20px 48px;
+  padding: 14px 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
-.site-header .logo { display: flex; align-items: center; }
-.site-header .logo img { height: 40px; width: auto; display: block; }
-.site-header .nav-links {
+.logo { display: flex; align-items: center; flex-shrink: 0; }
+.logo img { height: 38px; width: auto; display: block; }
+.nav-super-links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 28px;
 }
-.site-header .nav-links a {
+.nav-super-links a {
   font-family: var(--sans-ui);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: #222;
   transition: color .2s;
-  text-decoration: none;
 }
-.site-header .nav-links a:hover { color: var(--green); }
-.site-header .nav-btn {
+.nav-super-links a:hover { color: var(--green); }
+.nav-super-links a.btn-primary { color: #fff; font-size: 13px; }
+.nav-super-links a.btn-primary:hover { color: #fff; }
+.btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 14px 28px;
   font-family: var(--sans-ui);
   font-weight: 500;
   font-size: 14px;
@@ -53,11 +57,63 @@
   cursor: pointer;
   transition: all .25s;
   white-space: nowrap;
-  background: var(--darkest-green) !important;
-  color: #fff !important;
-  text-decoration: none !important;
 }
-.site-header .nav-btn:hover { background: var(--green) !important; color: #fff !important; }
+.btn-primary { background: var(--darkest-green); color: #fff; }
+.btn-primary:hover { background: var(--green); }
+/* Tier 2: camp nav — green banner */
+.nav-camp { background: var(--green); color: #fff; }
+.nav-camp-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-camp-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(24px, 2.4vw, 38px);
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+  margin-right: auto;
+  letter-spacing: -0.01em;
+}
+.nav-camp-title:hover { color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+.nav-camp-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  padding: 0; margin: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.nav-camp-links a {
+  font-family: var(--sans-ui);
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+  transition: opacity .2s;
+}
+.nav-camp-links a:hover { opacity: 0.75; }
+.nav-camp-links a.active { border-bottom: 2px solid #fff; padding-bottom: 2px; }
+.nav-camp-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #fff;
+  color: var(--green);
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 4px;
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.nav-camp-cta:hover { background: var(--lightest-green); color: var(--darkest-green); }
 
 /* ── Site Footer ── */
 .site-footer {
@@ -210,9 +266,9 @@ img { max-width: 100%; display: block; }
    HERO (text with optional bg photo)
    ══════════════════════════════════ */
 .hero {
-  margin-top: 81px;
+  padding-top: 148px; /* clear fixed two-tier header */
   background: var(--darkest-green);
-  padding: 80px 48px 72px;
+  padding: 148px 48px 72px;
   text-align: center;
 }
 .hero__title {
@@ -417,27 +473,50 @@ img { max-width: 100%; display: block; }
   .site-footer__container { padding: 0 24px; }
   .site-footer__inner { gap: 24px; }
   .site-footer__col { flex: 0 1 100%; }
-  .site-header .nav { padding: 16px 24px; }
-  .site-header .nav-links { gap: 16px; }
-  .site-header .nav-links a:not(.nav-btn) { display: none; }
+  .nav-super-inner, .nav-camp-inner { padding-left: 24px; padding-right: 24px; }
+  .nav-super-inner { padding-top: 10px; padding-bottom: 10px; }
+  .nav-super-links { gap: 14px; }
+  .nav-super-links a:not(.btn) { display: none; }
+  .nav-camp-inner { padding-top: 12px; padding-bottom: 12px; gap: 16px; }
+  .nav-camp-links { display: none; }
+  .nav-camp-cta { padding: 8px 14px; font-size: 14px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ══════ SITE HEADER ══════ -->
-<header class="site-header">
-  <nav class="nav">
-    <a href="index.html" class="logo">
-      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
-    </a>
-    <div class="nav-links">
-      <a href="#">Camps</a>
-      <a href="#">Alumni &amp; Events</a>
-      <a href="#">Rentals</a>
-      <a href="morasha-donate-form.html" class="nav-btn">Donate Now</a>
+<!-- ══════ TWO-TIER NAV ══════ -->
+<header>
+  <!-- Tier 1: Super nav (site-wide) -->
+  <div class="nav-super">
+    <div class="nav-super-inner">
+      <a href="index.html" class="logo" aria-label="Morasha Camps">
+        <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+      </a>
+      <nav class="nav-super-links" aria-label="Main navigation">
+        <a href="#">Camps</a>
+        <a href="morasha-alumni-events.html">Alumni &amp; Events</a>
+        <a href="morasha-rentals.html">Rentals</a>
+        <a href="morasha-donate-form.html" class="btn btn-primary">Donate Now</a>
+      </nav>
     </div>
-  </nav>
+  </div>
+
+  <!-- Tier 2: Camp Morasha program nav (green banner) -->
+  <div class="nav-camp">
+    <div class="nav-camp-inner">
+      <a href="#" class="nav-camp-title">Camp Morasha</a>
+      <ul class="nav-camp-links" role="menubar" aria-label="Camp Morasha navigation">
+        <li><a href="#" class="active">The Morasha Experience</a></li>
+        <li><a href="#">Current Families</a></li>
+        <li><a href="morasha-dates-rates.html">Dates &amp; Rates</a></li>
+        <li><a href="#">Mania</a></li>
+        <li><a href="#">Join Our Staff</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <a href="#" class="nav-camp-cta">Apply / Login</a>
+    </div>
+  </div>
 </header>
 
 <!-- ══════ HERO ══════ -->
