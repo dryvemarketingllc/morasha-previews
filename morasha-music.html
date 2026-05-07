@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music | Camp Morasha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --white: #ffffff;
+    --off-white: #F7F8F5;
+    --text-muted: rgba(255,255,255,0.7);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--darkest-green);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  ul { list-style: none; }
+
+  /* ── TIER 1: SUPER NAV ── */
+  .super-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--white);
+    border-bottom: 1px solid #e8e8e8;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+  }
+
+  .super-nav__logo img {
+    height: 48px;
+    width: auto;
+  }
+
+  .super-nav__right {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .super-nav__links {
+    display: flex;
+    gap: 28px;
+  }
+
+  .super-nav__links a {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--darkest-green);
+    transition: color 0.2s;
+  }
+
+  .super-nav__links a:hover {
+    color: var(--green);
+  }
+
+  .btn-donate {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--green);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-donate:hover {
+    background: var(--darkest-green);
+  }
+
+  /* ── TIER 2: CAMP NAV ── */
+  .camp-nav {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--green);
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+  }
+
+  .camp-nav__title {
+    font-family: 'Georgia', 'Kefa', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    white-space: nowrap;
+  }
+
+  .camp-nav__links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .camp-nav__links a {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .camp-nav__links a:hover,
+  .camp-nav__links a.active {
+    color: var(--white);
+  }
+
+  .camp-nav__links a.active {
+    font-weight: 700;
+    border-bottom: 2px solid var(--white);
+    padding-bottom: 2px;
+  }
+
+  .btn-apply {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--white);
+    color: var(--green);
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+    cursor: pointer;
+    margin-left: 12px;
+    white-space: nowrap;
+  }
+
+  .btn-apply:hover {
+    background: var(--lightest-green);
+    color: var(--darkest-green);
+  }
+
+  /* ── MOBILE NAV TOGGLE ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--darkest-green);
+    margin: 5px 0;
+    transition: 0.3s;
+  }
+
+  .camp-nav .nav-toggle span {
+    background: var(--white);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: 228px;
+    padding-bottom: 64px;
+    background: var(--darkest-green);
+    text-align: center;
+  }
+
+  .hero__title {
+    font-family: 'Georgia', 'Kefa', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .hero__subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* ── SPOTIFY CTA ── */
+  .spotify-cta {
+    background: var(--off-white);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .spotify-cta__text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--darkest-green);
+  }
+
+  .btn-spotify {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #1DB954;
+    color: var(--white);
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 28px;
+    border-radius: 50px;
+    transition: background 0.2s;
+  }
+
+  .btn-spotify:hover {
+    background: #1aa34a;
+  }
+
+  .btn-spotify svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  /* ── ALBUM GRID ── */
+  .albums {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 64px 48px 80px;
+  }
+
+  .albums__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .albums__grid iframe {
+    border-radius: 12px;
+    width: 100%;
+    height: 352px;
+    border: none;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--darkest-green);
+    color: var(--white);
+    padding: 64px 48px 0;
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .footer__brand img {
+    height: 48px;
+    margin-bottom: 20px;
+    filter: brightness(0) invert(1);
+  }
+
+  .footer__brand p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .footer__newsletter {
+    margin-top: 24px;
+  }
+
+  .footer__newsletter p {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    color: var(--light-green);
+  }
+
+  .footer__newsletter-form {
+    display: flex;
+    gap: 8px;
+  }
+
+  .footer__newsletter-form input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--white);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .footer__newsletter-form input::placeholder {
+    color: rgba(255,255,255,0.4);
+  }
+
+  .footer__newsletter-form button {
+    padding: 10px 18px;
+    background: var(--green);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .footer__newsletter-form button:hover {
+    background: var(--light-green);
+    color: var(--darkest-green);
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .footer__social a {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .footer__social a:hover {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .footer__social svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--white);
+  }
+
+  .footer__col h4 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--light-green);
+    margin-bottom: 16px;
+  }
+
+  .footer__col ul li {
+    margin-bottom: 10px;
+  }
+
+  .footer__col ul a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+  }
+
+  .footer__col ul a:hover {
+    color: var(--white);
+  }
+
+  .footer__bottom {
+    padding: 24px 0;
+    margin-top: 0;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .super-nav { padding: 0 24px; }
+    .camp-nav { padding: 0 24px; }
+    .albums { padding: 48px 24px 64px; }
+    .albums__grid { gap: 28px; }
+    .spotify-cta { padding: 24px; }
+    .footer { padding: 48px 24px 0; }
+  }
+
+  @media (max-width: 768px) {
+    .super-nav__links { display: none; }
+    .camp-nav__links a:not(.btn-apply) { display: none; }
+    .camp-nav__title { font-size: 17px; }
+    .nav-toggle { display: block; }
+
+    .hero { padding-top: 200px; padding-bottom: 48px; }
+    .hero__title { font-size: 38px; }
+    .hero__subtitle { font-size: 16px; padding: 0 24px; }
+
+    .spotify-cta { flex-direction: column; text-align: center; }
+
+    .albums { padding: 36px 20px 56px; }
+    .albums__grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ TIER 1: SUPER NAV ══════════ -->
+<nav class="super-nav">
+  <a href="/" class="super-nav__logo">
+    <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha">
+  </a>
+  <div class="super-nav__right">
+    <div class="super-nav__links">
+      <a href="#">Camps</a>
+      <a href="#">Alumni &amp; Events</a>
+      <a href="#">Rentals</a>
+    </div>
+    <a href="#" class="btn-donate">Donate Now</a>
+  </div>
+</nav>
+
+<!-- ══════════ TIER 2: CAMP NAV ══════════ -->
+<nav class="camp-nav">
+  <span class="camp-nav__title">Camp Morasha</span>
+  <div class="camp-nav__links">
+    <a href="#" class="active">The Morasha Experience</a>
+    <a href="#">Current Families</a>
+    <a href="#">Dates &amp; Rates</a>
+    <a href="#">Mania</a>
+    <a href="#">Join Our Staff</a>
+    <a href="#">Contact</a>
+    <a href="#" class="btn-apply">Apply / Login</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <h1 class="hero__title">Music</h1>
+  <p class="hero__subtitle">Listen to the sounds of Camp Morasha</p>
+</section>
+
+<!-- ══════════ SPOTIFY CTA ══════════ -->
+<div class="spotify-cta">
+  <span class="spotify-cta__text">Stream all Camp Morasha music on Spotify</span>
+  <a href="https://open.spotify.com/artist/0LBJ3GbDRIevmMIqbCmcOB" target="_blank" rel="noopener" class="btn-spotify">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+    Listen on Spotify
+  </a>
+</div>
+
+<!-- ══════════ ALBUM GRID ══════════ -->
+<section class="albums">
+  <div class="albums__grid">
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1zDL1Si8I715k5WPQibe1i?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1pVvBnMkoMQQ9JP9VwrlgO?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/66rzKGU3iQbgF0Nuj0Psej?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/6lrmZcQPT2I2saWX0NxYnt?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/40Y9W2wNX6pW1HuHZb6dSV?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1h23eQMUKhebDawoAp5VkQ?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/7hpYZSF4tT8SekApcWpUEO?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1kk0lX2TpLKRWbUnzhR6To?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1DENDJfHnM7Z8zgD6uf3ru?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/5QCKwClyT1o6PJBlwPJeTx?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/3tD0EDCcdeZQgyVNWyvTSC?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/5ZEfo3SPCTtetv58beWVti?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1NULhVEtLF43yrSMG2jk5z?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/3bdRiK5YenW2XK02vxQpsG?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha">
+      <p>Camp Morasha has been nurturing Jewish youth since 1972, building lifelong friendships and a love for Torah, community, and the outdoors.</p>
+      <div class="footer__newsletter">
+        <p>Stay Connected</p>
+        <form class="footer__newsletter-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer__social">
+        <a href="#" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer__col">
+      <h4>Camps</h4>
+      <ul>
+        <li><a href="#">Camp Morasha</a></li>
+        <li><a href="#">Mania</a></li>
+        <li><a href="#">Dates &amp; Rates</a></li>
+        <li><a href="#">Apply Now</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Experience</h4>
+      <ul>
+        <li><a href="#">Activities</a></li>
+        <li><a href="#">Music</a></li>
+        <li><a href="#">Facilities</a></li>
+        <li><a href="#">Staff</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Alumni &amp; Events</a></li>
+        <li><a href="#">Rentals</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Donate</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    &copy; 2026 Camp Morasha. All rights reserved.
+  </div>
+</footer>
+
+</body>
+</html>
