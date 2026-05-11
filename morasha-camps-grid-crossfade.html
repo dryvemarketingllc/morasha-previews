@@ -320,21 +320,136 @@
   </div>
 </section>
 
-<div class="notes">
-  <h2>How It Works</h2>
-  <p>Each card has two stacked background layers (<code>.bg</code> and <code>.bg-alt</code>). A simple JS timer crossfades between them every 4 seconds using CSS <code>opacity</code> transitions (1.2s ease). Hovering any card pauses its timer so the current photo stays visible.</p>
+<!-- ══════════════════════════════════════════════════════════════
+     DEVELOPER HANDOFF
+     ══════════════════════════════════════════════════════════════ -->
+<div class="notes" style="border-top:none; padding-top:0;">
 
-  <h2>Implementation for WordPress</h2>
-  <ul>
-    <li>Add a second <code>&lt;div class="bg-alt"&gt;</code> inside each <code>.camp-card</code>, right after the existing <code>.bg</code> div</li>
-    <li>Set the alternate photo as an inline <code>background-image</code> on <code>.bg-alt</code></li>
-    <li>Add the small dot indicators (<code>&lt;div class="dots"&gt;</code>) — optional but helps signal that images cycle</li>
-    <li>The JS below handles the crossfade timer and hover pause</li>
-    <li>Each card's timer is offset by 1 second so all 4 don't switch in unison</li>
-  </ul>
+  <div style="background:#142B15; color:#fff; padding:40px 48px 32px; margin:-48px -48px 40px; border-radius:0;">
+    <div style="font-family:'Roboto Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#9BBA91; margin-bottom:8px;">Developer Handoff</div>
+    <h2 style="font-family:Georgia,serif; font-size:32px; color:#fff; margin-bottom:8px;">Camp Cards — Crossfade Implementation</h2>
+    <p style="font-size:15px; color:rgba(255,255,255,0.6); margin:0;">Changes to the homepage <code style="background:rgba(255,255,255,0.1); color:#9BBA91;">.morasha-camps__grid</code> section. No changes to existing card layout or styling.</p>
+  </div>
 
-  <h2>Photo Pairing Notes</h2>
-  <p>For the actual implementation, pair each camp with one photo of each gender (or a coed group shot as the alternate). Current placeholder pairings use campus photos from the staging site's uploads folder — swap these with the real gendered pairs once selected.</p>
+  <h2>1. Overview</h2>
+  <p>Each <code>.camp-card</code> gets a second background image that crossfades on a 4-second timer. The existing card structure, styles, aspect ratio, color bars, and tint hover behavior are all preserved — this adds two new elements and a small script.</p>
+
+  <h2>2. HTML Changes</h2>
+  <p>Inside each <code>.camp-card</code>, add two elements after the existing <code>.bg</code> div:</p>
+  <pre><span class="comment">&lt;!-- Existing card structure --&gt;</span>
+&lt;<span class="tag">a</span> class="<span class="val">camp-card</span>" data-camp="<span class="val">morasha</span>" href="<span class="val">/about</span>"&gt;
+  &lt;<span class="tag">div</span> class="<span class="val">bg</span>" style="<span class="val">background-image:url('photo-1.jpg')</span>"&gt;&lt;/<span class="tag">div</span>&gt;
+
+  <span class="comment">&lt;!-- ✦ NEW: alternate background image --&gt;</span>
+  &lt;<span class="tag">div</span> class="<span class="val">bg-alt</span>" style="<span class="val">background-image:url('photo-2.jpg')</span>"&gt;&lt;/<span class="tag">div</span>&gt;
+
+  &lt;<span class="tag">div</span> class="<span class="val">tint</span>"&gt;&lt;/<span class="tag">div</span>&gt;
+  &lt;<span class="tag">div</span> class="<span class="val">content</span>"&gt;
+    &lt;<span class="tag">h3</span>&gt;Camp&lt;br&gt;Morasha&lt;/<span class="tag">h3</span>&gt;
+  &lt;/<span class="tag">div</span>&gt;
+
+  <span class="comment">&lt;!-- ✦ NEW: dot indicators (optional) --&gt;</span>
+  &lt;<span class="tag">div</span> class="<span class="val">dots</span>"&gt;&lt;<span class="tag">span</span> class="<span class="val">active</span>"&gt;&lt;/<span class="tag">span</span>&gt;&lt;<span class="tag">span</span>&gt;&lt;/<span class="tag">span</span>&gt;&lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">a</span>&gt;</pre>
+  <div style="background:#fafaf8; border-left:3px solid #46764B; padding:16px 20px; font-size:14px; color:#555; line-height:1.6; margin:12px 0;">If a card has only one photo (no alternate needed), simply omit <code>.bg-alt</code> and <code>.dots</code>. The JS skips cards without a <code>.bg-alt</code>.</div>
+
+  <h2>3. CSS to Add</h2>
+  <p>Append these rules to the existing camp card stylesheet. No changes to existing rules needed.</p>
+  <pre><span class="comment">/* ── Crossfade: alternate background layer ── */</span>
+<span class="sel">.camp-card .bg-alt</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">background-position</span>: <span class="val">center</span>;
+  <span class="prop">opacity</span>: <span class="val">0</span>;
+  <span class="prop">transition</span>: <span class="val">transform 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 1.2s ease-in-out</span>;
+  <span class="prop">z-index</span>: <span class="val">1</span>;
+}
+<span class="sel">.camp-card .bg-alt.active</span> { <span class="prop">opacity</span>: <span class="val">1</span>; }
+<span class="sel">.camp-card .bg.hidden</span>     { <span class="prop">opacity</span>: <span class="val">0</span>; }
+
+<span class="comment">/* Hover zoom applies to both layers */</span>
+<span class="sel">.camp-card:hover .bg-alt</span> {
+  <span class="prop">transform</span>: <span class="val">scale(1.06)</span>;
+}
+
+<span class="comment">/* ── Dot indicators ── */</span>
+<span class="sel">.camp-card .dots</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>;
+  <span class="prop">bottom</span>: <span class="val">20px</span>;
+  <span class="prop">right</span>: <span class="val">16px</span>;
+  <span class="prop">z-index</span>: <span class="val">5</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>;
+  <span class="prop">gap</span>: <span class="val">6px</span>;
+}
+<span class="sel">.camp-card .dots span</span> {
+  <span class="prop">width</span>: <span class="val">6px</span>;
+  <span class="prop">height</span>: <span class="val">6px</span>;
+  <span class="prop">border-radius</span>: <span class="val">50%</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.4)</span>;
+  <span class="prop">transition</span>: <span class="val">background 0.4s, transform 0.3s</span>;
+}
+<span class="sel">.camp-card .dots span.active</span> {
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">transform</span>: <span class="val">scale(1.3)</span>;
+}</pre>
+
+  <h2>4. JavaScript</h2>
+  <p>Add to the homepage JS (or as an inline script after the camps grid). No dependencies.</p>
+  <pre><span class="comment">/* Camp card crossfade — 4s interval, 1s stagger, hover pauses */</span>
+(<span class="tag">function</span>() {
+  <span class="tag">var</span> cards = document.querySelectorAll(<span class="val">'.camp-card'</span>);
+
+  cards.forEach(<span class="tag">function</span>(card, index) {
+    <span class="tag">var</span> bg    = card.querySelector(<span class="val">'.bg'</span>);
+    <span class="tag">var</span> bgAlt = card.querySelector(<span class="val">'.bg-alt'</span>);
+    <span class="tag">var</span> dots  = card.querySelectorAll(<span class="val">'.dots span'</span>);
+    <span class="tag">if</span> (!bg || !bgAlt) <span class="tag">return</span>; <span class="comment">// skip cards without alt image</span>
+
+    <span class="tag">var</span> showingAlt = <span class="val">false</span>;
+    <span class="tag">var</span> paused = <span class="val">false</span>;
+
+    <span class="tag">function</span> toggle() {
+      <span class="tag">if</span> (paused) <span class="tag">return</span>;
+      showingAlt = !showingAlt;
+      bg.classList.toggle(<span class="val">'hidden'</span>, showingAlt);
+      bgAlt.classList.toggle(<span class="val">'active'</span>, showingAlt);
+      <span class="tag">if</span> (dots.length === <span class="val">2</span>) {
+        dots[<span class="val">0</span>].classList.toggle(<span class="val">'active'</span>, !showingAlt);
+        dots[<span class="val">1</span>].classList.toggle(<span class="val">'active'</span>, showingAlt);
+      }
+    }
+
+    <span class="comment">// Stagger each card by 1s so they don't all flip together</span>
+    setTimeout(<span class="tag">function</span>() {
+      setInterval(toggle, <span class="val">4000</span>);
+    }, index * <span class="val">1000</span>);
+
+    <span class="comment">// Pause on hover</span>
+    card.addEventListener(<span class="val">'mouseenter'</span>, <span class="tag">function</span>() { paused = <span class="val">true</span>; });
+    card.addEventListener(<span class="val">'mouseleave'</span>, <span class="tag">function</span>() { paused = <span class="val">false</span>; });
+  });
+})();</pre>
+
+  <h2>5. Behavior Summary</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;">
+    <tr><th style="font-family:'Roboto Condensed',sans-serif; font-weight:700; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; text-align:left; padding:10px 14px; background:#f5f5f3; color:#46764B; border-bottom:2px solid #eee;">Behavior</th><th style="font-family:'Roboto Condensed',sans-serif; font-weight:700; font-size:10px; letter-spacing:0.18em; text-transform:uppercase; text-align:left; padding:10px 14px; background:#f5f5f3; color:#46764B; border-bottom:2px solid #eee;">Detail</th></tr>
+    <tr><td style="padding:10px 14px; border-bottom:1px solid #eee; font-weight:500; color:#222; width:30%; vertical-align:top;">Crossfade interval</td><td style="padding:10px 14px; border-bottom:1px solid #eee; color:#555; line-height:1.5;">4 seconds per image</td></tr>
+    <tr><td style="padding:10px 14px; border-bottom:1px solid #eee; font-weight:500; color:#222; vertical-align:top;">Transition duration</td><td style="padding:10px 14px; border-bottom:1px solid #eee; color:#555; line-height:1.5;">1.2s <code>ease-in-out</code> opacity</td></tr>
+    <tr><td style="padding:10px 14px; border-bottom:1px solid #eee; font-weight:500; color:#222; vertical-align:top;">Stagger offset</td><td style="padding:10px 14px; border-bottom:1px solid #eee; color:#555; line-height:1.5;">1 second between each card (card 1 starts at 0s, card 2 at 1s, etc.)</td></tr>
+    <tr><td style="padding:10px 14px; border-bottom:1px solid #eee; font-weight:500; color:#222; vertical-align:top;">Hover</td><td style="padding:10px 14px; border-bottom:1px solid #eee; color:#555; line-height:1.5;">Pauses crossfade timer; existing zoom + tint hover effects still work on both layers</td></tr>
+    <tr><td style="padding:10px 14px; border-bottom:1px solid #eee; font-weight:500; color:#222; vertical-align:top;">Mobile / touch</td><td style="padding:10px 14px; border-bottom:1px solid #eee; color:#555; line-height:1.5;">Crossfade runs continuously (no hover pause on touch). No additional touch handling needed.</td></tr>
+    <tr><td style="padding:10px 14px; border-bottom:1px solid #eee; font-weight:500; color:#222; vertical-align:top;">Fallback</td><td style="padding:10px 14px; border-bottom:1px solid #eee; color:#555; line-height:1.5;">If <code>.bg-alt</code> is missing, card displays single image as before — fully backward compatible</td></tr>
+    <tr><td style="padding:10px 14px; font-weight:500; color:#222; vertical-align:top;">Dot indicators</td><td style="padding:10px 14px; color:#555; line-height:1.5;">Optional. 6px white dots, bottom-right corner, above color bar. Active dot scales to 1.3×</td></tr>
+  </table>
+
+  <h2>6. WordPress Custom Field (Suggested)</h2>
+  <p>Add an ACF or custom meta field called <code>camp_card_alt_image</code> (image type) to the homepage camps block. In the template, output the second <code>.bg-alt</code> div only when this field has a value. This lets editors swap alternate photos without code changes.</p>
+
+  <h2>7. Photo Pairing Notes</h2>
+  <p>The current mockup uses placeholder campus photos from <code>/wp-content/uploads/2026/05/</code>. For production, pair each coed camp with one photo showing boys and one showing girls (or a mixed group shot). Non-coed camps can omit <code>.bg-alt</code> entirely.</p>
+
 </div>
 
 <script>
