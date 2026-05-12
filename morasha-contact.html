@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Camp Morasha</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── NAV (two-tier: super + camp) ── */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(10px);
+  z-index: 200;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.nav-super { border-bottom: 1px solid rgba(0,0,0,0.06); }
+.nav-super-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 14px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo { display: flex; align-items: center; flex-shrink: 0; }
+.logo img { height: 38px; width: auto; display: block; }
+.nav-super-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.nav-super-links a {
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+  transition: color .2s;
+}
+.nav-super-links a:hover { color: var(--green); }
+.nav-super-links a.btn-primary { color: #fff; font-size: 13px; }
+.nav-super-links a.btn-primary:hover { color: #fff; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: all .25s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--darkest-green); color: #fff; }
+.btn-primary:hover { background: var(--green); }
+.nav-camp { background: var(--green); color: #fff; }
+.nav-camp-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-camp-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(24px, 2.4vw, 38px);
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+  margin-right: auto;
+  letter-spacing: -0.01em;
+}
+.nav-camp-title:hover { color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.18); }
+.nav-camp-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  padding: 0; margin: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.nav-camp-links a {
+  font-family: var(--sans-ui);
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  white-space: nowrap;
+  transition: opacity .2s;
+}
+.nav-camp-links a:hover { opacity: 0.75; }
+.nav-camp-links a.active { border-bottom: 2px solid #fff; padding-bottom: 2px; }
+.nav-camp-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: #fff;
+  color: var(--green);
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 4px;
+  transition: background .2s, color .2s;
+  white-space: nowrap;
+}
+.nav-camp-cta:hover { background: var(--lightest-green); color: var(--darkest-green); }
+
+/* ── Site Footer ── */
+.site-footer {
+  background: #ececec;
+  padding: 48px 0 24px;
+}
+.site-footer__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-right: auto;
+  flex: 0 1 358px;
+}
+.site-footer__logo { color: #142b15; display: inline-block; }
+.site-footer__logo img,
+.site-footer__logo svg { height: 58px; width: auto; display: block; }
+.site-footer__newsletter-label {
+  font-family: var(--sans-ui);
+  font-weight: 600;
+  font-size: 16px;
+  color: #2A522E;
+  margin: 0 0 8px;
+}
+.site-footer__newsletter-form {
+  display: flex;
+  gap: 4px;
+  max-width: 348px;
+  width: 100%;
+  height: 42px;
+}
+.site-footer__newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 10px 12px;
+  border: none;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  color: var(--green);
+  background: #fff;
+  outline: none;
+}
+.site-footer__newsletter-form input::placeholder {
+  color: #2A522E;
+  opacity: .6;
+}
+.site-footer__newsletter-form button {
+  flex: 0 0 113px;
+  height: 42px;
+  background: #2A522E;
+  border: 1px solid #2A522E;
+  color: #fff;
+  padding: 10px 16px;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.site-footer__newsletter-form button:hover { opacity: .85; }
+.site-footer__social { display: flex; gap: 8px; }
+.site-footer__social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 4px;
+  color: #142b15;
+  transition: opacity .2s;
+}
+.site-footer__social a:hover { opacity: .7; }
+.site-footer__social svg { width: 20px; height: 20px; }
+.site-footer__col { flex: 0 1 187px; }
+.site-footer__col h4 {
+  font-family: var(--sans-ui);
+  font-weight: 500;
+  font-size: 16px;
+  color: #142b15;
+  margin: 0 0 16px;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+.site-footer__col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.site-footer__col a {
+  font-family: var(--sans-ui);
+  font-size: 16px;
+  color: #2a522e;
+  transition: color .2s;
+}
+.site-footer__col a:hover { color: #46764b; }
+.site-footer__copyright {
+  text-align: center;
+  font-family: var(--sans-ui);
+  font-size: 14px;
+  color: #2a522e;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid #d0d0cf;
+}
+.site-footer__copyright a { color: #2a522e; }
+.site-footer__copyright a:hover { text-decoration: underline; }
+
+/* ── Reset & Variables ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --darkest-green: #142B15;
+  --dark-green: #2A522E;
+  --green: #46764B;
+  --light-green: #9BBA91;
+  --lightest-green: #DAE4D0;
+  --cream: #F7F8F5;
+  --warm-white: #FAFAF8;
+  --charcoal: #222;
+  --text: #333;
+  --text-muted: #666;
+  --sans: 'Nunito Sans', 'Kefa', system-ui, sans-serif;
+  --sans-ui: 'Roboto', system-ui, sans-serif;
+  --sans-cond: 'Roboto Condensed', sans-serif;
+  --serif: Georgia, 'Times New Roman', serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: #fff;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--darkest-green);
+  padding: 228px 48px 64px;
+  text-align: center;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero p {
+  font-family: var(--sans-ui);
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── CONTACT SECTION ── */
+.contact-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 48px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── LEFT: FORM ── */
+.contact-form-wrap {
+  background: #fff;
+}
+.contact-form-wrap h2 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--darkest-green);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.contact-form-wrap .form-intro {
+  font-family: var(--sans-ui);
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group.full {
+  grid-column: 1 / -1;
+}
+.form-group label {
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.form-group label .req {
+  color: #c0392b;
+  margin-left: 2px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  font-family: var(--sans-ui);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--cream);
+  border: 1px solid #e0e0dc;
+  border-radius: 4px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(70,118,75,0.1);
+}
+.form-group textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath fill='%23666' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-submit {
+  margin-top: 28px;
+}
+.form-submit button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  background: var(--darkest-green);
+  color: #fff;
+  font-family: var(--sans-ui);
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background .25s, transform .15s;
+  letter-spacing: 0.01em;
+}
+.form-submit button:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+}
+.form-submit button svg {
+  width: 16px;
+  height: 16px;
+  transition: transform .2s;
+}
+.form-submit button:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── RIGHT: INFO + MAP ── */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.contact-info h2 {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--darkest-green);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.contact-info .info-intro {
+  font-family: var(--sans-ui);
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 32px;
+}
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+.info-card:first-child { padding-top: 0; }
+.info-card:last-child { border-bottom: none; }
+.info-card .icon-circle {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--lightest-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info-card .icon-circle svg {
+  width: 20px;
+  height: 20px;
+  color: var(--darkest-green);
+}
+.info-card .info-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.info-card .info-label {
+  font-family: var(--sans-cond);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.info-card .info-value {
+  font-family: var(--sans-ui);
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.info-card .info-value a {
+  color: var(--darkest-green);
+  font-weight: 500;
+  transition: color .2s;
+}
+.info-card .info-value a:hover {
+  color: var(--green);
+}
+
+/* Map links row */
+.map-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.map-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--green);
+  padding: 6px 14px;
+  border: 1px solid var(--lightest-green);
+  border-radius: 50px;
+  transition: all .2s;
+}
+.map-links a:hover {
+  background: var(--lightest-green);
+  color: var(--darkest-green);
+  border-color: var(--light-green);
+}
+.map-links a svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Map embed */
+.map-wrap {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0dc;
+  height: 280px;
+}
+.map-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 48px 24px 64px;
+  }
+  .hero { padding: 200px 24px 48px; }
+  .hero h1 { font-size: 40px; }
+}
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hero { padding: 180px 20px 40px; }
+  .hero h1 { font-size: 34px; }
+  .contact-section { padding: 36px 20px 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ TWO-TIER NAV ══════ -->
+<header>
+  <div class="nav-super">
+    <div class="nav-super-inner">
+      <a href="index.html" class="logo" aria-label="Morasha Camps">
+        <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+      </a>
+      <nav class="nav-super-links" aria-label="Main navigation">
+        <a href="#">Camps</a>
+        <a href="morasha-alumni-events.html">Alumni &amp; Events</a>
+        <a href="morasha-rentals.html">Rentals</a>
+        <a href="morasha-donate-form.html" class="btn btn-primary">Donate Now</a>
+      </nav>
+    </div>
+  </div>
+  <div class="nav-camp">
+    <div class="nav-camp-inner">
+      <a href="#" class="nav-camp-title">Camp Morasha</a>
+      <ul class="nav-camp-links" role="menubar" aria-label="Camp Morasha navigation">
+        <li><a href="#">The Morasha Experience</a></li>
+        <li><a href="#">Current Families</a></li>
+        <li><a href="morasha-dates-rates.html">Dates &amp; Rates</a></li>
+        <li><a href="#">Mania</a></li>
+        <li><a href="morasha-join-staff.html">Join Our Staff</a></li>
+        <li><a href="#" class="active">Contact</a></li>
+      </ul>
+      <a href="#" class="nav-camp-cta">Apply / Login</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <h1>Contact Us</h1>
+  <p>We'd love to hear from you. Reach out and we'll get back to you shortly.</p>
+</section>
+
+<!-- ══════ CONTACT SECTION ══════ -->
+<section class="contact-section">
+
+  <!-- LEFT: FORM -->
+  <div class="contact-form-wrap">
+    <h2>Send a Message</h2>
+    <p class="form-intro">Fill out the form below and our team will respond within 1&ndash;2 business days.</p>
+
+    <form action="#" method="post">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name <span class="req">*</span></label>
+          <input type="text" id="first-name" name="first_name" required />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name <span class="req">*</span></label>
+          <input type="text" id="last-name" name="last_name" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full">
+          <label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option value="">Select a topic...</option>
+            <option value="enrollment">Enrollment &amp; Registration</option>
+            <option value="dates-rates">Dates &amp; Rates</option>
+            <option value="financial-aid">Financial Aid</option>
+            <option value="staffing">Staffing &amp; Employment</option>
+            <option value="alumni">Alumni</option>
+            <option value="rentals">Rentals</option>
+            <option value="donations">Donations</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group full">
+          <label for="message">How can we help you? <span class="req">*</span></label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit">
+          Submit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- RIGHT: INFO + MAP -->
+  <div class="contact-info">
+    <h2>Get in Touch</h2>
+    <p class="info-intro">You can also reach us directly by phone, email, or visit our campus.</p>
+
+    <div class="info-cards">
+
+      <div class="info-card">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="info-card-content">
+          <span class="info-label">Phone</span>
+          <span class="info-value"><a href="tel:570-798-2781">570-798-2781</a></span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div class="info-card-content">
+          <span class="info-label">Email</span>
+          <span class="info-value"><a href="mailto:office@campmorasha.com">office@campmorasha.com</a></span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="info-card-content">
+          <span class="info-label">Address</span>
+          <span class="info-value">274 High Lake Road<br>Lakewood, PA 18439</span>
+          <div class="map-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=274+High+Lake+Road+Lakewood+PA+18439" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12.005C20 5.589 16.411 2 12 2zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+              Google Maps
+            </a>
+            <a href="https://maps.apple.com/?address=274+High+Lake+Road,+Lakewood,+PA+18439" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12.005C20 5.589 16.411 2 12 2zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>
+              Apple Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Embedded Map -->
+    <div class="map-wrap">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d-75.3747!3d41.5181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c4c9f5e5e5e5e5%3A0x1234567890abcdef!2s274+High+Lake+Rd%2C+Lakewood%2C+PA+18439!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Camp Morasha location"
+      ></iframe>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="site-footer">
+  <div class="site-footer__container">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
+          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+        </a>
+        <div class="site-footer__newsletter">
+          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
+          <form class="site-footer__newsletter-form" action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+        <div class="site-footer__social">
+          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__col">
+        <ul class="site-footer__menu">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Alumni &amp; Events</a></li>
+          <li><a href="#">Rentals</a></li>
+          <li><a href="#">Donate</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>Camps</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Camp Morasha</a></li>
+          <li><a href="#">Kehilas Yaakov</a></li>
+          <li><a href="#">Morasha Kollel</a></li>
+        </ul>
+      </div>
+
+      <div class="site-footer__col">
+        <h4>&nbsp;</h4>
+        <ul class="site-footer__menu">
+          <li><a href="#">Sulam</a></li>
+          <li><a href="#">Amcha Boys</a></li>
+          <li><a href="#">Amcha Girls</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
