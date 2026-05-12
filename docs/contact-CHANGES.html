@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CHANGES: Contact — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --lightest-green: #DAE4D0;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .meta-bar {
+    display: flex; flex-wrap: wrap; gap: 24px;
+    padding: 24px 0 32px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+    font-size: 13px; color: #888;
+  }
+  .meta-bar a { color: var(--green); text-decoration: none; }
+  .meta-bar a:hover { text-decoration: underline; }
+  .meta-label {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); display: block; margin-bottom: 4px;
+  }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-of-type { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  table.diff {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  table.diff th {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    text-align: left; padding: 10px 14px;
+    background: #f5f5f3; color: var(--green);
+    border-bottom: 2px solid #eee;
+  }
+  table.diff td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    color: #555; line-height: 1.5;
+    vertical-align: top;
+  }
+  table.diff td:first-child { width: 28%; font-weight: 500; color: var(--charcoal); }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .tag { color: #569cd6; }
+  pre .attr { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+
+  .footer {
+    text-align: center;
+    padding: 40px 48px;
+    font-size: 13px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+  }
+
+  @media (max-width: 640px) {
+    .page-header { padding: 48px 24px 40px; }
+    .content { padding: 32px 24px; }
+    .page-header h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Camp Morasha &bull; Developer Handoff</div>
+  <h1>Contact Page — Redesign</h1>
+  <p>Changes from the current staging Contact page to the new design.</p>
+</div>
+
+<div class="content">
+
+  <div class="meta-bar">
+    <div>
+      <span class="meta-label">Staging URL</span>
+      <a href="https://morashastg1.wpenginepowered.com/the-morasha-experience/contact/" target="_blank">morashastg1.../contact/</a>
+    </div>
+    <div>
+      <span class="meta-label">Mockup</span>
+      <a href="../morasha-contact.html" target="_blank">morasha-contact.html</a>
+    </div>
+    <div>
+      <span class="meta-label">Camp</span>
+      Camp Morasha
+    </div>
+    <div>
+      <span class="meta-label">Last Updated</span>
+      May 12, 2026
+    </div>
+  </div>
+
+  <!-- ─── SECTION 1 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">1. Remove Old Layout</div>
+    <div class="change-desc">The current page uses a two-column layout with a background photo panel on the left and a Gravity Forms contact form on the right. This entire layout is being replaced.</div>
+    <table class="diff">
+      <tr><th>Remove</th><th>Details</th></tr>
+      <tr><td>Photo panel</td><td>Left column with background image, overlaid contact info, and social icons</td></tr>
+      <tr><td>Inline contact details</td><td>Phone, email, and address overlaid on the photo</td></tr>
+    </table>
+  </div>
+
+  <!-- ─── SECTION 2 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">2. Add Standard Two-Tier Navigation</div>
+    <div class="change-desc">Replace the current single nav bar with the standard two-tier fixed navigation used across all Camp Morasha interior pages:</div>
+    <table class="diff">
+      <tr><th>Element</th><th>Details</th></tr>
+      <tr><td>Super Nav (Tier 1)</td><td>White bar: Logo + Camps, Alumni &amp; Events, Rentals, Donate Now button</td></tr>
+      <tr><td>Camp Nav (Tier 2)</td><td>Green (<code>#46764B</code>) banner: "Camp Morasha" title + The Morasha Experience, Current Families, Dates &amp; Rates, Mania, Join Our Staff, Contact (active) + Apply / Login CTA</td></tr>
+    </table>
+    <div class="note">"Contact" should have the <code>.active</code> class in the Camp Nav links (white underline).</div>
+  </div>
+
+  <!-- ─── SECTION 3 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">3. Hero Section — Text Only</div>
+    <div class="change-desc">Dark green (<code>#142B15</code>) text hero, centered. Consistent with other interior pages (Campus, Music, etc.).</div>
+    <table class="diff">
+      <tr><th>Element</th><th>Details</th></tr>
+      <tr><td>Title</td><td>"Contact Us" — serif font (Kefa/Georgia), 52px, white, centered</td></tr>
+      <tr><td>Subtitle</td><td>"We'd love to hear from you. Reach out and we'll get back to you shortly." — Nunito Sans 17px, white at 60% opacity, single line</td></tr>
+      <tr><td>Padding</td><td><code>228px 48px 48px</code> (accounts for 148px fixed nav clearance + 80px breathing room)</td></tr>
+    </table>
+  </div>
+
+  <!-- ─── SECTION 4 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">4. Two-Column Content Layout</div>
+    <div class="change-desc">Below the hero, a two-column grid replaces the old photo + form layout. Contact info is on the left, form on the right.</div>
+    <table class="diff">
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Container</td><td><code>max-width: 1200px</code>, centered, <code>padding: 72px 48px 80px</code></td></tr>
+      <tr><td>Grid</td><td><code>grid-template-columns: 1fr 1fr</code>, <code>gap: 64px</code></td></tr>
+      <tr><td>Left column</td><td>Contact info cards (phone, email, address)</td></tr>
+      <tr><td>Right column</td><td>Contact form</td></tr>
+      <tr><td>Responsive</td><td>Stacks to single column below 900px</td></tr>
+    </table>
+  </div>
+
+  <!-- ─── SECTION 5 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">5. Left Column — Contact Info</div>
+    <div class="change-desc">Heading "Get in Touch" (serif, 28px) with a short intro line, then three contact cards stacked vertically with dividers:</div>
+    <table class="diff">
+      <tr><th>Card</th><th>Icon</th><th>Content</th></tr>
+      <tr><td>Phone</td><td>Phone icon in <code>#DAE4D0</code> circle</td><td><code>&lt;a href="tel:570-798-2781"&gt;570-798-2781&lt;/a&gt;</code></td></tr>
+      <tr><td>Email</td><td>Mail icon in <code>#DAE4D0</code> circle</td><td><code>&lt;a href="mailto:office@campmorasha.com"&gt;office@campmorasha.com&lt;/a&gt;</code></td></tr>
+      <tr><td>Address</td><td>Pin icon in <code>#DAE4D0</code> circle</td><td>274 High Lake Road, Lakewood, PA 18439</td></tr>
+    </table>
+    <div class="change-desc" style="margin-top:12px;">The address card includes two pill-shaped links below the text:</div>
+    <table class="diff">
+      <tr><th>Link</th><th>URL</th></tr>
+      <tr><td>Google Maps</td><td><code>https://www.google.com/maps/search/?api=1&amp;query=274+High+Lake+Road+Lakewood+PA+18439</code></td></tr>
+      <tr><td>Apple Maps</td><td><code>https://maps.apple.com/?address=274+High+Lake+Road,+Lakewood,+PA+18439</code></td></tr>
+    </table>
+    <div class="note">Both links open in a new tab. Pills are styled with <code>border: 1px solid #DAE4D0</code>, <code>border-radius: 50px</code>, green text, hover fills with lightest green.</div>
+  </div>
+
+  <!-- ─── SECTION 6 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">6. Right Column — Contact Form</div>
+    <div class="change-desc">Heading "Send a Message" (serif, 28px) with intro text "Fill out the form below and our team will respond within 1–2 business days." Then the form fields:</div>
+    <table class="diff">
+      <tr><th>Field</th><th>Type</th><th>Required</th></tr>
+      <tr><td>First Name</td><td>Text input</td><td>Yes</td></tr>
+      <tr><td>Last Name</td><td>Text input</td><td>Yes</td></tr>
+      <tr><td>Email</td><td>Email input</td><td>Yes</td></tr>
+      <tr><td>Phone</td><td>Tel input</td><td>No</td></tr>
+      <tr><td>Topic</td><td>Select dropdown (full width)</td><td>No</td></tr>
+      <tr><td>How can we help you?</td><td>Textarea</td><td>Yes</td></tr>
+    </table>
+    <div class="change-desc" style="margin-top:12px;">Topic dropdown options:</div>
+    <table class="diff">
+      <tr><th>Value</th><th>Label</th></tr>
+      <tr><td>(empty)</td><td>Select a topic...</td></tr>
+      <tr><td>enrollment</td><td>Enrollment &amp; Registration</td></tr>
+      <tr><td>dates-rates</td><td>Dates &amp; Rates</td></tr>
+      <tr><td>financial-aid</td><td>Financial Aid</td></tr>
+      <tr><td>staffing</td><td>Staffing &amp; Employment</td></tr>
+      <tr><td>alumni</td><td>Alumni</td></tr>
+      <tr><td>rentals</td><td>Rentals</td></tr>
+      <tr><td>donations</td><td>Donations</td></tr>
+      <tr><td>other</td><td>Other</td></tr>
+    </table>
+    <div class="note">Form field styling: <code>background: #F7F8F5</code>, <code>border: 1px solid #e0e0dc</code>, <code>border-radius: 4px</code>, <code>padding: 12px 14px</code>. Focus state: green border + <code>box-shadow: 0 0 0 3px rgba(70,118,75,0.1)</code>.</div>
+  </div>
+
+  <!-- ─── SECTION 7 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">7. Submit Button</div>
+    <div class="change-desc">Styled submit button replacing the current plain green button:</div>
+    <table class="diff">
+      <tr><th>Property</th><th>Value</th></tr>
+      <tr><td>Background</td><td><code>#142B15</code> (darkest green)</td></tr>
+      <tr><td>Text</td><td>"Submit" — Roboto 15px, font-weight 600, white</td></tr>
+      <tr><td>Icon</td><td>Right arrow SVG, slides right 3px on hover</td></tr>
+      <tr><td>Padding</td><td><code>16px 40px</code></td></tr>
+      <tr><td>Border radius</td><td>4px</td></tr>
+      <tr><td>Hover</td><td>Background transitions to <code>#46764B</code>, translateY(-1px)</td></tr>
+    </table>
+  </div>
+
+  <!-- ─── SECTION 8 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">8. Footer</div>
+    <div class="change-desc">Standard site footer matching other interior pages: light gray background (<code>#ececec</code>), logo, newsletter signup form, YouTube + Instagram social icons, link columns (About, Alumni &amp; Events, Rentals, Donate | Camps: Camp Morasha, Kehilas Yaakov, Morasha Kollel | Sulam, Amcha Boys, Amcha Girls), and copyright bar.</div>
+  </div>
+
+  <!-- ─── SECTION 9 ─── -->
+  <div class="change-item">
+    <div class="change-date">May 12, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">9. WordPress / Gravity Forms Notes</div>
+    <div class="change-desc">The existing Gravity Forms form can be kept but will need restyling to match the new design. Key changes:</div>
+    <table class="diff">
+      <tr><th>Item</th><th>Notes</th></tr>
+      <tr><td>Topic dropdown</td><td>New field — add a select/dropdown to the Gravity Form with the options listed in Section 6</td></tr>
+      <tr><td>Form wrapper</td><td>Remove the old two-column photo+form container; form now lives inside a CSS Grid cell</td></tr>
+      <tr><td>Input styling</td><td>Override GF defaults with the cream background, green focus ring, and 4px border-radius</td></tr>
+      <tr><td>Submit button</td><td>Override <code>.gform_submit_button</code> with the darkest-green style from Section 7</td></tr>
+      <tr><td>CAPTCHA</td><td>Keep existing Cloudflare Turnstile; position it between the textarea and submit button</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">Morasha Camps Website Redesign — Dryve Marketing 2026</div>
+
+</body>
+</html>
