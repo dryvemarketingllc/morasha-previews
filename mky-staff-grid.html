@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MKY Staff Announcement — Grid Post (1080×1080)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+  }
+  .label {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  /* ── THE GRAPHIC ── */
+  .post {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: #0a1632;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top section: photo + name overlay */
+  .post-photo-area {
+    position: relative;
+    flex: 0 0 620px;
+    overflow: hidden;
+  }
+  .post-photo-area .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Placeholder photo */
+  .post-photo-area .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #2a4a8a 0%, #1C326B 40%, #0f1f45 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .photo-placeholder svg {
+    width: 200px;
+    height: 200px;
+    opacity: 0.15;
+  }
+
+  /* Gradient overlay from bottom of photo */
+  .post-photo-area::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 280px;
+    background: linear-gradient(to top, #0a1632 0%, rgba(10,22,50,0.85) 40%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Name bar sitting on the gradient */
+  .name-block {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2;
+    padding: 0 64px 32px;
+  }
+  .name-block .staff-name {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+    font-size: 58px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  .name-block .staff-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8ba4d4;
+  }
+
+  /* Bottom section: quote + branding */
+  .post-bottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 36px 64px 48px;
+    position: relative;
+  }
+
+  /* Accent bar */
+  .post-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 64px;
+    width: 48px; height: 4px;
+    background: #4a7dd4;
+    border-radius: 2px;
+  }
+
+  .quote {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.55;
+    font-style: italic;
+    max-width: 880px;
+  }
+  .quote::before {
+    content: '\201C';
+    font-size: 48px;
+    color: #4a7dd4;
+    font-style: normal;
+    line-height: 0;
+    vertical-align: -8px;
+    margin-right: 4px;
+  }
+  .quote::after {
+    content: '\201D';
+    font-size: 48px;
+    color: #4a7dd4;
+    font-style: normal;
+    line-height: 0;
+    vertical-align: -8px;
+    margin-left: 2px;
+  }
+
+  /* Camp badge */
+  .camp-badge {
+    position: absolute;
+    top: 40px; right: 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .camp-badge .badge-text {
+    text-align: right;
+  }
+  .camp-badge .badge-label {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8ba4d4;
+    display: block;
+  }
+  .camp-badge .badge-camp {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .camp-badge .badge-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .camp-badge .badge-icon svg {
+    width: 22px; height: 22px;
+    color: #8ba4d4;
+  }
+
+  /* Bottom branding bar */
+  .branding-bar {
+    position: absolute;
+    bottom: 36px; left: 64px; right: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .branding-bar .brand-name {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .branding-bar .brand-handle {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* Scale wrapper for preview */
+  .scale-wrap {
+    transform: scale(0.55);
+    transform-origin: top center;
+    margin-bottom: -480px;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Instagram Grid — 1080 × 1080</div>
+
+<div class="scale-wrap">
+<div class="post">
+
+  <!-- Top: Photo area -->
+  <div class="post-photo-area">
+    <div class="photo-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+
+    <!-- Camp badge top-right -->
+    <div class="camp-badge">
+      <div class="badge-text">
+        <span class="badge-label">Summer 2026</span>
+        <span class="badge-camp">Kehilas Yaakov</span>
+      </div>
+      <div class="badge-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+      </div>
+    </div>
+
+    <!-- Name overlay -->
+    <div class="name-block">
+      <div class="staff-name">Rabbi David<br>Rosenbaum</div>
+      <div class="staff-title">Head Counselor — Division Aleph</div>
+    </div>
+  </div>
+
+  <!-- Bottom: Quote area -->
+  <div class="post-bottom">
+    <p class="quote">Camp is where kids discover who they really are — and who they can become.</p>
+
+    <div class="branding-bar">
+      <span class="brand-name">Morasha Camps</span>
+      <span class="brand-handle">@campmorasha</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>

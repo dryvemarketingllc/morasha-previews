@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MKY Staff Announcement — Story (1080×1920)</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Roboto+Condensed:wght@400;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+  }
+  .label {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  /* ── THE GRAPHIC ── */
+  .story {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    overflow: hidden;
+    background: #0a1632;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Photo — takes up most of the frame */
+  .story-photo-area {
+    position: relative;
+    flex: 0 0 1100px;
+    overflow: hidden;
+  }
+  .story-photo-area .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #2a4a8a 0%, #1C326B 35%, #0f1f45 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .photo-placeholder svg {
+    width: 240px;
+    height: 240px;
+    opacity: 0.12;
+  }
+
+  /* Bottom gradient */
+  .story-photo-area::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 400px;
+    background: linear-gradient(to top, #0a1632 0%, rgba(10,22,50,0.9) 35%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Top badge bar */
+  .story-top-bar {
+    position: absolute;
+    top: 80px; left: 64px; right: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+  }
+  .story-top-bar .camp-label {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .story-top-bar .season-pill {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* Staff announcement label */
+  .announce-label {
+    position: absolute;
+    top: 160px; left: 64px;
+    z-index: 5;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #4a7dd4;
+  }
+
+  /* Name block over gradient */
+  .story-name-block {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2;
+    padding: 0 64px 40px;
+  }
+  .story-name-block .staff-name {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.0;
+    margin-bottom: 14px;
+  }
+  .story-name-block .divider {
+    width: 56px; height: 4px;
+    background: #4a7dd4;
+    border-radius: 2px;
+    margin-bottom: 18px;
+  }
+  .story-name-block .staff-title {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8ba4d4;
+  }
+
+  /* Bottom content area */
+  .story-bottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 64px 64px;
+    position: relative;
+  }
+
+  .quote {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+    font-size: 36px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    font-style: italic;
+    max-width: 900px;
+    margin-bottom: 48px;
+  }
+  .quote::before {
+    content: '\201C';
+    font-size: 64px;
+    color: #4a7dd4;
+    font-style: normal;
+    line-height: 0;
+    vertical-align: -12px;
+    margin-right: 4px;
+  }
+  .quote::after {
+    content: '\201D';
+    font-size: 64px;
+    color: #4a7dd4;
+    font-style: normal;
+    line-height: 0;
+    vertical-align: -12px;
+    margin-left: 2px;
+  }
+
+  /* Bottom branding */
+  .story-branding {
+    position: absolute;
+    bottom: 80px; left: 64px; right: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .story-branding .brand-name {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+  .story-branding .swipe-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: rgba(255,255,255,0.35);
+  }
+  .story-branding .swipe-hint svg {
+    width: 18px; height: 18px;
+    animation: bounce 1.5s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  /* Scale wrapper for preview */
+  .scale-wrap {
+    transform: scale(0.38);
+    transform-origin: top center;
+    margin-bottom: -1180px;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Instagram Story — 1080 × 1920</div>
+
+<div class="scale-wrap">
+<div class="story">
+
+  <!-- Photo area (top ~57%) -->
+  <div class="story-photo-area">
+    <div class="photo-placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+
+    <!-- Top bar -->
+    <div class="story-top-bar">
+      <span class="camp-label">Kehilas Yaakov</span>
+      <span class="season-pill">Summer 2026</span>
+    </div>
+
+    <!-- Announcement label -->
+    <div class="announce-label">Staff Announcement</div>
+
+    <!-- Name overlay -->
+    <div class="story-name-block">
+      <div class="staff-name">Rabbi David<br>Rosenbaum</div>
+      <div class="divider"></div>
+      <div class="staff-title">Head Counselor — Division Aleph</div>
+    </div>
+  </div>
+
+  <!-- Bottom: Quote -->
+  <div class="story-bottom">
+    <p class="quote">Camp is where kids discover who they really are — and who they can become.</p>
+
+    <div class="story-branding">
+      <span class="brand-name">Morasha Camps</span>
+      <span class="swipe-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+        Swipe up to learn more
+      </span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>
