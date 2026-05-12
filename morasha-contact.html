@@ -247,7 +247,7 @@ header {
   --sans: 'Nunito Sans', 'Kefa', system-ui, sans-serif;
   --sans-ui: 'Roboto', system-ui, sans-serif;
   --sans-cond: 'Roboto Condensed', sans-serif;
-  --serif: Georgia, 'Times New Roman', serif;
+  --serif: 'Kefa', Georgia, 'Times New Roman', serif;
 }
 html { scroll-behavior: smooth; }
 body {
@@ -263,7 +263,7 @@ img { display: block; max-width: 100%; }
 /* ── HERO ── */
 .hero {
   background: var(--darkest-green);
-  padding: 228px 48px 64px;
+  padding: 228px 48px 48px;
   text-align: center;
 }
 .hero h1 {
@@ -272,13 +272,12 @@ img { display: block; max-width: 100%; }
   font-weight: 400;
   color: #fff;
   letter-spacing: -0.02em;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .hero p {
-  font-family: var(--sans-ui);
-  font-size: 18px;
-  color: rgba(255,255,255,0.7);
-  max-width: 480px;
+  font-family: var(--sans);
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
   margin: 0 auto;
 }
 
@@ -509,20 +508,6 @@ img { display: block; max-width: 100%; }
   height: 14px;
 }
 
-/* Map embed */
-.map-wrap {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #e0e0dc;
-  height: 280px;
-}
-.map-wrap iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-}
-
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .contact-section {
@@ -650,7 +635,7 @@ img { display: block; max-width: 100%; }
   <!-- RIGHT: INFO + MAP -->
   <div class="contact-info">
     <h2>Get in Touch</h2>
-    <p class="info-intro">You can also reach us directly by phone, email, or visit our campus.</p>
+    <p class="info-intro">You can also reach us directly by phone or email.</p>
 
     <div class="info-cards">
 
@@ -694,17 +679,6 @@ img { display: block; max-width: 100%; }
         </div>
       </div>
 
-    </div>
-
-    <!-- Embedded Map -->
-    <div class="map-wrap">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d-75.3747!3d41.5181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c4c9f5e5e5e5e5%3A0x1234567890abcdef!2s274+High+Lake+Rd%2C+Lakewood%2C+PA+18439!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Camp Morasha location"
-      ></iframe>
     </div>
 
   </div>
