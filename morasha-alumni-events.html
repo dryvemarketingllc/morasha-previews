@@ -1,751 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Alumni &amp; Events — Morasha Camps</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alumni & Events — Morasha Camps (Redesign)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'Kefa';
-    font-weight: 700;
-    src: local('Kefa Bold'), local('Kefa'), url('assets/fonts/Kefa.ttc') format('collection');
-  }
   :root {
-    --green: #46764B;
-    --dark-green: #2A522E;
     --darkest-green: #142B15;
+    --green: #46764B;
     --light-green: #9BBA91;
     --lightest-green: #DAE4D0;
-    --grey: #ECECEC;
-    --text-grey: #828282;
-    --charcoal: #222222;
     --serif: 'Kefa', Georgia, 'Times New Roman', serif;
-    --sans: 'Roboto', system-ui, sans-serif;
-    --sans-cond: 'Roboto Condensed', 'Roboto', system-ui, sans-serif;
+    --sans: 'Nunito Sans', 'Kefa', system-ui, sans-serif;
+    --sans-ui: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: var(--sans);
-    color: var(--charcoal);
-    background: #fff;
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
-  }
-  img { display: block; max-width: 100%; }
-  a { text-decoration: none; color: inherit; }
-  h1, h2, h3, h4 {
-    font-family: var(--serif);
-    font-weight: 700;
-    letter-spacing: -0.015em;
-    line-height: 1.0;
-  }
-  .eyebrow {
-    font-family: var(--sans-cond);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
+  body { font-family: var(--sans-ui); background: #fff; color: #222; -webkit-font-smoothing: antialiased; }
 
-  /* ============ NAV ============ */
-  header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.96);
-    backdrop-filter: blur(10px);
-    z-index: 100;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-  .nav {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 20px 48px;
+  /* ── NAV (simplified for mockup) ── */
+  .nav-super {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 0 48px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   }
-  .logo { display: flex; align-items: center; }
-  .logo img { height: 40px; width: auto; display: block; }
-  .nav-links {
+  .nav-super .logo {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--darkest-green);
+    letter-spacing: 0.04em;
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 10px;
+    text-decoration: none;
   }
+  .nav-super .logo svg { width: 32px; height: 32px; fill: var(--darkest-green); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
   .nav-links a {
+    font-family: var(--sans-ui);
     font-size: 14px;
     font-weight: 500;
-    color: var(--charcoal);
-    transition: color .2s;
+    color: #444;
+    text-decoration: none;
+    letter-spacing: 0.01em;
   }
-  .nav-links a:hover { color: var(--green); }
-  .nav-links a.btn-primary { color: #fff; }
-  .nav-links a.btn-primary:hover { color: #fff; background: var(--green); }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 14px;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    transition: all .25s;
-    white-space: nowrap;
+  .nav-links a.active { color: var(--darkest-green); font-weight: 700; }
+  .nav-links .btn-outline {
+    border: 1.5px solid var(--darkest-green);
+    padding: 8px 20px;
+    border-radius: 4px;
+    color: var(--darkest-green);
+    font-weight: 600;
   }
-  .btn-primary { background: var(--darkest-green); color: #fff; }
-  .btn-primary:hover { background: var(--green); }
-
-  /* ============ HERO ============ */
-  .hero {
-    padding: 128px 0 72px;
+  .nav-links .btn-fill {
     background: var(--darkest-green);
     color: #fff;
-    position: relative;
-    overflow: hidden;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 600;
   }
-  .hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 15% 20%, rgba(70,118,75,0.35) 0%, transparent 55%),
-      radial-gradient(ellipse at 90% 80%, rgba(155,186,145,0.22) 0%, transparent 45%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px;
-    position: relative;
-    z-index: 2;
+
+  /* ── HERO ── */
+  .hero {
+    padding: 160px 48px 64px;
+    background: var(--darkest-green);
+    color: #fff;
   }
   .hero .eyebrow {
-    color: var(--light-green);
-    margin-bottom: 18px;
-  }
-  .hero h1 {
-    font-size: clamp(40px, 5vw, 72px);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    max-width: 20ch;
-    margin-bottom: 24px;
-  }
-  .hero-sub {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(18px, 1.6vw, 22px);
-    max-width: 54ch;
-    color: rgba(255,255,255,0.82);
-    line-height: 1.5;
-  }
-
-  /* ============ EVENTS SECTIONS ============ */
-  .events-section {
-    padding: 96px 0 48px;
-    background: #fff;
-  }
-  .events-section:last-of-type { padding-bottom: 96px; }
-  .events-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-  .section-head {
-    margin-bottom: 48px;
-  }
-  .section-head h2 {
-    font-size: clamp(32px, 3.5vw, 44px);
-    color: var(--darkest-green);
-  }
-
-  /* ============ UPCOMING CARDS (larger) ============ */
-  .upcoming-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-  }
-  .upcoming-card {
-    display: block;
-    background: #fff;
-    border: 1px solid rgba(20,43,21,0.1);
-    overflow: hidden;
-    transition: all .3s ease;
-  }
-  .upcoming-card:hover {
-    border-color: var(--green);
-    transform: translateY(-4px);
-  }
-  .upcoming-img {
-    aspect-ratio: 16 / 9;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-  .upcoming-img::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--darkest-green);
-    opacity: 0.1;
-    transition: opacity .3s ease;
-  }
-  .upcoming-card:hover .upcoming-img::after { opacity: 0; }
-  .upcoming-body {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 24px;
-    padding: 28px 28px 32px;
-    align-items: start;
-  }
-  .upcoming-date {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    padding-top: 4px;
-    border-right: 1px solid rgba(20,43,21,0.1);
-    padding-right: 20px;
-  }
-  .upcoming-month {
     font-family: var(--sans-cond);
     font-weight: 700;
     font-size: 12px;
-    letter-spacing: 0.22em;
-    color: var(--green);
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    color: var(--light-green);
+    margin-bottom: 16px;
   }
-  .upcoming-day {
+  .hero h1 {
     font-family: var(--serif);
+    font-size: 52px;
     font-weight: 700;
-    font-size: 48px;
-    color: var(--darkest-green);
-    line-height: 0.9;
-    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
   }
-  .upcoming-year {
+  .hero p {
     font-family: var(--sans);
-    font-weight: 400;
-    font-size: 14px;
-    color: var(--text-grey);
-    margin-top: 4px;
-  }
-  .upcoming-title {
-    font-size: clamp(22px, 2vw, 28px);
-    color: var(--darkest-green);
-    margin-bottom: 8px;
-    letter-spacing: -0.015em;
-  }
-  .upcoming-desc {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 16px;
-    color: var(--text-grey);
-    line-height: 1.5;
+    font-size: 17px;
+    color: rgba(255,255,255,0.6);
+    max-width: 640px;
+    line-height: 1.6;
   }
 
-  /* ============ PAST CARDS (smaller) ============ */
-  .past-grid {
+  /* ── UPCOMING EVENTS ── */
+  .events-section {
+    padding: 64px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .events-section h2 {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--darkest-green);
+    margin-bottom: 12px;
+  }
+  .events-section .events-note {
+    font-family: var(--sans);
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 40px;
+  }
+  .events-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
-  .past-card {
-    display: block;
-    transition: transform .3s ease;
+  .event-card {
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 1px solid #eee;
   }
-  .past-card:hover { transform: translateY(-3px); }
-  .past-img {
-    aspect-ratio: 4 / 3;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    margin-bottom: 16px;
-  }
-  .past-img::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--darkest-green);
-    opacity: 0.12;
-    transition: opacity .3s ease;
-  }
-  .past-card:hover .past-img::after { opacity: 0; }
-  .past-body {
-    padding: 0 2px;
-  }
-  .past-date-line {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-    margin-bottom: 6px;
+  .event-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+  .event-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .event-card .event-info { padding: 20px; }
+  .event-card .event-date {
     font-family: var(--sans-cond);
     font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    color: var(--green);
+    font-size: 11px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 6px;
   }
-  .past-sep { color: var(--light-green); }
-  .past-year { color: var(--text-grey); letter-spacing: 0.1em; }
-  .past-title {
+  .event-card .event-title {
+    font-family: var(--serif);
     font-size: 20px;
     color: var(--darkest-green);
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
+    margin-bottom: 4px;
   }
-  .past-desc {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 15px;
-    color: var(--text-grey);
-    line-height: 1.5;
+  .event-card .event-desc {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: #888;
   }
 
-  /* ============ ARCHIVES ============ */
-  .archives {
-    padding: 96px 0 128px;
+  /* ── ARCHIVES — 4 across ── */
+  .archives-section {
+    padding: 64px 48px 72px;
     background: var(--lightest-green);
   }
   .archives-inner {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 48px;
   }
-  .archive-grid {
+  .archives-section h2 {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--darkest-green);
+    margin-bottom: 32px;
+  }
+  .archives-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
   }
-  .archive-tile {
-    display: block;
+  .archive-card {
+    border-radius: 8px;
     overflow: hidden;
+    text-decoration: none;
+    color: inherit;
     background: #fff;
-    transition: transform .3s ease;
+    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .archive-tile:hover { transform: translateY(-4px); }
-  .archive-img {
-    aspect-ratio: 4 / 3;
-    background-size: cover;
-    background-position: center;
-    position: relative;
+  .archive-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-3px); }
+  .archive-card .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
   }
-  .archive-img::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--darkest-green);
-    opacity: 0.15;
-    transition: opacity .3s ease;
-  }
-  .archive-tile:hover .archive-img::after { opacity: 0; }
-  .archive-label {
+  .archive-card .card-label {
+    padding: 16px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 20px 24px;
+  }
+  .archive-card .card-label span {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
     color: var(--darkest-green);
   }
-  .archive-name {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: -0.01em;
-  }
-  .archive-label svg { color: var(--green); }
-
-  /* ============ FOOTER (Morasha 2026 spec) ============ */
-  .site-footer {
-    background: #ececec;
-    padding: 48px 0 24px;
-  }
-  .site-footer__container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-  .site-footer__inner {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    padding-bottom: 40px;
-  }
-  .site-footer__brand {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-right: auto;
-    flex: 0 1 358px;
-  }
-  .site-footer__logo { color: #142b15; display: inline-block; }
-  .site-footer__logo img,
-  .site-footer__logo svg { height: 58px; width: auto; display: block; }
-  .site-footer__newsletter-label {
-    font-family: var(--sans);
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--dark-green);
-    margin: 0 0 8px;
-  }
-  .site-footer__newsletter-form {
-    display: flex;
-    gap: 4px;
-    max-width: 348px;
-    width: 100%;
-    height: 42px;
-  }
-  .site-footer__newsletter-form input {
-    flex: 1;
-    min-width: 0;
-    height: 42px;
-    padding: 10px 12px;
-    border: none;
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
+  .archive-card .card-label svg {
+    width: 16px; height: 16px;
     color: var(--green);
-    background: #fff;
-    outline: none;
+    flex-shrink: 0;
   }
-  .site-footer__newsletter-form input::placeholder {
-    color: var(--dark-green);
-    opacity: .6;
-  }
-  .site-footer__newsletter-form input:focus {
-    outline: 2px solid var(--green);
-    outline-offset: -2px;
-  }
-  .site-footer__newsletter-form button {
-    flex: 0 0 113px;
-    width: 113px;
-    height: 42px;
-    background: var(--dark-green);
-    border: 1px solid var(--dark-green);
-    color: #fff;
-    padding: 10px 16px;
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 14px;
-    cursor: pointer;
-    transition: opacity .2s;
-  }
-  .site-footer__newsletter-form button:hover { opacity: .85; }
-  .site-footer__social { display: flex; gap: 8px; }
-  .site-footer__social a {
+
+  /* ── PHOTO GALLERY CTA BAND ── */
+  .gallery-band {
+    padding: 56px 48px;
+    background: var(--darkest-green);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    color: #142b15;
-    transition: opacity .2s;
+    gap: 48px;
   }
-  .site-footer__social a:hover { opacity: .7; }
-  .site-footer__social svg { width: 20px; height: 20px; }
-  .site-footer__col { flex: 0 1 187px; }
-  .site-footer__col h4 {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 16px;
-    color: #142b15;
-    margin: 0 0 16px;
-    letter-spacing: 0;
-    line-height: 1.4;
-  }
-  .site-footer__col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-  }
-  .site-footer__col a {
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 16px;
-    color: #2a522e;
-    line-height: 22px;
-    transition: color .2s;
-  }
-  .site-footer__col a:hover { color: #46764b; }
-  .site-footer__copyright {
+  .gallery-band .gallery-text {
     text-align: center;
+  }
+  .gallery-band .gallery-text h3 {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .gallery-band .gallery-text p {
     font-family: var(--sans);
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 20px;
+  }
+  .gallery-band .gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans-ui);
     font-size: 14px;
-    color: #2a522e;
-    margin: 0;
-    padding-top: 16px;
-    border-top: 1px solid #d0d0cf;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 12px 28px;
+    border-radius: 4px;
+    transition: all 0.2s;
   }
-  .site-footer__copyright a { color: #2a522e; text-decoration: none; }
-  .site-footer__copyright a:hover { text-decoration: underline; }
+  .gallery-band .gallery-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+  }
+  .gallery-band .gallery-btn svg { width: 16px; height: 16px; }
 
-  /* ============ RESPONSIVE ============ */
-  @media (max-width: 1024px) {
-    .hero { padding: 104px 0 56px; }
-    .events-section { padding: 72px 0 40px; }
-    .archives { padding: 72px 0 96px; }
-    .upcoming-grid { grid-template-columns: 1fr; }
-    .past-grid { grid-template-columns: repeat(2, 1fr); }
-    .archive-grid { grid-template-columns: repeat(2, 1fr); }
-    .site-footer__inner { gap: 32px; }
-    .site-footer__col { flex: 0 1 50%; }
+  /* ── FOOTER ── */
+  .site-footer {
+    background: #ececec;
+    padding: 56px 48px 32px;
   }
-  @media (max-width: 640px) {
-    .nav, .hero-inner, .events-inner, .archives-inner { padding-left: 24px; padding-right: 24px; }
-    .nav { padding: 16px 24px; }
-    .nav-links { gap: 16px; }
-    .nav-links a:not(.btn) { display: none; }
-    .hero { padding: 96px 0 48px; }
-    .upcoming-body { grid-template-columns: 80px 1fr; gap: 16px; padding: 22px 22px 26px; }
-    .upcoming-date { padding-right: 14px; }
-    .upcoming-day { font-size: 40px; }
-    .past-grid { grid-template-columns: 1fr; gap: 20px; }
-    .archive-grid { grid-template-columns: 1fr; }
-    .site-footer__container { padding: 0 24px; }
-    .site-footer__inner { gap: 24px; }
-    .site-footer__col { flex: 0 1 100%; }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-brand {
+    font-family: var(--sans-cond);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--darkest-green);
+    letter-spacing: 0.04em;
+  }
+  .footer-links a {
+    display: block;
+    font-family: var(--sans-ui);
+    font-size: 14px;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+  .footer-copyright {
+    max-width: 1200px;
+    margin: 32px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    font-family: var(--sans-ui);
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+  }
+
+  /* ── NOTE BANNER ── */
+  .mockup-note {
+    background: #FFF8E1;
+    border-bottom: 1px solid #FFE082;
+    padding: 10px 48px;
+    font-family: var(--sans-ui);
+    font-size: 13px;
+    color: #795548;
+    text-align: center;
+    position: fixed;
+    top: 80px; left: 0; right: 0;
+    z-index: 99;
+  }
+
+  @media (max-width: 900px) {
+    .archives-grid { grid-template-columns: repeat(2, 1fr); }
+    .events-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .archives-grid { grid-template-columns: 1fr; }
+    .hero { padding: 140px 24px 48px; }
+    .hero h1 { font-size: 36px; }
+    .events-section, .archives-section { padding: 48px 24px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ============ NAV ============ -->
-<header>
-  <nav class="nav">
-    <a href="index.html" class="logo" aria-label="Morasha Camps">
-      <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
+<!-- Nav -->
+<div class="nav-super">
+  <a class="logo" href="#">
+    <svg viewBox="0 0 40 40"><rect width="40" height="40" rx="4" fill="#142B15"/><text x="7" y="28" font-family="Georgia" font-size="22" font-weight="bold" fill="#fff">M</text></svg>
+    MORASHA CAMPS
+  </a>
+  <div class="nav-links">
+    <a href="#">About</a>
+    <a href="#">Camps</a>
+    <a href="#">Dates & Rates</a>
+    <a href="#" class="active">Alumni & Events</a>
+    <a href="#">Rentals</a>
+    <a href="#">Contact</a>
+    <a href="#" class="btn-outline">Donate</a>
+    <a href="#" class="btn-fill">Apply | Login</a>
+  </div>
+</div>
+
+<div class="mockup-note">Mockup — revised Alumni & Events page. Changes: Olympics removed, 4-across archive grid, photo gallery moved to CTA band.</div>
+
+<!-- Hero -->
+<div class="hero" style="padding-top: 200px;">
+  <div class="eyebrow">Alumni & Events</div>
+  <h1>Camp stays with you</h1>
+  <p>The Morasha experience doesn't end when the summer does — it stays with you for life. Through our alumni community and annual events, we're committed to keeping those connections strong.</p>
+</div>
+
+<!-- Upcoming Events -->
+<div class="events-section">
+  <h2>Upcoming Events</h2>
+  <p class="events-note">Stay tuned for a Morasha alumni event happening near you!</p>
+</div>
+
+<!-- Past Events -->
+<div class="events-section" style="padding-top: 0;">
+  <h2>Past Events</h2>
+  <div class="events-grid">
+    <a class="event-card" href="#">
+      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&q=80&fit=crop" alt="Morasha@60" />
+      <div class="event-info">
+        <div class="event-date">Jul 30 · 2023</div>
+        <div class="event-title">Morasha@60</div>
+        <div class="event-desc">Mordechai Shapiro Live at Camp Morasha</div>
+      </div>
     </a>
-    <div class="nav-links">
-      <a href="#">About</a>
-      <a href="#">Camps</a>
-      <a href="morasha-dates-rates.html">Dates &amp; Rates</a>
-      <a href="#">Alumni &amp; Events</a>
-      <a href="#">Rentals</a>
-      <a href="#">Contact</a>
-      <a href="#" class="btn btn-primary">Donate</a>
-    </div>
-  </nav>
-</header>
-
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="eyebrow">Alumni &amp; Events</div>
-    <h1>Camp stays with you</h1>
-    <p class="hero-sub">The Morasha experience doesn't end when the summer does — it stays with you for life. Through our alumni community and annual events, we're committed to keeping those connections strong, celebrating shared memories, and bringing our Morasha family back together year after year.</p>
+    <a class="event-card" href="#">
+      <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=600&q=80&fit=crop" alt="Morasha@50" />
+      <div class="event-info">
+        <div class="event-date">Feb 22 · 2023</div>
+        <div class="event-title">Morasha@50</div>
+        <div class="event-desc">A journey through song at Purchase College Theater</div>
+      </div>
+    </a>
+    <a class="event-card" href="#">
+      <img src="https://images.unsplash.com/photo-1529543544282-ea41407407db?w=600&q=80&fit=crop" alt="Alumnight" />
+      <div class="event-info">
+        <div class="event-date">Mar 13 · 2010</div>
+        <div class="event-title">Alumnight</div>
+        <div class="event-desc">A Camp Morasha Panoply event at Citifield</div>
+      </div>
+    </a>
   </div>
-</section>
+</div>
 
-<!-- ============ UPCOMING ============ -->
-<section class="events-section">
-  <div class="events-inner">
-    <div class="section-head">
-      <h2>Upcoming Events</h2>
-    </div>
-    <div class="upcoming-grid">
-      <a class="upcoming-card" href="#">
-        <div class="upcoming-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/camp1.png')"></div>
-        <div class="upcoming-body">
-          <div class="upcoming-date">
-            <span class="upcoming-month">MAR</span>
-            <span class="upcoming-day">10</span>
-            <span class="upcoming-year">2010</span>
-          </div>
-          <div class="upcoming-text">
-            <h3 class="upcoming-title">Alumnight</h3>
-            <p class="upcoming-desc">A Camp Morasha Panoply event at Citifield</p>
-          </div>
-        </div>
-      </a>
-      <a class="upcoming-card" href="#">
-        <div class="upcoming-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/camp2.png')"></div>
-        <div class="upcoming-body">
-          <div class="upcoming-date">
-            <span class="upcoming-month">MAR</span>
-            <span class="upcoming-day">10</span>
-            <span class="upcoming-year">2010</span>
-          </div>
-          <div class="upcoming-text">
-            <h3 class="upcoming-title">Alumnight</h3>
-            <p class="upcoming-desc">A Camp Morasha Panoply event at Citifield</p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PAST ============ -->
-<section class="events-section">
-  <div class="events-inner">
-    <div class="section-head">
-      <h2>Past Events</h2>
-    </div>
-    <div class="past-grid">
-      <a class="past-card" href="#">
-        <div class="past-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider1.png')"></div>
-        <div class="past-body">
-          <div class="past-date-line">
-            <span class="past-month">JUL</span>
-            <span class="past-day">30</span>
-            <span class="past-sep">·</span>
-            <span class="past-year">2023</span>
-          </div>
-          <h3 class="past-title">Morasha@60</h3>
-          <p class="past-desc">Mordechai Shapiro Live at Camp Morasha</p>
-        </div>
-      </a>
-      <a class="past-card" href="#">
-        <div class="past-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider2.png')"></div>
-        <div class="past-body">
-          <div class="past-date-line">
-            <span class="past-month">JUL</span>
-            <span class="past-day">30</span>
-            <span class="past-sep">·</span>
-            <span class="past-year">2023</span>
-          </div>
-          <h3 class="past-title">Morasha@60</h3>
-          <p class="past-desc">A journey through song at Purchase College Theater</p>
-        </div>
-      </a>
-      <a class="past-card" href="#">
-        <div class="past-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider3.png')"></div>
-        <div class="past-body">
-          <div class="past-date-line">
-            <span class="past-month">JUL</span>
-            <span class="past-day">30</span>
-            <span class="past-sep">·</span>
-            <span class="past-year">2023</span>
-          </div>
-          <h3 class="past-title">Morasha@60</h3>
-          <p class="past-desc">A journey through song at Purchase College Theater</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ARCHIVES ============ -->
-<section class="archives">
+<!-- Archives — 4 across (Music, Color War, Yearbooks, Shalhevet) -->
+<div class="archives-section">
   <div class="archives-inner">
-    <div class="section-head">
-      <h2>Archives</h2>
-    </div>
-    <div class="archive-grid">
-      <a class="archive-tile" href="#">
-        <div class="archive-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider1.png')"></div>
-        <div class="archive-label">
-          <span class="archive-name">Alumni Photo Gallery</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+    <h2>Archives</h2>
+    <div class="archives-grid">
+
+      <a class="archive-card" href="https://morashastg1.wpenginepowered.com/morasha-music/">
+        <img class="card-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&q=80&fit=crop" alt="Music" />
+        <div class="card-label">
+          <span>Music</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 17 10-10"/><path d="M7 7h10v10"/></svg>
         </div>
       </a>
-      <a class="archive-tile" href="#">
-        <div class="archive-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider2.png')"></div>
-        <div class="archive-label">
-          <span class="archive-name">Shiria Album Archive</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+
+      <a class="archive-card" href="https://www.dropbox.com/scl/fo/ifavu0cgno0j1x2jml1zo/ADiAon5Yhw06wcVlfeKjlMg?rlkey=bfu82sng8aw2knpzgp8xg9rjk&dl=0" target="_blank">
+        <img class="card-img" src="https://images.unsplash.com/photo-1461896836934-bd45ba8ec4e5?w=500&q=80&fit=crop" alt="Color War" />
+        <div class="card-label">
+          <span>Color War</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 17 10-10"/><path d="M7 7h10v10"/></svg>
         </div>
       </a>
-      <a class="archive-tile" href="#">
-        <div class="archive-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/slider3.png')"></div>
-        <div class="archive-label">
-          <span class="archive-name">Alumni Photo Gallery</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+
+      <a class="archive-card" href="https://www.dropbox.com/scl/fo/bb8c6n3j6c9swqf3w8cid/AAd-tMwJEEz4kXTg4nD7Pd8?rlkey=h11cm403giq44j1ax9ezlraws&dl=0" target="_blank">
+        <img class="card-img" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&q=80&fit=crop" alt="Yearbooks" />
+        <div class="card-label">
+          <span>Yearbooks</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 17 10-10"/><path d="M7 7h10v10"/></svg>
         </div>
       </a>
-      <a class="archive-tile" href="#">
-        <div class="archive-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export1.png')"></div>
-        <div class="archive-label">
-          <span class="archive-name">Shiria Album Archive</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+
+      <a class="archive-card" href="https://morashastg1.wpenginepowered.com/current-campers/shalhevet-newsletter/">
+        <img class="card-img" src="https://images.unsplash.com/photo-1504711434969-e33886168d5c?w=500&q=80&fit=crop" alt="Shalhevet" />
+        <div class="card-label">
+          <span>Shalhevet</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 17 10-10"/><path d="M7 7h10v10"/></svg>
         </div>
       </a>
-      <a class="archive-tile" href="#">
-        <div class="archive-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export2.png')"></div>
-        <div class="archive-label">
-          <span class="archive-name">Alumni Photo Gallery</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
-        </div>
-      </a>
-      <a class="archive-tile" href="#">
-        <div class="archive-img" style="background-image:url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/04/export3.png')"></div>
-        <div class="archive-label">
-          <span class="archive-name">Shiria Album Archive</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
-        </div>
-      </a>
+
     </div>
   </div>
-</section>
+</div>
 
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer">
-  <div class="site-footer__container">
-    <div class="site-footer__inner">
-
-      <div class="site-footer__brand">
-        <a href="index.html" class="site-footer__logo" aria-label="Morasha Camps">
-          <img src="https://morashastg1.wpenginepowered.com/wp-content/themes/morasha2026/assets/images/morasha-logo.svg" alt="Morasha Camps" />
-        </a>
-        <div class="site-footer__newsletter">
-          <h4 class="site-footer__newsletter-label">Subscribe to our Newsletter!</h4>
-          <form class="site-footer__newsletter-form" action="#" method="post">
-            <input type="email" name="email" placeholder="Enter your email..." required aria-label="Email address" />
-            <button type="submit">Subscribe</button>
-          </form>
-        </div>
-        <div class="site-footer__social">
-          <a href="https://youtube.com/campmorasha/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a2.995 2.995 0 0 0-2.106-2.116C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.392.525A2.995 2.995 0 0 0 .502 6.186C0 8.083 0 12 0 12s0 3.917.502 5.814a2.995 2.995 0 0 0 2.106 2.116c1.887.525 9.392.525 9.392.525s7.505 0 9.392-.525a2.995 2.995 0 0 0 2.106-2.116C24 15.917 24 12 24 12s0-3.917-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </a>
-          <a href="https://instagram.com/campmorasha64" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="site-footer__col">
-        <ul class="site-footer__menu">
-          <li><a href="/about">About</a></li>
-          <li><a href="#">Alumni &amp; Events</a></li>
-          <li><a href="#">Rentals</a></li>
-          <li><a href="#">Donate</a></li>
-        </ul>
-      </div>
-
-      <div class="site-footer__col">
-        <h4>Camps</h4>
-        <ul class="site-footer__menu">
-          <li><a href="#">Camp Morasha</a></li>
-          <li><a href="#">Kehilas Yaakov</a></li>
-          <li><a href="#">Morasha Kollel</a></li>
-        </ul>
-      </div>
-
-      <div class="site-footer__col">
-        <h4>&nbsp;</h4>
-        <ul class="site-footer__menu">
-          <li><a href="/sulam">Sulam</a></li>
-          <li><a href="/amcha">Amcha Boys</a></li>
-          <li><a href="/amcha-girls">Amcha Girls</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <p class="site-footer__copyright">Copyright &copy; 1964&ndash;2026 &nbsp;|&nbsp; All Rights Reserved &nbsp;|&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
+<!-- Photo Gallery CTA Band -->
+<div class="gallery-band">
+  <div class="gallery-text">
+    <h3>Morasha Photo Archive</h3>
+    <p>Browse thousands of photos from summers past</p>
+    <a class="gallery-btn" href="https://morashaphotos.smugmug.com/Alumni-Events/Alumni-Photo-Galleries" target="_blank">
+      Browse the Gallery
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 17 10-10"/><path d="M7 7h10v10"/></svg>
+    </a>
   </div>
-</footer>
+</div>
+
+<!-- Footer -->
+<div class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Morasha Camps</div>
+      <p style="font-size:13px; color:#888; margin-top:8px;">Subscribe to our Newsletter!</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Alumni & Events</a>
+      <a href="#">Rentals</a>
+      <a href="#">Donate</a>
+    </div>
+    <div class="footer-links">
+      <a href="#">Camp Morasha</a>
+      <a href="#">Kehillas Yaakov</a>
+      <a href="#">Morasha Kollel</a>
+      <a href="#">Morasha Travel</a>
+    </div>
+  </div>
+  <div class="footer-copyright">Copyright © 1964-2026 | All Rights Reserved | Privacy Policy</div>
+</div>
 
 </body>
 </html>
