@@ -97,6 +97,32 @@
     max-width: 640px;
     line-height: 1.6;
   }
+  .hero-gallery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding: 14px 28px;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 6px;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .hero-gallery-btn:hover {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.6);
+  }
+  .hero-gallery-btn svg {
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
 
   /* ── UPCOMING EVENTS ── */
   .events-section {
@@ -341,6 +367,10 @@
   <div class="eyebrow">Alumni & Events</div>
   <h1>Camp stays with you</h1>
   <p>The Morasha experience doesn't end when the summer does — it stays with you for life. Through our alumni community and annual events, we're committed to keeping those connections strong.</p>
+  <a href="https://morashaphotos.smugmug.com/Alumni-Events/Alumni-Photo-Galleries" target="_blank" class="hero-gallery-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+    Browse the Photo Gallery
+  </a>
 </div>
 
 <!-- Upcoming Events -->
