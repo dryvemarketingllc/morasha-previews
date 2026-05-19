@@ -189,12 +189,66 @@
     </div>
     <div>
       <span class="meta-label">Last Updated</span>
-      April 24, 2026
+      May 19, 2026
     </div>
   </div>
 
   <div class="change-desc" style="margin-bottom:32px;">
     <strong>Summary of changes:</strong> The current Reunions & Events page is rebuilt as a dedicated "Alumni & Events" page. The redesign introduces: (1) a dark-green hero with radial gradient accents, (2) an Upcoming Events section with large two-column cards, (3) a Past Events section with a three-column grid, (4) an Archives section on lightest-green background, and (5) a single-tier nav (this is not a camp-specific page). The URL should change from <code>/current-campers/reunions-events/</code> to something like <code>/alumni-events/</code>.
+  </div>
+
+  <!-- ── REVISION: MAY 19 ── -->
+  <div class="change-item" id="may19-revision">
+    <div class="change-date">May 19, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">Revision: Archives Restructured &amp; Photo Gallery in Hero</div>
+    <div class="change-desc">
+      Based on Jeremy's feedback, the following changes were made to the original design:
+    </div>
+
+    <table class="diff">
+      <tr><th>Area</th><th>Before</th><th>After</th></tr>
+      <tr><td>Olympics section</td><td>Included as an archive tile</td><td><strong>Removed entirely</strong></td></tr>
+      <tr><td>Archives grid</td><td>3&times;2 grid (6 tiles)</td><td><strong>4&times;1 grid</strong> — Music, Color War, Yearbooks, Shalhevet</td></tr>
+      <tr><td>Color War link</td><td>Internal page</td><td><strong>Dropbox folder</strong> (shared link to booklet PDFs)</td></tr>
+      <tr><td>Yearbooks link</td><td>Internal page</td><td><strong>Dropbox folder</strong> (shared link to yearbook PDFs)</td></tr>
+      <tr><td>Music link</td><td>—</td><td><code>/morasha-music/</code></td></tr>
+      <tr><td>Shalhevet link</td><td>—</td><td><code>/current-campers/shalhevet-newsletter/</code></td></tr>
+      <tr><td>Photo Gallery</td><td>One of the archive tiles</td><td><strong>Moved to hero</strong> — solid white button with photo icon: "Browse the Photo Gallery Archive" → links to SmugMug</td></tr>
+      <tr><td>Gallery CTA band</td><td>Full-width dark green band below archives</td><td><strong>Removed</strong> — redundant now that the hero button handles it</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>Dropbox links:</strong> Color War and Yearbooks open external Dropbox shared folders in a new tab (<code>target="_blank"</code>). These are Jeremy's shared folders — no Dropbox account required to view. Izzy should organize the files by year before launch for a clean presentation.
+    </div>
+
+    <div class="note">
+      <strong>Hero button CSS:</strong> Solid white background, dark green text (<code>var(--darkest-green)</code>), no border, 6px border-radius. Photo/landscape SVG icon in <code>var(--green)</code>. Hover lifts 1px with slightly darker background (#f0f0f0).
+    </div>
+
+<pre><span class="sel">.hero-gallery-btn</span> {
+  <span class="prop">display</span>: <span class="val">inline-flex</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>;
+  <span class="prop">gap</span>: <span class="val">10px</span>;
+  <span class="prop">margin-top</span>: <span class="val">28px</span>;
+  <span class="prop">padding</span>: <span class="val">14px 28px</span>;
+  <span class="prop">background</span>: <span class="val">#fff</span>;
+  <span class="prop">border</span>: <span class="val">none</span>;
+  <span class="prop">border-radius</span>: <span class="val">6px</span>;
+  <span class="prop">color</span>: <span class="val">var(--darkest-green)</span>;
+  <span class="prop">font-size</span>: <span class="val">15px</span>;
+  <span class="prop">font-weight</span>: <span class="val">700</span>;
+}
+<span class="sel">.hero-gallery-btn:hover</span> {
+  <span class="prop">background</span>: <span class="val">#f0f0f0</span>;
+  <span class="prop">transform</span>: <span class="val">translateY(-1px)</span>;
+}
+
+<span class="comment">/* Archives: now 4 across instead of 3 */</span>
+<span class="sel">.archive-grid</span> {
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+}
+<span class="comment">/* Tablet: 2 across, Mobile: 1 */</span></pre>
   </div>
 
   <!-- ── CHANGE 1: HERO ── -->
@@ -435,10 +489,13 @@
       <li>Card hover: border turns green, lifts 4px</li>
       <li>Past Events: 3-column grid on desktop, 2 on tablet, 1 on mobile</li>
       <li>Past event date line shows in Roboto Condensed uppercase with dot separator</li>
-      <li>Archives section: lightest-green background (#DAE4D0)</li>
-      <li>Archive tiles: white cards with 4:3 images, overlay clears on hover</li>
-      <li>Archive tile label shows name + arrow icon, lifts on hover</li>
-      <li>Archives grid: 3 columns desktop, 2 tablet, 1 mobile</li>
+      <li>Hero: solid white "Browse the Photo Gallery Archive" button with photo icon, links to SmugMug</li>
+      <li>Archives section: lightest-green background (#DAE4D0), 4 tiles across: Music, Color War, Yearbooks, Shalhevet</li>
+      <li>Color War and Yearbooks tiles open Dropbox shared folders in new tab</li>
+      <li>Music tile links to /morasha-music/, Shalhevet links to /current-campers/shalhevet-newsletter/</li>
+      <li>No Olympics tile (removed)</li>
+      <li>No gallery CTA band at bottom (removed — hero button replaces it)</li>
+      <li>Archives grid: 4 columns desktop, 2 tablet, 1 mobile</li>
       <li>Nav is single-tier (no camp sub-nav on this page)</li>
       <li>Footer matches standardized site-wide layout</li>
       <li>All event data is dynamic (CPT or ACF-driven, not hardcoded)</li>
