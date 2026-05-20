@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KY Launch Email — Redesign Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e1525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  .page-label {
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .page-title {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .page-sub {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  /* ── EMAIL FRAME ── */
+  .email-frame {
+    width: 600px;
+    max-width: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(28,50,107,0.75) 0%,
+      rgba(28,50,107,0.35) 40%,
+      rgba(28,50,107,0.0) 60%,
+      rgba(28,50,107,0.55) 85%,
+      rgba(10,20,50,0.90) 100%
+    );
+  }
+
+  .hero-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 28px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .hero-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 100px;
+    padding: 8px 18px;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hero-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 0 36px 36px;
+  }
+  .hero-tagline {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+  }
+  .hero-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .hero-headline em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .hero-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.8);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .hero-meta-item svg {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+  }
+
+  /* ── INTRO SECTION ── */
+  .intro {
+    padding: 48px 40px 44px;
+    border-bottom: 1px solid #eee;
+  }
+  .intro-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1C326B;
+    margin-bottom: 16px;
+  }
+  .intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+  .intro p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #555;
+  }
+
+  /* ── PHOTO BREAK ── */
+  .photo-break {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .photo-break img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── PILLARS SECTION ── */
+  .pillars {
+    padding: 48px 40px;
+    background: #f7f8fb;
+  }
+  .pillars-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1C326B;
+    margin-bottom: 12px;
+  }
+  .pillars h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 32px;
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .pillar {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px 24px;
+    border: 1px solid #e8eaf0;
+    transition: box-shadow 0.2s;
+  }
+  .pillar:hover {
+    box-shadow: 0 4px 20px rgba(28,50,107,0.08);
+  }
+  .pillar-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #1C326B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .pillar-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+  }
+  .pillar h3 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .pillar p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #777;
+  }
+
+  /* ── FULL-WIDTH PHOTO ── */
+  .full-photo {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+  }
+  .full-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .full-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(10,20,50,0.7) 100%);
+  }
+  .full-photo-text {
+    position: absolute;
+    bottom: 28px;
+    left: 40px;
+    right: 40px;
+  }
+  .full-photo-text blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 48px 40px;
+    text-align: center;
+    background: #fff;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+  }
+  .cta-section p {
+    font-size: 15px;
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #1C326B;
+    color: #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover {
+    background: #263f7a;
+    transform: translateY(-1px);
+  }
+
+  /* ── FOOTER ── */
+  .email-footer {
+    padding: 32px 40px;
+    background: #1C326B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .footer-name {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .footer-sub {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  .footer-right {
+    text-align: right;
+  }
+  .footer-link {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    text-decoration: none;
+  }
+  .footer-link:hover {
+    color: #fff;
+  }
+
+  /* ── NOTES BELOW ── */
+  .design-notes {
+    margin-top: 48px;
+    max-width: 600px;
+    width: 100%;
+  }
+  .design-notes h3 {
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .design-notes ul {
+    list-style: none;
+    padding: 0;
+  }
+  .design-notes li {
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 6px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .design-notes li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.25);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">Redesign Concept</div>
+<h1 class="page-title">KY Launch Email Blast</h1>
+<p class="page-sub">Replacing clip art with full-bleed photography, editorial typography, and a layout that signals premium — not template.</p>
+
+<!-- ═══ EMAIL START ═══ -->
+<div class="email-frame">
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=85&fit=crop&crop=faces" alt="Kids at camp" />
+    <div class="hero-overlay"></div>
+    <div class="hero-top">
+      <div class="hero-logo">KY</div>
+      <div class="hero-badge">Summer 2027</div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-tagline">A new experience for boys</div>
+      <h1 class="hero-headline">Kehilas<br>Yaakov</h1>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.8 21a7 7 0 0 1 12.4 0"/></svg>
+          3rd – 9th Grade Boys
+        </div>
+        <div class="hero-meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+          Lakewood, PA
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-label">Introducing Kehilas Yaakov</div>
+    <h2>Built with the warmth, energy, and standards families trust</h2>
+    <p>Kehilas Yaakov is designed to help boys thrive — growing in confidence, character, connection, and רוח (spirit), while having the kind of summer they'll talk about all year long.</p>
+  </div>
+
+  <!-- PHOTO BREAK: 2-up -->
+  <div class="photo-break">
+    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80&fit=crop" alt="Tent camping" />
+    <img src="https://images.unsplash.com/photo-1534329539061-64caeb388c42?w=600&q=80&fit=crop" alt="Camp activities" />
+  </div>
+
+  <!-- PILLARS -->
+  <div class="pillars">
+    <div class="pillars-label">The Kehilas Yaakov Experience</div>
+    <h2>What sets this summer apart</h2>
+    <div class="pillar-grid">
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>Torah growth</h3>
+        <p>Meaningful learning in a warm, engaging environment that meets every boy where he is.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-5"/></svg>
+        </div>
+        <h3>Adventure & fun</h3>
+        <p>Sports, outdoor activities, creative programming, and the kind of summer memories that stick.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Real friendships</h3>
+        <p>A tight-knit community where boys build bonds that last far beyond the summer.</p>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Every boy belongs</h3>
+        <p>Designed so that every camper feels seen, valued, and empowered to grow at his own pace.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FULL-WIDTH PHOTO WITH QUOTE -->
+  <div class="full-photo">
+    <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=1200&q=80&fit=crop" alt="Sunset at lake" />
+    <div class="full-photo-overlay"></div>
+    <div class="full-photo-text">
+      <blockquote>"This is more than a camp — it's the place where your son becomes who he's meant to be."</blockquote>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Something special is coming</h2>
+    <p>Details are on the way. Be among the first families to learn more about Kehilas Yaakov.</p>
+    <a href="https://morashastg1.wpenginepowered.com" class="cta-btn">Get Early Details →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="email-footer">
+    <div class="footer-brand">
+      <div class="footer-logo">KY</div>
+      <div>
+        <div class="footer-name">Kehilas Yaakov</div>
+        <div class="footer-sub">A Morasha Camps experience</div>
+      </div>
+    </div>
+    <div class="footer-right">
+      <a class="footer-link" href="https://morashastg1.wpenginepowered.com">morashacamps.com</a>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ EMAIL END ═══ -->
+
+<div class="design-notes">
+  <h3>What changed</h3>
+  <ul>
+    <li>Eliminated all clip art — full-bleed camp photography throughout</li>
+    <li>Editorial hero with layered type over real photo (no illustrated lake scene)</li>
+    <li>Tighter, more confident copy — fewer words, more impact</li>
+    <li>4-pillar card grid replaces generic checkmark list</li>
+    <li>Pull quote over atmospheric photo replaces bold italic "This is more than a camp!" shout</li>
+    <li>Single clear CTA button instead of passive "more details coming soon"</li>
+    <li>Navy brand color used intentionally — icons, accents, footer — not as wallpaper</li>
+    <li>Photography placeholders — swap with real KY/Morasha images for production</li>
+  </ul>
+</div>
+
+</body>
+</html>
