@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KY Staff Announcement — Redesign Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  .mockup-label {
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .comparison {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .version {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .version-label {
+    color: rgba(255,255,255,0.35);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── STORY FRAME ── */
+  .story {
+    width: 360px;
+    height: 640px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* ── VERSION A: GRID POST (1080×1080 → 360×360) ── */
+  .grid-post {
+    width: 360px;
+    height: 360px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════════════
+     REDESIGNED STORY
+     ══════════════════════════════════════ */
+  .story-v2 {
+    background: #1C326B;
+  }
+
+  /* Landscape illustration (CSS-drawn) */
+  .landscape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    overflow: hidden;
+  }
+  .mountain {
+    position: absolute;
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+  }
+  .m1 { width: 500px; height: 180px; background: #253a6e; left: -80px; }
+  .m2 { width: 400px; height: 140px; background: #2a4078; left: 100px; }
+  .m3 { width: 600px; height: 160px; background: #1e3060; right: -100px; }
+  .m4 { width: 100%; height: 60px; background: #162550; border-radius: 0; }
+
+  .tree {
+    position: absolute;
+    bottom: 55px;
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 24px solid #14224a;
+  }
+
+  .lake {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 55px;
+    background: linear-gradient(180deg, #162856 0%, #111f42 100%);
+    opacity: 0.9;
+  }
+  .lake::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+  .lake::after {
+    content: "";
+    position: absolute;
+    top: 22px;
+    left: 25%;
+    right: 25%;
+    height: 1px;
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* Moon */
+  .moon {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(160,180,220,0.3);
+    box-shadow: 0 0 20px rgba(160,180,220,0.15);
+  }
+
+  /* Cloud */
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.06);
+    border-radius: 20px;
+    height: 12px;
+  }
+  .c1 { top: 40px; left: 20px; width: 50px; }
+  .c2 { top: 60px; right: 80px; width: 35px; height: 8px; }
+
+  /* Content area */
+  .story-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px 28px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Top brand bar */
+  .brand-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: auto;
+  }
+  .brand-bar .logo-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    color: #fff;
+  }
+  .brand-bar .brand-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.06em;
+  }
+
+  /* Photo + info block */
+  .person-block {
+    margin-bottom: 28px;
+  }
+  .person-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.12);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .person-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .person-photo .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.2);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .person-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .person-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(160,185,230,0.8);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Quote */
+  .person-quote {
+    margin-bottom: 44px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(160,185,230,0.3);
+  }
+  .person-quote p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.55;
+    font-weight: 600;
+  }
+
+  /* Bottom brand lockup */
+  .bottom-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 3;
+  }
+  .bottom-brand .ky-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bottom-brand .ky-mark svg {
+    width: 18px;
+    height: 18px;
+    fill: rgba(255,255,255,0.5);
+  }
+  .bottom-brand .ky-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 700;
+  }
+
+  /* ══════════════════════════════════════
+     REDESIGNED GRID POST
+     ══════════════════════════════════════ */
+  .grid-v2 {
+    background: #1C326B;
+    display: flex;
+  }
+
+  .grid-left {
+    flex: 0 0 145px;
+    padding: 24px 0 24px 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .grid-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.12);
+    overflow: hidden;
+    margin-bottom: auto;
+  }
+  .grid-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .grid-photo .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.2);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .grid-bottom-brand {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .grid-bottom-brand .ky-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+  }
+  .grid-bottom-brand span {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 700;
+  }
+
+  .grid-right {
+    flex: 1;
+    padding: 24px 24px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* mini landscape for grid */
+  .grid-landscape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    overflow: hidden;
+  }
+  .grid-landscape .gm {
+    position: absolute;
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+  }
+  .gm1 { width: 300px; height: 60px; background: #253a6e; left: -40px; }
+  .gm2 { width: 200px; height: 45px; background: #2a4078; left: 50px; }
+  .gm3 { width: 100%; height: 20px; background: #162550; border-radius: 0; }
+
+  .grid-right .g-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .grid-right .g-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(160,185,230,0.8);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .grid-right .g-quote {
+    padding-left: 12px;
+    border-left: 2px solid rgba(160,185,230,0.25);
+    position: relative;
+    z-index: 1;
+  }
+  .grid-right .g-quote p {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  /* ── NOTES ── */
+  .notes {
+    max-width: 780px;
+    margin-top: 48px;
+    padding: 32px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .notes h3 {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+  .notes p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .notes p:last-child { margin-bottom: 0; }
+  .notes strong { color: rgba(255,255,255,0.75); }
+</style>
+</head>
+<body>
+
+<div class="mockup-label">Kehilas Yaakov — Staff Announcement Redesign Concept</div>
+
+<div class="comparison">
+
+  <!-- ── STORY FORMAT ── -->
+  <div class="version">
+    <div class="version-label">Story — 1080 × 1920</div>
+    <div class="story story-v2">
+
+      <!-- Atmospheric background -->
+      <div class="moon"></div>
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+
+      <div class="landscape">
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="mountain m3"></div>
+        <div class="mountain m4"></div>
+        <div class="tree" style="left: 40px;"></div>
+        <div class="tree" style="left: 62px; bottom: 60px; border-bottom-width: 18px; border-left-width: 6px; border-right-width: 6px;"></div>
+        <div class="tree" style="left: 280px;"></div>
+        <div class="tree" style="left: 300px; bottom: 62px; border-bottom-width: 16px; border-left-width: 5px; border-right-width: 5px;"></div>
+        <div class="tree" style="right: 50px; left: auto;"></div>
+        <div class="tree" style="right: 30px; left: auto; bottom: 58px; border-bottom-width: 20px; border-left-width: 7px; border-right-width: 7px;"></div>
+        <div class="lake"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="story-content">
+        <div class="brand-bar">
+          <div class="logo-mark">M</div>
+          <div class="brand-name">Kehilas Yaakov</div>
+        </div>
+
+        <div class="person-block">
+          <div class="person-photo">
+            <div class="placeholder">photo</div>
+          </div>
+          <div class="person-name">Yitz<br>Kaminetsky</div>
+          <div class="person-title">Boys Athletics Director</div>
+        </div>
+
+        <div class="person-quote">
+          <p>"Every kid deserves to feel like an athlete — that's what we're building here."</p>
+        </div>
+
+        <div class="bottom-brand">
+          <div class="ky-mark">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+          </div>
+          <div class="ky-name">Kehilas Yaakov</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GRID POST FORMAT ── -->
+  <div class="version">
+    <div class="version-label">Grid Post — 1080 × 1080</div>
+    <div class="grid-post grid-v2">
+      <div class="grid-left">
+        <div class="grid-photo">
+          <div class="placeholder">photo</div>
+        </div>
+        <div class="grid-bottom-brand">
+          <div class="ky-circle">M</div>
+          <span>Kehilas Yaakov</span>
+        </div>
+      </div>
+      <div class="grid-right">
+        <div class="grid-landscape">
+          <div class="gm gm1"></div>
+          <div class="gm gm2"></div>
+          <div class="gm gm3"></div>
+        </div>
+        <div class="g-name">Yitz<br>Kaminetsky</div>
+        <div class="g-title">Boys Athletics Director</div>
+        <div class="g-quote">
+          <p>"Every kid deserves to feel like an athlete — that's what we're building here."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="notes">
+  <h3>Design Notes</h3>
+  <p><strong>What changed:</strong> The photo shrinks from ~40% of the canvas to a deliberate 120px rounded rectangle. This does two things: it stops the empty circle from reading as "unfinished," and it puts the <strong>name first</strong> — which is what people actually scan for on social.</p>
+  <p><strong>Quote added:</strong> A short pull quote below the name gives each announcement personality. Without it, you're just showing a face and a title — same as a company directory. The quote makes people pause.</p>
+  <p><strong>Landscape as atmosphere:</strong> The illustrated mountains and lake stay, but pushed to the bottom third as ambient texture. They set the mood without competing with the person.</p>
+  <p><strong>Photo note:</strong> The rounded rectangle works better than a circle for headshots — circles crop out shoulders and context, making everyone look like a LinkedIn avatar. The rectangle lets you show more of the person.</p>
+  <p><strong>For production:</strong> Replace the "photo" placeholder with an actual headshot. The quote should come from the staff member — even one sentence works. The Playfair Display serif gives a more editorial feel than the current all-caps sans-serif treatment.</p>
+</div>
+
+</body>
+</html>
