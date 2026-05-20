@@ -189,12 +189,53 @@
     </div>
     <div>
       <span class="meta-label">Last Updated</span>
-      May 19, 2026
+      May 20, 2026
     </div>
   </div>
 
   <div class="change-desc" style="margin-bottom:32px;">
     <strong>Summary of changes:</strong> The current Reunions & Events page is rebuilt as a dedicated "Alumni & Events" page. The redesign introduces: (1) a dark-green hero with radial gradient accents, (2) an Upcoming Events section with large two-column cards, (3) a Past Events section with a three-column grid, (4) an Archives section on lightest-green background, and (5) a single-tier nav (this is not a camp-specific page). The URL should change from <code>/current-campers/reunions-events/</code> to something like <code>/alumni-events/</code>.
+  </div>
+
+  <!-- ── REVISION: MAY 20 — OPTION B BENTO GRID ── -->
+  <div class="change-item" id="may20-bento">
+    <div class="change-date">May 20, 2026</div>
+    <span class="status pending">Pending</span>
+    <div class="change-title">Revision: Option B — Bento Archives Grid</div>
+    <div class="change-desc">
+      Implemented "Option B" from the gallery options exploration. The hero gallery button, photo gallery mosaic section, and gallery CTA band are all removed. Photo Gallery is now the dominant item in a 5-box bento grid within the Archives section.
+    </div>
+
+    <table class="diff">
+      <tr><th>Area</th><th>Before (May 19)</th><th>After (May 20)</th></tr>
+      <tr><td>Hero gallery button</td><td>White "Browse the Photo Gallery Archive" button in hero</td><td><strong>Removed</strong> — hero is text-only</td></tr>
+      <tr><td>Gallery mosaic</td><td>8-photo mosaic grid below hero with CTA bar</td><td><strong>Removed entirely</strong></td></tr>
+      <tr><td>Gallery CTA band</td><td>Already removed in May 19 rev</td><td>Confirmed removed</td></tr>
+      <tr><td>Archives grid</td><td>4&times;1 even grid (Music, Color War, Yearbooks, Shalhevet)</td><td><strong>5-box bento grid</strong> — Photo Gallery (dominant, spans left half, 2 rows), Music (wide, top right), Color War + Yearbooks + Shalhevet (3 small tiles, bottom right)</td></tr>
+      <tr><td>Archives CSS</td><td><code>.archives-grid</code>, <code>.archive-card</code> classes</td><td><strong>Replaced</strong> with <code>.bento-grid</code>, <code>.bento-card</code>, <code>.bento-overlay</code>, <code>.bento-label</code>, <code>.bento-arrow</code></td></tr>
+    </table>
+
+    <div class="note">
+      <strong>Bento grid layout:</strong> Uses a 6-column CSS grid with 2 rows of 220px. Photo Gallery spans 3 columns and 2 rows (left half). Music spans 3 columns (top right). Color War, Yearbooks, and Shalhevet each span 1 column (bottom right row). Cards have rounded corners (16px), image zoom on hover, gradient overlay, and a blurred arrow button.
+    </div>
+
+    <div class="note">
+      <strong>Responsive behavior:</strong> At 768px, grid switches to 2 columns with Photo Gallery and Music spanning full width. At 480px, single column stack. The outer archives section wrapper (<code>.archives-section</code>, <code>.archives-inner</code>, the h2 "Archives") is unchanged.
+    </div>
+
+<pre><span class="comment">/* Bento grid — 6-column, 2 rows */</span>
+<span class="sel">.bento-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">repeat(6, 1fr)</span>;
+  <span class="prop">grid-template-rows</span>: <span class="val">220px 220px</span>;
+  <span class="prop">gap</span>: <span class="val">16px</span>;
+}
+<span class="sel">.bento-gallery</span> { <span class="prop">grid-column</span>: <span class="val">span 3</span>; <span class="prop">grid-row</span>: <span class="val">span 2</span>; }
+<span class="sel">.bento-music</span>   { <span class="prop">grid-column</span>: <span class="val">span 3</span>; }
+<span class="sel">.bento-colorwar, .bento-yearbooks, .bento-shalhevet</span> { <span class="prop">grid-column</span>: <span class="val">span 1</span>; }
+
+<span class="comment">/* 768px: 2-col, Gallery and Music full-width */</span>
+<span class="comment">/* 480px: single column stack */</span></pre>
   </div>
 
   <!-- ── REVISION: MAY 19 ── -->
@@ -489,13 +530,17 @@
       <li>Card hover: border turns green, lifts 4px</li>
       <li>Past Events: 3-column grid on desktop, 2 on tablet, 1 on mobile</li>
       <li>Past event date line shows in Roboto Condensed uppercase with dot separator</li>
-      <li>Hero: solid white "Browse the Photo Gallery Archive" button with photo icon, links to SmugMug</li>
-      <li>Archives section: lightest-green background (#DAE4D0), 4 tiles across: Music, Color War, Yearbooks, Shalhevet</li>
+      <li>Hero: no gallery button (removed — Photo Gallery is now in bento grid)</li>
+      <li>No photo gallery mosaic section below hero (removed)</li>
+      <li>Archives section: lightest-green background (#DAE4D0), 5-box bento grid</li>
+      <li>Bento: Photo Gallery is dominant (spans left half, 2 rows), links to SmugMug in new tab</li>
+      <li>Bento: Music spans top-right (3 cols), Color War + Yearbooks + Shalhevet fill bottom-right (1 col each)</li>
+      <li>Bento cards have 16px border-radius, gradient overlay, hover zoom, blurred arrow button</li>
       <li>Color War and Yearbooks tiles open Dropbox shared folders in new tab</li>
       <li>Music tile links to /morasha-music/, Shalhevet links to /current-campers/shalhevet-newsletter/</li>
       <li>No Olympics tile (removed)</li>
-      <li>No gallery CTA band at bottom (removed — hero button replaces it)</li>
-      <li>Archives grid: 4 columns desktop, 2 tablet, 1 mobile</li>
+      <li>No gallery CTA band at bottom (removed)</li>
+      <li>Bento grid: 6-col at desktop, 2-col at 768px, 1-col at 480px</li>
       <li>Nav is single-tier (no camp sub-nav on this page)</li>
       <li>Footer matches standardized site-wide layout</li>
       <li>All event data is dynamic (CPT or ACF-driven, not hardcoded)</li>
