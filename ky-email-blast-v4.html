@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MKY Launch Email</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Macedonia';
+    src: url('assets/macedonia.regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Kefa';
+    src: url('assets/kefa-0.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Kefa';
+    src: url('assets/kefa-1.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e1525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ── EMAIL FRAME ── */
+  .email {
+    width: 600px;
+    max-width: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 450px;
+    overflow: hidden;
+    background: #1C326B;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(28,50,107,0.88) 0%,
+      rgba(28,50,107,0.55) 35%,
+      rgba(28,50,107,0.25) 55%,
+      rgba(28,50,107,0.45) 75%,
+      rgba(10,20,50,0.9) 100%
+    );
+  }
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px 36px;
+  }
+  .hero-parent-logo {
+    height: 40px;
+    margin-bottom: 16px;
+  }
+  .hero-parent-logo img { height: 100%; width: auto; opacity: 0.85; }
+  .hero-divider-top {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 18px;
+  }
+  .hero-introducing {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+  .hero-name {
+    font-family: 'Macedonia', Kefa, 'Playfair Display', serif;
+    font-size: 62px;
+    font-weight: normal;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    margin-bottom: 14px;
+  }
+  .hero-tagline {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-top: 6px;
+    margin-bottom: 14px;
+  }
+  .hero-divider-bottom {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 14px;
+  }
+  .hero-launching {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+  }
+
+  /* ── TEXT SECTIONS ── */
+  .text-section {
+    padding: 44px 40px;
+    border-bottom: 1px solid #eee;
+  }
+  .text-section:last-child {
+    border-bottom: none;
+  }
+  .section-heading {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #1a1a2e;
+    text-align: center;
+    margin-bottom: 18px;
+    line-height: 1.3;
+  }
+  .section-heading em {
+    font-style: normal;
+    font-weight: 700;
+  }
+  .section-body {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #555;
+    text-align: center;
+  }
+  .section-body em {
+    font-style: italic;
+  }
+
+  /* ── PHOTO BAND (full-width) ── */
+  .photo-band {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+  .photo-band img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── SPLIT SECTION (photo + text side by side) ── */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 320px;
+  }
+  .split-section.reverse {
+    direction: rtl;
+  }
+  .split-section.reverse > * {
+    direction: ltr;
+  }
+  .split-photo {
+    overflow: hidden;
+  }
+  .split-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .split-text {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f7f8fb;
+  }
+  .split-text.dark {
+    background: #1C326B;
+  }
+  .split-text.dark .section-heading {
+    color: #fff;
+    text-align: left;
+  }
+  .split-text.dark .section-heading em {
+    color: #fff;
+  }
+  .split-text.dark .section-body {
+    color: rgba(255,255,255,0.75);
+    text-align: left;
+  }
+  .split-text .section-heading {
+    text-align: left;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .split-text .section-body {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  /* ── FULL-WIDTH PHOTO WITH OVERLAY TEXT ── */
+  .photo-overlay-section {
+    position: relative;
+    min-height: 360px;
+    overflow: hidden;
+  }
+  .photo-overlay-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  .photo-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28,50,107,0.85) 0%, rgba(28,50,107,0.75) 100%);
+  }
+  .photo-overlay-content {
+    position: relative;
+    z-index: 1;
+    padding: 44px 40px;
+  }
+  .photo-overlay-content .section-heading {
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .photo-overlay-content .section-heading em {
+    color: #fff;
+  }
+  .photo-overlay-content .section-body {
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 48px 40px;
+    text-align: center;
+    background: #fff;
+  }
+  .cta-heading {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1C326B;
+    margin-bottom: 18px;
+  }
+  .cta-body {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 28px;
+  }
+  .cta-body a {
+    color: #1C326B;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #1C326B;
+    color: #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover {
+    background: #263f7a;
+    transform: translateY(-1px);
+  }
+
+  /* ── FOOTER ── */
+  .email-footer {
+    background: #1C326B;
+    padding: 40px 40px 32px;
+    text-align: center;
+  }
+  .footer-parent-logo {
+    height: 32px;
+    margin-bottom: 24px;
+  }
+  .footer-parent-logo img { height: 100%; width: auto; opacity: 0.9; }
+  .footer-divider {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto 20px;
+  }
+  .footer-family-label {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+  .footer-camp-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .footer-camp-logos img {
+    height: 28px;
+    width: auto;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+  .footer-camp-logos img:hover { opacity: 0.8; }
+  .footer-bottom {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-link {
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    text-decoration: none;
+  }
+  .footer-link:hover { color: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    body { padding: 0; }
+    .email { border-radius: 0; }
+
+    .hero { height: 400px; }
+    .hero-content { padding: 24px 20px; }
+    .hero-name { font-size: 46px; }
+    .hero-introducing { font-size: 14px; }
+    .hero-tagline { font-size: 11px; letter-spacing: 0.08em; }
+    .hero-launching { font-size: 10px; }
+    .hero-parent-logo { height: 34px; }
+
+    .text-section { padding: 32px 24px; }
+    .section-heading { font-size: 22px; }
+    .section-body { font-size: 14px; }
+
+    .split-section {
+      grid-template-columns: 1fr;
+    }
+    .split-section.reverse {
+      direction: ltr;
+    }
+    .split-photo {
+      min-height: 220px;
+    }
+    .split-text {
+      padding: 28px 24px;
+    }
+    .split-text .section-heading { font-size: 20px; }
+    .split-text .section-body { font-size: 13.5px; }
+    .split-text.dark .section-heading,
+    .split-text.dark .section-body {
+      text-align: center;
+    }
+
+    .photo-overlay-content { padding: 32px 24px; }
+
+    .cta-section { padding: 36px 24px; }
+    .cta-heading { font-size: 24px; }
+    .cta-body { font-size: 13.5px; }
+    .cta-btn { padding: 14px 28px; font-size: 13px; }
+
+    .email-footer { padding: 32px 24px 24px; }
+    .footer-camp-logos { gap: 20px; }
+    .footer-camp-logos img { height: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ EMAIL START ═══ -->
+<div class="email">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <img src="photos/sunset-lake.jpg" alt="Camp Morasha — sunset over the lake" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-parent-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
+      <div class="hero-divider-top"></div>
+      <div class="hero-introducing">Introducing</div>
+      <div class="hero-name">Kehillas Yaakov</div>
+      <div class="hero-tagline">Our new all-boys full-summer overnight camp</div>
+      <div class="hero-divider-bottom"></div>
+      <div class="hero-launching">Launching for Summer 2027</div>
+    </div>
+  </div>
+
+  <!-- ── FOR OVER SIX DECADES ── -->
+  <div class="text-section">
+    <h2 class="section-heading"><em>For Over Six Decades</em></h2>
+    <p class="section-body">Camp Morasha has been more than just a summer experience — it has been a community, a standard of excellence, and a place where generations of children have grown in their love for yiddishkeit and dedication to Eretz Yisrael. Since our founding in 1964, our camp's core values and mission have guided every step forward. Today, we are excited to share a historic and meaningful new chapter in that journey.</p>
+  </div>
+
+  <!-- ── BUILT FOR BOYS (split layout) ── -->
+  <div class="split-section">
+    <div class="split-photo">
+      <img src="photos/basketball-gym.jpg" alt="Boys playing basketball" />
+    </div>
+    <div class="split-text">
+      <h2 class="section-heading"><em>Built</em> for Boys</h2>
+      <p class="section-body">We are incredibly proud to announce Morasha's Kehillas Yaakov (MKY) — our new all-boys full-summer overnight camp that combines strong structure, thoughtful programming, and a warm, growth-oriented environment. MKY is a camp grounded in the belief that a summer in a wholesome environment plays a significant role in shaping a child's relationship with Torah and avodas Hashem, his middos, love for Israel, and relationships with others.</p>
+    </div>
+  </div>
+
+  <!-- ── A STAFF THAT INSPIRES (split layout, reversed) ── -->
+  <div class="split-section reverse">
+    <div class="split-photo">
+      <img src="photos/boys-learning.jpg" alt="Boys learning together" />
+    </div>
+    <div class="split-text dark">
+      <h2 class="section-heading">A <em>Staff</em> That Inspires</h2>
+      <p class="section-body">We know that a camp is only as good as its staff. Therefore, assembling the ideal team is a top priority for MKY. We look forward to announcing our leadership team in August — and hiring highly motivated <em>mechanchim</em>, counselors, athletes, and camping professionals, who come with positive energy, a love for camp, and the recognition that every staff member is a role model to our boys.</p>
+    </div>
+  </div>
+
+  <!-- ── A CAMPUS LIKE NO OTHER (photo + overlay) ── -->
+  <div class="photo-overlay-section">
+    <img src="photos/tubing-lake.jpg" alt="Boys tubing on the lake" />
+    <div class="photo-overlay-gradient"></div>
+    <div class="photo-overlay-content">
+      <h2 class="section-heading">A <em>Campus</em> Like No Other</h2>
+      <p class="section-body">We are thrilled to have secured an exceptional property located just minutes away from Camp Morasha. The campus, surrounded by hundreds of acres of natural beauty, features a wide range of first-rate facilities: A modern Beis Medrash at its center, a Dining Hall that overlooks a scenic mountain landscape, and the most unbelievable and expansive sports and activity spaces. Every element supports both an active, exciting summer and an environment that feels inspiring, uplifting, and mission-driven.</p>
+    </div>
+  </div>
+
+  <!-- ── PASSIONATELY PROFESSIONAL (split layout) ── -->
+  <div class="split-section">
+    <div class="split-photo">
+      <img src="photos/staff-stage.jpg" alt="Staff member on stage" />
+    </div>
+    <div class="split-text">
+      <h2 class="section-heading">Passionately <em>Professional</em></h2>
+      <p class="section-body">MKY will benefit from the same administrative leadership and commitment to excellence that define Morasha. While operationally and programmatically distinct, the two camps will create powerful synergies — shared resources, systems, talent, and expertise — that will elevate both programs. By expanding thoughtfully, we are investing in a future that allows Camp Morasha to continue thriving while impacting more families in meaningful ways.</p>
+    </div>
+  </div>
+
+  <!-- ── WHAT'S NEXT ── -->
+  <div class="cta-section">
+    <h2 class="cta-heading">What's Next?</h2>
+    <p class="cta-body">Camper registration for MKY will open, together with all our programs, on September 1. For those interested in helping build something truly special from the ground up, we invite you to express interest in Senior Staff positions by <a href="#">clicking here</a>. This is just the beginning, and we can't wait to share more with you in the coming weeks and months. To hear the latest MKY updates, please join the MKY Updates WhatsApp group by <a href="#">clicking here</a>.</p>
+    <a href="#" class="cta-btn">Join the WhatsApp Group →</a>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="email-footer">
+    <div class="footer-parent-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
+    <div class="footer-divider"></div>
+    <div class="footer-family-label">Our Family of Programs</div>
+    <div class="footer-camp-logos">
+      <img src="assets/CampMorasha_White.svg" alt="Camp Morasha" />
+      <img src="assets/KehillasYaakov_White.svg" alt="Kehillas Yaakov" />
+      <img src="assets/MorashaKollel_White.svg" alt="Morasha Kollel" />
+      <img src="assets/MorashaTraval_White.svg" alt="Morasha Travel" />
+    </div>
+    <div class="footer-bottom">
+      <a class="footer-link" href="https://morashastg1.wpenginepowered.com">morashacamps.com</a>
+    </div>
+  </div>
+
+</div>
+<!-- ═══ EMAIL END ═══ -->
+
+</body>
+</html>
