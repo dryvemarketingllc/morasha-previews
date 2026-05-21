@@ -54,7 +54,7 @@
   /* ── HERO ── */
   .hero {
     position: relative;
-    height: 480px;
+    height: 560px;
     overflow: hidden;
     background: #1C326B;
   }
@@ -70,11 +70,11 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(28,50,107,0.92) 0%,
-      rgba(28,50,107,0.7) 30%,
-      rgba(28,50,107,0.15) 55%,
-      rgba(28,50,107,0.3) 75%,
-      rgba(10,20,50,0.85) 100%
+      rgba(28,50,107,0.88) 0%,
+      rgba(28,50,107,0.55) 35%,
+      rgba(28,50,107,0.25) 55%,
+      rgba(28,50,107,0.45) 75%,
+      rgba(10,20,50,0.9) 100%
     );
   }
   .hero-content {
@@ -85,29 +85,48 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 36px;
+    padding: 48px 36px;
   }
-  .hero-logo {
-    height: 44px;
-    margin-bottom: 8px;
+  .hero-parent-logo {
+    height: 32px;
+    margin-bottom: 24px;
   }
-  .hero-logo img { height: 100%; width: auto; }
-  .hero-launching {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.7);
+  .hero-parent-logo img { height: 100%; width: auto; opacity: 0.85; }
+  .hero-divider-top {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 28px;
+  }
+  .hero-ky-logo {
+    height: 72px;
     margin-bottom: 20px;
   }
+  .hero-ky-logo img { height: 100%; width: auto; }
   .hero-name {
     font-family: 'Playfair Display', serif;
-    font-size: 52px;
+    font-size: 56px;
     font-weight: 800;
     color: #fff;
     line-height: 1.05;
     letter-spacing: 0.02em;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    margin-bottom: 20px;
+  }
+  .hero-divider-bottom {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+  }
+  .hero-launching {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
   }
 
   /* ── TEXT SECTIONS ── */
@@ -315,9 +334,12 @@
     <img src="https://morashastg1.wpenginepowered.com/wp-content/uploads/2026/05/Yehuda-Joffe-Photography-23-1-2-2-scaled.jpg" alt="Camp Morasha" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
-      <div class="hero-launching">Launching for Summer 2027</div>
+      <div class="hero-parent-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
+      <div class="hero-divider-top"></div>
+      <div class="hero-ky-logo"><img src="assets/KehillasYaakov_White.svg" alt="Kehillas Yaakov" /></div>
       <div class="hero-name">Kehillas<br>Yaakov</div>
+      <div class="hero-divider-bottom"></div>
+      <div class="hero-launching">Launching for Summer 2027</div>
     </div>
   </div>
 
