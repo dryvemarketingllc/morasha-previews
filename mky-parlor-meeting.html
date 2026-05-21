@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MKY Parlor Meeting</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e1525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ── INVITE FRAME ── */
+  .invite {
+    width: 600px;
+    max-width: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    background: #1C326B;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(28,50,107,0.9) 0%,
+      rgba(28,50,107,0.55) 30%,
+      rgba(28,50,107,0.3) 50%,
+      rgba(28,50,107,0.5) 70%,
+      rgba(10,20,50,0.92) 100%
+    );
+  }
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 36px 36px;
+  }
+  .hero-parent-logo {
+    height: 40px;
+    margin-bottom: 20px;
+  }
+  .hero-parent-logo img { height: 100%; width: auto; opacity: 0.85; }
+
+  .hero-invited {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 6px;
+  }
+  .hero-intro {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.03em;
+    margin-bottom: 16px;
+  }
+  .hero-divider-top {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 18px;
+  }
+  .hero-name {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 54px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    margin-bottom: 14px;
+  }
+  .hero-event-type {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .hero-divider-bottom {
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+  }
+  .hero-tagline {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.6);
+    max-width: 340px;
+    line-height: 1.6;
+  }
+
+  /* ── DETAILS SECTION ── */
+  .details-section {
+    padding: 44px 40px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+  .details-date {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1C326B;
+    margin-bottom: 4px;
+  }
+  .details-time {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 20px;
+  }
+  .details-divider {
+    width: 40px;
+    height: 1px;
+    background: #ddd;
+    margin: 0 auto 20px;
+  }
+  .details-venue {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .details-address {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #888;
+    line-height: 1.6;
+  }
+
+  /* ── HIGHLIGHTS (split layout) ── */
+  .highlights-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 320px;
+  }
+  .highlights-photo {
+    overflow: hidden;
+  }
+  .highlights-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .highlights-text {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f7f8fb;
+  }
+  .highlights-heading {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: left;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  .highlights-heading em { font-style: italic; }
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .highlight-item:last-child { margin-bottom: 0; }
+  .highlight-bullet {
+    flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #1C326B;
+    margin-top: 7px;
+  }
+  .highlight-label {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #555;
+  }
+  .highlight-label strong {
+    color: #1a1a2e;
+    font-weight: 700;
+  }
+
+  /* ── QUOTE / MISSION (photo overlay) ── */
+  .mission-section {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+  }
+  .mission-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  .mission-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(28,50,107,0.88) 0%, rgba(28,50,107,0.82) 100%);
+  }
+  .mission-content {
+    position: relative;
+    z-index: 1;
+    padding: 44px 44px;
+    text-align: center;
+  }
+  .mission-quote {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .mission-attribution {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 44px 40px;
+    text-align: center;
+    background: #fff;
+  }
+  .cta-heading {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1C326B;
+    margin-bottom: 14px;
+  }
+  .cta-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 24px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: #1C326B;
+    color: #fff;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 6px;
+  }
+  .cta-note {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 16px;
+  }
+
+  /* ── FOOTER ── */
+  .invite-footer {
+    padding: 24px 40px;
+    background: #1C326B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo { height: 28px; }
+  .footer-logo img { height: 100%; width: auto; }
+  .footer-link {
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    text-decoration: none;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    body { padding: 0; }
+    .invite { border-radius: 0; }
+
+    .hero { height: 440px; }
+    .hero-content { padding: 24px 20px; }
+    .hero-name { font-size: 42px; }
+    .hero-intro { font-size: 15px; }
+
+    .details-section { padding: 32px 24px; }
+    .details-time { font-size: 24px; }
+    .details-venue { font-size: 18px; }
+
+    .highlights-section { grid-template-columns: 1fr; }
+    .highlights-photo { min-height: 220px; }
+    .highlights-text { padding: 28px 24px; }
+
+    .mission-content { padding: 32px 24px; }
+    .mission-quote { font-size: 18px; }
+
+    .cta-section { padding: 36px 24px; }
+    .invite-footer { padding: 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ INVITE START ═══ -->
+<div class="invite">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <img src="photos/sunset-lake.jpg" alt="Camp Morasha sunset" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-parent-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
+      <div class="hero-invited">You're Invited</div>
+      <div class="hero-intro">to an exclusive evening introducing</div>
+      <div class="hero-divider-top"></div>
+      <div class="hero-name">Kehillas<br>Yaakov</div>
+      <div class="hero-event-type">Parlor Meeting</div>
+      <div class="hero-divider-bottom"></div>
+      <div class="hero-tagline">A new all-boys full-summer overnight camp from the founders of Camp Morasha — launching Summer 2027</div>
+    </div>
+  </div>
+
+  <!-- ── EVENT DETAILS ── -->
+  <div class="details-section">
+    <div class="details-date">Thursday, September 18, 2026</div>
+    <div class="details-time">7:30 PM</div>
+    <div class="details-divider"></div>
+    <div class="details-venue">The Home of<br>Dr. &amp; Mrs. David Cohen</div>
+    <div class="details-address">142 Maple Avenue<br>Teaneck, New Jersey</div>
+  </div>
+
+  <!-- ── WHAT TO EXPECT (split) ── -->
+  <div class="highlights-section">
+    <div class="highlights-photo">
+      <img src="photos/basketball-gym.jpg" alt="Boys playing basketball" />
+    </div>
+    <div class="highlights-text">
+      <h2 class="highlights-heading"><em>What</em> to Expect</h2>
+      <div class="highlight-item">
+        <div class="highlight-bullet"></div>
+        <div class="highlight-label"><strong>Hear the vision</strong> for MKY directly from camp leadership</div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-bullet"></div>
+        <div class="highlight-label"><strong>See the campus</strong> — an exceptional property with first-rate facilities</div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-bullet"></div>
+        <div class="highlight-label"><strong>Meet the team</strong> building something truly special from the ground up</div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-bullet"></div>
+        <div class="highlight-label"><strong>Ask questions</strong> and connect with other interested families</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MISSION QUOTE (photo overlay) ── -->
+  <div class="mission-section">
+    <img src="photos/boys-learning.jpg" alt="Boys learning" />
+    <div class="mission-overlay"></div>
+    <div class="mission-content">
+      <p class="mission-quote">"A camp grounded in the belief that a summer in a wholesome environment plays a significant role in shaping a child's relationship with Torah, his middos, love for Israel, and relationships with others."</p>
+      <div class="mission-attribution">The MKY Mission</div>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div class="cta-section">
+    <h2 class="cta-heading">We'd Love to See You There</h2>
+    <p class="cta-body">Space is limited. Please RSVP by September 15 to reserve your spot.</p>
+    <a href="#" class="cta-btn">RSVP Now →</a>
+    <p class="cta-note">Refreshments will be served</p>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <div class="invite-footer">
+    <div class="footer-logo"><img src="assets/KehillasYaakov_White.svg" alt="Kehillas Yaakov" /></div>
+    <a class="footer-link" href="#">morashacamps.com</a>
+  </div>
+
+</div>
+<!-- ═══ INVITE END ═══ -->
+
+</body>
+</html>
