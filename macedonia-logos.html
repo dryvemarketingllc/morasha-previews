@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camp Logos in Macedonia Font</title>
+<style>
+  @font-face {
+    font-family: 'Macedonia';
+    src: url('assets/macedonia.regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f5f5f7;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #999;
+    margin-bottom: 48px;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .logo-card {
+    padding: 52px 40px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .logo-card:last-child { border-bottom: none; }
+
+  .logo-card.dark {
+    background: #1C326B;
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+
+  .camp-name {
+    font-family: 'Macedonia', serif;
+    font-size: 56px;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+  }
+
+  .camp-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    opacity: 0.5;
+  }
+
+  /* Camp colors */
+  .morasha .camp-name { color: #46764b; }
+  .morasha .camp-label { color: #46764b; }
+
+  .ky .camp-name { color: #1C326B; }
+  .ky .camp-label { color: #1C326B; }
+
+  .ky-white .camp-name { color: #ffffff; }
+  .ky-white .camp-label { color: rgba(255,255,255,0.5); }
+
+  .kollel .camp-name { color: #6b4c2e; }
+  .kollel .camp-label { color: #6b4c2e; }
+
+  .amcha .camp-name { color: #3a6da8; }
+  .amcha .camp-label { color: #3a6da8; }
+
+  .travel .camp-name { color: #2a5a7a; }
+  .travel .camp-label { color: #2a5a7a; }
+
+  .parent .camp-name { color: #333; }
+  .parent .camp-label { color: #333; }
+
+  @media (max-width: 600px) {
+    .camp-name { font-size: 38px; }
+    .logo-card { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">Morasha Camps — Macedonia Font Exploration</div>
+
+<div class="logo-grid">
+
+  <div class="logo-card parent" style="background: #fff; border-radius: 12px 12px 0 0;">
+    <div class="camp-name">Morasha Camps</div>
+    <div class="camp-label">Parent Brand</div>
+  </div>
+
+  <div class="logo-card morasha" style="background: #fff;">
+    <div class="camp-name">Camp Morasha</div>
+    <div class="camp-label">Boys & Girls · Est. 1964</div>
+  </div>
+
+  <div class="logo-card ky" style="background: #fff;">
+    <div class="camp-name">Kehillas Yaakov</div>
+    <div class="camp-label">All-Boys Full-Summer</div>
+  </div>
+
+  <div class="logo-card dark ky-white">
+    <div class="camp-name">Kehillas Yaakov</div>
+    <div class="camp-label">Reversed on Navy</div>
+  </div>
+
+  <div class="logo-card kollel" style="background: #fff;">
+    <div class="camp-name">Morasha Kollel</div>
+    <div class="camp-label">Post-High School</div>
+  </div>
+
+  <div class="logo-card amcha" style="background: #fff;">
+    <div class="camp-name">Amcha Girls</div>
+    <div class="camp-label">Israel Travel Program</div>
+  </div>
+
+  <div class="logo-card travel" style="background: #fff; border-radius: 0 0 12px 12px;">
+    <div class="camp-name">Morasha Travel</div>
+    <div class="camp-label">Israel Travel Program</div>
+  </div>
+
+</div>
+
+</body>
+</html>
