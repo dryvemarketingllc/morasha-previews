@@ -156,6 +156,8 @@
     text-align: center;
     margin-bottom: 18px;
     line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
   .section-heading em {
     font-style: normal;
@@ -282,6 +284,8 @@
     font-size: 28px;
     font-weight: 700;
     color: #1C326B;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
     margin-bottom: 18px;
   }
   .cta-body {
@@ -343,15 +347,18 @@
   .footer-camp-logos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 28px 48px;
+    gap: 28px 0;
     justify-items: center;
     align-items: center;
-    max-width: 400px;
+    max-width: 460px;
     margin: 0 auto 28px;
   }
   .footer-camp-logos img {
     height: 30px;
     width: auto;
+  }
+  .footer-camp-logos img.logo-ky {
+    height: 38px;
   }
   .footer-bottom {
     padding-top: 20px;
@@ -496,7 +503,7 @@
     <div class="footer-family-label">Our Family of Camps</div>
     <div class="footer-camp-logos">
       <img src="assets/CampMorasha_Color.svg" alt="Camp Morasha" />
-      <img src="assets/KehillasYaakov_Color.svg" alt="Kehillas Yaakov" />
+      <img src="assets/KehillasYaakov_Color.svg" alt="Kehillas Yaakov" class="logo-ky" />
       <img src="assets/MorashaKollel_Color.svg" alt="Morasha Kollel" />
       <img src="assets/MorashaTraval_Color.svg" alt="Morasha Travel" />
     </div>
