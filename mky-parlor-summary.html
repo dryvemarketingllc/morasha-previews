@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MKY Parlor Meeting — Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e1525;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ── SLIDE FRAME (9:16) ── */
+  .slide {
+    width: 540px;
+    height: 960px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .slide-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .slide-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
+  }
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(28,50,107,0.94) 0%,
+      rgba(28,50,107,0.65) 20%,
+      rgba(28,50,107,0.4) 38%,
+      rgba(28,50,107,0.55) 52%,
+      rgba(28,50,107,0.88) 70%,
+      rgba(10,20,50,0.97) 100%
+    );
+  }
+  .slide-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 44px 40px 36px;
+  }
+
+  /* ── TOP: Logo + Intro ── */
+  .top-logo {
+    height: 38px;
+    margin-bottom: 20px;
+  }
+  .top-logo img { height: 100%; width: auto; opacity: 0.8; }
+
+  .intro-invited {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .intro-text {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 14px;
+  }
+
+  /* ── CAMP NAME ── */
+  .divider-1 {
+    width: 44px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin-bottom: 16px;
+  }
+  .camp-name {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.02;
+    letter-spacing: 0.02em;
+    text-shadow: 0 3px 24px rgba(0,0,0,0.35);
+    margin-bottom: 10px;
+  }
+  .event-type {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  /* ── DETAILS ── */
+  .divider-2 {
+    width: 44px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin-bottom: 22px;
+  }
+  .detail-date {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  .detail-time {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .detail-venue {
+    font-family: Kefa, 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .detail-address {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  /* ── HIGHLIGHTS ── */
+  .divider-3 {
+    width: 44px;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    margin-bottom: 22px;
+  }
+  .highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 24px;
+  }
+  .hi-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+  }
+  .hi-bullet {
+    flex-shrink: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    margin-top: 7px;
+  }
+  .hi-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.7);
+  }
+  .hi-text strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* ── BOTTOM ── */
+  .bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .rsvp-btn {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+  }
+  .bottom-note {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+  .bottom-logo { height: 20px; }
+  .bottom-logo img { height: 100%; width: auto; opacity: 0.35; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 580px) {
+    body { padding: 20px 10px 40px; }
+    .slide {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 8px;
+    }
+    .slide-content { padding: 32px 24px 28px; }
+    .camp-name { font-size: 44px; }
+    .detail-time { font-size: 26px; }
+    .detail-venue { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide">
+  <div class="slide-bg">
+    <img src="photos/sunset-lake.jpg" alt="" />
+  </div>
+  <div class="slide-overlay"></div>
+  <div class="slide-content">
+
+    <div class="top-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
+    <div class="intro-invited">You're Invited</div>
+    <div class="intro-text">to an exclusive evening introducing</div>
+
+    <div class="divider-1"></div>
+    <div class="camp-name">Kehillas<br>Yaakov</div>
+    <div class="event-type">Parlor Meeting</div>
+
+    <div class="divider-2"></div>
+    <div class="detail-date">Thursday, September 18</div>
+    <div class="detail-time">7:30 PM</div>
+    <div class="detail-venue">The Home of Dr. &amp; Mrs. David Cohen</div>
+    <div class="detail-address">142 Maple Avenue · Teaneck, NJ</div>
+
+    <div class="divider-3"></div>
+    <div class="highlights">
+      <div class="hi-item">
+        <div class="hi-bullet"></div>
+        <div class="hi-text"><strong>Hear the vision</strong> for MKY from camp leadership</div>
+      </div>
+      <div class="hi-item">
+        <div class="hi-bullet"></div>
+        <div class="hi-text"><strong>See the campus</strong> — exceptional property, first-rate facilities</div>
+      </div>
+      <div class="hi-item">
+        <div class="hi-bullet"></div>
+        <div class="hi-text"><strong>Meet the team</strong> building something special from the ground up</div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <a href="#" class="rsvp-btn">RSVP Now →</a>
+      <div class="bottom-note">Refreshments will be served</div>
+      <div class="bottom-logo"><img src="assets/KehillasYaakov_White.svg" alt="Kehillas Yaakov" /></div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
