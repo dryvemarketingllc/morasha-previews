@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Packing List — Amcha Girls</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --camp-color: #3a6da8;
+    --camp-dark: #2a5080;
+    --camp-light: #e4edf5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Kefa, 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #222;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .global-nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; border-bottom: 1px solid #eee; }
+  .global-nav-logo { height: 40px; }
+  .global-nav-logo img { height: 100%; width: auto; }
+  .global-nav-links { display: flex; gap: 28px; list-style: none; }
+  .global-nav-links a { font-size: 14px; font-weight: 600; color: #555; text-decoration: none; }
+  .global-nav-links a:hover { color: var(--camp-color); }
+
+  .camp-subnav { background: var(--camp-color); padding: 0 40px; display: flex; align-items: center; gap: 32px; height: 56px; }
+  .camp-subnav-name { font-size: 22px; font-weight: 700; color: #fff; margin-right: auto; }
+  .camp-subnav a { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); text-decoration: none; white-space: nowrap; }
+  .camp-subnav a:hover { color: #fff; }
+  .camp-subnav a.active { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+
+  .page-hero { background: var(--camp-color); padding: 56px 40px; text-align: center; }
+  .page-hero h1 { font-size: 48px; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+
+  .content { max-width: 820px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  .intro { font-size: 20px; font-weight: 400; color: var(--camp-dark); text-align: center; line-height: 1.6; margin-bottom: 40px; }
+
+  .section-divider { border: none; border-top: 2px solid #eee; margin: 40px 0; }
+
+  .section-title { font-size: 32px; font-weight: 700; color: var(--camp-color); margin-bottom: 20px; line-height: 1.3; }
+
+  .body-text { font-size: 17px; line-height: 1.7; color: var(--camp-dark); margin-bottom: 16px; }
+  .body-text a { color: var(--camp-color); text-decoration: underline; text-underline-offset: 2px; }
+  .body-text strong { color: #222; }
+
+  .callout-box { background: var(--camp-light); border-left: 4px solid var(--camp-color); border-radius: 0 8px 8px 0; padding: 24px 28px; margin: 24px 0; }
+  .callout-box .callout-title { font-size: 16px; font-weight: 800; color: var(--camp-color); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+  .callout-box .body-text { margin-bottom: 0; font-size: 15px; }
+  .callout-box .callout-links { margin-top: 14px; display: flex; gap: 24px; flex-wrap: wrap; }
+  .callout-box .callout-links a { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--camp-color); text-decoration: none; padding: 8px 18px; border: 2px solid var(--camp-color); border-radius: 6px; transition: background 0.15s, color 0.15s; }
+  .callout-box .callout-links a:hover { background: var(--camp-color); color: #fff; }
+
+  .packing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin: 28px 0 16px; }
+  .packing-category { background: #fafbfc; border: 1px solid #eee; border-radius: 10px; padding: 24px; }
+  .packing-category-title { font-size: 16px; font-weight: 800; color: var(--camp-color); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--camp-light); }
+  .packing-item { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; font-size: 15px; color: #444; line-height: 1.45; }
+  .packing-check { flex-shrink: 0; width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 3px; margin-top: 2px; }
+  .packing-item-text { flex: 1; }
+  .packing-item .note { color: #999; font-size: 13px; }
+  .packing-category.full-width { grid-column: 1 / -1; }
+
+  .tips-list { counter-reset: tip; list-style: none; margin: 20px 0; }
+  .tips-list li { counter-increment: tip; display: flex; gap: 14px; margin-bottom: 16px; font-size: 16px; line-height: 1.6; color: var(--camp-dark); }
+  .tips-list li::before { content: counter(tip); flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--camp-light); color: var(--camp-color); font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+
+  .laundry-info { background: var(--camp-light); border-radius: 10px; padding: 24px 28px; margin: 24px 0; }
+  .laundry-info .callout-title { font-size: 16px; font-weight: 800; color: var(--camp-color); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+  .laundry-info .body-text { font-size: 15px; margin-bottom: 0; }
+
+  .print-btn-wrap { text-align: center; margin: 32px 0; }
+  .print-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--camp-color); color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; padding: 14px 32px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.15s; }
+  .print-btn:hover { background: var(--camp-dark); }
+
+  @media print {
+    .global-nav, .camp-subnav, .print-btn-wrap { display: none; }
+    .page-hero { padding: 24px; }
+    .page-hero h1 { font-size: 32px; }
+    .content { padding: 24px 20px; }
+    .packing-check { border-color: #666; }
+  }
+
+  @media (max-width: 768px) {
+    .camp-subnav { padding: 0 20px; gap: 16px; overflow-x: auto; }
+    .page-hero { padding: 36px 20px; }
+    .page-hero h1 { font-size: 34px; }
+    .content { padding: 32px 20px 60px; }
+    .packing-grid { grid-template-columns: 1fr; }
+    .callout-box .callout-links { flex-direction: column; }
+    .global-nav { padding: 12px 20px; }
+    .global-nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="global-nav">
+  <div class="global-nav-logo"><img src="assets/MorashaCamps_Color.svg" alt="Morasha Camps" /></div>
+  <ul class="global-nav-links">
+    <li><a href="#">About</a></li>
+    <li><a href="#">Camps</a></li>
+    <li><a href="#">Alumni & Events</a></li>
+    <li><a href="#">Rentals</a></li>
+    <li><a href="#">Donate</a></li>
+  </ul>
+</nav>
+
+<nav class="camp-subnav">
+  <div class="camp-subnav-name">Amcha Girls</div>
+  <a href="#">The Experience</a>
+  <a href="#" class="active">Current Families</a>
+  <a href="#">Dates & Rates</a>
+  <a href="#">Join Our Staff</a>
+  <a href="#">Contact Us</a>
+</nav>
+
+<div class="page-hero">
+  <h1>Packing List</h1>
+</div>
+
+<div class="content">
+
+  <p class="intro">We've put together this Packing Guide to help you prepare for an incredible summer in Israel. Clothing should be geared toward the Israeli summer and the informal nature of the program.</p>
+
+  <hr class="section-divider">
+
+  <!-- ── TRAVEL & LUGGAGE GUIDELINES ── -->
+  <h2 class="section-title">Travel & Luggage Guidelines</h2>
+  <p class="body-text">All items must fit into <strong>one suitcase or duffel</strong> that meets airline size and weight requirements.</p>
+  <p class="body-text">Each girl should also bring an <strong>overnight bag</strong> (for 2–3 nights when traveling without large luggage) and a <strong>backpack</strong> for daily outings. Please note: a backpack alone will not be sufficient as an overnight bag.</p>
+  <p class="body-text">We will be going to the supermarket within the first couple of days to purchase toiletries. It is recommended to bring mini/travel-size shampoo, conditioner, and soap to use until then.</p>
+
+  <div class="laundry-info">
+    <div class="callout-title">Laundry</div>
+    <p class="body-text">Laundry service will be available <strong>3 times</strong> during the program. Please plan accordingly when packing clothing. Because of travel considerations and the limitations of the 9 Days, laundry may not be done for up to 12 days.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── PACKING LIST ── -->
+  <h2 class="section-title">Packing List</h2>
+  <p class="body-text">Check off items as you pack.</p>
+
+  <div class="packing-grid">
+
+    <div class="packing-category">
+      <div class="packing-category-title">Clothing</div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Weekday shirts</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Weekday skirts</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Shabbos outfits</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Sweatshirt</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Sweater for cool evenings</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Pajamas</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Underwear and socks</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Modest swim shirt and skirt <span class="note">(meets tzniut guidelines)</span></div></div>
+    </div>
+
+    <div class="packing-category">
+      <div class="packing-category-title">Shoes</div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Sneakers</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Comfortable walking shoes</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Shabbos shoes</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Closed water shoes</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Flip flops / shower shoes</div></div>
+    </div>
+
+    <div class="packing-category">
+      <div class="packing-category-title">Toiletries & Personal Care</div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Toothbrush and toothpaste</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Hairbrush and hair accessories</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Deodorant</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Sunscreen</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Feminine hygiene products</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Personal care items</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Medications <span class="note">(clearly labeled with instructions)</span></div></div>
+    </div>
+
+    <div class="packing-category">
+      <div class="packing-category-title">Other Essentials</div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Hat</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Sunglasses</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Reusable water bottle</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Towel</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Laundry bag</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Adapters <span class="note">(Israeli outlets)</span></div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Siddur with Shabbat davening</div></div>
+      <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Spending money</div></div>
+    </div>
+
+  </div>
+
+  <div class="print-btn-wrap">
+    <button class="print-btn" onclick="window.print()">&#128424; Print This Packing List</button>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ── PACKING TIPS ── -->
+  <h2 class="section-title">Packing Tips</h2>
+
+  <ol class="tips-list">
+    <li>All items must fit in one suitcase or duffel that meets airline size and weight requirements.</li>
+    <li>Bring an overnight bag for 2–3 nights when traveling without your large luggage, plus a backpack for daily outings.</li>
+    <li>Pack mini/travel-size toiletries for the first couple of days — we'll visit a supermarket to purchase full-size items.</li>
+    <li>Plan for laundry only 3 times during the program. Because of the 9 Days, laundry may not be done for up to 12 days.</li>
+    <li>Clothing should be comfortable and appropriate for the Israeli summer heat.</li>
+  </ol>
+
+  <hr class="section-divider">
+
+  <!-- ── DRESS CODE & POLICIES ── -->
+  <h2 class="section-title">Dress Code & Policies</h2>
+  <p class="body-text">All clothing should meet tzniut guidelines. Swim attire should include a modest swim shirt and skirt. Please review the full guidelines in the Parent Handbook.</p>
+  <p class="body-text">Please see the <strong>Policy Guide</strong> for guidelines on phones, electronics, and other program policies.</p>
+
+  <div class="callout-box">
+    <div class="callout-title">Download Resources</div>
+    <div class="callout-links">
+      <a href="#">Parent Handbook (PDF) →</a>
+      <a href="#">Dress Code Guide →</a>
+      <a href="#">Policy Guide →</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

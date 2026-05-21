@@ -7,11 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Camp Morasha green — swap per camp */
-    --camp-color: #46764b;
+    /* ═══ CAMP THEMING — swap these per camp ═══ */
+    --camp-color: #46764b;      /* Camp Morasha green */
     --camp-dark: #2a522e;
     --camp-light: #e8f0e9;
-    --camp-name: "Camp Morasha";
+    /* Kollel:     #6b4c2e / #4a3520 / #f0e8df */
+    /* Amcha Girls: #3a6da8 / #2a5080 / #e4edf5 */
+    /* MKY:        #1C326B / #131f45 / #e4e8f0 */
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,7 +25,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── GLOBAL NAV (simplified representation) ── */
+  /* ── GLOBAL NAV ── */
   .global-nav {
     display: flex;
     align-items: center;
@@ -66,6 +68,7 @@
     font-weight: 600;
     color: rgba(255,255,255,0.8);
     text-decoration: none;
+    white-space: nowrap;
   }
   .camp-subnav a:hover { color: #fff; }
   .camp-subnav a.active { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
@@ -128,8 +131,9 @@
     text-decoration: underline;
     text-underline-offset: 2px;
   }
+  .body-text strong { color: #222; }
 
-  /* ── CALLOUT BOX (for Campify, important notices) ── */
+  /* ── CALLOUT BOX ── */
   .callout-box {
     background: var(--camp-light);
     border-left: 4px solid var(--camp-color);
@@ -173,6 +177,18 @@
     color: #fff;
   }
 
+  /* ── WARNING CALLOUT (for nut policy, important alerts) ── */
+  .callout-box.warning {
+    background: #fef9ee;
+    border-left-color: #d4a843;
+  }
+  .callout-box.warning .callout-title {
+    color: #8a6d1b;
+  }
+  .callout-box.warning .body-text {
+    color: #6b5520;
+  }
+
   /* ── PACKING LIST CATEGORIES ── */
   .packing-grid {
     display: grid;
@@ -213,15 +229,11 @@
     border-radius: 3px;
     margin-top: 2px;
   }
-  .packing-item-text {
-    flex: 1;
-  }
+  .packing-item-text { flex: 1; }
   .packing-item .note {
     color: #999;
     font-size: 13px;
   }
-
-  /* Full-width category for long lists */
   .packing-category.full-width {
     grid-column: 1 / -1;
   }
@@ -289,6 +301,46 @@
     line-height: 1.5;
   }
 
+  /* ── SEFORIM LIST (Kollel-specific) ── */
+  .seforim-list {
+    margin: 20px 0;
+    list-style: none;
+  }
+  .seforim-list li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--camp-dark);
+  }
+  .seforim-list li::before {
+    content: "📖";
+    flex-shrink: 0;
+    font-size: 16px;
+    margin-top: 2px;
+  }
+
+  /* ── LAUNDRY INFO (Amcha-specific) ── */
+  .laundry-info {
+    background: var(--camp-light);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 24px 0;
+  }
+  .laundry-info .callout-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--camp-color);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .laundry-info .body-text {
+    font-size: 15px;
+    margin-bottom: 0;
+  }
+
   /* ── PRINT STYLES ── */
   .print-btn-wrap {
     text-align: center;
@@ -312,7 +364,7 @@
   .print-btn:hover { background: var(--camp-dark); }
 
   @media print {
-    .global-nav, .camp-subnav, .print-btn-wrap { display: none; }
+    .global-nav, .camp-subnav, .print-btn-wrap, .template-note { display: none; }
     .page-hero { padding: 24px; }
     .page-hero h1 { font-size: 32px; }
     .content { padding: 24px 20px; }
@@ -332,7 +384,7 @@
     .global-nav-links { display: none; }
   }
 
-  /* ── TEMPLATE NOTE (not part of final design) ── */
+  /* ── TEMPLATE NOTE ── */
   .template-note {
     background: #fffbeb;
     border: 1px dashed #e5c07b;
@@ -344,6 +396,12 @@
     line-height: 1.6;
   }
   .template-note strong { color: #6b4f2d; }
+  .template-note code {
+    background: rgba(0,0,0,0.06);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
 </style>
 </head>
 <body>
@@ -379,7 +437,8 @@
 <div class="content">
 
   <div class="template-note">
-    <strong>Template Note:</strong> This is a unified packing list template. Each camp swaps in its own color (green for Morasha, brown for Kollel, blue for Amcha Girls, navy for MKY), camp-specific items, and Campify links. The structure stays consistent across all camps.
+    <strong>Modular Template Guide:</strong> This template contains ALL possible sections. Each camp includes/excludes sections as needed. Swap <code>--camp-color</code> variables for theming. Sections marked <strong>[MODULE]</strong> below are optional per camp.<br><br>
+    <strong>Color presets:</strong> Morasha <code>#46764b</code> · Kollel <code>#6b4c2e</code> · Amcha Girls <code>#3a6da8</code> · MKY <code>#1C326B</code>
   </div>
 
   <!-- INTRO -->
@@ -387,7 +446,11 @@
 
   <hr class="section-divider">
 
-  <!-- ══ SECTION 1: TRUNK DELIVERY ══ -->
+  <!-- ══════════════════════════════════════════
+       MODULE: TRUNK DELIVERY (Campify)
+       Used by: Morasha, Kollel, MKY
+       NOT used by: Amcha Girls (travel program)
+       ══════════════════════════════════════════ -->
   <h2 class="section-title">Trunk Delivery</h2>
 
   <div class="callout-box">
@@ -401,7 +464,29 @@
 
   <hr class="section-divider">
 
-  <!-- ══ SECTION 2: PACKING LIST ══ -->
+  <!-- ══════════════════════════════════════════
+       MODULE: TRAVEL PACKING GUIDELINES
+       Used by: Amcha Girls
+       NOT used by: Morasha, Kollel, MKY
+       ══════════════════════════════════════════ -->
+  <!--
+  <h2 class="section-title">Travel & Luggage Guidelines</h2>
+  <p class="body-text">All items must fit into <strong>one suitcase or duffel</strong> that meets airline size and weight requirements.</p>
+  <p class="body-text">Each girl should also bring an <strong>overnight bag</strong> (for 2–3 nights when traveling without large luggage) and a <strong>backpack</strong> for daily outings. A backpack alone will not be sufficient as an overnight bag.</p>
+  <p class="body-text">We will be going to the supermarket within the first couple of days to purchase toiletries. It is recommended to bring mini/travel-size shampoo, conditioner, and soap to use until then.</p>
+
+  <div class="laundry-info">
+    <div class="callout-title">Laundry</div>
+    <p class="body-text">Laundry service will be available 3 times during the program. Please plan accordingly when packing clothing. Because of travel considerations and the limitations of the 9 Days, laundry may not be done for up to 12 days.</p>
+  </div>
+
+  <hr class="section-divider">
+  -->
+
+  <!-- ══════════════════════════════════════════
+       CORE: PACKING LIST
+       Used by: ALL camps (items vary per camp)
+       ══════════════════════════════════════════ -->
   <h2 class="section-title">Packing List</h2>
   <p class="body-text">Check off items as you pack. All items should be clearly labeled with your child's name.</p>
 
@@ -482,12 +567,14 @@
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Laundry bag</div></div>
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Extension cord</div></div>
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Phone charger</div></div>
+          <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Flashlight & batteries</div></div>
         </div>
         <div>
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Siddur</div></div>
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Spending money</div></div>
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Medications <span class="note">(clearly labeled)</span></div></div>
           <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Stationery & stamps <span class="note">(optional)</span></div></div>
+          <div class="packing-item"><div class="packing-check"></div><div class="packing-item-text">Camera</div></div>
         </div>
       </div>
     </div>
@@ -496,12 +583,15 @@
 
   <!-- Print button -->
   <div class="print-btn-wrap">
-    <button class="print-btn" onclick="window.print()">🖨 Print This Packing List</button>
+    <button class="print-btn" onclick="window.print()">&#128424; Print This Packing List</button>
   </div>
 
   <hr class="section-divider">
 
-  <!-- ══ SECTION 3: PACKING TIPS ══ -->
+  <!-- ══════════════════════════════════════════
+       CORE: PACKING TIPS
+       Used by: ALL camps (wording varies)
+       ══════════════════════════════════════════ -->
   <h2 class="section-title">Packing Tips</h2>
 
   <ol class="tips-list">
@@ -514,7 +604,30 @@
 
   <hr class="section-divider">
 
-  <!-- ══ SECTION 4: STORAGE SPACE ══ -->
+  <!-- ══════════════════════════════════════════
+       MODULE: POLICIES (Dress Code + Technology)
+       Used by: ALL camps (links/wording vary)
+       ══════════════════════════════════════════ -->
+  <h2 class="section-title">Dress Code & Policies</h2>
+  <p class="body-text">Please be mindful of our dress code when shopping for camp. A full dress code guide is available in the Parent Handbook.</p>
+  <p class="body-text">Please see the <strong>Policy Guide</strong> for guidelines on phones, electronics, and other camp policies.</p>
+
+  <div class="callout-box">
+    <div class="callout-title">Download Resources</div>
+    <div class="callout-links">
+      <a href="#">Parent Handbook (PDF) →</a>
+      <a href="#">Dress Code Guide →</a>
+      <a href="#">Policy Guide →</a>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ══════════════════════════════════════════
+       MODULE: STORAGE SPACE IN BUNKS
+       Used by: Morasha, Kollel, MKY
+       NOT used by: Amcha Girls
+       ══════════════════════════════════════════ -->
   <h2 class="section-title">Storage Space in Bunks</h2>
   <p class="body-text">Here's what storage is available for each camper so you can plan accordingly:</p>
 
@@ -538,17 +651,46 @@
 
   <hr class="section-divider">
 
-  <!-- ══ SECTION 5: DRESS CODE ══ -->
-  <h2 class="section-title">Dress Code</h2>
-  <p class="body-text">Please be mindful of our dress code when shopping for camp. A full dress code guide is available in the Parent Handbook.</p>
+  <!-- ══════════════════════════════════════════
+       MODULE: NOTES ON NOSH
+       Used by: Morasha, Kollel, MKY
+       NOT used by: Amcha Girls
+       ══════════════════════════════════════════ -->
+  <h2 class="section-title">Notes on Nosh</h2>
+  <p class="body-text">Our first priority is the safety and health of our campers. Aside from Opening Day and Visiting Day, no package containing any food or drinks is to be sent to campers. This includes shipping or sending food with visitors or guests. All packages are directed to the Main Office, opened, and any food will be removed. No perishables, including meat, may be sent up with campers or staff.</p>
+  <p class="body-text">A large fridge is placed on every bunk porch to store cold drinks only.</p>
 
-  <div class="callout-box">
-    <div class="callout-title">Download Resources</div>
+  <div class="callout-box warning">
+    <div class="callout-title">We Are a Nut-Sensitive Camp</div>
+    <p class="body-text">We have many campers who have <strong>severe allergies</strong>. The camp kitchen and canteen do not prepare or serve any food products that contain peanuts, tree nuts, or sesame, OR offer products labeled "made in a facility that processes nuts." Nosh brought to camp may not contain any such products.</p>
     <div class="callout-links">
-      <a href="#">Parent Handbook (PDF) →</a>
-      <a href="#">Dress Code Guide →</a>
+      <a href="#">Approved Snacks List →</a>
     </div>
   </div>
+
+  <hr class="section-divider">
+
+  <!-- ══════════════════════════════════════════
+       MODULE: SEFORIM LIST
+       Used by: Kollel ONLY
+       ══════════════════════════════════════════ -->
+  <!--
+  <h2 class="section-title">Seforim List</h2>
+  <p class="body-text">Members of the Kollel should bring the following seforim. An email with the full list will be sent separately.</p>
+
+  <ul class="seforim-list">
+    <li>A Chumash (Bamidbar/D'varim) with Rashi, for Shnayim Mikra</li>
+    <li>Meseches Brachos (for High School Kollel learning)</li>
+    <li>Kinos with English translation (for those in camp for Tisha B'Av)</li>
+    <li>Mini-Shas (if you own one)</li>
+    <li>A Jastrow dictionary (highly recommended)</li>
+    <li>Any sefarim for Shabbos Divrei Torah preparation</li>
+  </ul>
+
+  <p class="body-text">The Kollel has a full Beis Medrash with seforim for everyone's use, and you are welcome to bring additional sefarim you plan to learn on Shabbosim and Bein Ha'sdarim.</p>
+
+  <hr class="section-divider">
+  -->
 
 </div>
 
