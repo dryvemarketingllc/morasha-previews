@@ -17,30 +17,6 @@
     font-family: 'Nunito Sans', sans-serif;
   }
 
-  .page-label {
-    color: rgba(255,255,255,0.35);
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .page-title {
-    color: #fff;
-    font-family: Kefa, 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 6px;
-    text-align: center;
-  }
-  .page-sub {
-    color: rgba(255,255,255,0.45);
-    font-size: 13px;
-    margin-bottom: 40px;
-    text-align: center;
-    max-width: 520px;
-    line-height: 1.6;
-  }
-
   /* ── EMAIL FRAME ── */
   .email {
     width: 600px;
@@ -332,11 +308,55 @@
     text-decoration: none;
   }
   .footer-link:hover { color: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    body { padding: 0; }
+    .email { border-radius: 0; }
+
+    .hero { height: 400px; }
+    .hero-content { padding: 24px 20px; }
+    .hero-name { font-size: 40px; }
+    .hero-introducing { font-size: 14px; }
+    .hero-tagline { font-size: 12px; letter-spacing: 0.1em; }
+    .hero-launching { font-size: 10px; }
+    .hero-parent-logo { height: 34px; }
+
+    .text-section { padding: 32px 24px; }
+    .section-heading { font-size: 22px; }
+    .section-body { font-size: 14px; }
+
+    .split-section {
+      grid-template-columns: 1fr;
+    }
+    .split-section.reverse {
+      direction: ltr;
+    }
+    .split-photo {
+      min-height: 220px;
+    }
+    .split-text {
+      padding: 28px 24px;
+    }
+    .split-text .section-heading { font-size: 20px; }
+    .split-text .section-body { font-size: 13.5px; }
+    .split-text.dark .section-heading,
+    .split-text.dark .section-body {
+      text-align: center;
+    }
+
+    .photo-overlay-content { padding: 32px 24px; }
+
+    .cta-section { padding: 36px 24px; }
+    .cta-heading { font-size: 24px; }
+    .cta-body { font-size: 13.5px; }
+    .cta-btn { padding: 14px 28px; font-size: 13px; }
+
+    .email-footer { padding: 20px 24px; }
+  }
 </style>
 </head>
 <body>
-
-<h1 class="page-title">MKY Launch Email</h1>
 
 <!-- ═══ EMAIL START ═══ -->
 <div class="email">
