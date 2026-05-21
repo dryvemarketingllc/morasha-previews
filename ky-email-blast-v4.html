@@ -316,7 +316,7 @@
 
   /* ── FOOTER ── */
   .email-footer {
-    background: #1C326B;
+    background: #f5f5f7;
     padding: 40px 40px 32px;
     text-align: center;
   }
@@ -324,11 +324,11 @@
     height: 32px;
     margin-bottom: 24px;
   }
-  .footer-parent-logo img { height: 100%; width: auto; opacity: 0.9; }
+  .footer-parent-logo img { height: 100%; width: auto; }
   .footer-divider {
     width: 48px;
     height: 1px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.12);
     margin: 0 auto 20px;
   }
   .footer-family-label {
@@ -337,34 +337,32 @@
     font-weight: 700;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 20px;
-  }
-  .footer-camp-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    flex-wrap: wrap;
+    color: rgba(0,0,0,0.3);
     margin-bottom: 24px;
   }
-  .footer-camp-logos img {
-    height: 28px;
-    width: auto;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+  .footer-camp-logos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 48px;
+    justify-items: center;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto 28px;
   }
-  .footer-camp-logos img:hover { opacity: 0.8; }
+  .footer-camp-logos img {
+    height: 30px;
+    width: auto;
+  }
   .footer-bottom {
     padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(0,0,0,0.08);
   }
   .footer-link {
-    color: rgba(255,255,255,0.4);
+    color: rgba(0,0,0,0.35);
     font-size: 11px;
     text-decoration: none;
   }
-  .footer-link:hover { color: #fff; }
+  .footer-link:hover { color: #1C326B; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 620px) {
@@ -410,8 +408,8 @@
     .cta-btn { padding: 14px 28px; font-size: 13px; }
 
     .email-footer { padding: 32px 24px 24px; }
-    .footer-camp-logos { gap: 20px; }
-    .footer-camp-logos img { height: 22px; }
+    .footer-camp-logos { gap: 20px 32px; max-width: 320px; }
+    .footer-camp-logos img { height: 24px; }
   }
 </style>
 </head>
@@ -493,14 +491,14 @@
 
   <!-- ── FOOTER ── -->
   <div class="email-footer">
-    <div class="footer-parent-logo"><img src="assets/MorashaCamps_White.svg" alt="Morasha Camps" /></div>
+    <div class="footer-parent-logo"><img src="assets/MorashaCamps_Color.svg" alt="Morasha Camps" /></div>
     <div class="footer-divider"></div>
-    <div class="footer-family-label">Our Family of Programs</div>
+    <div class="footer-family-label">Our Family of Camps</div>
     <div class="footer-camp-logos">
-      <img src="assets/CampMorasha_White.svg" alt="Camp Morasha" />
-      <img src="assets/KehillasYaakov_White.svg" alt="Kehillas Yaakov" />
-      <img src="assets/MorashaKollel_White.svg" alt="Morasha Kollel" />
-      <img src="assets/MorashaTraval_White.svg" alt="Morasha Travel" />
+      <img src="assets/CampMorasha_Color.svg" alt="Camp Morasha" />
+      <img src="assets/KehillasYaakov_Color.svg" alt="Kehillas Yaakov" />
+      <img src="assets/MorashaKollel_Color.svg" alt="Morasha Kollel" />
+      <img src="assets/MorashaTraval_Color.svg" alt="Morasha Travel" />
     </div>
     <div class="footer-bottom">
       <a class="footer-link" href="https://morashastg1.wpenginepowered.com">morashacamps.com</a>
