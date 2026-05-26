@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Dates & Rates — Morasha Travel (Consolidated)</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'Kefa';
+    src: url('assets/kefa-0.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Kefa';
+    src: url('assets/kefa-1.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --morasha-green: #46764b;
+    --travel-blue: #2a5a7a;
+    --dark-green: #1e3a20;
+    --bg-blue-light: #e8eef3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #222;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  .global-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px; background: #fff;
+  }
+  .global-nav-logo img { height: 40px; width: auto; }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: var(--morasha-green);
+    padding: 56px 40px; text-align: center;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px; font-weight: 400; color: #fff;
+  }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex; justify-content: center; gap: 0;
+    background: #f5f5f5; border-bottom: 1px solid #e0e0e0;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .tab-nav a {
+    display: block; padding: 16px 28px;
+    font-size: 12px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    color: #666; border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-nav a:hover { color: #333; }
+  .tab-nav a.active { color: var(--dark-green); border-bottom-color: var(--dark-green); }
+
+  /* ── SECTION BANNER ── */
+  .section-banner {
+    background: var(--travel-blue);
+    padding: 36px 40px; text-align: center;
+  }
+  .section-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 400; color: #fff;
+  }
+
+  /* ── CONTENT AREA ── */
+  .content { max-width: 1100px; margin: 0 auto; padding: 48px 40px; }
+
+  .section-label {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--travel-blue); margin-bottom: 4px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; font-weight: 400; color: #222; margin-bottom: 32px;
+  }
+
+  /* ── DATES GRID ── */
+  .dates-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+    border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .date-card {
+    padding: 28px 24px;
+    border-right: 1px solid #e0e0e0;
+  }
+  .date-card:last-child { border-right: none; }
+  .date-card-program {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--travel-blue); margin-bottom: 4px;
+  }
+  .date-card-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: #999; margin-bottom: 6px;
+  }
+  .date-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: #222; line-height: 1.3;
+  }
+  .date-card-sub {
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid #eee;
+  }
+
+  /* ── TUITION AREA ── */
+  .tuition-area {
+    background: var(--bg-blue-light); padding: 48px 40px;
+  }
+  .tuition-inner { max-width: 1100px; margin: 0 auto; }
+
+  .tuition-table {
+    width: 100%; border-collapse: collapse;
+    border-radius: 8px; overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .tuition-table thead th {
+    background: var(--travel-blue); color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 16px 20px; text-align: left;
+  }
+  .tuition-table tbody td {
+    padding: 16px 20px; font-size: 16px; color: #222;
+    border-bottom: 1px solid #ddd; background: #fff;
+  }
+  .tuition-table tbody tr:last-child td { border-bottom: none; }
+  .tuition-table .program-name {
+    font-weight: 700; color: var(--travel-blue);
+  }
+  .tuition-table .price {
+    font-family: 'Playfair Display', serif; font-size: 20px;
+  }
+
+  /* ── REFUND POLICY ── */
+  .refund-section {
+    max-width: 1100px; margin: 0 auto; padding: 40px 40px 60px;
+    border-top: 1px solid #e0e0e0;
+  }
+  .refund-label {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #999; margin-bottom: 4px;
+  }
+  .refund-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: #222;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .refund-plus { font-size: 28px; color: #999; cursor: pointer; }
+
+  /* ── CONTEXT NOTE ── */
+  .context-bar {
+    background: #fef9f0; border: 1px dashed #e0c99a;
+    border-radius: 8px; padding: 16px 20px; margin-bottom: 32px;
+    font-size: 13px; color: #8a7040; line-height: 1.5;
+  }
+  .context-bar strong { color: #6b5020; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .page-hero { padding: 36px 20px; }
+    .page-hero h1 { font-size: 34px; }
+    .tab-nav { overflow-x: auto; justify-content: flex-start; }
+    .tab-nav a { padding: 14px 16px; white-space: nowrap; font-size: 11px; }
+    .content { padding: 32px 20px; }
+    .dates-grid { grid-template-columns: 1fr; }
+    .date-card { border-right: none; border-bottom: 1px solid #e0e0e0; }
+    .date-card:last-child { border-bottom: none; }
+    .tuition-area { padding: 32px 20px; }
+    .tuition-table { font-size: 14px; }
+    .tuition-table thead th { padding: 12px 14px; font-size: 10px; }
+    .tuition-table tbody td { padding: 14px; }
+    .refund-section { padding: 32px 20px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="global-nav">
+  <div class="global-nav-logo"><img src="assets/MorashaCamps_Color.svg" alt="Morasha Camps" /></div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero"><h1>All Dates & Rates</h1></div>
+
+<!-- TAB NAV — consolidated: 3 travel programs → 1 tab -->
+<div class="tab-nav">
+  <a href="#">Camp Morasha</a>
+  <a href="#">Kehillas Yaakov</a>
+  <a href="#">Morasha Kollel</a>
+  <a href="#" class="active">Morasha Travel</a>
+</div>
+
+<!-- SECTION BANNER -->
+<div class="section-banner">
+  <h2>Morasha Travel</h2>
+</div>
+
+<!-- DATES -->
+<div class="content">
+  <div class="context-bar">
+    <strong>Redesign concept:</strong> Sulam, Amcha Boys, and Amcha Girls consolidated into one "Morasha Travel" section. Each program's dates appear in its own box; tuition is shown with one row per program.
+  </div>
+
+  <div class="section-title">2026 Dates</div>
+
+  <div class="dates-grid">
+    <div class="date-card">
+      <div class="date-card-program">Sulam</div>
+      <div class="date-card-label">Program Dates</div>
+      <div class="date-card-value">July 8 – August 14</div>
+      <div class="date-card-sub">
+        <div class="date-card-label">Free Weekend</div>
+        <div class="date-card-value" style="font-size:18px;">July 24 – 25</div>
+      </div>
+    </div>
+    <div class="date-card">
+      <div class="date-card-program">Amcha Boys</div>
+      <div class="date-card-label">Program Dates</div>
+      <div class="date-card-value">July 5 – August 11</div>
+      <div class="date-card-sub">
+        <div class="date-card-label">Free Weekend</div>
+        <div class="date-card-value" style="font-size:18px;">July 24 – 25</div>
+      </div>
+    </div>
+    <div class="date-card">
+      <div class="date-card-program">Amcha Girls</div>
+      <div class="date-card-label">Program Dates</div>
+      <div class="date-card-value">July 5 – August 11</div>
+      <div class="date-card-sub">
+        <div class="date-card-label">Free Weekend</div>
+        <div class="date-card-value" style="font-size:18px;">July 24 – 25</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TUITION -->
+<div class="tuition-area">
+  <div class="tuition-inner">
+    <div class="section-label">Tuition</div>
+    <div class="section-title">2026 Rates</div>
+
+    <table class="tuition-table">
+      <thead>
+        <tr>
+          <th>Program</th>
+          <th>Current Grade</th>
+          <th>Price</th>
+          <th>Application Fee</th>
+          <th>Full Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="program-name">Sulam</td>
+          <td>10th Grade</td>
+          <td class="price">$9,700</td>
+          <td class="price">$1,500</td>
+          <td class="price">$11,200</td>
+        </tr>
+        <tr>
+          <td class="program-name">Amcha Boys</td>
+          <td>10th Grade</td>
+          <td class="price">$9,700</td>
+          <td class="price">$1,500</td>
+          <td class="price">$11,200</td>
+        </tr>
+        <tr>
+          <td class="program-name">Amcha Girls</td>
+          <td>10th Grade</td>
+          <td class="price">$9,700</td>
+          <td class="price">$1,500</td>
+          <td class="price">$11,200</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- REFUND POLICY -->
+<div class="refund-section">
+  <div class="refund-label">Refund Policy</div>
+  <div class="refund-title">Morasha Travel Refund Policy <span class="refund-plus">+</span></div>
+</div>
+
+</body>
+</html>
