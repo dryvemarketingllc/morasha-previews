@@ -4,51 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Camp Morasha — Video Option D: Split Green Banner</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Montserrat', sans-serif; color: #333; }
+  body { font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif; color: #333; background: #f5f5f2; }
 
   .option-label {
     background: #1C326B; color: #fff; text-align: center;
     padding: 14px 20px; font-size: 13px; font-weight: 600;
     letter-spacing: 2px; text-transform: uppercase;
+    font-family: system-ui, sans-serif;
   }
 
-  .navbar {
-    background: #46764B; padding: 10px 40px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .navbar .brand { display: flex; align-items: center; text-decoration: none; }
-  .navbar .brand img { height: 50px; }
-  .navbar .nav-links { display: flex; gap: 22px; list-style: none; }
-  .navbar .nav-links a {
-    color: #fff; text-decoration: none; font-size: 12px;
-    font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;
-  }
-
-  .hero {
-    position: relative; height: 560px;
-    background: url('https://campmorasha.com/wp-content/uploads/2023/08/HomeBanner3.jpg') center/cover no-repeat;
-  }
-  .hero::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
-  }
-  .countdown {
-    position: absolute; top: 20px; right: 30px; z-index: 3;
-    background: rgba(255,255,255,0.92); border-radius: 6px;
-    padding: 14px 20px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  }
-  .countdown .label { font-size: 10px; font-weight: 700; color: #46764B; letter-spacing: 1px; text-transform: uppercase; }
-  .countdown .number { font-size: 44px; font-weight: 800; color: #46764B; line-height: 1; }
-  .countdown .unit { font-size: 11px; font-weight: 700; color: #46764B; letter-spacing: 2px; text-transform: uppercase; }
-
-  /* SPLIT GREEN BANNER */
+  /* Just the green section — nothing else */
   .split-banner {
-    background: #46764B;
+    background: rgb(70, 118, 75);
     display: flex;
     align-items: center;
+    padding: 0;
   }
 
   /* VIDEO SIDE */
@@ -73,7 +46,6 @@
     width: 100%; height: 100%; border: none;
   }
 
-  /* Thumbnail poster (shown before play) */
   .video-poster {
     position: absolute; inset: 0;
     background-size: cover;
@@ -95,7 +67,6 @@
   .video-frame:hover .play-btn { transform: scale(1.1); }
   .play-btn svg { margin-left: 4px; }
 
-  /* Gradient fade at bottom of poster for title */
   .poster-info {
     position: absolute; bottom: 0; left: 0; right: 0;
     padding: 40px 16px 14px;
@@ -109,7 +80,7 @@
     color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 400; margin-top: 1px;
   }
 
-  /* Dots navigation */
+  /* Dots */
   .video-dots {
     display: flex; gap: 10px;
     margin-top: 16px;
@@ -125,72 +96,70 @@
     border: none;
     padding: 0;
   }
-  .dot:hover {
-    background: rgba(255,255,255,0.6);
-  }
-  .dot.active {
-    background: #fff;
-    transform: scale(1.2);
-  }
+  .dot:hover { background: rgba(255,255,255,0.6); }
+  .dot.active { background: #fff; transform: scale(1.2); }
 
-  /* INFO SIDE */
+  /* INFO SIDE — matching actual staging site styles */
   .info-side {
     flex: 0 0 45%;
     padding: 40px 60px 40px 40px;
-    color: #fff; text-align: center;
+    color: #fff;
+    text-align: center;
   }
   .info-side h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px; font-weight: 400;
-    letter-spacing: 0.5px; line-height: 1.15;
+    font-family: Kefa, 'Times New Roman', Times, serif;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 60px;
+    color: #fff;
     margin-bottom: 14px;
   }
-  .info-side p { font-size: 14px; opacity: 0.9; margin-bottom: 3px; }
-  .buttons { margin-top: 24px; display: flex; gap: 14px; justify-content: center; }
-  .btn {
-    padding: 12px 30px; border-radius: 3px; font-size: 12px;
-    font-weight: 600; text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+  .info-side p {
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 4px;
   }
-  .btn-outline { border: 2px solid #fff; color: #fff; background: transparent; }
-  .btn-white { background: #fff; color: #46764B; border: 2px solid #fff; }
+  .buttons {
+    margin-top: 24px;
+    display: flex; gap: 14px; justify-content: center;
+  }
+  .btn {
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    letter-spacing: normal;
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    transition: background 0.2s;
+  }
+  .btn:hover {
+    background: rgba(255,255,255,0.1);
+  }
 
-  .section-placeholder { padding: 80px 40px; text-align: center; color: #999; font-size: 14px; }
+  .note {
+    text-align: center; padding: 30px 20px; color: #999; font-size: 13px;
+    font-family: system-ui, sans-serif;
+  }
 
   @media (max-width: 768px) {
-    .hero { height: 350px; }
     .split-banner { flex-direction: column; }
     .video-side { flex: auto; padding: 30px 20px 24px; }
     .info-side { flex: auto; padding: 20px 20px 35px; }
-    .info-side h2 { font-size: 28px; }
+    .info-side h2 { font-size: 34px; line-height: 42px; }
+    .info-side p { font-size: 16px; }
     .play-btn { width: 50px; height: 50px; }
   }
 </style>
 </head>
 <body>
 
-<div class="option-label">Option D — Split Green Banner with Video Slider (dots navigation)</div>
-
-<nav class="navbar">
-  <a href="#" class="brand">
-    <img src="https://campmorasha.com/wp-content/themes/camp-morasha/images/logo_2x.png" alt="Camp Morasha">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#">The Morasha Experience</a></li>
-    <li><a href="#">Current Families</a></li>
-    <li><a href="#">Dates & Rates</a></li>
-    <li><a href="#">Mania</a></li>
-    <li><a href="#">Join Our Staff</a></li>
-    <li><a href="#">Contact Us</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <div class="countdown">
-    <div class="label">Camp starts in</div>
-    <div class="number">34</div>
-    <div class="unit">Days</div>
-  </div>
-</div>
+<div class="option-label">Option D — Split Green Banner with Video Slider</div>
 
 <div class="split-banner">
   <div class="video-side">
@@ -215,18 +184,18 @@
   </div>
 
   <div class="info-side">
-    <h2>Tuesday, June 30 &ndash;<br>Tuesday, August 18</h2>
-    <p>3rd &ndash; 9th Grade Boys & Girls</p>
+    <h2>Tuesday, June 30 -<br>Tuesday, August 18</h2>
+    <p>3rd - 9th Grade Boys & Girls</p>
     <p>Lakewood, PA</p>
     <div class="buttons">
-      <a href="#" class="btn btn-outline">Dates & Rates</a>
-      <a href="#" class="btn btn-white">Apply Now</a>
+      <a href="#" class="btn">Dates & Rates</a>
+      <a href="#" class="btn">Apply Now</a>
     </div>
   </div>
 </div>
 
-<div class="section-placeholder">
-  <p>— Rest of homepage content continues below —</p>
+<div class="note">
+  <p>This preview shows only the modified green banner section.<br>Video slider with dot navigation replaces the original centered layout.</p>
 </div>
 
 <script>
