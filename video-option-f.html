@@ -66,12 +66,12 @@
     background: #fff;
     color: #46764B;
     text-decoration: none;
-    padding: 16px 36px 16px 20px;
+    padding: 8px 36px 8px 8px;
     border-radius: 60px;
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
     transition: transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
     position: relative;
@@ -79,32 +79,43 @@
   }
   .video-cta:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
   }
-  .video-cta .play-circle {
-    width: 48px; height: 48px;
-    background: #46764B;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .video-cta .thumb-wrap {
+    width: 80px; height: 56px;
+    border-radius: 50px;
+    overflow: hidden;
     flex-shrink: 0;
     position: relative;
   }
-  .video-cta .play-circle::before {
+  .video-cta .thumb-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .video-cta .thumb-wrap .play-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.25);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .video-cta:hover .thumb-wrap .play-overlay {
+    background: rgba(0,0,0,0.15);
+  }
+  .video-cta .thumb-wrap .play-overlay svg {
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+  }
+  .video-cta .thumb-wrap::after {
     content: '';
     position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    border: 2px solid rgba(70,118,75,0.3);
+    inset: -5px;
+    border-radius: 60px;
+    border: 2px solid rgba(255,255,255,0.4);
     animation: pulse-ring 2s ease-out infinite;
+    pointer-events: none;
   }
   @keyframes pulse-ring {
     0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.4); opacity: 0; }
-  }
-  .video-cta .play-circle svg {
-    margin-left: 2px;
+    100% { transform: scale(1.3); opacity: 0; }
   }
   .video-cta .cta-text {
     display: flex;
@@ -185,10 +196,13 @@
 
   <div class="video-cta-wrap">
     <a class="video-cta" href="#" onclick="openLightbox(); return false;">
-      <div class="play-circle">
-        <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-          <polygon points="0,0 18,10 0,20" fill="#fff"/>
-        </svg>
+      <div class="thumb-wrap">
+        <img src="https://img.youtube.com/vi/6o8Iof5L5Fw/mqdefault.jpg" alt="Video thumbnail">
+        <div class="play-overlay">
+          <svg width="20" height="22" viewBox="0 0 20 22" fill="none">
+            <polygon points="0,0 20,11 0,22" fill="#fff"/>
+          </svg>
+        </div>
       </div>
       <div class="cta-text">
         <span class="top-line">New for 2025</span>
