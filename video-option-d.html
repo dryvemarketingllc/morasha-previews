@@ -109,56 +109,28 @@
     color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 400; margin-top: 1px;
   }
 
-  /* Slider arrows */
-  .slider-arrow {
-    position: absolute; top: calc(50% - 30px);
-    transform: translateY(-50%);
-    width: 38px; height: 38px;
-    background: rgba(255,255,255,0.92);
-    border: none; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
-    z-index: 5;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .slider-arrow:hover {
-    background: #fff;
-    transform: translateY(-50%) scale(1.08);
-  }
-  .slider-arrow svg { width: 14px; height: 14px; }
-  .slider-arrow.prev { left: -19px; }
-  .slider-arrow.next { right: -19px; }
-
-  /* Thumbnail strip */
-  .thumb-strip {
+  /* Dots navigation */
+  .video-dots {
     display: flex; gap: 10px;
     margin-top: 16px;
     justify-content: center;
+    align-items: center;
   }
-  .thumb-item {
-    width: 74px; height: 46px;
-    border-radius: 6px; overflow: hidden;
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
     cursor: pointer;
-    border: 2px solid rgba(255,255,255,0.2);
-    opacity: 0.5;
     transition: all 0.25s;
-    position: relative; flex-shrink: 0;
+    border: none;
+    padding: 0;
   }
-  .thumb-item:hover { opacity: 0.8; border-color: rgba(255,255,255,0.5); }
-  .thumb-item.active {
-    opacity: 1; border-color: #fff;
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+  .dot:hover {
+    background: rgba(255,255,255,0.6);
   }
-  .thumb-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .thumb-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 2px 4px;
-    background: rgba(0,0,0,0.6);
-    color: #fff; font-size: 7px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.3px;
-    text-align: center;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  .dot.active {
+    background: #fff;
+    transform: scale(1.2);
   }
 
   /* INFO SIDE */
@@ -190,17 +162,13 @@
     .video-side { flex: auto; padding: 30px 20px 24px; }
     .info-side { flex: auto; padding: 20px 20px 35px; }
     .info-side h2 { font-size: 28px; }
-    .slider-arrow.prev { left: -10px; }
-    .slider-arrow.next { right: -10px; }
-    .slider-arrow { width: 32px; height: 32px; }
-    .thumb-item { width: 60px; height: 38px; }
     .play-btn { width: 50px; height: 50px; }
   }
 </style>
 </head>
 <body>
 
-<div class="option-label">Option D — Split Green Banner with Video Slider (clean player, thumbnail navigation)</div>
+<div class="option-label">Option D — Split Green Banner with Video Slider (dots navigation)</div>
 
 <nav class="navbar">
   <a href="#" class="brand">
@@ -241,20 +209,9 @@
           </div>
         </div>
       </div>
-
-      <button class="slider-arrow prev" onclick="changeVideo(-1); event.stopPropagation();" aria-label="Previous video">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#46764B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <button class="slider-arrow next" onclick="changeVideo(1); event.stopPropagation();" aria-label="Next video">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#46764B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 6 15 12 9 18"/>
-        </svg>
-      </button>
     </div>
 
-    <div class="thumb-strip" id="thumb-strip"></div>
+    <div class="video-dots" id="video-dots"></div>
   </div>
 
   <div class="info-side">
@@ -274,13 +231,12 @@
 
 <script>
 var videos = [
-  { id: '6o8Iof5L5Fw', title: 'Summer 2025 Trailer', short: 'Trailer' },
-  { id: 'dK3deR3XYOQ', title: 'Sulam Promo',         short: 'Sulam' },
-  { id: 'HkMNOlYcpHg', title: 'Amcha Boys',           short: 'Boys' },
-  { id: 'bRDNBnxu7xU', title: 'Amcha Girls',          short: 'Girls' }
+  { id: '6o8Iof5L5Fw', title: 'Summer 2025 Trailer' },
+  { id: 'dK3deR3XYOQ', title: 'Sulam Promo' },
+  { id: 'HkMNOlYcpHg', title: 'Amcha Boys' },
+  { id: 'bRDNBnxu7xU', title: 'Amcha Girls' }
 ];
 var currentIndex = 0;
-var isPlaying = false;
 var embedParams = '?modestbranding=1&rel=0&iv_load_policy=3&color=white&autoplay=1';
 
 function setPoster(index) {
@@ -290,7 +246,6 @@ function setPoster(index) {
   poster.classList.remove('hidden');
   document.getElementById('poster-title').textContent = v.title;
   document.getElementById('video-iframe').src = '';
-  isPlaying = false;
 }
 
 function playVideo() {
@@ -298,39 +253,28 @@ function playVideo() {
   document.getElementById('video-iframe').src =
     'https://www.youtube.com/embed/' + v.id + embedParams;
   document.getElementById('video-poster').classList.add('hidden');
-  isPlaying = true;
 }
 
 function goToVideo(index) {
   currentIndex = index;
   setPoster(index);
-  buildThumbs();
+  buildDots();
 }
 
-function changeVideo(dir) {
-  var next = currentIndex + dir;
-  if (next < 0) next = videos.length - 1;
-  if (next >= videos.length) next = 0;
-  goToVideo(next);
-}
-
-function buildThumbs() {
-  var strip = document.getElementById('thumb-strip');
-  strip.innerHTML = '';
+function buildDots() {
+  var wrap = document.getElementById('video-dots');
+  wrap.innerHTML = '';
   videos.forEach(function(v, i) {
-    var div = document.createElement('div');
-    div.className = 'thumb-item' + (i === currentIndex ? ' active' : '');
-    div.onclick = function(e) { e.stopPropagation(); goToVideo(i); };
-    div.innerHTML =
-      '<img src="https://img.youtube.com/vi/' + v.id + '/mqdefault.jpg" alt="' + v.title + '">' +
-      '<div class="thumb-label">' + v.short + '</div>';
-    strip.appendChild(div);
+    var dot = document.createElement('button');
+    dot.className = 'dot' + (i === currentIndex ? ' active' : '');
+    dot.title = v.title;
+    dot.onclick = function() { goToVideo(i); };
+    wrap.appendChild(dot);
   });
 }
 
-// Init
 setPoster(0);
-buildThumbs();
+buildDots();
 </script>
 
 </body>
