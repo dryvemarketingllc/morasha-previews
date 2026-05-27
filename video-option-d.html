@@ -16,7 +16,6 @@
     font-family: system-ui, sans-serif;
   }
 
-  /* Just the green section — nothing else */
   .split-banner {
     background: rgb(70, 118, 75);
     display: flex;
@@ -76,9 +75,6 @@
   .poster-info .vid-title {
     color: #fff; font-size: 13px; font-weight: 600;
   }
-  .poster-info .vid-channel {
-    color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 400; margin-top: 1px;
-  }
 
   /* Dots */
   .video-dots {
@@ -99,49 +95,68 @@
   .dot:hover { background: rgba(255,255,255,0.6); }
   .dot.active { background: #fff; transform: scale(1.2); }
 
-  /* INFO SIDE */
+  /* INFO SIDE — Icon Tiles */
   .info-side {
     flex: 0 0 45%;
     padding: 40px 50px 40px 40px;
     color: #fff;
     text-align: center;
   }
+  .info-side .summer-label {
+    font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 12px;
+  }
   .info-side .date-line {
     font-family: Kefa, 'Times New Roman', Times, serif;
-    font-size: 22px;
+    font-size: 28px;
     font-weight: 700;
     color: #fff;
     margin-bottom: 6px;
   }
   .info-side .grade-line {
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 400;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 28px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 24px;
   }
-  .quick-links {
+  .info-side .divider {
+    width: 50px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 24px;
+  }
+  .info-side .icon-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
   }
-  .ql-btn {
-    padding: 16px 10px;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: normal;
-    border: 2px solid rgba(255,255,255,0.5);
+  .info-side .ig-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 22px 10px 20px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
     color: #fff;
-    background: transparent;
+    text-decoration: none;
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    transition: all 0.2s;
-    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
   }
-  .ql-btn:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: #fff;
+  .info-side .ig-btn:hover {
+    background: rgba(255,255,255,0.16);
+  }
+  .info-side .ig-btn svg {
+    width: 24px; height: 24px;
+    fill: none; stroke: rgba(255,255,255,0.85); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
   }
 
   .note {
@@ -153,15 +168,14 @@
     .split-banner { flex-direction: column; }
     .video-side { flex: auto; padding: 30px 20px 24px; }
     .info-side { flex: auto; padding: 20px 20px 35px; }
-    .info-side .date-line { font-size: 20px; }
-    .quick-links { gap: 10px; }
+    .info-side .date-line { font-size: 24px; }
     .play-btn { width: 50px; height: 50px; }
   }
 </style>
 </head>
 <body>
 
-<div class="option-label">Option D — Split Green Banner with Video Slider</div>
+<div class="option-label">Option D — Split Green Banner with Video Slider + Icon Tiles</div>
 
 <div class="split-banner">
   <div class="video-side">
@@ -180,24 +194,37 @@
         </div>
       </div>
     </div>
-
     <div class="video-dots" id="video-dots"></div>
   </div>
 
   <div class="info-side">
-    <div class="date-line">June 30 - August 18, 2026</div>
-    <div class="grade-line">3rd - 9th Grade Boys & Girls</div>
-    <div class="quick-links">
-      <a href="#" class="ql-btn">Dates & Rates</a>
-      <a href="#" class="ql-btn">Apply Now</a>
-      <a href="#" class="ql-btn">The Experience</a>
-      <a href="#" class="ql-btn">Contact Us</a>
+    <div class="summer-label">Summer 2026</div>
+    <div class="date-line">June 30 – August 18</div>
+    <div class="grade-line">3rd – 9th Grade Boys & Girls</div>
+    <div class="divider"></div>
+    <div class="icon-grid">
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Dates & Rates
+      </a>
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Apply Now
+      </a>
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        The Experience
+      </a>
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Contact Us
+      </a>
     </div>
   </div>
 </div>
 
 <div class="note">
-  <p>This preview shows only the modified green banner section.<br>Video slider with dot navigation replaces the original centered layout.</p>
+  <p>Video slider with dot navigation + icon tile quick links.<br>Auto-slides every 5 seconds. Stops when a video is playing.</p>
 </div>
 
 <script>
