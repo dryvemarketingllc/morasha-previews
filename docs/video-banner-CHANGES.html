@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Video Banner Changes — Morasha Camps Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --darkest-green: #142B15;
+    --green: #46764B;
+    --light-green: #9BBA91;
+    --charcoal: #222;
+    --grey: #888;
+    --sans: 'Roboto', system-ui, sans-serif;
+    --sans-cond: 'Roboto Condensed', sans-serif;
+    --serif: Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: #fff; color: var(--charcoal); -webkit-font-smoothing: antialiased; }
+
+  .page-header {
+    background: var(--darkest-green);
+    color: #fff;
+    padding: 64px 48px 56px;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--light-green); margin-bottom: 16px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 42px; font-weight: 700;
+    letter-spacing: -0.02em; line-height: 0.95; margin-bottom: 12px;
+  }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.6); }
+
+  .content { max-width: 800px; margin: 0 auto; padding: 48px; }
+
+  .change-item {
+    border-bottom: 1px solid #eee;
+    padding: 40px 0;
+  }
+  .change-item:first-child { padding-top: 0; }
+  .change-item:last-child { border-bottom: none; }
+
+  .change-date {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 8px;
+  }
+  .change-title {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700;
+    color: var(--darkest-green);
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .change-desc {
+    font-size: 15px; color: #555;
+    line-height: 1.7; margin-bottom: 16px;
+  }
+  .change-desc ul {
+    margin: 8px 0 0 20px;
+    list-style: disc;
+  }
+  .change-desc ul li {
+    margin-bottom: 6px;
+  }
+  .change-desc code {
+    background: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+
+  pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 20px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  pre .comment { color: #6a9955; }
+  pre .prop { color: #9cdcfe; }
+  pre .val { color: #ce9178; }
+  pre .sel { color: #d7ba7d; }
+  pre .tag { color: #569cd6; }
+  pre .added { color: #b5cea8; }
+  pre .removed { color: #f48771; }
+
+  .status {
+    display: inline-block;
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 10px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 2px;
+    margin-bottom: 12px;
+  }
+  .status.pending { background: #fff3e0; color: #e65100; }
+  .status.approved { background: #e8f5e9; color: #2e7d32; }
+  .status.in-progress { background: #e3f2fd; color: #1565c0; }
+
+  .note {
+    background: #fafaf8;
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 12px 0;
+  }
+
+  .sub-heading {
+    font-family: var(--sans-cond);
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--grey); margin: 20px 0 8px;
+  }
+
+  .preview-link {
+    display: inline-block;
+    background: var(--green);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 12px 0;
+    transition: background 0.2s;
+  }
+  .preview-link:hover { background: #3a6340; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="eyebrow">Dryve Marketing &times; Morasha Camps</div>
+  <h1>Homepage Video Banner</h1>
+  <p>Replace the green date banner section (<code style="background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:3px;font-size:14px;">section.ch__date-banner</code>) with a split video slider + icon tile quick links.</p>
+</div>
+
+<div class="content">
+
+  <!-- ==================== CHANGE 1 ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status approved">Approved</span>
+    <h2 class="change-title">1. Replace date banner with split layout</h2>
+
+    <div class="change-desc">
+      Replace the existing centered date/button layout in <code>section.ch__date-banner</code> with a 55/45 flex split. Video player on the left, info panel with icon tiles on the right. Same green background — no new section needed.
+    </div>
+
+    <a href="../video-option-d.html" class="preview-link">View live preview &rarr;</a>
+
+    <div class="sub-heading">Current state</div>
+    <div class="change-desc">
+      <ul>
+        <li>Green banner with centered dates, location, and two buttons (Dates &amp; Rates / Apply Now)</li>
+        <li>No video content in this section</li>
+        <li>Background: <code>rgb(70, 118, 75)</code></li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">Change to</div>
+    <div class="change-desc">
+      <ul>
+        <li>Left 55%: Video player with poster overlay, dot navigation, auto-slide</li>
+        <li>Right 45%: Season label, date range, grade range, 2&times;2 icon tile quick links</li>
+        <li>Same background color — no new section, just replacing the inner content</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">HTML — New structure</div>
+<pre>
+<span class="comment">&lt;!-- Replace inner content of section.ch__date-banner --&gt;</span>
+<span class="tag">&lt;div</span> class=<span class="val">"split-banner"</span><span class="tag">&gt;</span>
+
+  <span class="comment">&lt;!-- LEFT: Video player --&gt;</span>
+  <span class="tag">&lt;div</span> class=<span class="val">"video-side"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"video-frame"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;iframe</span> id=<span class="val">"video-iframe"</span><span class="tag">&gt;&lt;/iframe&gt;</span>
+      <span class="tag">&lt;div</span> class=<span class="val">"video-poster"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> class=<span class="val">"play-btn"</span><span class="tag">&gt;</span><span class="comment">&lt;!-- SVG play triangle --&gt;</span><span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> class=<span class="val">"poster-info"</span><span class="tag">&gt;</span>
+          <span class="tag">&lt;div</span> class=<span class="val">"vid-title"</span><span class="tag">&gt;</span>Summer 2025 Trailer<span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+      <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"video-dots"</span><span class="tag">&gt;</span><span class="comment">&lt;!-- JS-generated dot buttons --&gt;</span><span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+  <span class="comment">&lt;!-- RIGHT: Info panel --&gt;</span>
+  <span class="tag">&lt;div</span> class=<span class="val">"info-side"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"summer-label"</span><span class="tag">&gt;</span>Summer 2026<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"date-line"</span><span class="tag">&gt;</span>June 30 &ndash; August 18<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"grade-line"</span><span class="tag">&gt;</span>3rd &ndash; 9th Grade Boys &amp; Girls<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"divider"</span><span class="tag">&gt;&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> class=<span class="val">"icon-grid"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;a</span> class=<span class="val">"ig-btn"</span><span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- SVG icon --&gt;</span> Dates &amp; Rates
+      <span class="tag">&lt;/a&gt;</span>
+      <span class="comment">&lt;!-- 3 more ig-btn links --&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/div&gt;</span>
+</pre>
+  </div>
+
+  <!-- ==================== CHANGE 2 ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status approved">Approved</span>
+    <h2 class="change-title">2. Video player — poster overlay pattern</h2>
+
+    <div class="change-desc">
+      Don't load a YouTube iframe on page load. Instead, show a thumbnail image with a custom play button. Clicking it loads the embed with autoplay. This gives zero YouTube branding before play.
+    </div>
+
+    <div class="sub-heading">How it works</div>
+    <div class="change-desc">
+      <ul>
+        <li>Poster overlay sits on top of a hidden iframe (z-index: 2)</li>
+        <li>Background-image from YouTube: <code>https://img.youtube.com/vi/{ID}/maxresdefault.jpg</code></li>
+        <li>Custom play button: 64px white circle, green triangle (<code>#46764B</code>)</li>
+        <li>Video title overlay at bottom-left over a dark gradient</li>
+        <li>On click: set iframe <code>src</code> to embed URL with autoplay, fade out poster</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">YouTube embed parameters</div>
+<pre>
+<span class="prop">?modestbranding=1&amp;rel=0&amp;iv_load_policy=3&amp;color=white&amp;autoplay=1</span>
+</pre>
+
+    <div class="sub-heading">CSS — Video frame</div>
+<pre>
+<span class="sel">.video-side</span> {
+  <span class="prop">flex</span>: <span class="val">0 0 55%</span>;
+  <span class="prop">padding</span>: <span class="val">40px 30px 44px 60px</span>;
+}
+
+<span class="sel">.video-frame</span> {
+  <span class="prop">position</span>: <span class="val">relative</span>;
+  <span class="prop">aspect-ratio</span>: <span class="val">16/9</span>;
+  <span class="prop">border-radius</span>: <span class="val">8px</span>;
+  <span class="prop">overflow</span>: <span class="val">hidden</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 6px 30px rgba(0,0,0,0.3)</span>;
+  <span class="prop">background</span>: <span class="val">#000</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+}
+
+<span class="sel">.video-poster</span> {
+  <span class="prop">position</span>: <span class="val">absolute</span>; <span class="prop">inset</span>: <span class="val">0</span>;
+  <span class="prop">background-size</span>: <span class="val">cover</span>;
+  <span class="prop">background-position</span>: <span class="val">center</span>;
+  <span class="prop">z-index</span>: <span class="val">2</span>;
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">align-items</span>: <span class="val">center</span>; <span class="prop">justify-content</span>: <span class="val">center</span>;
+  <span class="prop">transition</span>: <span class="val">opacity 0.3s</span>;
+}
+<span class="sel">.video-poster.hidden</span> { <span class="prop">opacity</span>: <span class="val">0</span>; <span class="prop">pointer-events</span>: <span class="val">none</span>; }
+
+<span class="sel">.play-btn</span> {
+  <span class="prop">width</span>: <span class="val">64px</span>; <span class="prop">height</span>: <span class="val">64px</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.95)</span>;
+  <span class="prop">border-radius</span>: <span class="val">50%</span>;
+  <span class="prop">box-shadow</span>: <span class="val">0 4px 20px rgba(0,0,0,0.3)</span>;
+}
+<span class="sel">.video-frame:hover .play-btn</span> { <span class="prop">transform</span>: <span class="val">scale(1.1)</span>; }
+</pre>
+  </div>
+
+  <!-- ==================== CHANGE 3 ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status approved">Approved</span>
+    <h2 class="change-title">3. Dot navigation + auto-slide</h2>
+
+    <div class="change-desc">
+      Dots below the video let users switch between videos. Auto-slide cycles every 5 seconds and pauses when a video is playing.
+    </div>
+
+    <div class="sub-heading">Behavior</div>
+    <div class="change-desc">
+      <ul>
+        <li>Dots are generated by JS from the video array</li>
+        <li>Active dot: white, scaled 1.2x. Inactive: <code>rgba(255,255,255,0.3)</code></li>
+        <li>Auto-slide every 5 seconds — cycles to next poster</li>
+        <li>Stops auto-slide when a video is playing (iframe loaded)</li>
+        <li>Clicking a dot while video is playing: stops video, shows new poster, resumes auto-slide</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">CSS — Dots</div>
+<pre>
+<span class="sel">.video-dots</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">gap</span>: <span class="val">10px</span>;
+  <span class="prop">margin-top</span>: <span class="val">16px</span>;
+  <span class="prop">justify-content</span>: <span class="val">center</span>;
+}
+
+<span class="sel">.dot</span> {
+  <span class="prop">width</span>: <span class="val">10px</span>; <span class="prop">height</span>: <span class="val">10px</span>;
+  <span class="prop">border-radius</span>: <span class="val">50%</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.3)</span>;
+  <span class="prop">cursor</span>: <span class="val">pointer</span>;
+  <span class="prop">transition</span>: <span class="val">all 0.25s</span>;
+  <span class="prop">border</span>: <span class="val">none</span>; <span class="prop">padding</span>: <span class="val">0</span>;
+}
+<span class="sel">.dot.active</span> { <span class="prop">background</span>: <span class="val">#fff</span>; <span class="prop">transform</span>: <span class="val">scale(1.2)</span>; }
+</pre>
+
+    <div class="sub-heading">JavaScript</div>
+<pre>
+<span class="comment">// Video data — pull from ACF repeater</span>
+<span class="prop">var</span> videos = [
+  { id: <span class="val">'6o8Iof5L5Fw'</span>, title: <span class="val">'Summer 2025 Trailer'</span> },
+  { id: <span class="val">'dK3deR3XYOQ'</span>, title: <span class="val">'Sulam Promo'</span> },
+  <span class="comment">// ... more from ACF</span>
+];
+
+<span class="comment">// Auto-slide — stops when video is playing</span>
+<span class="prop">function</span> startAutoSlide() {
+  stopAutoSlide();
+  autoSlideTimer = setInterval(<span class="prop">function</span>() {
+    <span class="prop">if</span> (!isPlaying) {
+      goToVideo((currentIndex + 1) % videos.length);
+    }
+  }, <span class="val">5000</span>);
+}
+
+<span class="comment">// Set poster — show thumbnail, hide iframe</span>
+<span class="prop">function</span> setPoster(index) {
+  poster.style.backgroundImage =
+    <span class="val">'url(https://img.youtube.com/vi/'</span> + videos[index].id + <span class="val">'/maxresdefault.jpg)'</span>;
+  poster.classList.remove(<span class="val">'hidden'</span>);
+  iframe.src = <span class="val">''</span>;
+  isPlaying = <span class="val">false</span>;
+}
+
+<span class="comment">// Play — load iframe, hide poster</span>
+<span class="prop">function</span> playVideo() {
+  iframe.src = <span class="val">'https://www.youtube.com/embed/'</span> + videos[currentIndex].id + embedParams;
+  poster.classList.add(<span class="val">'hidden'</span>);
+  isPlaying = <span class="val">true</span>;
+  stopAutoSlide();
+}
+</pre>
+  </div>
+
+  <!-- ==================== CHANGE 4 ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status approved">Approved</span>
+    <h2 class="change-title">4. Info panel — icon tile quick links</h2>
+
+    <div class="change-desc">
+      Right side shows a season label, date range, grade range, and a 2&times;2 grid of frosted-glass icon tiles. Each tile has an inline SVG icon above the label text.
+    </div>
+
+    <div class="sub-heading">CSS — Info panel</div>
+<pre>
+<span class="sel">.info-side</span> {
+  <span class="prop">flex</span>: <span class="val">0 0 45%</span>;
+  <span class="prop">padding</span>: <span class="val">40px 50px 40px 40px</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+
+<span class="sel">.summer-label</span> {
+  <span class="prop">font-family</span>: <span class="val">Roboto, sans-serif</span>;
+  <span class="prop">font-size</span>: <span class="val">13px</span>; <span class="prop">font-weight</span>: <span class="val">500</span>;
+  <span class="prop">letter-spacing</span>: <span class="val">2.5px</span>;
+  <span class="prop">text-transform</span>: <span class="val">uppercase</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.55)</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">12px</span>;
+}
+
+<span class="sel">.date-line</span> {
+  <span class="prop">font-family</span>: <span class="val">Kefa, 'Times New Roman', serif</span>;
+  <span class="prop">font-size</span>: <span class="val">28px</span>; <span class="prop">font-weight</span>: <span class="val">700</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">6px</span>;
+}
+
+<span class="sel">.grade-line</span> {
+  <span class="prop">font-size</span>: <span class="val">16px</span>; <span class="prop">font-weight</span>: <span class="val">400</span>;
+  <span class="prop">color</span>: <span class="val">rgba(255,255,255,0.75)</span>;
+  <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+}
+
+<span class="sel">.divider</span> {
+  <span class="prop">width</span>: <span class="val">50px</span>; <span class="prop">height</span>: <span class="val">1px</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.3)</span>;
+  <span class="prop">margin</span>: <span class="val">0 auto 24px</span>;
+}
+
+<span class="sel">.icon-grid</span> {
+  <span class="prop">display</span>: <span class="val">grid</span>;
+  <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr</span>;
+  <span class="prop">gap</span>: <span class="val">10px</span>;
+}
+
+<span class="sel">.ig-btn</span> {
+  <span class="prop">display</span>: <span class="val">flex</span>; <span class="prop">flex-direction</span>: <span class="val">column</span>;
+  <span class="prop">align-items</span>: <span class="val">center</span>; <span class="prop">gap</span>: <span class="val">8px</span>;
+  <span class="prop">padding</span>: <span class="val">22px 10px 20px</span>;
+  <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.08)</span>;
+  <span class="prop">border-radius</span>: <span class="val">8px</span>;
+  <span class="prop">color</span>: <span class="val">#fff</span>;
+  <span class="prop">font-size</span>: <span class="val">14px</span>; <span class="prop">font-weight</span>: <span class="val">500</span>;
+  <span class="prop">text-decoration</span>: <span class="val">none</span>;
+}
+<span class="sel">.ig-btn:hover</span> { <span class="prop">background</span>: <span class="val">rgba(255,255,255,0.16)</span>; }
+
+<span class="sel">.ig-btn svg</span> {
+  <span class="prop">width</span>: <span class="val">24px</span>; <span class="prop">height</span>: <span class="val">24px</span>;
+  <span class="prop">fill</span>: <span class="val">none</span>;
+  <span class="prop">stroke</span>: <span class="val">rgba(255,255,255,0.85)</span>;
+  <span class="prop">stroke-width</span>: <span class="val">1.8</span>;
+  <span class="prop">stroke-linecap</span>: <span class="val">round</span>;
+  <span class="prop">stroke-linejoin</span>: <span class="val">round</span>;
+}
+</pre>
+
+    <div class="sub-heading">Icons — SVG inline paths</div>
+    <div class="change-desc">
+      Each icon is an inline SVG. Here are the four currently used:
+    </div>
+<pre>
+<span class="comment">&lt;!-- Calendar (Dates &amp; Rates) --&gt;</span>
+<span class="tag">&lt;svg</span> viewBox=<span class="val">"0 0 24 24"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;rect</span> x=<span class="val">"3"</span> y=<span class="val">"4"</span> width=<span class="val">"18"</span> height=<span class="val">"18"</span> rx=<span class="val">"2"</span>/&gt;
+  <span class="tag">&lt;line</span> x1=<span class="val">"16"</span> y1=<span class="val">"2"</span> x2=<span class="val">"16"</span> y2=<span class="val">"6"</span>/&gt;
+  <span class="tag">&lt;line</span> x1=<span class="val">"8"</span> y1=<span class="val">"2"</span> x2=<span class="val">"8"</span> y2=<span class="val">"6"</span>/&gt;
+  <span class="tag">&lt;line</span> x1=<span class="val">"3"</span> y1=<span class="val">"10"</span> x2=<span class="val">"21"</span> y2=<span class="val">"10"</span>/&gt;
+<span class="tag">&lt;/svg&gt;</span>
+
+<span class="comment">&lt;!-- Pencil (Apply Now) --&gt;</span>
+<span class="tag">&lt;svg</span> viewBox=<span class="val">"0 0 24 24"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;path</span> d=<span class="val">"M12 20h9"</span>/&gt;
+  <span class="tag">&lt;path</span> d=<span class="val">"M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"</span>/&gt;
+<span class="tag">&lt;/svg&gt;</span>
+
+<span class="comment">&lt;!-- Star (The Experience) --&gt;</span>
+<span class="tag">&lt;svg</span> viewBox=<span class="val">"0 0 24 24"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;polygon</span> points=<span class="val">"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"</span>/&gt;
+<span class="tag">&lt;/svg&gt;</span>
+
+<span class="comment">&lt;!-- Envelope (Contact Us) --&gt;</span>
+<span class="tag">&lt;svg</span> viewBox=<span class="val">"0 0 24 24"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;rect</span> x=<span class="val">"2"</span> y=<span class="val">"4"</span> width=<span class="val">"20"</span> height=<span class="val">"16"</span> rx=<span class="val">"2"</span>/&gt;
+  <span class="tag">&lt;path</span> d=<span class="val">"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"</span>/&gt;
+<span class="tag">&lt;/svg&gt;</span>
+</pre>
+
+    <div class="note">
+      Quick links and icons will change per camp and per season (summer/winter). Build the icon as a select field or slug in ACF so the content team can pick from a library of icons without touching code.
+    </div>
+  </div>
+
+  <!-- ==================== CHANGE 5 ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status approved">Approved</span>
+    <h2 class="change-title">5. Mobile responsive (768px breakpoint)</h2>
+
+    <div class="change-desc">
+      Stack the layout vertically on mobile. Video on top, info panel below.
+    </div>
+
+<pre>
+<span class="sel">@media (max-width: 768px)</span> {
+  <span class="sel">.split-banner</span> { <span class="prop">flex-direction</span>: <span class="val">column</span>; }
+  <span class="sel">.video-side</span> { <span class="prop">flex</span>: <span class="val">auto</span>; <span class="prop">padding</span>: <span class="val">30px 20px 24px</span>; }
+  <span class="sel">.info-side</span> { <span class="prop">flex</span>: <span class="val">auto</span>; <span class="prop">padding</span>: <span class="val">20px 20px 35px</span>; }
+  <span class="sel">.date-line</span> { <span class="prop">font-size</span>: <span class="val">24px</span>; }
+  <span class="sel">.play-btn</span> { <span class="prop">width</span>: <span class="val">50px</span>; <span class="prop">height</span>: <span class="val">50px</span>; }
+}
+</pre>
+  </div>
+
+  <!-- ==================== CHANGE 6 ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status approved">Approved</span>
+    <h2 class="change-title">6. ACF fields needed</h2>
+
+    <div class="change-desc">
+      Create these ACF fields on the homepage (or options page) so content is editable without code changes.
+    </div>
+
+    <div class="sub-heading">Section settings</div>
+    <div class="change-desc">
+      <ul>
+        <li><code>season_label</code> — Text — e.g. "Summer 2026"</li>
+        <li><code>date_range</code> — Text — e.g. "June 30 – August 18"</li>
+        <li><code>grade_range</code> — Text — e.g. "3rd – 9th Grade Boys &amp; Girls"</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">Video repeater</div>
+    <div class="change-desc">
+      <ul>
+        <li><code>video_youtube_id</code> — Text — Just the ID, not the full URL (e.g. <code>6o8Iof5L5Fw</code>)</li>
+        <li><code>video_title</code> — Text — Shows on poster overlay bottom-left</li>
+      </ul>
+    </div>
+
+    <div class="sub-heading">Quick links repeater</div>
+    <div class="change-desc">
+      <ul>
+        <li><code>link_label</code> — Text — Button text (e.g. "Dates &amp; Rates")</li>
+        <li><code>link_url</code> — URL — Destination page</li>
+        <li><code>link_icon</code> — Select — Dropdown: <code>calendar</code>, <code>pencil</code>, <code>star</code>, <code>mail</code>, <code>map-pin</code>, <code>users</code>, <code>camera</code>, <code>book</code>, <code>heart</code>, <code>clipboard</code>, <code>info</code></li>
+      </ul>
+    </div>
+
+    <div class="note">
+      Store the SVG paths in a PHP helper function that outputs the correct icon based on the select value. The full set of SVG paths is in the preview HTML source.
+    </div>
+  </div>
+
+  <!-- ==================== QA CHECKLIST ==================== -->
+  <div class="change-item">
+    <div class="change-date">May 27, 2026</div>
+    <span class="status pending">QA Checklist</span>
+    <h2 class="change-title">QA Checklist</h2>
+
+    <div class="change-desc">
+      Verify each of the following after implementation:
+      <ul>
+        <li>Video poster loads (no YouTube branding visible before play)</li>
+        <li>Clicking poster plays video with autoplay</li>
+        <li>Dot navigation switches between videos</li>
+        <li>Auto-slide cycles every ~5 seconds</li>
+        <li>Auto-slide stops when a video is playing</li>
+        <li>All 4 icon tiles display with correct icons</li>
+        <li>Quick link URLs go to the right pages</li>
+        <li>Season label, dates, and grade text are correct</li>
+        <li>Mobile: layout stacks vertically, nothing overflows</li>
+        <li>Play button hover scale works</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
