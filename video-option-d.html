@@ -205,7 +205,23 @@ var videos = [
   { id: 'bRDNBnxu7xU', title: 'Amcha Girls' }
 ];
 var currentIndex = 0;
+var isPlaying = false;
+var autoSlideTimer = null;
 var embedParams = '?modestbranding=1&rel=0&iv_load_policy=3&color=white&autoplay=1';
+
+function startAutoSlide() {
+  stopAutoSlide();
+  autoSlideTimer = setInterval(function() {
+    if (!isPlaying) {
+      var next = (currentIndex + 1) % videos.length;
+      goToVideo(next);
+    }
+  }, 5000);
+}
+
+function stopAutoSlide() {
+  if (autoSlideTimer) { clearInterval(autoSlideTimer); autoSlideTimer = null; }
+}
 
 function setPoster(index) {
   var v = videos[index];
@@ -214,6 +230,7 @@ function setPoster(index) {
   poster.classList.remove('hidden');
   document.getElementById('poster-title').textContent = v.title;
   document.getElementById('video-iframe').src = '';
+  isPlaying = false;
 }
 
 function playVideo() {
@@ -221,12 +238,15 @@ function playVideo() {
   document.getElementById('video-iframe').src =
     'https://www.youtube.com/embed/' + v.id + embedParams;
   document.getElementById('video-poster').classList.add('hidden');
+  isPlaying = true;
+  stopAutoSlide();
 }
 
 function goToVideo(index) {
   currentIndex = index;
   setPoster(index);
   buildDots();
+  startAutoSlide();
 }
 
 function buildDots() {
@@ -243,6 +263,7 @@ function buildDots() {
 
 setPoster(0);
 buildDots();
+startAutoSlide();
 </script>
 
 </body>
