@@ -99,47 +99,49 @@
   .dot:hover { background: rgba(255,255,255,0.6); }
   .dot.active { background: #fff; transform: scale(1.2); }
 
-  /* INFO SIDE — matching actual staging site styles */
+  /* INFO SIDE */
   .info-side {
     flex: 0 0 45%;
-    padding: 40px 60px 40px 40px;
+    padding: 40px 50px 40px 40px;
     color: #fff;
     text-align: center;
   }
-  .info-side h2 {
+  .info-side .date-line {
     font-family: Kefa, 'Times New Roman', Times, serif;
-    font-size: 50px;
+    font-size: 22px;
     font-weight: 700;
-    line-height: 60px;
     color: #fff;
-    margin-bottom: 14px;
+    margin-bottom: 6px;
   }
-  .info-side p {
+  .info-side .grade-line {
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 400;
-    color: #fff;
-    margin-bottom: 4px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 28px;
   }
-  .buttons {
-    margin-top: 24px;
-    display: flex; gap: 14px; justify-content: center;
+  .quick-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
-  .btn {
-    padding: 14px 28px;
+  .ql-btn {
+    padding: 16px 10px;
     border-radius: 4px;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 500;
     text-decoration: none;
     letter-spacing: normal;
-    border: 2px solid #fff;
+    border: 2px solid rgba(255,255,255,0.5);
     color: #fff;
     background: transparent;
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    text-align: center;
   }
-  .btn:hover {
-    background: rgba(255,255,255,0.1);
+  .ql-btn:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: #fff;
   }
 
   .note {
@@ -151,8 +153,8 @@
     .split-banner { flex-direction: column; }
     .video-side { flex: auto; padding: 30px 20px 24px; }
     .info-side { flex: auto; padding: 20px 20px 35px; }
-    .info-side h2 { font-size: 34px; line-height: 42px; }
-    .info-side p { font-size: 16px; }
+    .info-side .date-line { font-size: 20px; }
+    .quick-links { gap: 10px; }
     .play-btn { width: 50px; height: 50px; }
   }
 </style>
@@ -183,12 +185,13 @@
   </div>
 
   <div class="info-side">
-    <h2>Tuesday, June 30 -<br>Tuesday, August 18</h2>
-    <p>3rd - 9th Grade Boys & Girls</p>
-    <p>Lakewood, PA</p>
-    <div class="buttons">
-      <a href="#" class="btn">Dates & Rates</a>
-      <a href="#" class="btn">Apply Now</a>
+    <div class="date-line">June 30 - August 18, 2026</div>
+    <div class="grade-line">3rd - 9th Grade Boys & Girls</div>
+    <div class="quick-links">
+      <a href="#" class="ql-btn">Dates & Rates</a>
+      <a href="#" class="ql-btn">Apply Now</a>
+      <a href="#" class="ql-btn">The Experience</a>
+      <a href="#" class="ql-btn">Contact Us</a>
     </div>
   </div>
 </div>
