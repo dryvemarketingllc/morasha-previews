@@ -104,26 +104,26 @@
   }
   .info-side-a .summer-label {
     font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.55);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .info-side-a .date-line {
     font-family: Kefa, 'Times New Roman', Times, serif;
-    font-size: 21px;
+    font-size: 28px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .info-side-a .grade-line {
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: rgba(255,255,255,0.75);
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
   .info-side-a .divider {
     width: 50px;
@@ -147,7 +147,7 @@
     color: #fff;
     text-decoration: none;
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     transition: all 0.2s;
   }
@@ -181,26 +181,26 @@
   }
   .info-side-c .summer-label {
     font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
     letter-spacing: 2.5px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.55);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .info-side-c .date-line {
     font-family: Kefa, 'Times New Roman', Times, serif;
-    font-size: 21px;
+    font-size: 28px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .info-side-c .grade-line {
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: rgba(255,255,255,0.75);
-    margin-bottom: 22px;
+    margin-bottom: 24px;
   }
   .info-side-c .divider {
     width: 50px;
@@ -218,13 +218,13 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding: 20px 10px 18px;
+    padding: 22px 10px 20px;
     background: rgba(255,255,255,0.08);
     border-radius: 8px;
     color: #fff;
     text-decoration: none;
     font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     transition: background 0.2s;
   }
@@ -234,6 +234,65 @@
   .info-side-c .ig-btn svg {
     width: 24px; height: 24px;
     fill: none; stroke: rgba(255,255,255,0.85); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* ===== VARIATION C2 — Tiles without icons ===== */
+  .info-side-c2 {
+    flex: 0 0 45%;
+    padding: 40px 50px 40px 40px;
+    color: #fff;
+    text-align: center;
+  }
+  .info-side-c2 .summer-label {
+    font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 12px;
+  }
+  .info-side-c2 .date-line {
+    font-family: Kefa, 'Times New Roman', Times, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .info-side-c2 .grade-line {
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 24px;
+  }
+  .info-side-c2 .divider {
+    width: 50px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 24px;
+  }
+  .info-side-c2 .tile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .info-side-c2 .tile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .info-side-c2 .tile-btn:hover {
+    background: rgba(255,255,255,0.16);
   }
 
   .note {
@@ -357,8 +416,47 @@
   </div>
 </div>
 
+<div class="spacer"></div>
+
+<!-- ============ VARIATION C2 — Tiles without icons ============ -->
+<div class="option-label">Variation C2 — Tiles without Icons</div>
+
+<div class="split-banner">
+  <div class="video-side">
+    <div class="video-player">
+      <div class="video-frame" id="video-frame-c2" onclick="playVideo('c2')">
+        <iframe id="video-iframe-c2" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-poster" id="video-poster-c2">
+          <div class="play-btn">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+              <polygon points="0,0 22,13 0,26" fill="#46764B"/>
+            </svg>
+          </div>
+          <div class="poster-info">
+            <div class="vid-title" id="poster-title-c2">Summer 2025 Trailer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-dots" id="video-dots-c2"></div>
+  </div>
+
+  <div class="info-side-c2">
+    <div class="summer-label">Summer 2026</div>
+    <div class="date-line">June 30 – August 18</div>
+    <div class="grade-line">3rd – 9th Grade Boys & Girls</div>
+    <div class="divider"></div>
+    <div class="tile-grid">
+      <a href="#" class="tile-btn">Dates & Rates</a>
+      <a href="#" class="tile-btn">Apply Now</a>
+      <a href="#" class="tile-btn">The Experience</a>
+      <a href="#" class="tile-btn">Contact Us</a>
+    </div>
+  </div>
+</div>
+
 <div class="note">
-  <p>Compare the two right-side variations above.<br>Video slider + dots are identical on both — only the info panel differs.</p>
+  <p>Compare the three right-side variations above.<br>Video slider + dots are identical on all — only the info panel differs.</p>
 </div>
 
 <script>
@@ -371,7 +469,8 @@ var videos = [
 
 var state = {
   a: { currentIndex: 0, isPlaying: false, autoTimer: null },
-  c: { currentIndex: 0, isPlaying: false, autoTimer: null }
+  c: { currentIndex: 0, isPlaying: false, autoTimer: null },
+  c2: { currentIndex: 0, isPlaying: false, autoTimer: null }
 };
 
 var embedParams = '?modestbranding=1&rel=0&iv_load_policy=3&color=white&autoplay=1';
@@ -428,7 +527,7 @@ function buildDots(v) {
   });
 }
 
-['a', 'c'].forEach(function(v) {
+['a', 'c', 'c2'].forEach(function(v) {
   setPoster(v, 0);
   buildDots(v);
   startAutoSlide(v);
