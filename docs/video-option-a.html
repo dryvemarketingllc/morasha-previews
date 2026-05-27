@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camp Morasha — Video Option A: Hero with Video</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Montserrat', sans-serif; color: #333; }
+
+  /* NAV */
+  .navbar {
+    background: #5a8a3c;
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+  }
+  .navbar .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+  }
+  .navbar .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .navbar .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 520px;
+    background: url('https://morashastg1.wpenginepowered.com/wp-content/uploads/2025/05/Morasha-2024-Week-1-Tuesday-BBQ-070-scaled.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(90,138,60,0.15) 0%, rgba(90,138,60,0.6) 100%);
+  }
+
+  /* VIDEO OVERLAY IN HERO */
+  .hero-video-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 680px;
+    margin-bottom: -60px;
+    padding: 0 20px;
+  }
+  .hero-video-container .video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+  }
+  .hero-video-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* DATE BANNER */
+  .date-banner {
+    background: #5a8a3c;
+    color: #fff;
+    text-align: center;
+    padding: 90px 20px 40px;
+  }
+  .date-banner h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .date-banner p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 4px;
+  }
+  .date-banner .buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+  .date-banner .btn {
+    padding: 12px 32px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .date-banner .btn-outline {
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+  }
+  .date-banner .btn-white {
+    background: #fff;
+    color: #5a8a3c;
+    border: 2px solid #fff;
+  }
+
+  /* LABEL */
+  .option-label {
+    background: #1C326B;
+    color: #fff;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* PLACEHOLDER SECTIONS */
+  .section-placeholder {
+    padding: 80px 40px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+
+  @media (max-width: 768px) {
+    .hero { height: 400px; }
+    .hero-video-container { max-width: 100%; margin-bottom: -40px; }
+    .date-banner { padding-top: 60px; }
+    .date-banner h2 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="option-label">Option A — Video Embedded in Hero (floats over the hero bottom edge)</div>
+
+<nav class="navbar">
+  <a href="#" class="brand">Camp Morasha</a>
+  <ul class="nav-links">
+    <li><a href="#">The Morasha Experience</a></li>
+    <li><a href="#">Current Families</a></li>
+    <li><a href="#">Dates & Rates</a></li>
+    <li><a href="#">Mania</a></li>
+    <li><a href="#">Join Our Staff</a></li>
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-video-container">
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/6o8Iof5L5Fw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="date-banner">
+  <h2>Tuesday, June 30 – Tuesday, August 18</h2>
+  <p>3rd – 9th Grade Boys & Girls</p>
+  <p>Lakewood, PA</p>
+  <div class="buttons">
+    <a href="#" class="btn btn-outline">Dates & Rates</a>
+    <a href="#" class="btn btn-white">Apply Now</a>
+  </div>
+</div>
+
+<div class="section-placeholder">
+  <p>— Rest of homepage content continues below —</p>
+</div>
+
+</body>
+</html>
