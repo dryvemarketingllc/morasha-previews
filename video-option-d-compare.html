@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camp Morasha — Option D: Right Side Variations</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif; color: #333; background: #f5f5f2; }
+
+  .option-label {
+    background: #1C326B; color: #fff; text-align: center;
+    padding: 14px 20px; font-size: 13px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    font-family: system-ui, sans-serif;
+  }
+
+  .split-banner {
+    background: rgb(70, 118, 75);
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  /* VIDEO SIDE */
+  .video-side {
+    flex: 0 0 55%;
+    padding: 40px 30px 44px 60px;
+  }
+  .video-player { position: relative; }
+
+  .video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.3);
+    background: #000;
+    cursor: pointer;
+  }
+  .video-frame iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none;
+  }
+
+  .video-poster {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.3s;
+  }
+  .video-poster.hidden { opacity: 0; pointer-events: none; }
+
+  .play-btn {
+    width: 64px; height: 64px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  .video-frame:hover .play-btn { transform: scale(1.1); }
+  .play-btn svg { margin-left: 4px; }
+
+  .poster-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 40px 16px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+    z-index: 3;
+  }
+  .poster-info .vid-title {
+    color: #fff; font-size: 13px; font-weight: 600;
+  }
+
+  /* Dots */
+  .video-dots {
+    display: flex; gap: 10px;
+    margin-top: 16px;
+    justify-content: center;
+    align-items: center;
+  }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.25s;
+    border: none;
+    padding: 0;
+  }
+  .dot:hover { background: rgba(255,255,255,0.6); }
+  .dot.active { background: #fff; transform: scale(1.2); }
+
+  /* ===== VARIATION A — Stacked rows with icons ===== */
+  .info-side-a {
+    flex: 0 0 45%;
+    padding: 40px 50px 40px 40px;
+    color: #fff;
+    text-align: center;
+  }
+  .info-side-a .summer-label {
+    font-family: Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 10px;
+  }
+  .info-side-a .date-line {
+    font-family: Kefa, 'Times New Roman', Times, serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .info-side-a .grade-line {
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 22px;
+  }
+  .info-side-a .divider {
+    width: 50px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 22px;
+  }
+  .info-side-a .stacked-links {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    text-align: left;
+  }
+  .info-side-a .link-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .info-side-a .link-row:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.7);
+  }
+  .info-side-a .link-row .link-icon {
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+  }
+  .info-side-a .link-row .link-icon svg {
+    width: 18px; height: 18px;
+    fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .info-side-a .link-row .link-arrow {
+    margin-left: auto;
+    opacity: 0.4;
+    font-size: 16px;
+  }
+
+  /* ===== VARIATION C — Icon tiles ===== */
+  .info-side-c {
+    flex: 0 0 45%;
+    padding: 40px 50px 40px 40px;
+    color: #fff;
+    text-align: center;
+  }
+  .info-side-c .date-line {
+    font-family: Kefa, 'Times New Roman', Times, serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .info-side-c .grade-line {
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 22px;
+  }
+  .info-side-c .divider {
+    width: 50px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 0 auto 22px;
+  }
+  .info-side-c .icon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .info-side-c .ig-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 10px 18px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-family: Kefa, Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .info-side-c .ig-btn:hover {
+    background: rgba(255,255,255,0.16);
+  }
+  .info-side-c .ig-btn svg {
+    width: 24px; height: 24px;
+    fill: none; stroke: rgba(255,255,255,0.85); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  .note {
+    text-align: center; padding: 30px 20px; color: #999; font-size: 13px;
+    font-family: system-ui, sans-serif;
+  }
+  .spacer { height: 30px; background: #f5f5f2; }
+
+  @media (max-width: 768px) {
+    .split-banner { flex-direction: column; }
+    .video-side { flex: auto; padding: 30px 20px 24px; }
+    .info-side-a, .info-side-c { flex: auto; padding: 20px 20px 35px; }
+    .info-side-a .date-line, .info-side-c .date-line { font-size: 19px; }
+    .play-btn { width: 50px; height: 50px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ VARIATION A — Stacked rows with icons ============ -->
+<div class="option-label">Variation A — Stacked Rows with Icons</div>
+
+<div class="split-banner">
+  <div class="video-side">
+    <div class="video-player">
+      <div class="video-frame" id="video-frame-a" onclick="playVideo('a')">
+        <iframe id="video-iframe-a" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-poster" id="video-poster-a">
+          <div class="play-btn">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+              <polygon points="0,0 22,13 0,26" fill="#46764B"/>
+            </svg>
+          </div>
+          <div class="poster-info">
+            <div class="vid-title" id="poster-title-a">Summer 2025 Trailer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-dots" id="video-dots-a"></div>
+  </div>
+
+  <div class="info-side-a">
+    <div class="summer-label">Summer 2026</div>
+    <div class="date-line">June 30 – August 18</div>
+    <div class="grade-line">3rd – 9th Grade Boys & Girls</div>
+    <div class="divider"></div>
+    <div class="stacked-links">
+      <a href="#" class="link-row">
+        <span class="link-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        Dates & Rates
+        <span class="link-arrow">›</span>
+      </a>
+      <a href="#" class="link-row">
+        <span class="link-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+        Apply Now
+        <span class="link-arrow">›</span>
+      </a>
+      <a href="#" class="link-row">
+        <span class="link-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+        The Experience
+        <span class="link-arrow">›</span>
+      </a>
+      <a href="#" class="link-row">
+        <span class="link-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+        Contact Us
+        <span class="link-arrow">›</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- ============ VARIATION C — Icon tiles ============ -->
+<div class="option-label">Variation C — Icon Tiles</div>
+
+<div class="split-banner">
+  <div class="video-side">
+    <div class="video-player">
+      <div class="video-frame" id="video-frame-c" onclick="playVideo('c')">
+        <iframe id="video-iframe-c" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-poster" id="video-poster-c">
+          <div class="play-btn">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+              <polygon points="0,0 22,13 0,26" fill="#46764B"/>
+            </svg>
+          </div>
+          <div class="poster-info">
+            <div class="vid-title" id="poster-title-c">Summer 2025 Trailer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-dots" id="video-dots-c"></div>
+  </div>
+
+  <div class="info-side-c">
+    <div class="date-line">June 30 – August 18, 2026</div>
+    <div class="grade-line">3rd – 9th Grade Boys & Girls</div>
+    <div class="divider"></div>
+    <div class="icon-grid">
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Dates & Rates
+      </a>
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Apply Now
+      </a>
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        The Experience
+      </a>
+      <a href="#" class="ig-btn">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Contact Us
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="note">
+  <p>Compare the two right-side variations above.<br>Video slider + dots are identical on both — only the info panel differs.</p>
+</div>
+
+<script>
+var videos = [
+  { id: '6o8Iof5L5Fw', title: 'Summer 2025 Trailer' },
+  { id: 'dK3deR3XYOQ', title: 'Sulam Promo' },
+  { id: 'HkMNOlYcpHg', title: 'Amcha Boys' },
+  { id: 'bRDNBnxu7xU', title: 'Amcha Girls' }
+];
+
+var state = {
+  a: { currentIndex: 0, isPlaying: false, autoTimer: null },
+  c: { currentIndex: 0, isPlaying: false, autoTimer: null }
+};
+
+var embedParams = '?modestbranding=1&rel=0&iv_load_policy=3&color=white&autoplay=1';
+
+function startAutoSlide(v) {
+  stopAutoSlide(v);
+  state[v].autoTimer = setInterval(function() {
+    if (!state[v].isPlaying) {
+      var next = (state[v].currentIndex + 1) % videos.length;
+      goToVideo(v, next);
+    }
+  }, 5000);
+}
+
+function stopAutoSlide(v) {
+  if (state[v].autoTimer) { clearInterval(state[v].autoTimer); state[v].autoTimer = null; }
+}
+
+function setPoster(v, index) {
+  var vid = videos[index];
+  var poster = document.getElementById('video-poster-' + v);
+  poster.style.backgroundImage = 'url(https://img.youtube.com/vi/' + vid.id + '/maxresdefault.jpg)';
+  poster.classList.remove('hidden');
+  document.getElementById('poster-title-' + v).textContent = vid.title;
+  document.getElementById('video-iframe-' + v).src = '';
+  state[v].isPlaying = false;
+}
+
+function playVideo(v) {
+  var vid = videos[state[v].currentIndex];
+  document.getElementById('video-iframe-' + v).src =
+    'https://www.youtube.com/embed/' + vid.id + embedParams;
+  document.getElementById('video-poster-' + v).classList.add('hidden');
+  state[v].isPlaying = true;
+  stopAutoSlide(v);
+}
+
+function goToVideo(v, index) {
+  state[v].currentIndex = index;
+  setPoster(v, index);
+  buildDots(v);
+  startAutoSlide(v);
+}
+
+function buildDots(v) {
+  var wrap = document.getElementById('video-dots-' + v);
+  wrap.innerHTML = '';
+  videos.forEach(function(vid, i) {
+    var dot = document.createElement('button');
+    dot.className = 'dot' + (i === state[v].currentIndex ? ' active' : '');
+    dot.title = vid.title;
+    dot.onclick = function() { goToVideo(v, i); };
+    wrap.appendChild(dot);
+  });
+}
+
+['a', 'c'].forEach(function(v) {
+  setPoster(v, 0);
+  buildDots(v);
+  startAutoSlide(v);
+});
+</script>
+
+</body>
+</html>
