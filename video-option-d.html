@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Camp Morasha — Video Option A: Video in Hero</title>
+<title>Camp Morasha — Video Option D: Split Green Banner</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,76 +36,95 @@
     position: relative;
     height: 560px;
     background: url('https://campmorasha.com/wp-content/uploads/2023/08/HomeBanner3.jpg') center/cover no-repeat;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
   }
   .hero::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
   }
+  /* Countdown badge */
+  .countdown {
+    position: absolute; top: 20px; right: 30px; z-index: 3;
+    background: rgba(255,255,255,0.92); border-radius: 6px;
+    padding: 14px 20px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .countdown .label { font-size: 10px; font-weight: 700; color: #46764B; letter-spacing: 1px; text-transform: uppercase; }
+  .countdown .number { font-size: 44px; font-weight: 800; color: #46764B; line-height: 1; }
+  .countdown .unit { font-size: 11px; font-weight: 700; color: #46764B; letter-spacing: 2px; text-transform: uppercase; }
 
-  .hero-video-container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 720px;
-    margin-bottom: -70px;
-    padding: 0 20px;
+  /* SPLIT GREEN BANNER */
+  .split-banner {
+    background: #46764B;
+    display: flex;
+    align-items: center;
+    min-height: 380px;
   }
-  .hero-video-container .video-wrap {
+  .split-banner .video-side {
+    flex: 0 0 55%;
+    padding: 40px 30px 40px 60px;
+  }
+  .split-banner .video-wrap {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+    border-radius: 8px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.3);
     background: #000;
   }
-  .hero-video-container iframe {
+  .split-banner iframe {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%; border: none;
   }
-
-  /* DATE BANNER */
-  .date-banner {
-    background: #46764B;
+  .split-banner .info-side {
+    flex: 0 0 45%;
+    padding: 40px 60px 40px 40px;
     color: #fff;
     text-align: center;
-    padding: 100px 20px 45px;
   }
-  .date-banner h2 {
+  .split-banner .info-side h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 42px; font-weight: 400; letter-spacing: 1px; margin-bottom: 10px;
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+    margin-bottom: 14px;
   }
-  .date-banner p { font-size: 14px; opacity: 0.9; margin-bottom: 4px; }
-  .date-banner .buttons {
-    margin-top: 22px; display: flex; gap: 16px; justify-content: center;
+  .split-banner .info-side p {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 3px;
   }
-  .date-banner .btn {
-    padding: 13px 34px; border-radius: 3px; font-size: 12px;
+  .split-banner .buttons {
+    margin-top: 24px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+  }
+  .split-banner .btn {
+    padding: 12px 30px; border-radius: 3px; font-size: 12px;
     font-weight: 600; text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
   }
-  .date-banner .btn-outline { border: 2px solid #fff; color: #fff; background: transparent; }
-  .date-banner .btn-white { background: #fff; color: #46764B; border: 2px solid #fff; }
+  .split-banner .btn-outline { border: 2px solid #fff; color: #fff; background: transparent; }
+  .split-banner .btn-white { background: #fff; color: #46764B; border: 2px solid #fff; }
 
   .section-placeholder {
     padding: 80px 40px; text-align: center; color: #999; font-size: 14px;
   }
 
   @media (max-width: 768px) {
-    .hero { height: 400px; }
-    .hero-video-container { max-width: 100%; margin-bottom: -50px; }
-    .date-banner { padding-top: 70px; }
-    .date-banner h2 { font-size: 28px; }
+    .hero { height: 350px; }
+    .split-banner { flex-direction: column; }
+    .split-banner .video-side { flex: auto; padding: 30px 20px 10px; }
+    .split-banner .info-side { flex: auto; padding: 20px 20px 35px; }
+    .split-banner .info-side h2 { font-size: 28px; }
   }
 </style>
 </head>
 <body>
 
-<div class="option-label">Option A — Video Embedded in Hero (floats over the bottom edge into green section)</div>
+<div class="option-label">Option D — Split Green Banner: Video Left + Info Right</div>
 
 <nav class="navbar">
   <a href="#" class="brand">
@@ -122,20 +141,27 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-video-container">
+  <div class="countdown">
+    <div class="label">Camp starts in</div>
+    <div class="number">34</div>
+    <div class="unit">Days</div>
+  </div>
+</div>
+
+<div class="split-banner">
+  <div class="video-side">
     <div class="video-wrap">
       <iframe src="https://www.youtube.com/embed/6o8Iof5L5Fw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
-</div>
-
-<div class="date-banner">
-  <h2>Tuesday, June 30 – Tuesday, August 18</h2>
-  <p>3rd – 9th Grade Boys & Girls</p>
-  <p>Lakewood, PA</p>
-  <div class="buttons">
-    <a href="#" class="btn btn-outline">Dates & Rates</a>
-    <a href="#" class="btn btn-white">Apply Now</a>
+  <div class="info-side">
+    <h2>Tuesday, June 30 –<br>Tuesday, August 18</h2>
+    <p>3rd – 9th Grade Boys & Girls</p>
+    <p>Lakewood, PA</p>
+    <div class="buttons">
+      <a href="#" class="btn btn-outline">Dates & Rates</a>
+      <a href="#" class="btn btn-white">Apply Now</a>
+    </div>
   </div>
 </div>
 

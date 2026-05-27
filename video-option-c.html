@@ -3,207 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Camp Morasha — Video Option C: Full-Width Feature</title>
+<title>Camp Morasha — Video Option C: Full-Width Featured</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Montserrat', sans-serif; color: #333; }
 
-  /* NAV */
-  .navbar {
-    background: #5a8a3c;
-    padding: 12px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .navbar .brand {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
-  }
-  .navbar .nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
-  .navbar .nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
+  .option-label {
+    background: #1C326B; color: #fff; text-align: center;
+    padding: 14px 20px; font-size: 13px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
   }
 
-  /* HERO */
+  .navbar {
+    background: #46764B; padding: 10px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .navbar .brand { display: flex; align-items: center; text-decoration: none; }
+  .navbar .brand img { height: 50px; }
+  .navbar .nav-links { display: flex; gap: 22px; list-style: none; }
+  .navbar .nav-links a {
+    color: #fff; text-decoration: none; font-size: 12px;
+    font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase;
+  }
+
   .hero {
-    position: relative;
-    height: 520px;
-    background: url('https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=1400&q=80') center/cover no-repeat, linear-gradient(135deg, #5a8a3c, #3d6b28);
+    position: relative; height: 560px;
+    background: url('https://campmorasha.com/wp-content/uploads/2023/08/HomeBanner3.jpg') center/cover no-repeat;
   }
   .hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(90,138,60,0.15) 0%, rgba(90,138,60,0.6) 100%);
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 100%);
   }
+  .countdown {
+    position: absolute; top: 20px; right: 30px; z-index: 3;
+    background: rgba(255,255,255,0.92); border-radius: 6px;
+    padding: 14px 20px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .countdown .label { font-size: 10px; font-weight: 700; color: #46764B; letter-spacing: 1px; text-transform: uppercase; }
+  .countdown .number { font-size: 44px; font-weight: 800; color: #46764B; line-height: 1; }
+  .countdown .unit { font-size: 11px; font-weight: 700; color: #46764B; letter-spacing: 2px; text-transform: uppercase; }
 
-  /* DATE BANNER */
   .date-banner {
-    background: #5a8a3c;
-    color: #fff;
-    text-align: center;
-    padding: 40px 20px;
+    background: #46764B; color: #fff; text-align: center; padding: 40px 20px;
   }
   .date-banner h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    font-size: 42px; font-weight: 400; letter-spacing: 1px; margin-bottom: 10px;
   }
-  .date-banner p {
-    font-size: 14px;
-    opacity: 0.9;
-    margin-bottom: 4px;
-  }
-  .date-banner .buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-  }
+  .date-banner p { font-size: 14px; opacity: 0.9; margin-bottom: 4px; }
+  .date-banner .buttons { margin-top: 22px; display: flex; gap: 16px; justify-content: center; }
   .date-banner .btn {
-    padding: 12px 32px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.5px;
+    padding: 13px 34px; border-radius: 3px; font-size: 12px;
+    font-weight: 600; text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
   }
-  .date-banner .btn-outline {
-    border: 2px solid #fff;
-    color: #fff;
-    background: transparent;
-  }
-  .date-banner .btn-white {
-    background: #fff;
-    color: #5a8a3c;
-    border: 2px solid #fff;
-  }
+  .date-banner .btn-outline { border: 2px solid #fff; color: #fff; background: transparent; }
+  .date-banner .btn-white { background: #fff; color: #46764B; border: 2px solid #fff; }
 
   /* FULL-WIDTH VIDEO */
   .video-section {
-    background: #f5f5f2;
-    padding: 60px 20px;
-    text-align: center;
+    background: #f5f5f2; padding: 60px 20px; text-align: center;
   }
   .video-section .section-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: #5a8a3c;
-    margin-bottom: 30px;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px;
+    font-weight: 400; letter-spacing: 4px; text-transform: uppercase;
+    color: #46764B; margin-bottom: 30px;
   }
-  .video-section .video-container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
+  .video-section .video-container { max-width: 900px; margin: 0 auto; }
   .video-section .video-wrap {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.15);
-    background: #000;
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    border-radius: 10px; box-shadow: 0 6px 30px rgba(0,0,0,0.15); background: #000;
   }
-  .video-section iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    border: none;
-  }
-  .video-section .video-caption {
-    margin-top: 16px;
-    font-size: 13px;
-    color: #666;
-  }
-  .video-section .video-caption strong {
-    color: #5a8a3c;
-    font-weight: 600;
-  }
-  .video-section .video-dots {
-    margin-top: 14px;
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-  }
-  .video-section .video-dots .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .video-section .video-dots .dot.active {
-    background: #5a8a3c;
-  }
+  .video-section iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+  .video-section .video-caption { margin-top: 16px; font-size: 13px; color: #666; }
+  .video-section .video-caption strong { color: #46764B; font-weight: 600; }
+  .video-section .video-dots { margin-top: 14px; display: flex; gap: 8px; justify-content: center; }
+  .video-section .dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; cursor: pointer; }
+  .video-section .dot.active { background: #46764B; }
   .video-section .browse-all {
-    display: inline-block;
-    margin-top: 24px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #5a8a3c;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    border-bottom: 1.5px solid rgba(90,138,60,0.3);
-    padding-bottom: 2px;
-    transition: border-color 0.2s;
-  }
-  .video-section .browse-all:hover {
-    border-color: #5a8a3c;
+    display: inline-block; margin-top: 24px; font-size: 13px; font-weight: 600;
+    color: #46764B; text-decoration: none; letter-spacing: 0.5px;
+    border-bottom: 1.5px solid rgba(70,118,75,0.3); padding-bottom: 2px;
   }
 
-  /* LABEL */
-  .option-label {
-    background: #1C326B;
-    color: #fff;
-    text-align: center;
-    padding: 14px 20px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .section-placeholder {
-    padding: 80px 40px;
-    text-align: center;
-    color: #999;
-    font-size: 14px;
-    border-bottom: 1px solid #eee;
-  }
+  .section-placeholder { padding: 80px 40px; text-align: center; color: #999; font-size: 14px; }
 
   @media (max-width: 768px) {
     .hero { height: 350px; }
-    .date-banner h2 { font-size: 26px; }
+    .date-banner h2 { font-size: 28px; }
     .video-section { padding: 40px 16px; }
-    .video-section .video-wrap { border-radius: 6px; }
   }
 </style>
 </head>
 <body>
 
-<div class="option-label">Option C — Full-Width Video Section with Slider Dots (clean, centered)</div>
+<div class="option-label">Option C — Full-Width Featured Video Section (clean, centered, with slider)</div>
 
 <nav class="navbar">
-  <a href="#" class="brand">Camp Morasha</a>
+  <a href="#" class="brand">
+    <img src="https://campmorasha.com/wp-content/themes/camp-morasha/images/logo_2x.png" alt="Camp Morasha">
+  </a>
   <ul class="nav-links">
     <li><a href="#">The Morasha Experience</a></li>
     <li><a href="#">Current Families</a></li>
@@ -214,7 +113,13 @@
   </ul>
 </nav>
 
-<div class="hero"></div>
+<div class="hero">
+  <div class="countdown">
+    <div class="label">Camp starts in</div>
+    <div class="number">34</div>
+    <div class="unit">Days</div>
+  </div>
+</div>
 
 <div class="date-banner">
   <h2>Tuesday, June 30 – Tuesday, August 18</h2>
